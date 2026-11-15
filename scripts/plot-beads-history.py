@@ -23,10 +23,8 @@ sys.path.insert(0, os.path.join(HERE, "tufte-plots"))
 
 import matplotlib  # noqa: E402
 matplotlib.use("Agg")
-import matplotlib.dates as mdates  # noqa: E402
 import matplotlib.pyplot as plt  # noqa: E402
-from style import (apply_tufte, finish_axes, label_lines_directly, ordinal_colors,  # noqa: E402
-                   place_legend, PRIMARY_INK, SECONDARY_INK)
+from style import apply_tufte, finish_axes, ordinal_colors, place_legend  # noqa: E402
 
 PRIS = ["P0", "P1", "P2", "P3"]
 
@@ -68,7 +66,7 @@ def main(argv=None):
         ax.plot(ts, col(rows, s), linewidth=1.0, color=c, label=names[s])
     ax.set_xlabel("Time (UTC)")
     ax.set_ylabel("Issues (tasks and bugs)")
-    label_lines_directly(ax, {names[s]: mdates.date2num(ts[-1]) for s in states}, dx=0.02)
+    place_legend(ax)
     finish_axes(ax, box_aspect=3 / 5)
     fig.savefig(os.path.join(status_dir, "beads-history.svg"), facecolor="white")
     plt.close(fig)
