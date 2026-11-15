@@ -50,6 +50,8 @@ for (const file of files) {
     document: deep(), navigator: { userAgent: 'node' }, location: deep(),
     localStorage: deep(), serverVars: null, initVars: null,
     XMLHttpRequest: function () {},
+    // React 18's react-dom/server reads TextEncoder at load time; every browser has these
+    TextEncoder, TextDecoder,
   };
   for (const k of ['DOMParser', 'XMLSerializer', 'Node', 'NodeList', 'NamedNodeMap',
                    'HTMLElement', 'Element', 'Event', 'MutationObserver', 'WebSocket']) ctx[k] = deep();
@@ -57,7 +59,8 @@ for (const file of files) {
   vm.createContext(ctx);
   try {
     vm.runInContext(src, ctx, { filename: file });
-    const missing = ['ReactTransitionGroup', 'Select', 'DayPicker', 'hljs'].filter(g => ctx[g] === undefined);
+    // React 18 / react-select 5 line: DayPicker and ReactTransitionGroup were removed in im-7os.2
+    const missing = ['Select', 'hljs'].filter(g => ctx[g] === undefined);
     const init = ctx.bluegenes && ctx.bluegenes.core && typeof ctx.bluegenes.core.init;
     if (loadErrors.length) {
       console.log(`LOAD ERROR ${file}: ${loadErrors.join('; ')}`);
@@ -66,7 +69,7 @@ for (const file of files) {
       console.log(`LOAD INCOMPLETE ${file}: missing globals [${missing.join(',')}], typeof bluegenes.core.init=${init}`);
       failed = 1;
     } else {
-      console.log(`LOADED OK ${file} (${src.length} bytes): ReactTransitionGroup, Select, DayPicker, hljs defined; bluegenes.core.init is a function`);
+      console.log(`LOADED OK ${file} (${src.length} bytes): Select, hljs defined; bluegenes.core.init is a function`);
     }
   } catch (e) {
     console.log(`LOAD ERROR ${file}: ${e.name}: ${e.message} ${(e.stack || '').split('\n')[1] || ''}`);

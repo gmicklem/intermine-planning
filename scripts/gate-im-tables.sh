@@ -236,9 +236,9 @@ if [ -f deps.edn ]; then
 <script>
 var r = {};
 try {
-  r.Select = typeof Select; r.Creatable = typeof Select.Creatable;
-  r.DayPickerInput = typeof DayPicker.Input;
-  r.CSSTransitionGroup = typeof ReactTransitionGroup.CSSTransitionGroup;
+  // react-select 5 exports Select as a forwardRef object, not a function
+  r.Select = (typeof Select === "function" || (typeof Select === "object" && Select !== null)) ? "component" : typeof Select;
+  r.Creatable = (typeof Select.Creatable === "function" || typeof Select.Creatable === "object") ? "component" : typeof Select.Creatable;
   r.langs = hljs.listLanguages().join(",");
   var el = document.createElement("code"); el.className = "xml"; el.textContent = "<a b='c'>d</a>";
   document.body.appendChild(el); hljs.highlightBlock(el); r.highlighted = el.innerHTML.indexOf("hljs-") >= 0;
@@ -252,7 +252,7 @@ HTML
           pkill -f "$LOGS/browser-profile" 2>/dev/null; rm -rf "$LOGS"/browser-profile-* 2>/dev/null
           RES=$(grep -o 'SHIMCHECK {.*}' "$LOGS/shim-browser.log" | head -1 | sed 's/", source.*//')
           UNCAUGHT=$(grep -c 'Uncaught' "$LOGS/shim-browser.log")
-          WANT='"Select":"function","Creatable":"function","DayPickerInput":"function","CSSTransitionGroup":"function","langs":"javascript,perl,python,ruby,java,xml","highlighted":true,"init":"ok"'
+          WANT='"Select":"component","Creatable":"component","langs":"javascript,perl,python,ruby,java,xml","highlighted":true,"init":"ok"'
           if echo "$RES" | grep -qF "$WANT" && [ "$UNCAUGHT" = 0 ]; then record shim-browser PASS "$(( $(date +%s) - s0 ))s" "globals set, init ran, no uncaught errors"
           else record shim-browser FAIL "$(( $(date +%s) - s0 ))s" "${RES:-no SHIMCHECK line}; uncaught=$UNCAUGHT; see .gate-logs/shim-browser.log"; FAILED=1; fi
         fi
