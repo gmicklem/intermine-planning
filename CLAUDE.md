@@ -69,4 +69,5 @@ This protocol applies when ending a Beads implementation workflow. It is subordi
 - Sprint report: `python3 -I scripts/sprint-report.py [--prices FILE] [--since DATE]` regenerates `status/sprint-report.md` (cost and delivery per model, from agent-runs.csv, session logs, beads and git).
 - Transcript: `scripts/transcript.py` regenerates `../transcript.md` (i.e. `repos/transcript.md`, which is on the host mount and visible on the Mac; `../../transcript.md` is a symlink to it) from the session log.
 - Sandbox layout warning: only `repos/` is the host mount (641 GB). `worktrees/`, `/home/agent` and `/var/lib/docker` are on the 20 GB sandbox root overlay; large scratch data goes under `repos/.sandbox-disk/`.
+- Test mines (Gos): prefer the local rdfc2im demo mine, then public HumanMine (read-only); FlyMine only when a test is about Drosophila data or multi-mine switching.
 - Dependency rules (Gos): remove weak dependencies rather than upgrade; vet any replacement package and log it in `decisions/package-vetting.md`; prefer task input/output wiring over explicit Gradle `dependsOn`.
