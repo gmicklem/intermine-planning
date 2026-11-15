@@ -23,3 +23,4 @@ started_utc,ended_utc,beads_id,agent_label,model,input_tokens,cache_read_tokens,
 2026-11-15T04:16:29.306Z,2026-11-15T05:07:15.917Z,im-ee7.2,B2 batch P plugin rewrite,opus,202,23237783,653034,151358,done,1 commit; dependsOn 42->8 stmts; works on 4.9/6.9.4/7.6.4; jars identical
 2026-11-15T03:03:47.402Z,2026-11-15T05:22:00.260Z,im-7os.1,E1 review fixes,opus,498,76453179,1240029,223402,done,7 commits; bundle-load gate; deterministic hash
 2026-11-15T05:23:36.231Z,2026-11-15T05:31:55.786Z,im-28e.3,F3 bluegenes GitHub Actions,sonnet,54,2105502,89653,32687,done,6 commits; actionlint clean
+2026-11-15T02:46:30.124Z,2026-11-15T05:52:26.732Z,im-jqz.7,C7 intermine weak-dependency removals,sonnet,206,9893419,2306935,51702,done,12 commits; 14 declarations removed; httpclient gone
