@@ -34,3 +34,4 @@ started_utc,ended_utc,beads_id,agent_label,model,input_tokens,cache_read_tokens,
 2026-11-15T09:44:42.096Z,2026-11-15T09:48:45.243Z,im-7os.6,tool-store fixes im-7os.6-9,sonnet,32,788746,47399,12960,success,"4 gated commits, merged ff, pushed"
 2026-11-15T09:54:08.993Z,2026-11-15T09:55:18.099Z,im-89g.5,CI actions major bumps (both repos),sonnet,24,562896,47772,5871,success,actionlint clean; merged both; CI dispatched
 2026-11-15T09:53:26.440Z,2026-11-15T09:57:53.934Z,im-bdy.3,H1 intermine docs: BUILDING/TESTING/UPGRADING-build,sonnet,64,3532142,136130,33447,success,"2 commits, docs only, merged"
+2026-11-15T09:59:28.767Z,2026-11-15T10:01:44.189Z,im-8dd.5,I5 sprint-report generator,sonnet,16,472454,71460,18864,success,scripts/sprint-report.py + status/sprint-report.md

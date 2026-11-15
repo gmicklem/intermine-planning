@@ -11,7 +11,7 @@ executed largely by coding agents coordinated from a single orchestrator session
 | `decisions/` | Decision records (ADRs) and the package-vetting log. |
 | `baselines/` | Measured state of builds and tests before any change. |
 | `inventory/` | Dependency, CVE and dependency-usage inventories. |
-| `scripts/` | Gate scripts, worktree and test-environment helpers, dashboard and transcript generators. |
+| `scripts/` | Gate scripts, worktree and test-environment helpers, dashboard, transcript and sprint-report (`sprint-report.py`) generators. |
 | `status/` | Generated: `STATUS.md`, `index.html`, `agent-runs.csv`, `LOG.md`. |
 | `.beads/` | beads issue database (Dolt, embedded). Only the orchestrator writes to it. |
 
