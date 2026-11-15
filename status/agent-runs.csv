@@ -29,3 +29,4 @@ started_utc,ended_utc,beads_id,agent_label,model,input_tokens,cache_read_tokens,
 2026-11-15T04:16:52.056Z,2026-11-15T06:54:38.750Z,im-89g.1,CI fix2: PG15+ public schema grant,sonnet,172,9186734,907134,66620,done,1 commit; gate green on non-superuser PG18
 2026-11-15T06:36:04.667Z,2026-11-15T07:16:51.711Z,im-ee7.2,B2 batch S bio/sources + testmine,sonnet,154,8892179,654222,59960,done,3 commits; gate green; testmine builds
 2026-11-15T07:04:23.498Z,2026-11-15T07:31:21.422Z,im-jqz.8,Fix flaky testBatchesCache + DataTracker.clear race,opus,112,5244082,276297,37515,done,2 commits; real DataTracker race fixed
+2026-11-15T05:24:08.776Z,2026-11-15T09:40:36.881Z,im-89g.3,D3 maven-publish + Central Portal,sonnet,260,24674967,425665,106637,success,"2 commits, gate passed, nmcp vetted not adopted, RELEASING.md"

@@ -16,7 +16,7 @@
 #   1. config/lib/install_intermine.py with its Gradle-install step disabled: writes every
 #      gradle.properties / gradle-wrapper.properties from the *.in templates (defaults: Maven Central,
 #      Gradle 4.9) and leaves the task's ~/.intermine/*.properties alone (they already exist).
-#   2. `install` in plugin, intermine, and (if any bio build is requested) bio, bio/sources,
+#   2. `publishToMavenLocal` (GATE_INSTALL_TASK) in plugin, intermine, and (if any bio build is requested) bio, bio/sources,
 #      bio/postprocess - the module list of install_intermine.py. Any failure aborts the gate.
 #   3. `build` in each requested build (tests run with ignoreFailures=true, as in CI).
 #   4. `checkstyleMain` in requested builds among intermine, bio, bio/sources, bio/postprocess
@@ -36,7 +36,8 @@
 #   GATE_CLEAN=1       run `clean` in every involved build before installing
 #   GATE_SKIP_INSTALL=1, GATE_SKIP_CHECKSTYLE=1   skip those steps (for quick local iteration only;
 #                      a real gate run must not skip them)
-#   GATE_SHARED_M2=1   let `install` write org.intermine artefacts to the shared ~/.m2 (CI behaviour);
+#   GATE_INSTALL_TASK  Gradle task of step 2 (default publishToMavenLocal; `install` is a deprecated alias of it)
+#   GATE_SHARED_M2=1   let publishToMavenLocal write org.intermine artefacts to the shared ~/.m2 (CI behaviour);
 #                      default is the task-private $HOME/.m2-intermine/repository (-Dmaven.repo.local)
 #   GATE_LANG          locale for the build (default C.UTF-8, as on GitHub runners)
 #   GATE_XMX           Gradle daemon heap (default 4g; do not raise in the shared sandbox)
@@ -147,7 +148,7 @@ run_step() {
   return $rc
 }
 
-# `install` (old `maven` plugin) writes org.intermine:*:5.1.1 into the Maven local repo. ~/.m2 is
+# publishToMavenLocal (maven-publish; `install` was the old maven plugin) writes org.intermine:*:5.1.1 into the Maven local repo. ~/.m2 is
 # shared between tasks, so by default each task installs into its own repo inside the task home
 # (the intermine builds never read mavenLocal; they resolve each other through file/ivy repos in
 # the worktree, so nothing else changes). GATE_SHARED_M2=1 restores CI's behaviour (~/.m2).
@@ -192,7 +193,7 @@ is_install() { local x; for x in "${INSTALL[@]}"; do [ "$x" = "$1" ] && return 0
 if [ "${GATE_SKIP_INSTALL:-0}" != 1 ]; then
   for d in "${INSTALL[@]}"; do
     if [ "${GATE_CLEAN:-0}" = 1 ]; then gradle "$d" clean || { FAIL=1; break; }; fi
-    gradle "$d" install || { echo "install failed in $d; see $LOGS" >&2; FAIL=1; break; }
+    gradle "$d" "${GATE_INSTALL_TASK:-publishToMavenLocal}" || { echo "install failed in $d; see $LOGS" >&2; FAIL=1; break; }
   done
 fi
 
