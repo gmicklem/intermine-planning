@@ -60,8 +60,9 @@ for (const file of files) {
   try {
     vm.runInContext(src, ctx, { filename: file });
     // React 18 / react-select 5 line: DayPicker and ReactTransitionGroup were removed in im-7os.2
-    // React and ReactDOM are what BlueGenes tools expect on window (im-7os.25)
-    const missing = ['Select', 'hljs', 'React', 'ReactDOM'].filter(g => ctx[g] === undefined);
+    // React, ReactDOM (im-7os.25) and imjs (im-7os.27) are what BlueGenes tools expect on window
+    const missing = ['Select', 'hljs', 'React', 'ReactDOM', 'imjs'].filter(g => ctx[g] === undefined);
+    if (ctx.imjs !== undefined && !(ctx.imjs && typeof ctx.imjs.Service === 'function')) missing.push('imjs.Service');
     const init = ctx.bluegenes && ctx.bluegenes.core && typeof ctx.bluegenes.core.init;
     if (loadErrors.length) {
       console.log(`LOAD ERROR ${file}: ${loadErrors.join('; ')}`);
@@ -70,7 +71,7 @@ for (const file of files) {
       console.log(`LOAD INCOMPLETE ${file}: missing globals [${missing.join(',')}], typeof bluegenes.core.init=${init}`);
       failed = 1;
     } else {
-      console.log(`LOADED OK ${file} (${src.length} bytes): Select, hljs, React, ReactDOM defined; bluegenes.core.init is a function`);
+      console.log(`LOADED OK ${file} (${src.length} bytes): Select, hljs, React, ReactDOM, imjs defined; bluegenes.core.init is a function`);
     }
   } catch (e) {
     console.log(`LOAD ERROR ${file}: ${e.name}: ${e.message} ${(e.stack || '').split('\n')[1] || ''}`);
