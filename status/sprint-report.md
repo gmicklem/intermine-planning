@@ -1,28 +1,28 @@
 # Sprint report
 
-Generated 2026-11-15 18:50 by `scripts/sprint-report.py` (since 2026-11-14). Regenerate with `python3 -I scripts/sprint-report.py`. All times UTC.
+Generated 2026-11-15 22:05 by `scripts/sprint-report.py` (since 2026-11-14). Regenerate with `python3 -I scripts/sprint-report.py`. All times UTC.
 
 ## 1. Headline
 
-Sprint window (first to last timestamp in agent-runs.csv and the orchestrator log): 2026-11-14 22:38:30 UTC to 2026-11-15 18:50:34 UTC, elapsed 20:12:03.
+Sprint window (first to last timestamp in agent-runs.csv and the orchestrator log): 2026-11-14 22:38:30 UTC to 2026-11-15 22:05:16 UTC, elapsed 23:26:46.
 
-Total agent runs recorded: 63 (3 of them resumptions of an earlier agent, charged only for the tokens added since its previous row).
+Total agent runs recorded: 71 (3 of them resumptions of an earlier agent, charged only for the tokens added since its previous row).
 
 | Model | Runs | Success | Failed | Partial | Other | Input tok | Cache read tok | Cache write tok | Output tok | Wall-clock agent time | Median run |
 |---|---|---|---|---|---|---|---|---|---|---|---|
-| opus | 23 | 23 | 0 | 0 | 0 | 4,282 | 372,143,637 | 16,585,230 | 1,667,950 | 18:57:37 | 0:41:59 |
-| sonnet | 40 | 40 | 0 | 0 | 0 | 4,462 | 255,538,902 | 13,644,921 | 1,761,445 | 29:46:10 | 0:27:12 |
-| **all workers** | 63 | 63 | 0 | 0 | 0 | 8,744 | 627,682,539 | 30,230,151 | 3,429,395 | 48:43:47 | 0:34:13 |
-| orchestrator (fable) | n/a (539 msgs) | - | - | - | - | 13,648 | 136,091,981 | 1,159,841 | 495,234 | - | - |
+| opus | 24 | 24 | 0 | 0 | 0 | 4,550 | 393,585,875 | 17,986,548 | 1,762,441 | 20:31:42 | 0:44:31 |
+| sonnet | 47 | 46 | 0 | 0 | 1 | 5,626 | 348,573,066 | 16,864,495 | 2,174,200 | 36:24:29 | 0:31:30 |
+| **all workers** | 71 | 70 | 0 | 0 | 1 | 10,176 | 742,158,941 | 34,851,043 | 3,936,641 | 56:56:11 | 0:35:01 |
+| orchestrator (fable) | n/a (630 msgs) | - | - | - | - | 16,216 | 161,242,868 | 1,389,467 | 585,615 | - | - |
 
 Success = outcome `done`/`success`; failed = outcome starting `fail`/`error`/`abort`/`blocked`; partial = starting `partial`; other = anything else. Wall-clock agent time is the sum of ended minus started per run; agents ran in parallel, so it exceeds elapsed time. The orchestrator is the main Claude Code session (not in agent-runs.csv); its totals come from the session JSONL (1 file(s), de-duplicated per API message id) and cover its whole context re-reads, so cache read is large by nature.
 
-Cross-check (agent-runs.csv / all subagent logs on disk, 62 logs parsed): differences are agents not yet recorded or still running.
+Cross-check (agent-runs.csv / all subagent logs on disk, 71 logs parsed): differences are agents not yet recorded or still running.
 
 | Model | Input | Cache read | Cache write | Output |
 |---|---|---|---|---|
-| opus | 4,282 / 4,282 | 372,143,637 / 372,143,637 | 16,585,230 / 16,585,230 | 1,667,950 / 1,667,950 |
-| sonnet | 4,462 / 4,768 | 255,538,902 / 281,284,048 | 13,644,921 / 13,959,342 | 1,761,445 / 1,852,186 |
+| opus | 4,550 / 4,352 | 393,585,875 / 374,467,643 | 17,986,548 / 16,681,363 | 1,762,441 / 1,687,596 |
+| sonnet | 5,626 / 6,040 | 348,573,066 / 377,624,421 | 16,864,495 / 18,500,533 | 2,174,200 / 2,310,891 |
 
 ## 2. Delivered
 
@@ -30,15 +30,18 @@ Cross-check (agent-runs.csv / all subagent logs on disk, 62 logs parsed): differ
 
 | Repo | Ref | Commits | Merge commits |
 |---|---|---|---|
-| intermine-planning | HEAD | 64 | 0 |
-| intermine | maint-2026 | 132 | 26 |
-| bluegenes | maint-2026 | 79 | 5 |
+| intermine-planning | HEAD | 82 | 0 |
+| intermine | maint-2026 | 145 | 29 |
+| bluegenes | maint-2026 | 91 | 7 |
 | imcljs | maint-2026 | 8 | 0 |
-| bluegenes-tool-store | maint-2026 | 8 | 0 |
-| im-tables-3 | maint-2026 | 21 | 3 |
+| bluegenes-tool-store | maint-2026 | 10 | 1 |
+| im-tables-3 | maint-2026 | 23 | 4 |
 
 **intermine merge commits**
 
+- `a93c0fba20 Merge maint/im-ee7.53-deployer-recheck: UPGRADING-build.md commons-lang step, re-check numbers with the final plugin, bio-sources conversion notes [im-ee7.53 im-ee7.52]`
+- `45c10e48ee Merge maint/im-jqz.20-commons-lang3: commons-lang 2.6 -> commons-lang3 3.21.0 in 268 files; XmlUtil.escapeXml; secure random API keys; lang 2.6 kept at run time for the vendored torque [im-jqz.20]`
+- `5fa33f25f8 Merge maint/im-ee7.46-plugin-deployer-fixes: webapp classes jar in webtasks/jbrowse POMs; SO paths resolved against the mine root; mergeProperties wired to processResources; the webapp plugin composes the war (Sync) [im-ee7.46 im-ee7.47 im-ee7.48 im-ee7.41]`
 - `5279e4ee25 Merge maint/im-jqz.6-junit-vendored: JUnit 4.13.2, EasyMock 5.7; mockobjects, mockrunner, stringtree-json, libreadline-java, chebiWS-client removed; one patched antlr jar [im-jqz.6]`
 - `10728b1bc0 Merge maint/im-ee7.5-deployer-guide: UPGRADING-build.md 6.0.0 section as a deployer step list, verified on humanmine and flymine [im-ee7.5]`
 - `256977fbcb Merge maint/im-ee7.26-checkstyle-bump: Checkstyle 9.3 through the plain Gradle plugin; the Gradle 6 Ant bridge is deleted [im-ee7.26]`
@@ -66,34 +69,45 @@ Cross-check (agent-runs.csv / all subagent logs on disk, 62 logs parsed): differ
 - `42e105197e Merge maint/im-ee7.2-plugin-gradle7: plugin lazy tasks, no init tasks, input wiring [im-ee7.2]`
 - `31d15fa725 Merge maint/im-ee7.1-gradle-6: Gradle 6.9.4 across all builds [im-ee7.1]`
 
+**intermine unmerged maint/* branches ahead of maint-2026**
+
+- `maint/im-bdy.3-docs`: 2 commit(s), tip `26afb69bc4 docs: UPGRADING-build.md separates the 5.1.1 and 6.0.0 lines; 5.1.1 checked on Gradle 4.9 and 6.9.4; gretty alternative [im-bdy.3] [im-ee7.38]`
+
 **bluegenes merge commits**
 
+- `79077194 Merge maint/im-7os.33-p1-bugs: ids case-sensitivity fix, text-input that keeps keystrokes under React 18 createRoot, search submits the typed term, Cypress defaults on the demo mine; 137 pass / 0 fail / 23 skipped [im-7os.30 im-7os.31 im-28e.9]`
+- `0adc0ad8 Merge maint/im-28e.5-cypress-demo-mine: Cypress suite re-targeted to the rdfc2im demo mine (API-created test accounts, re-recorded fixtures, capability-based skips); 136 pass / 0 fail / 23 skipped [im-28e.5]`
 - `331b7124 Merge maint/im-7os.27-imjs-global: window.imjs for BlueGenes tools from the bundled imjs 4.0.0 (CDN script tag was removed upstream in Oct 2024); xmldom override; tool-rendering Cypress check [im-7os.27]`
 - `5fd13485 Merge maint/im-7os.25-window-react: the app sets window.React and window.ReactDOM again for BlueGenes tools [im-7os.25]`
 - `dab1a840 Merge maint/im-7os.23-humanmine-default: HumanMine is the default public mine for Cypress @external specs, templates test and docs; CYPRESS_EXTERNAL_ONLY [im-7os.24]`
 - `69de5e6b Merge maint/im-7os.15-hljs11: highlight.js 11.12.0 shims and CDN theme with new SRI [im-7os.15]`
 - `0acf48ef Merge maint/im-7os.2-lib-bumps: Clojure 1.12, ring 1.13, timbre 6, reagent 1.2, re-frame 1.4, reitit 0.7, React 18, react-select 5; drop core.cache, react-day-picker, react-transition-group, react-highlight.js [im-7os.2]`
 
+**bluegenes-tool-store merge commits**
+
+- `1029320 Merge maint/im-7os.19-imcljs-pin: imcljs 1.7.0-SNAPSHOT by git sha instead of Clojars 1.4.3 [im-7os.19]`
+
 **im-tables-3 merge commits**
 
+- `146b1c5 Merge maint/im-7os.19-imcljs-pin: imcljs 1.7.0-SNAPSHOT by git sha until the Clojars release [im-7os.19]`
 - `7dd9082 Merge maint/im-7os.23-humanmine-default: HumanMine is the default mine for unit tests and the demo [im-7os.24]`
 - `782b448 Merge maint/im-7os.15-hljs11: highlight.js 11.12.0, highlightElement, v11 github theme [im-7os.15]`
 - `6d8df0f Merge maint/im-7os.2-lib-bumps: reagent 1.2, re-frame 1.4, React 18, react-select 5; drop react-day-picker and react-transition-group [im-7os.2]`
 
 ### Beads
 
-`bd status`: total 166, open 88, in progress 8, blocked 0, ready 88, closed 70.
+`bd status`: total 189, open 94, in progress 10, blocked 0, ready 94, closed 85.
 
 | Epic | Title | Epic status | Children | Open | In progress | Closed |
 |---|---|---|---|---|---|---|
-| im-28e | Epic F: BlueGenes tests and CI | open | 8 | 3 | 2 | 3 |
-| im-7os | Epic E: BlueGenes toolchain modernisation | open | 29 | 13 | 0 | 16 |
-| im-89g | Epic D: intermine CI and release pipeline | open | 10 | 5 | 0 | 5 |
-| im-8dd | Epic I: Planning repo, beads, dashboard | open | 6 | 1 | 2 | 3 |
-| im-bdy | Epic H: Docs and governance | open | 3 | 2 | 0 | 1 |
-| im-ee7 | Epic B: intermine build toolchain (Gradle 4.9 -> 8.x, JDK 17) | open | 49 | 24 | 3 | 22 |
-| im-jqz | Epic C: intermine Tier 1 dependency upgrades and removals | open | 33 | 23 | 1 | 9 |
-| im-ore | Epic G: Whole-system testbed | open | 9 | 5 | 0 | 4 |
+| im-28e | Epic F: BlueGenes tests and CI | open | 9 | 3 | 1 | 5 |
+| im-7os | Epic E: BlueGenes toolchain modernisation | open | 39 | 19 | 1 | 19 |
+| im-89g | Epic D: intermine CI and release pipeline | open | 12 | 5 | 1 | 6 |
+| im-8dd | Epic I: Planning repo, beads, dashboard | open | 8 | 3 | 2 | 3 |
+| im-bdy | Epic H: Docs and governance | open | 3 | 1 | 1 | 1 |
+| im-ee7 | Epic B: intermine build toolchain (Gradle 4.9 -> 8.x, JDK 17) | open | 53 | 21 | 3 | 29 |
+| im-jqz | Epic C: intermine Tier 1 dependency upgrades and removals | open | 36 | 24 | 1 | 11 |
+| im-ore | Epic G: Whole-system testbed | open | 10 | 6 | 0 | 4 |
 | im-rkn | Epic A: Environment and baseline | open | 10 | 3 | 0 | 7 |
 
 #### Closed issues by epic
@@ -103,6 +117,8 @@ Cross-check (agent-runs.csv / all subagent logs on disk, 62 logs parsed): differ
 - `im-28e.1` F1 kaocha unit tests green on new toolchain
 - `im-28e.2` F2 Cypress 13+ migration targeting the rdfc2im mine
 - `im-28e.4` bluegenes gate: smoke must execute the JS bundle, not just HTTP 200 (lesson from E1 review)
+- `im-28e.5` F4 re-record Cypress specs and fixtures for the rdfc2im demo mine (113-gene panel; replace Biotestmine Plasmodium ids, MAL chromosomes, 'DB identifier' labels, GST hit counts, seeded test_user account); 41 failures today are all data
+- `im-28e.9` bluegenes cypress: cypress.config.js defaults still point at Biotestmine (set defaults to the demo mine, name 'rdfc2im: 113 gene food/drug-metabolism panel'); nightly-cypress.yml placeholder still describes Biotestmine (im-28e.7); regions_test edits untested on a mine with locations
 
 **im-7os Epic E: BlueGenes toolchain modernisation**
 
@@ -111,11 +127,14 @@ Cross-check (agent-runs.csv / all subagent logs on disk, 62 logs parsed): differ
 - `im-7os.15` bluegenes: highlight.js 9.12.0 + react-highlight.js -> highlight.js 11 (the only production npm advisory; breaking API)
 - `im-7os.17` im-tables: re-run test suite with FlyMine defaults when reachable (sort-column rewrite compares ids case-insensitively; only tested on numeric HumanMine ids); README to document IM_TABLES_SERVICE_ROOT / IM_TABLES_MINE_NAME; npm audit 2 high
 - `im-7os.18` S5: switch bluegenes deps.edn to the sibling snapshots (imcljs 1.7.0-SNAPSHOT, im-tables 0.16.0-SNAPSHOT, tool-store 0.3.0-SNAPSHOT) or git deps, then E2 lockstep bumps
+- `im-7os.19` siblings before release: im-tables deps.edn still lists imcljs 1.6.0, tool-store lists imcljs 1.4.3 -> point at imcljs 1.7.0; release all three to Clojars (human: credentials) then switch bluegenes back to Maven coordinates (design 5.3) and drop the CI consumer workaround
 - `im-7os.2` E2 Library bumps: ClojureScript, re-frame 1.4, reagent 1.2/React 18, reitit, ring 1.12, timbre
 - `im-7os.24` bluegenes/im-tables/imcljs tests: HumanMine as the default public mine (Gos: HumanMine is the most important service); FlyMine only for Drosophila-specific or multi-mine cases; im-tables test_config + demo app default, bluegenes @external Cypress specs, kaocha tests, gate probes, nightly-cypress.yml, docs
 - `im-7os.25` [bug] bluegenes: built app no longer sets window.React / window.ReactDOM (cljsjs jars did; lost in the npm migration im-7os.1); BlueGenes tools (e.g. @intermine/bluegenes-protein-visualizer) throw 'reading Component' on HumanMine gene report pages; set the globals in src/shim, add a runbundle/gate check for React global, remove the /tools/ uncaught-error ignore in report_page_test.js
 - `im-7os.27` [bug] bluegenes: tools need window.imjs (upstream 06363a30 Oct 2024 removed the CDN script tag); protein visualizer, MSA viewer, protein-atlas, human-tissue, expression visualizers fail with 'imjs is not defined'; bundle imjs 4.0.0 from npm setting window.imjs (vetting entry required), make runbundle/Cypress fail on missing imjs; check which tools expect jQuery
 - `im-7os.3` E3 imcljs / im-tables-3 / bluegenes-tool-store on the same toolchain
+- `im-7os.30` [bug] bluegenes ws/ids.clj:57: case-sensitive condition inverted (ticking 'Identifiers are case sensitive' lower-cases identifiers, UniProt accessions not found)
+- `im-7os.31` [bug] bluegenes search input-new-term: on-submit uses the term from the last render (Enter right after typing searches nothing ~50% when logged in); controlled inputs drop keystrokes under fast typing ('PPARG' -> 'PARG'); Cypress works around both (1 s wait, typeSlowly helper) - fix the components and remove the workarounds
 - `im-7os.4` E4 CDN assets pinned with SRI or bundled; vega bumps
 - `im-7os.5` E5 npm security: ws, wait-on, xmlhttprequest; npm audit clean
 - `im-7os.6` commons-compress 1.19 -> 1.27.1 in tool-store/bluegenes (needs commons-io 2.16.1 + commons-codec 1.17.1 pins under lein)
@@ -126,6 +145,7 @@ Cross-check (agent-runs.csv / all subagent logs on disk, 62 logs parsed): differ
 **im-89g Epic D: intermine CI and release pipeline**
 
 - `im-89g.1` D1 GitHub Actions: pull_request trigger, setup-java@v4 matrix, Gradle cache
+- `im-89g.11` release: intermine-webtasks 5.1.0 POM on Maven Central has the webapp-war-as-dependency bug; 5.1.1 must carry the classes classifier fix (config/gradle/webapp-classes-dependency.gradle) - check the release/5.1.1-candidate branch
 - `im-89g.2` D2 .github/dependabot.yml (gradle, github-actions)
 - `im-89g.3` D3 maven-publish + Central Portal publishing; docs/RELEASING.md
 - `im-89g.4` D4 PR template, CONTRIBUTING.md, README badges
@@ -162,7 +182,14 @@ Cross-check (agent-runs.csv / all subagent logs on disk, 62 logs parsed): differ
 - `im-ee7.37` plugin addStrutsConfig uses outputs of copyMineProperties and copyWebappContent without declaring dependencies (Gradle 7 warns, Gradle 8 errors); seen in the G1 humanmine build
 - `im-ee7.39` 6.0.0 deployer guide + plugin: with the new copyMineProperties pattern intermine.properties (DB credentials) lands in the mine's dbmodel jar; add jar { exclude 'intermine.properties' } to the guide and consider doing it in the plugin
 - `im-ee7.4` B4 JDK 17 build and test run; JDK 21 verification
+- `im-ee7.41` intermine plugin/testmine: Copy tasks that unwar intermine-webapp into explodedWebApp do not clear the target, so stale jars survive until clean; make it a Sync task
+- `im-ee7.46` [bug] intermine-webtasks POM declares intermine-webapp as a compile dependency, so every mine's war gets intermine-webapp-<v>.war (12 MB) in WEB-INF/lib; fix the dependency metadata (seen in B5 humanmine/flymine wars)
+- `im-ee7.47` plugin: resolve soTermListFilePath and soAdditionFilePath against rootDir (Ant resolves relative paths against the Gradle 8 daemon cwd; deployers must use absolute paths today)
+- `im-ee7.48` plugin: mergeProperties resource() should depend on processResources so mines need no copyMineProperties workaround; copyWebappContent empties build/explodedWebApp on a first Gradle 8 run so the war silently lacks bio-webapp content (46 MB vs 68 MB) - move war composition (warWebApp, duplicatesStrategy, filter) into the plugin
 - `im-ee7.5` B5 Deployer migration: update humanmine/flymine build files; docs/UPGRADING-build.md
+- `im-ee7.50` humanmine/flymine forks: simplify webapp/build.gradle per the new plugin war composition (delete warWebApp, copyWebappContent, explodedWebAppDir, propsDir, mergeProperties input block, classpath filter); rebuild the wars to confirm byte-equivalence
+- `im-ee7.52` UPGRADING-build.md: a mine's dbmodel build must add commons-lang3 (InterMine code now imports lang3) and keep commons-lang 2.6 for the vendored torque at build time; or have the plugin add both (im-jqz.20 follow-up)
+- `im-ee7.53` deployer re-verification on the new plugin: humanmine/flymine forks simplified per the war composition change, rebuilt (buildDB + war) against maint-2026 45c10e48ee; lang3 transitivity checked; UPGRADING-build.md updated (covers im-ee7.50, im-ee7.52)
 - `im-ee7.7` intermine: regenerate the seven gradlew scripts and wrapper jars for 6.9.4 (S1-wrap)
 - `im-ee7.9` intermine: flaky IntegrationWriterDataTrackingImplTest (setUp IllegalArgumentException cascades to 17 failures) under concurrent gates
 
@@ -171,10 +198,12 @@ Cross-check (agent-runs.csv / all subagent logs on disk, 62 logs parsed): differ
 - `im-jqz.1` C1 Postgres JDBC 42.7.x + HikariCP
 - `im-jqz.11` intermine: remove jersey-media-json-jackson + Jersey client (inventory R13) and the jackson-jaxrs-json-provider line
 - `im-jqz.2` C2 Jackson 2.17+, org.json, everit json-schema
+- `im-jqz.20` intermine: commons-lang 2.6 -> commons-lang3 migration (268 files import it; mechanical, batchable)
 - `im-jqz.25` intermine bio/webapp war ships log4j-core/api/slf4j-impl 2.5 (Log4Shell) via biojava-core and biojava-ontology; other modules exclude org.apache.logging.log4j, bio/webapp does not; also a second SLF4J binding
 - `im-jqz.26` intermine bio/webapp war stale jars: junit-4.10 + hamcrest-core (via json-simple), spring-test, aopalliance-1.0 next to aopalliance-repackaged; commons-logging + jcl-over-slf4j both in testmine war
 - `im-jqz.3` C3 commons-* (collections, io, lang, fileupload, httpclient, codec, math3 duplicate)
 - `im-jqz.4` C4 bcprov, oltu, JOpenId, DWR CVE check (Tier 2 minimal)
+- `im-jqz.6` C6 JUnit 4.13.2, xmlunit, mockobjects/easymock cleanup, vendored jars -> Maven artefacts
 - `im-jqz.7` C7 Weak-dependency removals from the usage census
 - `im-jqz.8` intermine: flaky testBatchesCache in FlatMode/WithNotXml ObjectStoreInterMineImplTest (test-order dependent result cache)
 
@@ -201,24 +230,25 @@ Mean tokens per run, by model and outcome class:
 
 | Model | Outcome class | Runs | Mean input | Mean cache read | Mean cache write | Mean output |
 |---|---|---|---|---|---|---|
-| opus | success | 23 | 186 | 16,180,158 | 721,097 | 72,520 |
+| opus | success | 24 | 190 | 16,399,411 | 749,440 | 73,435 |
 | opus | failed | 0 | - | - | - | - |
-| sonnet | success | 40 | 112 | 6,388,473 | 341,123 | 44,036 |
+| sonnet | success | 46 | 122 | 7,558,244 | 365,267 | 47,061 |
 | sonnet | failed | 0 | - | - | - | - |
+| sonnet | other | 1 | 32 | 893,828 | 62,209 | 9,400 |
 
 Five most expensive runs, ranked by output tokens, then cache write tokens (no prices supplied):
 
 | Run | Bead | Model | Output tok | Cache write tok | Outcome |
 |---|---|---|---|---|---|
 | E1 bluegenes shadow-cljs migration | im-7os.1 | opus | 177,729 | 755,011 | done |
+| F4 Cypress specs and fixtures for the demo mine | im-28e.5 | sonnet | 164,627 | 1,742,226 | success |
 | B2 batch P plugin rewrite | im-ee7.2 | opus | 151,358 | 653,034 | done |
 | intermine dependency census and CVE inventory | im-rkn.6 | sonnet | 133,496 | 316,367 | done |
 | Gradle upgrade path design (read-only) | im-ee7 | opus | 132,117 | 312,803 | done |
-| B4 JDK 17 build and tests; JDK 21 check | im-ee7.4 | opus | 123,396 | 3,947,438 | success |
 
 ## 4. Model usage pattern
 
-**opus** (23 runs)
+**opus** (24 runs)
 
 - Survey intermine build/test state (`im-rkn`)
 - Survey bluegenes build/test state (`im-rkn`)
@@ -243,8 +273,9 @@ Five most expensive runs, ranked by output tokens, then cache write tokens (no p
 - S5 bluegenes on sibling git deps (`im-7os.18`)
 - E2 bluegenes+im-tables library bumps (`im-7os.2`)
 - B4 JDK 17 build and tests; JDK 21 check (`im-ee7.4`)
+- BlueGenes P1 bugs: ids case, text-input keystrokes, search term, Cypress defaults (`im-7os.31`)
 
-**sonnet** (40 runs)
+**sonnet** (47 runs)
 
 - intermine dependency census and CVE inventory (`im-rkn.6`)
 - bluegenes dependency census and inventory (`im-rkn.7`)
@@ -285,7 +316,14 @@ Five most expensive runs, ranked by output tokens, then cache write tokens (no p
 - window.React/ReactDOM globals for tools (`im-7os.25`)
 - window.imjs for tools (bundled imjs 4.0.0) (`im-7os.27`)
 - C6 JUnit 4.13.2, EasyMock 5.7, vendored jars 16->6 (`im-jqz.6`)
+- F4 Cypress specs and fixtures for the demo mine (`im-28e.5`)
 - B5 deployer migration: humanmine, flymine, UPGRADING-build.md (`im-ee7.5`)
+- plugin deployer fixes: webtasks POM, SO paths, war composition (`im-ee7.46`)
+- commons-lang 2.6 -> lang3 3.21.0 (268 files) (`im-jqz.20`)
+- 5.1.1 candidate backports (6 items, 8 commits) (`im-89g.11`)
+- deployer re-check on the final plugin (humanmine, flymine, guide) (`im-ee7.53`)
+- siblings imcljs git-sha pins + release order doc (`im-7os.19`)
+- Testbed: 5.1.1 candidate ut stack + smoke (first attempt) (`im-89g.12`)
 
 ## 5. Notes
 
@@ -297,7 +335,7 @@ Token counts are de-duplicated per API message id. Runs that resume an earlier a
 
 | Issue | Title | Status | Why listed |
 |---|---|---|---|
-| im-7os.19 | siblings before release: im-tables deps.edn still lists imcljs 1.6.0, tool-store lists imcljs 1.4.3 -> point at imcljs 1.7.0; release all three to Clojars (human: credentials) then switch bluegenes back to Maven coordinates (design 5.3) and drop the CI consumer workaround | open | label human, title mentions human |
+| im-7os.33 | HUMAN (Gos): release imcljs 1.7.0, im-tables 0.16.0, tool-store 0.3.0 to Clojars in that order per intermine-planning/docs/RELEASING-siblings.md (CLOJARS_USERNAME/CLOJARS_PASSWORD deploy token; tool-store via lein deploy, move its project.clj to imcljs 1.7.0 first); then switch bluegenes deps.edn back to :mvn/version and drop the CI git-dep workaround (ci.yml 179-188, build.clj 206-228) | open | title mentions human |
 | im-89g.7 | D3 follow-up: test real Central Portal upload (central.sonatype.com blocked in sandbox); human: Portal account, org.intermine namespace, GPG key, run docs/RELEASING.md for 5.1.1 | open | label human, title mentions blocked, title mentions human |
 | im-rkn.9 | sandbox/human: approve cdn.jsdelivr.net and cdn.intermine.org (BlueGenes loads scripts from them; browser tests against the local stack fail without them); Playwright's own Chromium needs 8 apt libs on Ubuntu 26.04 (PLAYWRIGHT_HOST_PLATFORM_OVERRIDE=ubuntu24.04-arm64) | open | label human, label blocked, title mentions human |
 
