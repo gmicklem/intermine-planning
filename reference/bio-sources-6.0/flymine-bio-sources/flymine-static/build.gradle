@@ -1,0 +1,18 @@
+sourceSets {
+    main {
+        java {
+            srcDirs = ['build/gen']
+        }
+        resources {
+            srcDirs = ['resources']
+        }
+    }
+}
+
+dependencies {
+    api group: 'org.intermine', name: 'bio-model', version: bioVersion
+}
+
+processResources {
+    from('.') { include ("*.properties")}
+}

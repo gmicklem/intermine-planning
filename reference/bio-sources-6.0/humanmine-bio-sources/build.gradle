@@ -1,0 +1,78 @@
+// Scratch conversion (im-ee7.53, not committed): Gradle 4.9 build of humanmine-bio-sources on Gradle 8.14.6.
+buildscript {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
+    dependencies {
+        classpath group: 'org.intermine', name: 'plugin', version: System.getProperty("imVersion")
+    }
+}
+
+ext {
+    bioVersion = System.getProperty("bioVersion")
+    imVersion = System.getProperty("imVersion")
+}
+
+subprojects {
+    group = 'org.intermine'
+    version = '4.3.0'
+
+    apply plugin: 'java-library'
+    apply plugin: 'maven-publish'
+    apply plugin: 'dbmodel'
+    apply plugin: 'biosource-dbmodel'
+
+    java {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+    if (JavaVersion.current().isJava9Compatible()) {
+        tasks.withType(JavaCompile).configureEach { options.release = 8 }
+    }
+
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
+
+    configurations {
+        bioModel
+        mergeModel
+    }
+
+    dependencies {
+        api group: 'org.intermine', name: 'bio-core', version: bioVersion
+        api group: 'org.intermine', name: 'intermine-resources', version: imVersion // log4j
+        api 'commons-collections:commons-collections:3.2'
+        mergeModel group: 'org.intermine', name: 'intermine-objectstore', version: imVersion
+        bioModel group: 'org.intermine', name: 'bio-model', version: bioVersion, transitive: false
+    }
+
+    dbModelConfig {
+        objectStoreName = "os.bio-test"
+        modelName = "genomic"
+        defaultInterminePropertiesFile = "default.intermine.bio-test.properties"
+    }
+
+    // mergeModel needs the properties file the plugin names copyMineProperties; the jar must not carry it
+    task copyMineProperties(type: Copy) {
+        from "${System.env.HOME}/.intermine/intermine-bio-test.properties"
+        into layout.buildDirectory.dir('im/mine-properties')
+        rename { fileName -> fileName.replace('intermine-bio-test.properties', 'intermine.properties') }
+    }
+    processResources {
+        from copyMineProperties
+    }
+    jar {
+        exclude "intermine.properties"
+    }
+
+    publishing {
+        publications {
+            mavenJava(MavenPublication) {
+                from components.java
+            }
+        }
+    }
+}
