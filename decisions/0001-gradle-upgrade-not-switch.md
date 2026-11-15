@@ -72,3 +72,5 @@ Gradle 7 runs Checkstyle in a worker without the module classpath, and checkstyl
 ## Addendum 2026-11-15 (afternoon): 5.1.1 plugin compatibility verified
 
 The 5.1.1 candidate (`release/5.1.1-candidate`, built on Gradle 6.9.4) loads and runs its tasks in a humanmine copy on the Gradle 4.9 wrapper and on 6.9.4 (im-ee7.34). The 7.6.6-built plugin does not run on 4.9 (`NoClassDefFoundError: groovy/ant/AntBuilder`, seen in the G1 testbed run), confirming the release mapping: 5.1.1 from the 6.9.4 branch, 6.0.0 from the Gradle 8 branch requiring Gradle 8.14 in the mine.
+
+**Addendum 15 Nov 2026 (R7):** the temporary checkstyle bridge `config/gradle/checkstyle-classpath.gradle` is gone. Checkstyle 7.8.1 became 9.3 (the last release that runs on JDK 8) through the plain Gradle checkstyle plugin, merged as 256977fbcb. One rule is weaker than before: 9.3 cannot demand a `@throws` tag per checked exception without a classpath (im-ee7.43 tracks whether to replace it). 26 malformed Javadoc comments are suppressed by message match until fixed.
