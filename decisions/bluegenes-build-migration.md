@@ -85,6 +85,8 @@ Notes:
 
 `build.clj` tasks:
 
+> **As implemented (im-7os.1):** both `uber` and `jar` AOT-compile `bluegenes.core` only (`:ns-compile '[bluegenes.core]` with `:filter-nses '[bluegenes.core]`); every other namespace loads from source at start-up (6-11 s instead of about 2 s). `:filter-nses '[bluegenes]` as planned below does not work: AOT-compiled compojure routes embed `clout.core.CompiledRoute` records, so `java -cp lib/* bluegenes.core` fails with `NoClassDefFoundError` before clout is loaded, and the path prefix `bluegenes` also keeps `bluegenes_tool_store/*.class`. Keeping all classes (lein's `:aot :all`) is not portable either: classes compiled on JDK 21 fail on JDK 17 (instaparse then needs `java.util.SequencedCollection`), and rdfc2im runs the Clojars jar on JDK 17. The release file hash is also computed by build.clj from the build inputs, not by `:module-hash-names` (see docs/building.md).
+
 | Task | What it does |
 |---|---|
 | `clean` | Deletes `target`, `resources/public/js/compiled`, `resources/public/css`. |

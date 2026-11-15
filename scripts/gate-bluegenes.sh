@@ -19,10 +19,19 @@
 #                  summary or any failure/error is a gate failure)
 #   4. app-dev   : npx shadow-cljs compile app  (the dev build; warnings counted,
 #                  listed in .gate-logs/app-dev-warnings.txt)
+#      app-load  : a dev build as one file (--config-merge {:output-dir
+#                  "target/bundle-dev" :devtools {:loader-mode :eval}}) loaded in
+#                  a node vm with stub DOM globals by scripts/bluegenes-runbundle.js;
+#                  any exception while a namespace loads fails the gate (e.g. a
+#                  top-level def reading js/ReactTransitionGroup before the
+#                  cljsjs stand-in that sets it). Only the re-frame-10x preload,
+#                  which needs a real DOM, may fail.
 #   5. prod      : (only with --with-prod)
 #      uber      : clojure -T:build uber  (clean, im-tables CSS, lessc, shadow
 #                  release with hashed file names, fingerprinted CSS, AOT of
 #                  bluegenes.core) -> target/bluegenes.jar
+#      bundle-load: the release app.<hash>.js loaded the same way (no exception,
+#                  the four cljsjs globals set, bluegenes.core.init defined)
 #      jar-check : jar has jetty classes, bluegenes/core.class, manifest.edn, the
 #                  hashed app js and css
 #      smoke-NN  : for each JDK in GATE_SMOKE_JDKS: run the uberjar on $GATE_PORT
@@ -94,6 +103,7 @@
 # Final line of output is a one-line machine-greppable summary: GATE RESULT: ...
 
 set -u
+HERE=$(cd "$(dirname "$0")" && pwd)
 usage() { awk 'NR>1 && /^#/ {sub(/^# ?/,""); print; next} NR>1 {exit}' "$0"; exit 2; }
 
 WT=""; WITH_PROD=0; ALLOW_NO_BROWSER=0; AUDIT=1
@@ -264,6 +274,11 @@ deps_mode() {
     record app-dev FAIL "${STEP_SECS}s" "see .gate-logs/app-dev.log"; FAILED=1
   fi
 
+  rm -rf target/bundle-dev
+  run_step app-load "$LOGS/app-load.log" bash -c "npx shadow-cljs compile app --config-merge '{:output-dir \"target/bundle-dev\" :devtools {:loader-mode :eval}}' && node '$HERE/bluegenes-runbundle.js' --allow-fail=day8.re_frame_10x.preload.js target/bundle-dev/app.js"
+  if [ $STEP_RC -eq 0 ]; then record app-load PASS "${STEP_SECS}s" "$(grep -E '^LOADED OK' "$LOGS/app-load.log" | sed 's/ (.*bytes)//')"
+  else record app-load FAIL "${STEP_SECS}s" "$(grep -E '^LOAD' "$LOGS/app-load.log" | cut -c1-200) (see .gate-logs/app-load.log)"; FAILED=1; fi
+
   [ $WITH_PROD -eq 1 ] || return
 
   # ---- 5. prod: uberjar ----
@@ -277,6 +292,10 @@ deps_mode() {
   local HASH
   HASH=$(grep -oE ':output-name "app\.[^"]*\.js"' resources/public/js/compiled/manifest.edn | sed -E 's/.*app\.(.*)\.js"/\1/')
   record uber PASS "${STEP_SECS}s" "target/bluegenes.jar $(du -h target/bluegenes.jar | cut -f1) ($(stat -c %s target/bluegenes.jar) bytes), hash $HASH"
+
+  run_step bundle-load "$LOGS/bundle-load.log" node "$HERE/bluegenes-runbundle.js" "resources/public/js/compiled/app.$HASH.js"
+  if [ $STEP_RC -eq 0 ]; then record bundle-load PASS "${STEP_SECS}s" "$(grep -E '^LOADED OK' "$LOGS/bundle-load.log" | sed 's/ (.*bytes)//; s|resources/public/js/compiled/||')"
+  else record bundle-load FAIL "${STEP_SECS}s" "$(grep -E '^LOAD' "$LOGS/bundle-load.log" | cut -c1-200)"; FAILED=1; fi
 
   local LIST PROB=""
   LIST=$(unzip -Z1 target/bluegenes.jar)

@@ -18,3 +18,6 @@ started_utc,ended_utc,beads_id,agent_label,model,input_tokens,cache_read_tokens,
 2026-11-15T02:45:55.344Z,2026-11-15T04:01:09.363Z,im-ee7.1,B1 Gradle 4.9->6.9.4,opus,208,15735662,1229934,71314,done,3 commits; 2277/2279 (flaky pair); deployer smoke OK on 4.9 and 6.9.4
 2026-11-15T03:33:22.889Z,2026-11-15T04:23:33.388Z,im-7os.3,im-tables-3 deps.edn + shadow-cljs migration,sonnet,162,12753808,205427,79208,done,9 commits; tests unverified: FlyMine unreachable
 2026-11-15T03:03:47.402Z,2026-11-15T04:34:57.021Z,im-7os.1,E1 bluegenes shadow-cljs migration,opus,402,54167411,755011,177729,done,9 commits; 27/132 tests; uberjar 54->37 MiB; lein removed
+2026-11-15T04:16:52.056Z,2026-11-15T04:45:22.573Z,im-89g.1,"D1+D2+D4 GitHub Actions, dependabot, docs",sonnet,104,4635333,328561,41617,done,3 commits; actionlint clean
+2026-11-15T04:42:45.452Z,2026-11-15T04:50:16.193Z,im-7os.1,E1 pre-merge review,opus,92,4176639,114355,36542,done,DO NOT MERGE: shim load order breaks boot; fixes sent to worker
+2026-11-15T04:16:29.306Z,2026-11-15T05:07:15.917Z,im-ee7.2,B2 batch P plugin rewrite,opus,202,23237783,653034,151358,done,1 commit; dependsOn 42->8 stmts; works on 4.9/6.9.4/7.6.4; jars identical
