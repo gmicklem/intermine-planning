@@ -26,7 +26,8 @@
 #      jar-check : jar has jetty classes, bluegenes/core.class, manifest.edn, the
 #                  hashed app js and css
 #      smoke-NN  : for each JDK in GATE_SMOKE_JDKS: run the uberjar on $GATE_PORT
-#                  (default 5055) from a temp dir and fetch /, /version,
+#                  (default 5055) from a temp dir; time until /version answers;
+#                  fetch /, /version,
 #                  /api/tools/all and the js/css files the page references; the
 #                  hash in those names must be the one in manifest.edn and in
 #                  serverVars.version (the client-state reset key)
@@ -190,17 +191,19 @@ smoke() {
       BLUEGENES_DEFAULT_SERVICE_ROOT=${BLUEGENES_DEFAULT_SERVICE_ROOT:-https://www.flymine.org/flymine} \
       exec "$javabin" "$@" ) > "$LOGS/$name-server.log" 2>&1 &
   pid=$!
+  # /version answers without calling out; / fetches the default mine's semantic
+  # markup first (3 s timeout in bluegenes.index), so give it longer below.
   for _ in $(seq 1 120); do
-    curl -s -o /dev/null -m 2 "http://localhost:$PORT/" && { up=1; break; }
+    curl -s -o /dev/null -m 2 "http://localhost:$PORT/version" && { up=1; break; }
     kill -0 $pid 2>/dev/null || break; sleep 1
   done
   local startup=$(( $(date +%s) - s ))
-  html=$(curl -s -m 10 "http://localhost:$PORT/")
+  html=$(curl -s -m 30 "http://localhost:$PORT/")
   js=$(echo "$html" | grep -oE '/js/compiled/app[^"]*\.js' | head -1)
   css=$(echo "$html" | grep -oE '/css/site[^"]*\.css' | head -1)
   imcss=$(echo "$html" | grep -oE '/css/im-tables[^"]*\.css' | head -1)
   ver=$(echo "$html" | grep -oE ':version \\"[^\\]*' | sed 's/.*"//')
-  c_root=$(curl -s -o /dev/null -m 10 -w '%{http_code}' "http://localhost:$PORT/")
+  c_root=$(curl -s -o /dev/null -m 30 -w '%{http_code}' "http://localhost:$PORT/")
   c_ver=$(curl -s -o /dev/null -m 10 -w '%{http_code}' "http://localhost:$PORT/version")
   c_tools=$(curl -s -o /dev/null -m 10 -w '%{http_code}' "http://localhost:$PORT/api/tools/all")
   c_js=$(curl -s -o /dev/null -m 10 -w '%{http_code}' "http://localhost:$PORT$js")
