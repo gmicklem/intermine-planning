@@ -16,3 +16,5 @@ started_utc,ended_utc,beads_id,agent_label,model,input_tokens,cache_read_tokens,
 2026-11-15T02:24:52.856Z,2026-11-15T03:02:34.088Z,im-7os.5,bluegenes weak-dependency removals,sonnet,100,3741989,88108,25575,done,22 removal commits; npm audit 45->35
 2026-11-15T02:46:13.295Z,2026-11-15T03:32:06.055Z,im-jqz.1,C1+C2 JDBC/Hikari/Jackson/json/everit/ant/math3 bumps,sonnet,88,3391906,306687,23142,done,"6 commits, 85 advisories closed, gate green"
 2026-11-15T02:45:55.344Z,2026-11-15T04:01:09.363Z,im-ee7.1,B1 Gradle 4.9->6.9.4,opus,208,15735662,1229934,71314,done,3 commits; 2277/2279 (flaky pair); deployer smoke OK on 4.9 and 6.9.4
+2026-11-15T03:33:22.889Z,2026-11-15T04:23:33.388Z,im-7os.3,im-tables-3 deps.edn + shadow-cljs migration,sonnet,162,12753808,205427,79208,done,9 commits; tests unverified: FlyMine unreachable
+2026-11-15T03:03:47.402Z,2026-11-15T04:34:57.021Z,im-7os.1,E1 bluegenes shadow-cljs migration,opus,402,54167411,755011,177729,done,9 commits; 27/132 tests; uberjar 54->37 MiB; lein removed
