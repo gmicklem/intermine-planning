@@ -58,20 +58,13 @@ This protocol applies when ending a Beads implementation workflow. It is subordi
 <!-- END BEADS INTEGRATION -->
 
 
-## Build & Test
+## How this repo is used (orchestrator conventions)
 
-_Add your build and test commands here_
-
-```bash
-# Example:
-# npm install
-# npm test
-```
-
-## Architecture Overview
-
-_Add a brief overview of your project architecture_
-
-## Conventions & Patterns
-
-_Add your project-specific conventions here_
+- This is the planning repo for the 2026 InterMine + BlueGenes maintenance sprint. The master plan is `plans/00-overview.md`; per-area plans are `plans/10..40`.
+- **Only the orchestrator session writes to beads.** Worker agents receive their issue text in the prompt, never run `bd` write commands, and report back in their final message. (This overrides the generic Beads guidance above.)
+- Worker agents never commit in this repo; the orchestrator commits and pushes at checkpoints.
+- Code work happens in git worktrees under `../../worktrees/<repo>/<beads-id>-<slug>` created with `scripts/worktree.sh`, on branches `maint/<beads-id>-<slug>` from `maint-2026`.
+- Gate scripts: `scripts/gate-intermine.sh`, `scripts/gate-bluegenes.sh`; test isolation: `scripts/im-testenv.sh <task-id>`.
+- Dashboard: `python3 -I scripts/dashboard.py` writes `status/STATUS.md`, `status/index.html`, `status/artifact.html`.
+- Transcript: `scripts/transcript.py` regenerates `../../transcript.md` from the session log.
+- Dependency rules (Gos): remove weak dependencies rather than upgrade; vet any replacement package and log it in `decisions/package-vetting.md`; prefer task input/output wiring over explicit Gradle `dependsOn`.
