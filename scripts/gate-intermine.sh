@@ -1,0 +1,290 @@
+#!/usr/bin/env bash
+# gate-intermine.sh - per-commit gate for the InterMine Java back end (mirrors CI).
+#
+# Usage:
+#   eval "$(scripts/im-testenv.sh <task-id> create --src <worktree>)"   # once per task
+#   scripts/gate-intermine.sh <worktree-path> [builds...]
+#
+# builds (default: all):
+#   all               = suite:intermine + suite:bio (CI im-build.yml unit-tests matrix {intermine, bio})
+#   suite:intermine   = intermine
+#   suite:bio         = bio bio/sources bio/postprocess bio/postprocess-test (config/ci/run.sh "bio")
+#   intermine | bio | bio/sources | bio/postprocess | bio/postprocess-test   (single Gradle builds)
+#
+# Steps (each Gradle call is CI's run_gradle from config/ci/run.sh:
+#   ./gradlew -Dorg.gradle.jvmargs=-Xmx4g --max-workers=4 --no-daemon --warning-mode all --stacktrace <task>)
+#   1. config/lib/install_intermine.py with its Gradle-install step disabled: writes every
+#      gradle.properties / gradle-wrapper.properties from the *.in templates (defaults: Maven Central,
+#      Gradle 4.9) and leaves the task's ~/.intermine/*.properties alone (they already exist).
+#   2. `install` in plugin, intermine, and (if any bio build is requested) bio, bio/sources,
+#      bio/postprocess - the module list of install_intermine.py. Any failure aborts the gate.
+#   3. `build` in each requested build (tests run with ignoreFailures=true, as in CI).
+#   4. `checkstyleMain` in requested builds among intermine, bio, bio/sources, bio/postprocess
+#      (checkstyle.yml / run.sh "checkstyle"), then config/lib/parse_checkstyle_report.py <worktree>.
+#   5. config/lib/parse_test_report.py on intermine, bio, bio/sources, bio/postprocess-test (as
+#      run.sh), plus bio/postprocess if it produced test results.
+#   Exit status is non-zero if any step fails or any test fails/errors.
+#
+# Environment:
+#   HOME must be a task home made by im-testenv.sh (checked: $HOME/.intermine/intermine-test.properties
+#   exists and HOME is not the real home, unless GATE_ALLOW_REAL_HOME=1).
+#   GATE_JAVA_HOME     JDK to use (default /usr/lib/jvm/java-8-openjdk-arm64)
+#   GATE_PYTHON        python with xunitparser (default /home/agent/venvs/intermine-ci/bin/python;
+#                      created automatically if missing)
+#   GATE_INSTALL_ARGS  extra args for install_intermine.py (e.g. --gradle_distribution_url ...)
+#   GATE_GRADLE_ARGS   extra args appended to every Gradle call (e.g. --offline, --rerun-tasks)
+#   GATE_CLEAN=1       run `clean` in every involved build before installing
+#   GATE_SKIP_INSTALL=1, GATE_SKIP_CHECKSTYLE=1   skip those steps (for quick local iteration only;
+#                      a real gate run must not skip them)
+#   GATE_XMX           Gradle daemon heap (default 4g; do not raise in the shared sandbox)
+#   GATE_MAX_WORKERS   default 4
+#
+# Output: compact summary on stdout (per build: tests run/failed/errored/skipped, wall time, peak RSS
+# of the Gradle process tree); full logs, per-test failure list, deprecation list and summary in
+# <worktree>/.gate-logs/ (self-ignored via .gate-logs/.gitignore).
+set -uo pipefail
+
+[ $# -ge 1 ] || { sed -n '2,40p' "$0" | sed 's/^# \{0,1\}//'; exit 2; }
+WT=$(cd "$1" && pwd) || exit 2; shift
+[ -f "$WT/config/lib/install_intermine.py" ] || { echo "not an intermine checkout: $WT" >&2; exit 2; }
+
+# ---------- requested builds ----------
+ALL_BUILDS=(intermine bio bio/sources bio/postprocess bio/postprocess-test)
+BUILDS=()
+add_build() { local b; for b in "${BUILDS[@]}"; do [ "$b" = "$1" ] && return; done; BUILDS+=("$1"); }
+[ $# -eq 0 ] && set -- all
+for arg in "$@"; do
+  case $arg in
+    all) for b in "${ALL_BUILDS[@]}"; do add_build "$b"; done ;;
+    suite:intermine) add_build intermine ;;
+    suite:bio) for b in bio bio/sources bio/postprocess bio/postprocess-test; do add_build "$b"; done ;;
+    intermine|bio|bio/sources|bio/postprocess|bio/postprocess-test) add_build "$arg" ;;
+    *) echo "unknown build '$arg'" >&2; exit 2 ;;
+  esac
+done
+NEED_BIO=0
+for b in "${BUILDS[@]}"; do case $b in bio*) NEED_BIO=1 ;; esac; done
+
+# ---------- environment ----------
+if [ "${GATE_ALLOW_REAL_HOME:-0}" != 1 ]; then
+  [ "$HOME" != /home/agent ] || { echo "HOME is the real home; eval \"\$(im-testenv.sh <task-id>)\" first" >&2; exit 2; }
+fi
+for f in intermine-test.properties intermine-bio-test.properties testmodel.properties; do
+  [ -f "$HOME/.intermine/$f" ] || { echo "missing $HOME/.intermine/$f (run im-testenv.sh)" >&2; exit 2; }
+done
+export PSQL_HOST=${PSQL_HOST:-localhost} PSQL_USER=${PSQL_USER:-test} PSQL_PWD=${PSQL_PWD:-test}
+export JAVA_HOME=${GATE_JAVA_HOME:-/usr/lib/jvm/java-8-openjdk-arm64}
+export PATH=$JAVA_HOME/bin:$PATH
+export ANT_OPTS='-server'
+# GitHub runners run with LANG=C.UTF-8; without a UTF-8 locale JDK 8 defaults to ASCII and javadoc
+# fails on non-ASCII source (jbrowse-endpoint Segment.java). Override with GATE_LANG.
+export LANG=${GATE_LANG:-C.UTF-8} LC_ALL=${GATE_LANG:-C.UTF-8}
+PY=${GATE_PYTHON:-/home/agent/venvs/intermine-ci/bin/python}
+if ! "$PY" -c 'import xunitparser' 2>/dev/null; then
+  echo "creating venv for xunitparser at $(dirname "$(dirname "$PY")")" >&2
+  python3 -m venv "$(dirname "$(dirname "$PY")")" && "$PY" -m pip install -q xunitparser==1.3.4 'requests>=2.20.0' || exit 2
+fi
+XMX=${GATE_XMX:-4g}
+WORKERS=${GATE_MAX_WORKERS:-4}
+
+LOGS=$WT/.gate-logs
+mkdir -p "$LOGS"
+printf '*\n' > "$LOGS/.gitignore"
+rm -f "$LOGS"/*.log "$LOGS"/summary.txt "$LOGS"/steps.tsv "$LOGS"/deprecations.txt "$LOGS"/failed-tests.txt
+STEPS=$LOGS/steps.tsv      # name \t status \t seconds \t peakRSS_MB
+FAIL=0
+
+{
+  echo "gate-intermine $(date -Is)"
+  echo "worktree: $WT  ($(git -C "$WT" rev-parse --short HEAD 2>/dev/null) $(git -C "$WT" rev-parse --abbrev-ref HEAD 2>/dev/null)$(git -C "$WT" diff --quiet 2>/dev/null || echo ', dirty'))"
+  echo "HOME=$HOME  JAVA_HOME=$JAVA_HOME  LANG=$LANG"
+  "$JAVA_HOME/bin/java" -version 2>&1 | grep -v JAVA_TOOL_OPTIONS | head -1
+  echo "builds: ${BUILDS[*]}"
+} | tee "$LOGS/header.txt"
+
+# ---------- helpers ----------
+CUR_PID=
+on_signal() {
+  if [ -n "$CUR_PID" ]; then pkill -TERM -P "$CUR_PID" 2>/dev/null; kill -TERM "$CUR_PID" 2>/dev/null; fi
+  echo "gate interrupted" >&2; exit 130
+}
+trap on_signal INT TERM HUP
+# Sum RSS (MB) of a process tree every 2 s; write the peak to $2.
+mem_sampler() {
+  local root=$1 out=$2 peak=0 cur
+  while kill -0 "$root" 2>/dev/null; do
+    cur=$(ps -e -o pid=,ppid=,rss= | awk -v r="$root" '
+      { p[$1]=$2; m[$1]=$3 }
+      END { s=0; for (i in p) { j=i; while (j!="" && j!=0 && j!=1) { if (j==r) { s+=m[i]; break } j=p[j] } } print int(s/1024) }')
+    [ "$cur" -gt "$peak" ] && peak=$cur && echo "$peak" > "$out"
+    sleep 2
+  done
+}
+
+# run_step <name> <dir> <cmd...> : run in dir, log to $LOGS/<name>.log, record time/mem/status.
+run_step() {
+  local name=$1 dir=$2; shift 2
+  local log=$LOGS/$name.log memf=$LOGS/.$name.mem start end rc
+  echo 0 > "$memf"
+  start=$(date +%s)
+  printf '%-34s ' "$name" >&2
+  ( cd "$WT/$dir" && echo "+ (cd $dir && $*)" && exec "$@" ) > "$log" 2>&1 &
+  local pid=$!
+  CUR_PID=$pid
+  mem_sampler "$pid" "$memf" &
+  local spid=$!
+  wait "$pid"; rc=$?
+  CUR_PID=
+  kill "$spid" 2>/dev/null; wait "$spid" 2>/dev/null
+  end=$(date +%s)
+  local secs=$((end-start)) mem; mem=$(cat "$memf"); rm -f "$memf"
+  local st=OK; [ $rc -eq 0 ] || st="FAIL($rc)"
+  printf '%s\t%s\t%s\t%s\n' "$name" "$st" "$secs" "$mem" >> "$STEPS"
+  printf '%-9s %6ss  peak %5s MB\n' "$st" "$secs" "$mem" >&2
+  return $rc
+}
+
+gradle() {  # gradle <dir> <task>  == run.sh run_gradle
+  local dir=$1 task=$2
+  # shellcheck disable=SC2086
+  run_step "$(echo "$dir" | tr / -)-$task" "$dir" ./gradlew -Dorg.gradle.jvmargs=-Xmx$XMX --max-workers=$WORKERS \
+    --no-daemon --warning-mode all --stacktrace ${GATE_GRADLE_ARGS:-} "$task"
+}
+
+TOTAL_START=$(date +%s)
+
+# ---------- 1. generated properties ----------
+cat > "$LOGS/.genprops.py" <<'EOF'
+import sys
+sys.path.insert(0, sys.argv[1])
+import install_intermine as m
+m.IntermineBuilder.gradle_install_modules = lambda self, clean=False: None
+sys.argv = ["install_intermine.py"] + sys.argv[2:]
+m.main()
+EOF
+# shellcheck disable=SC2086
+run_step genprops . "$PY" "$LOGS/.genprops.py" "$WT/config/lib" ${GATE_INSTALL_ARGS:-} || { echo "property generation failed" >&2; exit 1; }
+if grep -q "^Written $HOME/.intermine" "$LOGS/genprops.log"; then
+  echo "install_intermine.py wrote unsuffixed ~/.intermine files; re-run im-testenv.sh" >&2; exit 1
+fi
+
+# ---------- 2. install ----------
+INSTALL=(plugin intermine)
+[ $NEED_BIO = 1 ] && INSTALL+=(bio bio/sources bio/postprocess)
+# GATE_CLEAN: `clean` right before each build's install (as install_intermine.py --clean does) or,
+# for builds that are not installed, right before `build`. Order matters: the bio builds cannot even
+# be configured (and so cannot be cleaned) until plugin/intermine have been installed.
+is_install() { local x; for x in "${INSTALL[@]}"; do [ "$x" = "$1" ] && return 0; done; return 1; }
+if [ "${GATE_SKIP_INSTALL:-0}" != 1 ]; then
+  for d in "${INSTALL[@]}"; do
+    if [ "${GATE_CLEAN:-0}" = 1 ]; then gradle "$d" clean || { FAIL=1; break; }; fi
+    gradle "$d" install || { echo "install failed in $d; see $LOGS" >&2; FAIL=1; break; }
+  done
+fi
+
+# ---------- 3. build ----------
+BUILT=0
+if [ $FAIL = 0 ]; then
+  BUILT=1
+  for d in "${BUILDS[@]}"; do
+    if [ "${GATE_CLEAN:-0}" = 1 ] && { [ "${GATE_SKIP_INSTALL:-0}" = 1 ] || ! is_install "$d"; }; then
+      gradle "$d" clean || FAIL=1
+    fi
+    gradle "$d" build || FAIL=1
+  done
+fi
+
+# ---------- 4. checkstyle ----------
+if [ $FAIL = 0 ] && [ "${GATE_SKIP_CHECKSTYLE:-0}" != 1 ]; then
+  CS=0
+  for d in "${BUILDS[@]}"; do
+    case $d in intermine|bio|bio/sources|bio/postprocess) gradle "$d" checkstyleMain || FAIL=1; CS=1 ;; esac
+  done
+  if [ $CS = 1 ]; then
+    run_step checkstyle-report . "$PY" "$WT/config/lib/parse_checkstyle_report.py" "$WT" || FAIL=1
+  fi
+fi
+
+# ---------- 5. test reports ----------
+for d in "${BUILDS[@]}"; do
+  [ $BUILT = 1 ] || break
+  case $d in
+    bio/postprocess) ls "$WT"/bio/postprocess/*/build/test-results/test/*.xml >/dev/null 2>&1 || continue ;;
+  esac
+  [ -d "$WT/$d" ] || continue
+  run_step "test-report-$(echo "$d" | tr / -)" . "$PY" "$WT/config/lib/parse_test_report.py" "$WT/$d" || FAIL=1
+done
+
+TOTAL=$(( $(date +%s) - TOTAL_START ))
+
+# ---------- summary ----------
+"$PY" - "$WT" "$LOGS" "$TOTAL" "${BUILDS[@]}" <<'EOF' | tee "$LOGS/summary.txt"
+import glob, os, re, sys
+import xml.etree.ElementTree as ET
+wt, logs, total = sys.argv[1], sys.argv[2], int(sys.argv[3])
+builds = sys.argv[4:]
+steps = {}
+for line in open(os.path.join(logs, "steps.tsv")):
+    n, st, s, m = line.rstrip("\n").split("\t")
+    steps[n] = (st, int(s), int(m))
+def fmt(s): return "%d:%02d:%02d" % (s // 3600, s % 3600 // 60, s % 60)
+failed = []
+rows = []
+for b in builds:
+    tot = [0, 0, 0, 0]
+    sub = {}
+    for x in glob.glob(os.path.join(wt, b, "*", "build", "test-results", "test", "*.xml")):
+        proj = x[len(os.path.join(wt, b)) + 1:].split(os.sep)[0]
+        try:
+            r = ET.parse(x).getroot()
+        except ET.ParseError as e:
+            failed.append("%s: unparseable %s (%s)" % (b, x, e)); continue
+        suites = [r] if r.tag == "testsuite" else r.findall("testsuite")
+        for s in suites:
+            for tc in s.findall("testcase"):
+                k = 0
+                if tc.find("failure") is not None: k = 1
+                elif tc.find("error") is not None: k = 2
+                elif tc.find("skipped") is not None: k = 3
+                c = sub.setdefault(proj, [0, 0, 0, 0])
+                c[0] += 1; tot[0] += 1
+                if k:
+                    c[k] += 1; tot[k] += 1
+                if k in (1, 2):
+                    failed.append("%s %s %s.%s" % (("FAILURE", "ERROR")[k - 1], b, tc.get("classname"), tc.get("name")))
+    key = b.replace("/", "-")
+    st, secs, mem = steps.get(key + "-build", ("not run", 0, 0))
+    rows.append((b, st, tot, secs, mem, sub))
+print("\n%-22s %-9s %6s %6s %6s %6s %9s %8s" % ("build", "gradle", "tests", "fail", "error", "skip", "wall", "peakMB"))
+for b, st, t, secs, mem, sub in rows:
+    print("%-22s %-9s %6d %6d %6d %6d %9s %8d" % (b, st, t[0], t[1], t[2], t[3], fmt(secs), mem))
+with open(os.path.join(logs, "per-subproject.txt"), "w") as f:
+    for b, st, t, secs, mem, sub in rows:
+        for p in sorted(sub):
+            c = sub[p]
+            f.write("%s/%s\t%d\t%d\t%d\t%d\n" % (b, p, c[0], c[1], c[2], c[3]))
+other = [(n, v) for n, v in steps.items() if not n.endswith("-build")]
+print("\nother steps: " + ", ".join("%s %s %s" % (n, v[0], fmt(v[1])) for n, v in other))
+with open(os.path.join(logs, "failed-tests.txt"), "w") as f:
+    f.write("\n".join(failed) + ("\n" if failed else ""))
+if failed:
+    print("\n%d failed/errored tests (first 30; full list in .gate-logs/failed-tests.txt):" % len(failed))
+    for x in failed[:30]: print("  " + x)
+# deprecation warnings printed by Gradle (--warning-mode all)
+dep = {}
+for lf in glob.glob(os.path.join(logs, "*.log")):
+    for line in open(lf, errors="replace"):
+        if re.search(r"deprecat", line, re.I) and not line.lstrip().startswith(("at ", "\tat ")):
+            msg = re.sub(r"\s+", " ", line.strip())
+            msg = re.sub(r"^.*?(The |Using |Gradle )", r"\1", msg) if " has been deprecated" in msg or "is deprecated" in msg else msg
+            dep[msg] = dep.get(msg, 0) + 1
+with open(os.path.join(logs, "deprecations.txt"), "w") as f:
+    for m, c in sorted(dep.items(), key=lambda kv: -kv[1]):
+        f.write("%6d  %s\n" % (c, m))
+print("\ndeprecation lines: %d distinct (see .gate-logs/deprecations.txt)" % len(dep))
+print("total wall time: %s" % fmt(total))
+EOF
+
+if [ $FAIL = 0 ] && [ -s "$LOGS/failed-tests.txt" ]; then FAIL=1; fi
+if [ $FAIL = 0 ]; then echo "GATE PASSED" | tee -a "$LOGS/summary.txt"; else echo "GATE FAILED (logs: $LOGS)" | tee -a "$LOGS/summary.txt"; fi
+exit $FAIL

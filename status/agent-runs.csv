@@ -1,1 +1,9 @@
 started_utc,ended_utc,beads_id,agent_label,model,input_tokens,cache_read_tokens,cache_write_tokens,output_tokens,outcome,notes
+2026-11-15T00:18:05.248Z,2026-11-15T00:20:36.748Z,im-rkn,Survey intermine build/test state,opus,42,972647,79480,9021,done,
+2026-11-15T00:18:17.152Z,2026-11-15T00:20:01.947Z,im-rkn,Survey bluegenes build/test state,opus,22,306039,41426,8299,done,
+2026-11-15T00:18:31.027Z,2026-11-15T00:21:09.300Z,im-rkn,Survey rdfc2im/docker_template/mine-tests/beads,opus,26,767016,96587,7495,done,
+2026-11-15T01:48:20.608Z,2026-11-15T01:50:59.076Z,im-8dd.2,Write dashboard generator,sonnet,28,742524,64560,22874,done,
+2026-11-15T01:48:29.637Z,2026-11-15T01:49:54.875Z,im-8dd.4,Split plan into per-area docs,sonnet,10,197471,41223,15179,done,
+2026-11-15T01:55:10.360Z,2026-11-15T01:56:22.332Z,im-bdy.2,Decision records 0001-0006,sonnet,14,314314,51307,10909,done,
+2026-11-15T01:47:26.127Z,2026-11-15T02:04:07.148Z,im-rkn.7,bluegenes dependency census and inventory,sonnet,162,12649509,253319,113653,done,"38 removal candidates, 65 GHSA ids"
+2026-11-15T01:47:08.335Z,2026-11-15T02:07:25.628Z,im-rkn.6,intermine dependency census and CVE inventory,sonnet,182,16154618,316367,133496,done,"79 coords, 21 vulnerable, 153 advisories, 26 removal rows"

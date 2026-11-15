@@ -1,47 +1,50 @@
-# STATUS 2026-11-15 01:53 UTC
+# STATUS 2026-11-15 02:07 UTC
 
-Generated 2026-11-15 01:53 UTC / 2026-11-15 01:53 GMT. Sprint dashboard for the InterMine and BlueGenes maintenance effort.
+Generated 2026-11-15 02:07 UTC / 2026-11-15 02:07 GMT. Sprint dashboard for the InterMine and BlueGenes maintenance effort.
 
 Times are UTC. Agent state: running = unfinished and written to in the last 10 min; stalled = unfinished and silent for 10 min or more; finished = last message ended its turn (no tool call pending).
 
-Subagents: 4 running, 0 stalled, 5 finished.
+Subagents: 4 running, 0 stalled, 8 finished.
 
 ## Agents
 
 | Agent | Model | State | Started | Last | In | Cache | Out |
 |---|---|---|---|---|---|---|---|
-| main session | fable-5-1 | running | 11-14 22:38 | 01:53 | 1.1k | 5.91M | 80.0k |
+| main session | fable-5-1 | running | 11-14 22:38 | 02:07 | 1.4k | 8.19M | 91.5k |
 | Survey intermine build/test state | opus-5-5 | finished | 00:18 | 00:20 | 42 | 1.05M | 9.0k |
 | Survey bluegenes build/test state | opus-5-5 | finished | 00:18 | 00:20 | 22 | 347.5k | 8.3k |
 | Survey rdfc2im, docker_template, mine-tests… | opus-5-5 | finished | 00:18 | 00:21 | 26 | 863.6k | 7.5k |
-| intermine dependency census and CVE invento… | sonnet-5-5 | running | 01:47 | 01:53 | 56 | 2.32M | 28.5k |
-| bluegenes dependency census and inventory | sonnet-5-5 | running | 01:47 | 01:53 | 68 | 3.01M | 31.7k |
+| intermine dependency census and CVE invento… | sonnet-5-5 | finished | 01:47 | 02:07 | 182 | 16.47M | 133.5k |
+| bluegenes dependency census and inventory | sonnet-5-5 | finished | 01:47 | 02:04 | 162 | 12.90M | 113.7k |
 | Write dashboard generator script | sonnet-5-5 | finished | 01:48 | 01:50 | 28 | 807.1k | 22.9k |
 | Split master plan into per-area plan docs | sonnet-5-5 | finished | 01:48 | 01:49 | 10 | 238.7k | 15.2k |
-| A3 intermine baseline build and tests | opus-5-5 | running | 01:51 | 01:53 | 40 | 1.30M | 7.8k |
-| A4 bluegenes baseline build and tests | sonnet-5-5 | running | 01:51 | 01:52 | 18 | 390.3k | 3.5k |
+| A3 intermine baseline build and tests | opus-5-5 | running | 01:51 | 02:07 | 122 | 6.56M | 42.0k |
+| A4 bluegenes baseline build and tests | sonnet-5-5 | running | 01:51 | 02:03 | 76 | 2.30M | 19.9k |
+| Gradle upgrade path design for intermine | opus-5-5 | running | 01:54 | 02:06 | 126 | 9.77M | 59.6k |
+| shadow-cljs migration design for BlueGenes | opus-5-5 | running | 01:55 | 02:07 | 122 | 6.63M | 61.1k |
+| Write decision records from the plan | sonnet-5-5 | finished | 01:55 | 01:56 | 14 | 365.6k | 10.9k |
 
-Note: 3 non-agent .output file(s) skipped (empty or plain-text task output)
+Note: 13 non-agent .output file(s) skipped (empty or plain-text task output)
 
 ## Totals by model
 
 | Scope | Model | Msgs | In | Cache rd | Cache wr | Out |
 |---|---|---|---|---|---|---|
-| main | fable-5-1 | 48 | 1.1k | 5.69M | 213.4k | 80.0k |
-| subagents | opus-5-5 | 65 | 130 | 3.26M | 305.1k | 32.6k |
-| subagents | sonnet-5-5 | 90 | 180 | 6.36M | 398.9k | 101.8k |
+| main | fable-5-1 | 58 | 1.4k | 7.95M | 237.0k | 91.5k |
+| subagents | opus-5-5 | 230 | 460 | 24.45M | 771.8k | 187.5k |
+| subagents | sonnet-5-5 | 236 | 472 | 32.29M | 793.1k | 316.0k |
 
 Tokens are de-duplicated per API message (streamed records share one message id).
 
 ## Beads summary
 
-bd status: total 49, open 41, in progress 4, blocked 24, ready 17, deferred 0, closed 4.
+bd status: total 49, open 38, in progress 3, blocked 19, ready 19, deferred 0, closed 8.
 
 | Status | Count |
 |---|---|
-| closed | 4 |
-| in_progress | 4 |
-| open | 41 |
+| closed | 8 |
+| in_progress | 3 |
+| open | 38 |
 
 ### im-28e Epic F: BlueGenes tests and CI [open, 0/3 closed]
 
@@ -70,19 +73,17 @@ bd status: total 49, open 41, in progress 4, blocked 24, ready 17, deferred 0, c
 | im-89g.2 | D2 .github/dependabot.yml (gradle, github-actions) | open | 2 | epic |
 | im-89g.4 | D4 PR template, CONTRIBUTING.md, README badges | open | 3 | epic |
 
-### im-8dd Epic I: Planning repo, beads, dashboard [open, 2/5 closed]
+### im-8dd Epic I: Planning repo, beads, dashboard [open, 3/5 closed]
 
 | ID | Title | Status | P | Labels |
 |---|---|---|---|---|
 | im-8dd.2 | I2 Dashboard generator (STATUS.md, index.html) an… | in_progress | 0 | epic |
-| im-8dd.4 | I4 Per-area plan docs 10/20/30/40 | in_progress | 1 | epic |
 | im-8dd.5 | I5 Sprint report for renewal decision (tokens/tim… | open | 1 | epic |
 
-### im-bdy Epic H: Docs and governance [open, 0/2 closed]
+### im-bdy Epic H: Docs and governance [open, 1/2 closed]
 
 | ID | Title | Status | P | Labels |
 |---|---|---|---|---|
-| im-bdy.2 | H2 Decision records: gradle-upgrade-vs-switch, jd… | open | 2 | epic |
 | im-bdy.3 | H1 intermine docs: building, local testing, upgra… | open | 2 | epic |
 
 ### im-ee7 Epic B: intermine build toolchain (Gradle 4.9 -> … [open, 0/5 closed]
@@ -114,14 +115,12 @@ bd status: total 49, open 41, in progress 4, blocked 24, ready 17, deferred 0, c
 | im-ore.1 | G1 rdfc2im --intermine-src: consume local org.int… | open | 1 | epic |
 | im-ore.2 | G2 mine-tests fixtures for the local demo mine (m… | open | 2 | epic |
 
-### im-rkn Epic A: Environment and baseline [open, 2/7 closed]
+### im-rkn Epic A: Environment and baseline [open, 4/7 closed]
 
 | ID | Title | Status | P | Labels |
 |---|---|---|---|---|
-| im-rkn.3 | Baseline: intermine build and tests on JDK 8 / Gr… | open | 0 | baseline,epic |
-| im-rkn.4 | Baseline: bluegenes cljfmt, kaocha (chromium), pr… | open | 0 | baseline,epic |
-| im-rkn.6 | Inventory: intermine dependencies, CVEs and usage… | in_progress | 0 | epic,inventory |
-| im-rkn.7 | Inventory: bluegenes + sibling libs dependencies,… | in_progress | 0 | epic,inventory |
+| im-rkn.3 | Baseline: intermine build and tests on JDK 8 / Gr… | in_progress | 0 | baseline,epic |
+| im-rkn.4 | Baseline: bluegenes cljfmt, kaocha (chromium), pr… | in_progress | 0 | baseline,epic |
 | im-rkn.5 | Baseline: rdfc2im full-build + make test-live + m… | open | 1 | baseline,epic |
 
 ## Repos and branches
@@ -140,4 +139,13 @@ WT = number of git worktrees (extra ones named). Branches shown: maint-2026 and 
 
 ## Recent agent runs
 
-status/agent-runs.csv has a header but no runs recorded yet.
+| Start | Bead | Agent | Model | In | Cache | Out | Outcome | Notes |
+|---|---|---|---|---|---|---|---|---|
+| 01:55 | im-bdy.2 | Decision records 0001-0006 | sonnet | 14 | 365.6k | 10.9k | done |  |
+| 01:48 | im-8dd.4 | Split plan into per-area do… | sonnet | 10 | 238.7k | 15.2k | done |  |
+| 01:48 | im-8dd.2 | Write dashboard generator | sonnet | 28 | 807.1k | 22.9k | done |  |
+| 01:47 | im-rkn.7 | bluegenes dependency census… | sonnet | 162 | 12.90M | 113.7k | done | 38 removal candidates, 65 GHSA ids |
+| 01:47 | im-rkn.6 | intermine dependency census… | sonnet | 182 | 16.47M | 133.5k | done | 79 coords, 21 vulnerable, 153 advisorie… |
+| 00:18 | im-rkn | Survey rdfc2im/docker_templ… | opus | 26 | 863.6k | 7.5k | done |  |
+| 00:18 | im-rkn | Survey bluegenes build/test… | opus | 22 | 347.5k | 8.3k | done |  |
+| 00:18 | im-rkn | Survey intermine build/test… | opus | 42 | 1.05M | 9.0k | done |  |
