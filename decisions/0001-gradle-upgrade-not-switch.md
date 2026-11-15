@@ -64,3 +64,7 @@ Follow-ups:
 Revisit if B2 (Gradle 7.6.4) proves slow enough to threaten the fallback release, if Gradle's
 one-major-ahead deprecation warnings start to demand plugin rewrites rather than small fixes, or if the
 grant work retires the deployer-facing plugin so the deployer-impact argument no longer applies.
+
+## Addendum 2026-11-15: checkstyle on Gradle 7 (for discussion with Gos)
+
+Gradle 7 runs Checkstyle in a worker without the module classpath, and checkstyle 7.8.1's `JavadocMethod` needs that classpath to resolve `@throws` types (41 sites fail). Rather than bump checkstyle mid-flip (config migration, risk R7), the flip ships `config/gradle/checkstyle-classpath.gradle`: ~100 lines that replace each Checkstyle task's action with the Gradle 6.9-style Ant call, including a small custom class loader. It is correct (verified by deleting a `@throws` tag) but it is exactly the kind of convoluted build code we do not want to keep. Decision: merged as a bridge, with issue "R7 checkstyle bump" (P1) to bump checkstyle and delete the file before 6.0.0 is cut.
