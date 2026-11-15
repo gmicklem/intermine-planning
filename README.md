@@ -16,3 +16,7 @@ executed largely by coding agents coordinated from a single orchestrator session
 | `.beads/` | beads issue database (Dolt, embedded). Only the orchestrator writes to it. |
 
 Work branches: `maint-2026` in each code repo under `gmicklem/*`; task branches `maint/<beads-id>-<slug>`.
+
+## For Gos
+
+- `docs/HUMAN-STEPS.md`: the steps only Gos can take (Clojars releases, Central Portal, CDN approvals, decisions), in unblocking order.
