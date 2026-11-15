@@ -53,6 +53,10 @@ intermineorg/* or intermine/*.
 
 ## 5. Review items flagged "for discussion with Gos"
 
+- `decisions/0007-reagent-input-patch.md` (bluegenes a2894c0d): a start-up monkey-patch of reagent's
+  input wrapper is what stops every text input dropping keystrokes under React 18 (0/6400 keys lost,
+  measured). It touches non-public reagent API, guarded by a unit test. Keep it, or revert to
+  per-input components?
 - `decisions/package-vetting.md`: every package swap, with the vet verdict and reasons.
 - `KeySigner.java` (intermine/webapp): bcprov removed; a ~90-line hand-written DER X.509 v3
   self-signed certificate writer replaces it (C4). Please read it or say whether you would
