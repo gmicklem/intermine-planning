@@ -1,28 +1,28 @@
 # Sprint report
 
-Generated 2026-11-15 13:29 by `scripts/sprint-report.py` (since 2026-11-14). Regenerate with `python3 -I scripts/sprint-report.py`. All times UTC.
+Generated 2026-11-15 16:47 by `scripts/sprint-report.py` (since 2026-11-14). Regenerate with `python3 -I scripts/sprint-report.py`. All times UTC.
 
 ## 1. Headline
 
-Sprint window (first to last timestamp in agent-runs.csv and the orchestrator log): 2026-11-14 22:38:30 UTC to 2026-11-15 13:29:32 UTC, elapsed 14:51:01.
+Sprint window (first to last timestamp in agent-runs.csv and the orchestrator log): 2026-11-14 22:38:30 UTC to 2026-11-15 16:47:24 UTC, elapsed 18:08:53.
 
-Total agent runs recorded: 49 (3 of them resumptions of an earlier agent, charged only for the tokens added since its previous row).
+Total agent runs recorded: 56 (3 of them resumptions of an earlier agent, charged only for the tokens added since its previous row).
 
 | Model | Runs | Success | Failed | Partial | Other | Input tok | Cache read tok | Cache write tok | Output tok | Wall-clock agent time | Median run |
 |---|---|---|---|---|---|---|---|---|---|---|---|
-| opus | 21 | 21 | 0 | 0 | 0 | 3,544 | 300,824,620 | 11,652,729 | 1,445,797 | 13:59:52 | 0:39:07 |
-| sonnet | 28 | 28 | 0 | 0 | 0 | 2,812 | 171,077,550 | 8,952,894 | 1,212,707 | 20:26:09 | 0:21:10 |
-| **all workers** | 49 | 49 | 0 | 0 | 0 | 6,356 | 471,902,170 | 20,605,623 | 2,658,504 | 34:26:01 | 0:28:31 |
-| orchestrator (fable) | n/a (380 msgs) | - | - | - | - | 9,400 | 102,488,003 | 840,026 | 372,610 | - | - |
+| opus | 23 | 23 | 0 | 0 | 0 | 4,282 | 372,143,637 | 16,585,230 | 1,667,950 | 18:57:37 | 0:41:59 |
+| sonnet | 33 | 33 | 0 | 0 | 0 | 3,476 | 203,605,174 | 11,514,335 | 1,438,160 | 25:26:44 | 0:25:53 |
+| **all workers** | 56 | 56 | 0 | 0 | 0 | 7,758 | 575,748,811 | 28,099,565 | 3,106,110 | 44:24:21 | 0:34:23 |
+| orchestrator (fable) | n/a (459 msgs) | - | - | - | - | 11,578 | 114,542,907 | 1,035,816 | 428,862 | - | - |
 
 Success = outcome `done`/`success`; failed = outcome starting `fail`/`error`/`abort`/`blocked`; partial = starting `partial`; other = anything else. Wall-clock agent time is the sum of ended minus started per run; agents ran in parallel, so it exceeds elapsed time. The orchestrator is the main Claude Code session (not in agent-runs.csv); its totals come from the session JSONL (1 file(s), de-duplicated per API message id) and cover its whole context re-reads, so cache read is large by nature.
 
-Cross-check (agent-runs.csv / all subagent logs on disk, 48 logs parsed): differences are agents not yet recorded or still running.
+Cross-check (agent-runs.csv / all subagent logs on disk, 54 logs parsed): differences are agents not yet recorded or still running.
 
 | Model | Input | Cache read | Cache write | Output |
 |---|---|---|---|---|
-| opus | 3,544 / 3,726 | 300,824,620 / 313,788,296 | 11,652,729 / 11,994,068 | 1,445,797 / 1,486,902 |
-| sonnet | 2,812 / 2,880 | 171,077,550 / 173,621,837 | 8,952,894 / 9,037,045 | 1,212,707 / 1,237,431 |
+| opus | 4,282 / 4,282 | 372,143,637 / 372,143,637 | 16,585,230 / 16,585,230 | 1,667,950 / 1,667,950 |
+| sonnet | 3,476 / 3,490 | 203,605,174 / 203,885,195 | 11,514,335 / 11,557,898 | 1,438,160 / 1,441,258 |
 
 ## 2. Delivered
 
@@ -30,15 +30,19 @@ Cross-check (agent-runs.csv / all subagent logs on disk, 48 logs parsed): differ
 
 | Repo | Ref | Commits | Merge commits |
 |---|---|---|---|
-| intermine-planning | HEAD | 46 | 0 |
-| intermine | maint-2026 | 85 | 18 |
-| bluegenes | maint-2026 | 60 | 0 |
+| intermine-planning | HEAD | 53 | 0 |
+| intermine | maint-2026 | 111 | 22 |
+| bluegenes | maint-2026 | 73 | 2 |
 | imcljs | maint-2026 | 8 | 0 |
 | bluegenes-tool-store | maint-2026 | 8 | 0 |
-| im-tables-3 | maint-2026 | 12 | 0 |
+| im-tables-3 | maint-2026 | 19 | 2 |
 
 **intermine merge commits**
 
+- `99a3aee9ed Merge maint/im-ee7.4-jdk17: builds and tests pass on JDK 8, 17 and 21; --release 8; --add-opens for cglib on JDK 9+; CI on JDK {8,17} x PostgreSQL {14,16}; deployer notes [im-ee7.4]`
+- `159341ef2d Merge maint/im-jqz.25-webapp-libs: no log4j 2.5 in the bio war; junit, hamcrest, spring-test out of the war; Jersey removed, registry lookup via HttpURLConnection [im-jqz.25 im-jqz.26 im-jqz.11]`
+- `70094bf344 Merge maint/im-ee7.24-jar-hygiene: no intermine.properties in published or dbmodel jars; no duplicate antlr, javax.inject, Jackson, lang3, logging jars in the wars [im-ee7.24 im-ee7.39 im-ee7.35]`
+- `331bb31924 Merge maint/im-jqz.3-commons-ant-json: drop commons-beanutils and commons-codec usage; commons-collections 3.2.2, commons-io 2.22.0, commons-fileupload 1.6.0, ant 1.10.18; org.json declared in pathquery [im-jqz.3]`
 - `4a72be62af Merge maint/im-ee7.3-gradle-814-flip: Gradle 8.14.6; zero deprecations from InterMine scripts and plugin; testmine on 8.14; addStrutsConfig inputs [im-ee7.3]`
 - `58d3b6cb44 Merge maint/im-ee7.3-catalog-modules: all module coordinates in gradle/libs.versions.toml; conflicts resolved (xmlunit 1.6, oltu 1.0.1, commons-codec 1.15, jami-core 3.2.12) [im-ee7.3]`
 - `4c53c22158 Merge branch 'maint-2026' into maint/im-ee7.3-catalog-modules`
@@ -58,24 +62,30 @@ Cross-check (agent-runs.csv / all subagent logs on disk, 48 logs parsed): differ
 - `42e105197e Merge maint/im-ee7.2-plugin-gradle7: plugin lazy tasks, no init tasks, input wiring [im-ee7.2]`
 - `31d15fa725 Merge maint/im-ee7.1-gradle-6: Gradle 6.9.4 across all builds [im-ee7.1]`
 
-**bluegenes unmerged maint/* branches ahead of maint-2026**
+**bluegenes merge commits**
 
-- `maint/im-7os.2-lib-bumps`: 2 commit(s), tip `570f6e1c deps: server libraries: ring 1.13, timbre 6, clj-http 3.13, Clojure 1.12 [im-7os.2]`
+- `69de5e6b Merge maint/im-7os.15-hljs11: highlight.js 11.12.0 shims and CDN theme with new SRI [im-7os.15]`
+- `0acf48ef Merge maint/im-7os.2-lib-bumps: Clojure 1.12, ring 1.13, timbre 6, reagent 1.2, re-frame 1.4, reitit 0.7, React 18, react-select 5; drop core.cache, react-day-picker, react-transition-group, react-highlight.js [im-7os.2]`
+
+**im-tables-3 merge commits**
+
+- `782b448 Merge maint/im-7os.15-hljs11: highlight.js 11.12.0, highlightElement, v11 github theme [im-7os.15]`
+- `6d8df0f Merge maint/im-7os.2-lib-bumps: reagent 1.2, re-frame 1.4, React 18, react-select 5; drop react-day-picker and react-transition-group [im-7os.2]`
 
 ### Beads
 
-`bd status`: total 129, open 74, in progress 7, blocked 0, ready 74, closed 48.
+`bd status`: total 152, open 86, in progress 5, blocked 0, ready 86, closed 61.
 
 | Epic | Title | Epic status | Children | Open | In progress | Closed |
 |---|---|---|---|---|---|---|
 | im-28e | Epic F: BlueGenes tests and CI | open | 8 | 4 | 1 | 3 |
-| im-7os | Epic E: BlueGenes toolchain modernisation | open | 19 | 7 | 1 | 11 |
+| im-7os | Epic E: BlueGenes toolchain modernisation | open | 24 | 11 | 0 | 13 |
 | im-89g | Epic D: intermine CI and release pipeline | open | 9 | 4 | 0 | 5 |
-| im-8dd | Epic I: Planning repo, beads, dashboard | open | 5 | 0 | 2 | 3 |
+| im-8dd | Epic I: Planning repo, beads, dashboard | open | 6 | 1 | 2 | 3 |
 | im-bdy | Epic H: Docs and governance | open | 3 | 2 | 0 | 1 |
-| im-ee7 | Epic B: intermine build toolchain (Gradle 4.9 -> 8.x, JDK 17) | open | 40 | 27 | 1 | 12 |
-| im-jqz | Epic C: intermine Tier 1 dependency upgrades and removals | open | 19 | 15 | 0 | 4 |
-| im-ore | Epic G: Whole-system testbed | open | 7 | 3 | 2 | 2 |
+| im-ee7 | Epic B: intermine build toolchain (Gradle 4.9 -> 8.x, JDK 17) | open | 44 | 26 | 1 | 17 |
+| im-jqz | Epic C: intermine Tier 1 dependency upgrades and removals | open | 30 | 21 | 1 | 8 |
+| im-ore | Epic G: Whole-system testbed | open | 9 | 5 | 0 | 4 |
 | im-rkn | Epic A: Environment and baseline | open | 10 | 3 | 0 | 7 |
 
 #### Closed issues by epic
@@ -90,8 +100,10 @@ Cross-check (agent-runs.csv / all subagent logs on disk, 48 logs parsed): differ
 
 - `im-7os.1` E1 shadow-cljs + deps.edn build reproducing dev/prod/kaocha; Node 22; lessc current
 - `im-7os.10` bluegenes: remaining npm advisories (7 critical, 22 high) via cypress 6, less 1.7.5, bootstrap 3; resolve in E1/E2 bumps
+- `im-7os.15` bluegenes: highlight.js 9.12.0 + react-highlight.js -> highlight.js 11 (the only production npm advisory; breaking API)
 - `im-7os.17` im-tables: re-run test suite with FlyMine defaults when reachable (sort-column rewrite compares ids case-insensitively; only tested on numeric HumanMine ids); README to document IM_TABLES_SERVICE_ROOT / IM_TABLES_MINE_NAME; npm audit 2 high
 - `im-7os.18` S5: switch bluegenes deps.edn to the sibling snapshots (imcljs 1.7.0-SNAPSHOT, im-tables 0.16.0-SNAPSHOT, tool-store 0.3.0-SNAPSHOT) or git deps, then E2 lockstep bumps
+- `im-7os.2` E2 Library bumps: ClojureScript, re-frame 1.4, reagent 1.2/React 18, reitit, ring 1.12, timbre
 - `im-7os.3` E3 imcljs / im-tables-3 / bluegenes-tool-store on the same toolchain
 - `im-7os.4` E4 CDN assets pinned with SRI or bundled; vega bumps
 - `im-7os.5` E5 npm security: ws, wait-on, xmlhttprequest; npm audit clean
@@ -128,21 +140,32 @@ Cross-check (agent-runs.csv / all subagent logs on disk, 48 logs parsed): differ
 - `im-ee7.18` B2 flip: root testReport task destinationDir->destinationDirectory and reportOn->testResults (7.x-only APIs)
 - `im-ee7.2` B2 Gradle 7.6.4: compile->implementation/api, maven->maven-publish, plugin getByName(compile) rework
 - `im-ee7.22` plugin: fold copyMineProperties into processResources (needs DBModelUtils.mineProperties() change)
+- `im-ee7.24` intermine bio/model jar ships the test intermine.properties (contains DB credentials) - exclude from jar (pre-existing, seen in batch B listings)
 - `im-ee7.3` B3 Gradle 8.14, remove com.sun.xml.internal property, version catalog
+- `im-ee7.30` B3 CATALOG batch: move the 50 module-file coordinates into gradle/libs.versions.toml; resolve conflicts commons-codec 1.15/1.9, oltu client 1.0.1/1.0.0 (intermine/webapp both), jami-core 3.0.0/3.2.12, xmlunit 1.6/1.0; plugin/build.gradle literal 5.1.1 -> catalog; docs/RELEASING.md:50 version note
 - `im-ee7.34` RELEASE BLOCKER check: does the 5.1.1 candidate plugin (release/5.1.1-candidate, built on Gradle 6.9.4) run in a Gradle 4.9 mine? G1 found the 7.6.6-built plugin fails on 4.9 (NoClassDefFoundError groovy/ant/AntBuilder). If 6.9.4-built also fails, 5.1.1 must document 'mine on Gradle 6.9.4' and UPGRADING-build.md must drop the 4.9 claim
+- `im-ee7.35` intermine-webapp war built by the 7.6.6 toolchain carries two versions of jackson (2.18.12 + 2.7.5), commons-lang3, ant, javax.inject, jcl-over-slf4j (diff in repos/.sandbox-disk/rdfc2im/logs_ut/war-listing-diff-5.0.8-vs-5.1.1.txt); fix dependency metadata (resolutionStrategy / exclusions) before 6.0.0
+- `im-ee7.37` plugin addStrutsConfig uses outputs of copyMineProperties and copyWebappContent without declaring dependencies (Gradle 7 warns, Gradle 8 errors); seen in the G1 humanmine build
+- `im-ee7.39` 6.0.0 deployer guide + plugin: with the new copyMineProperties pattern intermine.properties (DB credentials) lands in the mine's dbmodel jar; add jar { exclude 'intermine.properties' } to the guide and consider doing it in the plugin
 - `im-ee7.7` intermine: regenerate the seven gradlew scripts and wrapper jars for 6.9.4 (S1-wrap)
 - `im-ee7.9` intermine: flaky IntegrationWriterDataTrackingImplTest (setUp IllegalArgumentException cascades to 17 failures) under concurrent gates
 
 **im-jqz Epic C: intermine Tier 1 dependency upgrades and removals**
 
 - `im-jqz.1` C1 Postgres JDBC 42.7.x + HikariCP
+- `im-jqz.11` intermine: remove jersey-media-json-jackson + Jersey client (inventory R13) and the jackson-jaxrs-json-provider line
 - `im-jqz.2` C2 Jackson 2.17+, org.json, everit json-schema
+- `im-jqz.25` intermine bio/webapp war ships log4j-core/api/slf4j-impl 2.5 (Log4Shell) via biojava-core and biojava-ontology; other modules exclude org.apache.logging.log4j, bio/webapp does not; also a second SLF4J binding
+- `im-jqz.26` intermine bio/webapp war stale jars: junit-4.10 + hamcrest-core (via json-simple), spring-test, aopalliance-1.0 next to aopalliance-repackaged; commons-logging + jcl-over-slf4j both in testmine war
+- `im-jqz.3` C3 commons-* (collections, io, lang, fileupload, httpclient, codec, math3 duplicate)
 - `im-jqz.7` C7 Weak-dependency removals from the usage census
 - `im-jqz.8` intermine: flaky testBatchesCache in FlatMode/WithNotXml ObjectStoreInterMineImplTest (test-order dependent result cache)
 
 **im-ore Epic G: Whole-system testbed**
 
 - `im-ore.1` G1 rdfc2im --intermine-src: consume local org.intermine artefacts and war
+- `im-ore.2` G2 mine-tests fixtures for the local demo mine (mines.toml local)
+- `im-ore.5` mine-tests: add a 'local' mine entry; skip JBrowse/location tests when the mine has no locations; configurable template threshold; separate service and BlueGenes URLs; browser executable-path option
 - `im-ore.6` G1 prerequisites for --intermine-src (from A5 baseline): override imVersion/bioVersion 5.0.+ in the humanmine checkout; reactome source hard-codes 5.0.8; artefacts via private maven repo (-Dmaven.repo.local), not shared ~/.m2; UPSTREAM_CACHE/intermine -> our worktree; wrapper newer than 4.9
 
 **im-rkn Epic A: Environment and baseline**
@@ -161,9 +184,9 @@ Mean tokens per run, by model and outcome class:
 
 | Model | Outcome class | Runs | Mean input | Mean cache read | Mean cache write | Mean output |
 |---|---|---|---|---|---|---|
-| opus | success | 21 | 169 | 14,324,982 | 554,892 | 68,847 |
+| opus | success | 23 | 186 | 16,180,158 | 721,097 | 72,520 |
 | opus | failed | 0 | - | - | - | - |
-| sonnet | success | 28 | 100 | 6,109,912 | 319,746 | 43,311 |
+| sonnet | success | 33 | 105 | 6,169,854 | 348,919 | 43,581 |
 | sonnet | failed | 0 | - | - | - | - |
 
 Five most expensive runs, ranked by output tokens, then cache write tokens (no prices supplied):
@@ -174,11 +197,11 @@ Five most expensive runs, ranked by output tokens, then cache write tokens (no p
 | B2 batch P plugin rewrite | im-ee7.2 | opus | 151,358 | 653,034 | done |
 | intermine dependency census and CVE inventory | im-rkn.6 | sonnet | 133,496 | 316,367 | done |
 | Gradle upgrade path design (read-only) | im-ee7 | opus | 132,117 | 312,803 | done |
-| G1 rdfc2im --intermine-src (local 5.1.1 artefacts) | im-ore.1 | opus | 120,798 | 1,053,651 | success |
+| B4 JDK 17 build and tests; JDK 21 check | im-ee7.4 | opus | 123,396 | 3,947,438 | success |
 
 ## 4. Model usage pattern
 
-**opus** (21 runs)
+**opus** (23 runs)
 
 - Survey intermine build/test state (`im-rkn`)
 - Survey bluegenes build/test state (`im-rkn`)
@@ -201,8 +224,10 @@ Five most expensive runs, ranked by output tokens, then cache write tokens (no p
 - B3 3b: flip to Gradle 8.14.6 (`im-ee7.3`)
 - G1 rdfc2im --intermine-src (local 5.1.1 artefacts) (`im-ore.1`)
 - S5 bluegenes on sibling git deps (`im-7os.18`)
+- E2 bluegenes+im-tables library bumps (`im-7os.2`)
+- B4 JDK 17 build and tests; JDK 21 check (`im-ee7.4`)
 
-**sonnet** (28 runs)
+**sonnet** (33 runs)
 
 - intermine dependency census and CVE inventory (`im-rkn.6`)
 - bluegenes dependency census and inventory (`im-rkn.7`)
@@ -232,6 +257,11 @@ Five most expensive runs, ranked by output tokens, then cache write tokens (no p
 - E4 CDN assets SRI + vega bumps (`im-7os.4`)
 - bluegenes npm advisories (`im-7os.10`)
 - 5.1.1 candidate plugin on Gradle 4.9 check (`im-ee7.34`)
+- G2 mine-tests local mine entry + capability flags (`im-ore.2`)
+- C3 commons-*, ant, org.json cleanup (`im-jqz.3`)
+- highlight.js 9 -> 11 (bluegenes + im-tables) (`im-7os.15`)
+- jar hygiene: credentials out of jars, duplicate libs out of wars (`im-ee7.24`)
+- webapp libs: log4j 2.5 out, stale jars out, Jersey removed (`im-jqz.25`)
 
 ## 5. Notes
 
