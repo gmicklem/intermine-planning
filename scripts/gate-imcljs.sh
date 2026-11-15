@@ -25,6 +25,8 @@
 #     shadow-live  : npx shadow-cljs compile test-live (compile only, no run: the live
 #                    suite needs a Biotestmine, see the usage in shadow-cljs.edn)
 #     clj-load     : clojure -M -e (require every JVM-side namespace)
+#     clj-test     : clojure -M:test-clj (offline JVM test: clj-http + cheshire against a
+#                    throw-away local HTTP server; needs no mine)
 #     jar          : clojure -T:build jar      then checks the jar: coordinates in the
 #                    pom, no test/ or compiled output in it, source namespaces present
 #     install      : clojure -T:build install  then checks ~/.m2 contains the jar+pom
@@ -163,6 +165,12 @@ if [ -f deps.edn ]; then
 
   run_step clj-load "$LOGS/clj-load.log" "$CLJ" -M -e "(doseq [n '[imcljs.fetch imcljs.save imcljs.auth imcljs.path imcljs.query imcljs.entity imcljs.send imcljs.internal.io imcljs.internal.utils imcljs.internal.defaults]] (require n)) (println \"loaded JVM namespaces\")"
   pass_fail clj-load "all JVM namespaces load"
+
+  if grep -q ':test-clj' deps.edn; then
+    run_step clj-test "$LOGS/clj-test.log" "$CLJ" -M:test-clj
+    CT=$(grep -E '^Ran [0-9]+ tests containing [0-9]+ assertions' "$LOGS/clj-test.log" | tail -1)
+    if [ $STEP_RC -eq 0 ] && [ -n "$CT" ]; then record clj-test PASS "${STEP_SECS}s" "$CT"; else record clj-test FAIL "${STEP_SECS}s" "see .gate-logs/clj-test.log"; FAILED=1; fi
+  fi
 
   if [ -f build.clj ]; then
     rm -rf target/classes target/imcljs-*.jar

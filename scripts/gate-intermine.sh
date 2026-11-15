@@ -307,6 +307,13 @@ print("\nGradle deprecation warnings: %d distinct; javac deprecation notes: %d d
 print("total wall time: %s" % fmt(total))
 EOF
 
+# Files the build/tests leave in the source tree that git does not ignore (e.g. bio/core/obo-converter-tgt.xml
+# written by a bio-core test). Reported so they are not committed by accident; they do not fail the gate.
+untracked=$(git -C "$WT" status --porcelain --untracked-files=all 2>/dev/null | grep '^??' | cut -c4-)
+if [ -n "$untracked" ]; then
+  echo "untracked files left by the build (do not commit):" | tee -a "$LOGS/summary.txt"
+  echo "$untracked" | sed 's/^/  /' | tee -a "$LOGS/summary.txt"
+fi
 if [ $FAIL = 0 ] && [ -s "$LOGS/failed-tests.txt" ]; then FAIL=1; fi
 if [ $FAIL = 0 ]; then echo "GATE PASSED" | tee -a "$LOGS/summary.txt"; else echo "GATE FAILED (logs: $LOGS)" | tee -a "$LOGS/summary.txt"; fi
 exit $FAIL
