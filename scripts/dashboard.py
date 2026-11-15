@@ -531,6 +531,33 @@ def build_doc(agents, beads, repos, runs, runs_err, planning, stall_min):
             counts[i.get("status") or "?"] = counts.get(i.get("status") or "?", 0) + 1
         if counts:
             blocks.append(table(["Status", "Count"], [[k, str(v)] for k, v in sorted(counts.items())]))
+            # Priority breakdown (Gos, 15 Nov): P0 critical path, P1 must ship this sprint,
+            # P2 should ship, P3 nice to have / post-sprint. Epics are counted separately.
+            statuses = ["open", "in_progress", "blocked", "deferred", "closed"]
+            pri = {}
+            for i in issues:
+                pv = to_int(i.get("priority"))
+                pk = ("P%d" % pv) if pv is not None else "P?"
+                row = pri.setdefault(pk, {"epics": 0, "total": 0})
+                if i.get("issue_type") == "epic":
+                    row["epics"] += 1
+                    continue
+                st = i.get("status") or "?"
+                row[st] = row.get(st, 0) + 1
+                row["total"] += 1
+            rows = []
+            for pk in sorted(pri):
+                r = pri[pk]
+                done = r.get("closed", 0)
+                pct = ("%d%%" % round(100.0 * done / r["total"])) if r["total"] else "-"
+                rows.append([pk] + [str(r.get(st, 0)) for st in statuses] + [str(r["total"]), pct, str(r["epics"])])
+            tot = {st: sum(pri[k].get(st, 0) for k in pri) for st in statuses}
+            tot_n = sum(pri[k]["total"] for k in pri)
+            rows.append(["all"] + [str(tot[st]) for st in statuses] + [str(tot_n),
+                        ("%d%%" % round(100.0 * tot["closed"] / tot_n)) if tot_n else "-",
+                        str(sum(pri[k]["epics"] for k in pri))])
+            blocks.append(("h3", "By priority (tasks and bugs; epics counted apart)"))
+            blocks.append(table(["Priority"] + [st.replace("_", " ") for st in statuses] + ["total", "closed %", "epics"], rows))
         else:
             blocks.append(("p", "No issues in the beads database yet."))
         byid = {i.get("id"): i for i in issues}
