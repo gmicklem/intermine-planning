@@ -13,3 +13,4 @@ started_utc,ended_utc,beads_id,agent_label,model,input_tokens,cache_read_tokens,
 2026-11-15T02:25:23.160Z,2026-11-15T02:36:10.377Z,im-7os.3,tool-store deps.edn migration,sonnet,66,3255009,112544,32166,done,"4 commits, gate pass"
 2026-11-15T01:51:23.962Z,2026-11-15T02:44:44.720Z,im-rkn.3,A3 intermine baseline,opus,206,13549408,743655,77702,done,2279 tests pass; gate ~8 min; peak 3.2 GB; flaky testBatchesCache
 2026-11-15T02:25:10.036Z,2026-11-15T02:47:12.284Z,im-7os.3,imcljs deps.edn + shadow-cljs migration,sonnet,122,7397635,160326,53937,done,"8 commits, gate pass, 4 lib bumps beyond scope"
+2026-11-15T02:24:52.856Z,2026-11-15T03:02:34.088Z,im-7os.5,bluegenes weak-dependency removals,sonnet,100,3741989,88108,25575,done,22 removal commits; npm audit 45->35
