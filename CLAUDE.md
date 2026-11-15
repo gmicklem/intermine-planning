@@ -66,5 +66,6 @@ This protocol applies when ending a Beads implementation workflow. It is subordi
 - Code work happens in git worktrees under `../../worktrees/<repo>/<beads-id>-<slug>` created with `scripts/worktree.sh`, on branches `maint/<beads-id>-<slug>` from `maint-2026`.
 - Gate scripts: `scripts/gate-intermine.sh`, `scripts/gate-bluegenes.sh`; test isolation: `scripts/im-testenv.sh <task-id>`.
 - Dashboard: `python3 -I scripts/dashboard.py` writes `status/STATUS.md`, `status/index.html`, `status/artifact.html`.
-- Transcript: `scripts/transcript.py` regenerates `../../transcript.md` from the session log.
+- Transcript: `scripts/transcript.py` regenerates `../transcript.md` (i.e. `repos/transcript.md`, which is on the host mount and visible on the Mac; `../../transcript.md` is a symlink to it) from the session log.
+- Sandbox layout warning: only `repos/` is the host mount (641 GB). `worktrees/`, `/home/agent` and `/var/lib/docker` are on the 20 GB sandbox root overlay; large scratch data goes under `repos/.sandbox-disk/`.
 - Dependency rules (Gos): remove weak dependencies rather than upgrade; vet any replacement package and log it in `decisions/package-vetting.md`; prefer task input/output wiring over explicit Gradle `dependsOn`.
