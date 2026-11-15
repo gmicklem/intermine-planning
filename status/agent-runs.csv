@@ -30,3 +30,5 @@ started_utc,ended_utc,beads_id,agent_label,model,input_tokens,cache_read_tokens,
 2026-11-15T06:36:04.667Z,2026-11-15T07:16:51.711Z,im-ee7.2,B2 batch S bio/sources + testmine,sonnet,154,8892179,654222,59960,done,3 commits; gate green; testmine builds
 2026-11-15T07:04:23.498Z,2026-11-15T07:31:21.422Z,im-jqz.8,Fix flaky testBatchesCache + DataTracker.clear race,opus,112,5244082,276297,37515,done,2 commits; real DataTracker race fixed
 2026-11-15T05:24:08.776Z,2026-11-15T09:40:36.881Z,im-89g.3,D3 maven-publish + Central Portal,sonnet,260,24674967,425665,106637,success,"2 commits, gate passed, nmcp vetted not adopted, RELEASING.md"
+2026-11-15T06:00:47.209Z,2026-11-15T09:43:22.707Z,im-ee7.2,B2 batch B: bio core/postprocess build files to Gradle 7 configs,sonnet,264,19977719,1403291,91404,success,"5 commits, gate green on merged tree; 7.6.4 compiles; checkstyle issue im-ee7.17"
+2026-11-15T09:44:42.096Z,2026-11-15T09:48:45.243Z,im-7os.6,tool-store fixes im-7os.6-9,sonnet,32,788746,47399,12960,success,"4 gated commits, merged ff, pushed"

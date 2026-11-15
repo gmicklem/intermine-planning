@@ -30,3 +30,11 @@ Newest first. One entry per checkpoint (about every 3 hours while unattended).
 - Disk: root overlay filled at ~06:30; freed to ~7 GB; task envs of merged tasks now destroyed at merge time.
 - Running: B2 batch B (bio core), D3 maven-publish/Central Portal. Next: Gradle 7.6 flip once both land; then 8.14; then JDK 17.
 - Needs Gos: network to flymine.org/humanmine.org/rdfportal.org from the sandbox (connections time out at the proxy CONNECT; GitHub works); approvals for download.cypress.io and playwright.download.prss.microsoft.com.
+
+## Checkpoint 4 (15 Nov ~10:05 UTC)
+- intermine maint-2026 = d178eb5cbe: batch B (bio builds on Gradle 7 configurations) and D3 (maven-publish, centralBundle, docs/RELEASING.md) merged, full gate green (2279 tests, 0 failures) with **zero Gradle deprecation warnings on 6.9.4**. This is the 5.1.1 candidate; pushed also as branch `release/5.1.1-candidate` on gmicklem/intermine. CI dispatched on it.
+- CI on the previous head c1a158f511 passed completely (both workflows).
+- bluegenes-tool-store maint-2026 = 8606215: four fixes merged (SERVER_PORT parse, zip-slip check, npm registry discovery replacing dead api.npms.io, commons-compress 1.27.1).
+- Gos supplied rdfc2im `cached_raw_data` (181 MB); A5 testbed baseline worker (Opus) started with `--use-cached-data`; HumanMine live model still unreachable (optional input; Gos asked for his host copies of in/humanmine_model.*).
+- Gradle 7.6.x flip worker (Opus) started on maint-2026 d178eb5cbe (im-ee7.17, im-ee7.18, wrapper regen, 7.6 deprecations baseline, flymine smoke).
+- Human steps outstanding: Central Portal account + namespace, GPG key (docs/RELEASING.md); network to humanmine/flymine/rdfportal from the sandbox; approvals for download.cypress.io and the playwright CDN.
