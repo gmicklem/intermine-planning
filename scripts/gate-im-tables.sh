@@ -241,7 +241,7 @@ try {
   r.Creatable = (typeof Select.Creatable === "function" || typeof Select.Creatable === "object") ? "component" : typeof Select.Creatable;
   r.langs = hljs.listLanguages().join(",");
   var el = document.createElement("code"); el.className = "xml"; el.textContent = "<a b='c'>d</a>";
-  document.body.appendChild(el); hljs.highlightBlock(el); r.highlighted = el.innerHTML.indexOf("hljs-") >= 0;
+  document.body.appendChild(el); hljs.highlightElement(el); r.highlighted = el.innerHTML.indexOf("hljs-") >= 0;
   im_tables.core.init(); r.init = "ok";
 } catch (e) { r.error = String(e); }
 console.log("SHIMCHECK " + JSON.stringify(r));
