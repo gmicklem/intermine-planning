@@ -63,7 +63,7 @@ Newest first. One entry per checkpoint (about every 3 hours while unattended).
 - Permission allow rules widened (repos/.claude/settings.local.json) for rm on scratch/build-output paths, docker, git worktree, dropdb/psql, so cleanup does not prompt while Gos is away.
 - Running: C4 Tier 2 CVE check (bcprov, oltu, JOpenId, DWR; Sonnet). Next: HumanMine-as-default test switch (im-7os.24), R7 checkstyle bump, C6 JUnit/xmlunit/vendored jars, commons-lang3 migration, B5 deployer guide, sprint report Monday.
 
-## Checkpoint 8 - 2026-11-15 20:05 UTC
+## Checkpoint 8 - 2026-11-15 18:50 UTC
 
 - intermine maint-2026 10728b1bc0 pushed, CI green through 256977fbcb. Merged since checkpoint 7: B4 JDK 17 (gates on 8 and 17), C4 Tier 2 CVEs (bcprov removed via a JDK-only certificate writer, flagged for Gos; OpenID 2.0 login + JOpenId removed; Oltu 1.0.2; DWR 2.0.11), R7 checkstyle 9.3 with the 101-line bridge deleted, B5 deployer guide (6.0.0 step list verified on humanmine and flymine). C6 (JUnit 4.13.2, EasyMock 5.7, vendored jars 16 -> 6) merged locally as 5279e4ee25, gate running.
 - New forks gmicklem/humanmine (f426ac8) and gmicklem/flymine (3904f70b): maint-2026 carries the 6.0-line build files; buildDB + war verified on Gradle 8.14.6.
