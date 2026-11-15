@@ -12,7 +12,7 @@
 // failure unless the file is named with --allow-fail (the re-frame-10x dev
 // preload needs a real DOM to render into, so the gate allows that one).
 // It does not call bluegenes.core.init: it checks that the bundle
-// loads, the four globals exist and init is a function.
+// loads, the globals exist and init is a function.
 // Exit code 0 = loaded OK, 1 = load error or missing global, 2 = usage.
 // (Adapted from the im-7os.1 pre-merge reviewer's harness.)
 'use strict';
@@ -60,7 +60,8 @@ for (const file of files) {
   try {
     vm.runInContext(src, ctx, { filename: file });
     // React 18 / react-select 5 line: DayPicker and ReactTransitionGroup were removed in im-7os.2
-    const missing = ['Select', 'hljs'].filter(g => ctx[g] === undefined);
+    // React and ReactDOM are what BlueGenes tools expect on window (im-7os.25)
+    const missing = ['Select', 'hljs', 'React', 'ReactDOM'].filter(g => ctx[g] === undefined);
     const init = ctx.bluegenes && ctx.bluegenes.core && typeof ctx.bluegenes.core.init;
     if (loadErrors.length) {
       console.log(`LOAD ERROR ${file}: ${loadErrors.join('; ')}`);
@@ -69,7 +70,7 @@ for (const file of files) {
       console.log(`LOAD INCOMPLETE ${file}: missing globals [${missing.join(',')}], typeof bluegenes.core.init=${init}`);
       failed = 1;
     } else {
-      console.log(`LOADED OK ${file} (${src.length} bytes): Select, hljs defined; bluegenes.core.init is a function`);
+      console.log(`LOADED OK ${file} (${src.length} bytes): Select, hljs, React, ReactDOM defined; bluegenes.core.init is a function`);
     }
   } catch (e) {
     console.log(`LOAD ERROR ${file}: ${e.name}: ${e.message} ${(e.stack || '').split('\n')[1] || ''}`);
