@@ -15,3 +15,4 @@ started_utc,ended_utc,beads_id,agent_label,model,input_tokens,cache_read_tokens,
 2026-11-15T02:25:10.036Z,2026-11-15T02:47:12.284Z,im-7os.3,imcljs deps.edn + shadow-cljs migration,sonnet,122,7397635,160326,53937,done,"8 commits, gate pass, 4 lib bumps beyond scope"
 2026-11-15T02:24:52.856Z,2026-11-15T03:02:34.088Z,im-7os.5,bluegenes weak-dependency removals,sonnet,100,3741989,88108,25575,done,22 removal commits; npm audit 45->35
 2026-11-15T02:46:13.295Z,2026-11-15T03:32:06.055Z,im-jqz.1,C1+C2 JDBC/Hikari/Jackson/json/everit/ant/math3 bumps,sonnet,88,3391906,306687,23142,done,"6 commits, 85 advisories closed, gate green"
+2026-11-15T02:45:55.344Z,2026-11-15T04:01:09.363Z,im-ee7.1,B1 Gradle 4.9->6.9.4,opus,208,15735662,1229934,71314,done,3 commits; 2277/2279 (flaky pair); deployer smoke OK on 4.9 and 6.9.4
