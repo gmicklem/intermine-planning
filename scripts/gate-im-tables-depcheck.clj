@@ -7,6 +7,10 @@
 ;;      day8.re-frame/test, once it has moved to the :kaocha profile (checked below)
 ;;  - day8.re-frame/test in the project.clj :kaocha profile differs from deps.edn :test alias
 ;;  - the project.clj version differs from the VERSION file.
+;; A deps.edn entry that is a git dependency (:git/sha, no :mvn/version) is compared by
+;; artifact name only: it must be listed in project.clj, whose lein coordinate cannot be a
+;; git dependency and stays on the last release published to Clojars. Use this while a
+;; sibling (imcljs) is pinned by sha ahead of its Clojars release.
 (require '[clojure.edn :as edn] '[clojure.java.io :as io] '[clojure.string :as str])
 (let [wt    (first *command-line-args*)
       dedn  (edn/read-string (slurp (io/file wt "deps.edn")))
@@ -18,7 +22,9 @@
       skip? (fn [n] (or (#{'org.clojure/clojure 'org.clojure/clojurescript} n)
                         (= "cljsjs" (namespace n))))
       from-lein (into {} (for [[n v] (:dependencies proj) :let [n (norm n)] :when (not (skip? n))] [n v]))
-      from-deps (into {} (for [[n m] deps] [(norm n) (:mvn/version m)]))
+      from-deps (into {} (for [[n m] deps
+                               :let [n (norm n)]]
+                           [n (if (:git/sha m) (get from-lein n :git-dep-not-in-project-clj) (:mvn/version m))]))
       kaocha    (into {} (for [[n v] (get-in proj [:profiles :kaocha :dependencies])] [(norm n) v]))
       test-tool 'day8.re-frame/test
       from-test (get-in dedn [:aliases :test :extra-deps test-tool :mvn/version])
