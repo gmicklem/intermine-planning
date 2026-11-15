@@ -68,3 +68,7 @@ grant work retires the deployer-facing plugin so the deployer-impact argument no
 ## Addendum 2026-11-15: checkstyle on Gradle 7 (for discussion with Gos)
 
 Gradle 7 runs Checkstyle in a worker without the module classpath, and checkstyle 7.8.1's `JavadocMethod` needs that classpath to resolve `@throws` types (41 sites fail). Rather than bump checkstyle mid-flip (config migration, risk R7), the flip ships `config/gradle/checkstyle-classpath.gradle`: ~100 lines that replace each Checkstyle task's action with the Gradle 6.9-style Ant call, including a small custom class loader. It is correct (verified by deleting a `@throws` tag) but it is exactly the kind of convoluted build code we do not want to keep. Decision: merged as a bridge, with issue "R7 checkstyle bump" (P1) to bump checkstyle and delete the file before 6.0.0 is cut.
+
+## Addendum 2026-11-15 (afternoon): 5.1.1 plugin compatibility verified
+
+The 5.1.1 candidate (`release/5.1.1-candidate`, built on Gradle 6.9.4) loads and runs its tasks in a humanmine copy on the Gradle 4.9 wrapper and on 6.9.4 (im-ee7.34). The 7.6.6-built plugin does not run on 4.9 (`NoClassDefFoundError: groovy/ant/AntBuilder`, seen in the G1 testbed run), confirming the release mapping: 5.1.1 from the 6.9.4 branch, 6.0.0 from the Gradle 8 branch requiring Gradle 8.14 in the mine.
