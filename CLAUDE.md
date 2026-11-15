@@ -63,6 +63,7 @@ This protocol applies when ending a Beads implementation workflow. It is subordi
 - This is the planning repo for the 2026 InterMine + BlueGenes maintenance sprint. The master plan is `plans/00-overview.md`; per-area plans are `plans/10..40`.
 - **Only the orchestrator session writes to beads.** Worker agents receive their issue text in the prompt, never run `bd` write commands, and report back in their final message. (This overrides the generic Beads guidance above.)
 - Worker agents never commit in this repo; the orchestrator commits and pushes at checkpoints.
+- Worker prompts must say: write `rm` with absolute paths that match the allow rules in repos/.claude/settings.local.json (a relative path after `cd` hits a permission prompt nobody can answer and hangs the worker for ever; 78 min lost 15 Nov), and start long jobs with the Bash tool's run_in_background rather than `nohup ... &` plus sleep.
 - Code work happens in git worktrees under `../../worktrees/<repo>/<beads-id>-<slug>` created with `scripts/worktree.sh`, on branches `maint/<beads-id>-<slug>` from `maint-2026`.
 - Gate scripts: `scripts/gate-intermine.sh`, `scripts/gate-bluegenes.sh`; test isolation: `scripts/im-testenv.sh <task-id>`.
 - Dashboard: `python3 -I scripts/dashboard.py` writes `status/STATUS.md`, `status/index.html`, `status/artifact.html` and `status/sprint-dashboard.html` (the latter is the file published as the Claude artifact https://claude.ai/code/artifact/cd45aac8-c4af-484d-99d6-58067cfdb478).
