@@ -15,7 +15,7 @@
 #   ./gradlew -Dorg.gradle.jvmargs=-Xmx4g --max-workers=4 --no-daemon --warning-mode all --stacktrace <task>)
 #   1. config/lib/install_intermine.py with its Gradle-install step disabled: writes every
 #      gradle.properties / gradle-wrapper.properties from the *.in templates (defaults: Maven Central,
-#      Gradle 4.9) and leaves the task's ~/.intermine/*.properties alone (they already exist).
+#      the wrapper version in the .in templates, 6.9.4 since im-ee7.1) and leaves the task's ~/.intermine/*.properties alone (they already exist).
 #   2. `publishToMavenLocal` (GATE_INSTALL_TASK) in plugin, intermine, and (if any bio build is requested) bio, bio/sources,
 #      bio/postprocess - the module list of install_intermine.py. Any failure aborts the gate.
 #   3. `build` in each requested build (tests run with ignoreFailures=true, as in CI).
