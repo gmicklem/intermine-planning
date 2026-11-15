@@ -36,6 +36,9 @@
 #   GATE_CLEAN=1       run `clean` in every involved build before installing
 #   GATE_SKIP_INSTALL=1, GATE_SKIP_CHECKSTYLE=1   skip those steps (for quick local iteration only;
 #                      a real gate run must not skip them)
+#   GATE_SHARED_M2=1   let `install` write org.intermine artefacts to the shared ~/.m2 (CI behaviour);
+#                      default is the task-private $HOME/.m2-intermine/repository (-Dmaven.repo.local)
+#   GATE_LANG          locale for the build (default C.UTF-8, as on GitHub runners)
 #   GATE_XMX           Gradle daemon heap (default 4g; do not raise in the shared sandbox)
 #   GATE_MAX_WORKERS   default 4
 #
@@ -144,11 +147,22 @@ run_step() {
   return $rc
 }
 
+# `install` (old `maven` plugin) writes org.intermine:*:5.1.1 into the Maven local repo. ~/.m2 is
+# shared between tasks, so by default each task installs into its own repo inside the task home
+# (the intermine builds never read mavenLocal; they resolve each other through file/ivy repos in
+# the worktree, so nothing else changes). GATE_SHARED_M2=1 restores CI's behaviour (~/.m2).
+M2_ARGS=
+if [ "${GATE_SHARED_M2:-0}" != 1 ]; then
+  M2_LOCAL=$HOME/.m2-intermine/repository
+  mkdir -p "$M2_LOCAL"
+  M2_ARGS=-Dmaven.repo.local=$M2_LOCAL
+fi
+
 gradle() {  # gradle <dir> <task>  == run.sh run_gradle
   local dir=$1 task=$2
   # shellcheck disable=SC2086
   run_step "$(echo "$dir" | tr / -)-$task" "$dir" ./gradlew -Dorg.gradle.jvmargs=-Xmx$XMX --max-workers=$WORKERS \
-    --no-daemon --warning-mode all --stacktrace ${GATE_GRADLE_ARGS:-} "$task"
+    --no-daemon --warning-mode all --stacktrace $M2_ARGS ${GATE_GRADLE_ARGS:-} "$task"
 }
 
 TOTAL_START=$(date +%s)
@@ -270,18 +284,26 @@ with open(os.path.join(logs, "failed-tests.txt"), "w") as f:
 if failed:
     print("\n%d failed/errored tests (first 30; full list in .gate-logs/failed-tests.txt):" % len(failed))
     for x in failed[:30]: print("  " + x)
-# deprecation warnings printed by Gradle (--warning-mode all)
-dep = {}
-for lf in glob.glob(os.path.join(logs, "*.log")):
+# deprecation warnings: Gradle's own (--warning-mode all) versus javac's "-Xlint:deprecation" notes
+gdep, jdep = {}, {}
+for lf in sorted(glob.glob(os.path.join(logs, "*.log"))):
+    step = os.path.basename(lf)[:-4]
     for line in open(lf, errors="replace"):
-        if re.search(r"deprecat", line, re.I) and not line.lstrip().startswith(("at ", "\tat ")):
-            msg = re.sub(r"\s+", " ", line.strip())
-            msg = re.sub(r"^.*?(The |Using |Gradle )", r"\1", msg) if " has been deprecated" in msg or "is deprecated" in msg else msg
-            dep[msg] = dep.get(msg, 0) + 1
+        if not re.search(r"deprecat", line, re.I) or line.lstrip().startswith("at "):
+            continue
+        msg = re.sub(r"\s+", " ", line.strip())
+        if msg.startswith("Note:"):
+            msg = re.sub(r"^Note: \S+/", "Note: <file> ", msg) if "uses or overrides" in msg and "/" in msg else msg
+            d = jdep
+        else:
+            d = gdep
+        e = d.setdefault(msg, [0, set()]); e[0] += 1; e[1].add(step)
 with open(os.path.join(logs, "deprecations.txt"), "w") as f:
-    for m, c in sorted(dep.items(), key=lambda kv: -kv[1]):
-        f.write("%6d  %s\n" % (c, m))
-print("\ndeprecation lines: %d distinct (see .gate-logs/deprecations.txt)" % len(dep))
+    for title, d in (("Gradle deprecation warnings", gdep), ("javac deprecation notes", jdep)):
+        f.write("== %s (%d distinct)\n" % (title, len(d)))
+        for m, (c, st) in sorted(d.items(), key=lambda kv: -kv[1][0]):
+            f.write("%6d  %s\n        in: %s\n" % (c, m, " ".join(sorted(st))))
+print("\nGradle deprecation warnings: %d distinct; javac deprecation notes: %d distinct (.gate-logs/deprecations.txt)" % (len(gdep), len(jdep)))
 print("total wall time: %s" % fmt(total))
 EOF
 

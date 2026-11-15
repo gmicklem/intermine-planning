@@ -29,6 +29,9 @@
 #     .intermine/intermine-bio-test.properties  (from config/ci-bio.properties)
 #     .intermine/testmodel.properties           (from config/testmodel.properties)
 #     env.sh                                    (export HOME=... PSQL_*=... IM_*=...)
+#     .m2-intermine/repository   (created later by gate-intermine.sh: task-private target of
+#                                 `./gradlew install`, so tasks do not overwrite each other's
+#                                 org.intermine:*:5.1.1 artefacts in the shared ~/.m2)
 #   These are exactly the three files config/lib/install_intermine.py copies into ~/.intermine, with
 #   the same names, so install_intermine.py (and config/ci/init.sh) see them as already present and
 #   skip them ("Skipping ... as it already exists"). PSQL_HOST/USER/PWD are substituted as
