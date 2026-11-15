@@ -26,3 +26,5 @@ started_utc,ended_utc,beads_id,agent_label,model,input_tokens,cache_read_tokens,
 2026-11-15T02:46:30.124Z,2026-11-15T05:52:26.732Z,im-jqz.7,C7 intermine weak-dependency removals,sonnet,206,9893419,2306935,51702,done,12 commits; 14 declarations removed; httpclient gone
 2026-11-15T04:16:52.056Z,2026-11-15T06:28:45.649Z,im-89g.1,CI fix: drop sudo -E for Postgres,sonnet,130,6173827,587863,52167,done,1 commit; gate green
 2026-11-15T06:00:28.791Z,2026-11-15T06:35:01.583Z,im-ee7.2,B2 batch I intermine build files,sonnet,164,11072850,352261,71200,done,1 commit; gate green; 7.6.4 compiles; checkstyle issue on 7.x
+2026-11-15T04:16:52.056Z,2026-11-15T06:54:38.750Z,im-89g.1,CI fix2: PG15+ public schema grant,sonnet,172,9186734,907134,66620,done,1 commit; gate green on non-superuser PG18
+2026-11-15T06:36:04.667Z,2026-11-15T07:16:51.711Z,im-ee7.2,B2 batch S bio/sources + testmine,sonnet,154,8892179,654222,59960,done,3 commits; gate green; testmine builds
