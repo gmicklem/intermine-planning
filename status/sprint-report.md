@@ -1,28 +1,28 @@
 # Sprint report
 
-Generated 2026-11-15 10:01 by `scripts/sprint-report.py` (since 2026-11-14). Regenerate with `python3 -I scripts/sprint-report.py`. All times UTC.
+Generated 2026-11-15 11:38 by `scripts/sprint-report.py` (since 2026-11-14). Regenerate with `python3 -I scripts/sprint-report.py`. All times UTC.
 
 ## 1. Headline
 
-Sprint window (first to last timestamp in agent-runs.csv and the orchestrator log): 2026-11-14 22:38:30 UTC to 2026-11-15 10:01:44 UTC, elapsed 11:23:13.
+Sprint window (first to last timestamp in agent-runs.csv and the orchestrator log): 2026-11-14 22:38:30 UTC to 2026-11-15 11:38:26 UTC, elapsed 12:59:56.
 
-Total agent runs recorded: 36 (3 of them resumptions of an earlier agent, charged only for the tokens added since its previous row).
+Total agent runs recorded: 41 (3 of them resumptions of an earlier agent, charged only for the tokens added since its previous row).
 
 | Model | Runs | Success | Failed | Partial | Other | Input tok | Cache read tok | Cache write tok | Output tok | Wall-clock agent time | Median run |
 |---|---|---|---|---|---|---|---|---|---|---|---|
-| opus | 12 | 12 | 0 | 0 | 0 | 1,702 | 162,801,934 | 4,979,376 | 843,786 | 6:38:25 | 0:25:21 |
+| opus | 17 | 17 | 0 | 0 | 0 | 2,684 | 231,770,135 | 8,183,644 | 1,154,354 | 10:21:56 | 0:35:01 |
 | sonnet | 24 | 24 | 0 | 0 | 0 | 2,508 | 158,895,405 | 8,166,327 | 1,117,185 | 19:18:39 | 0:23:58 |
-| **all workers** | 36 | 36 | 0 | 0 | 0 | 4,210 | 321,697,339 | 13,145,703 | 1,960,971 | 25:57:04 | 0:24:49 |
-| orchestrator (fable) | n/a (257 msgs) | - | - | - | - | 6,268 | 65,587,262 | 627,138 | 254,218 | - | - |
+| **all workers** | 41 | 41 | 0 | 0 | 0 | 5,192 | 390,665,540 | 16,349,971 | 2,271,539 | 29:40:35 | 0:28:31 |
+| orchestrator (fable) | n/a (320 msgs) | - | - | - | - | 7,850 | 81,239,941 | 735,842 | 309,299 | - | - |
 
 Success = outcome `done`/`success`; failed = outcome starting `fail`/`error`/`abort`/`blocked`; partial = starting `partial`; other = anything else. Wall-clock agent time is the sum of ended minus started per run; agents ran in parallel, so it exceeds elapsed time. The orchestrator is the main Claude Code session (not in agent-runs.csv); its totals come from the session JSONL (1 file(s), de-duplicated per API message id) and cover its whole context re-reads, so cache read is large by nature.
 
-Cross-check (agent-runs.csv / all subagent logs on disk, 35 logs parsed): differences are agents not yet recorded or still running.
+Cross-check (agent-runs.csv / all subagent logs on disk, 39 logs parsed): differences are agents not yet recorded or still running.
 
 | Model | Input | Cache read | Cache write | Output |
 |---|---|---|---|---|
-| opus | 1,702 / 1,978 | 162,801,934 / 179,206,851 | 4,979,376 / 5,305,991 | 843,786 / 907,328 |
-| sonnet | 2,508 / 2,508 | 158,895,405 / 158,895,405 | 8,166,327 / 8,166,327 | 1,117,185 / 1,117,185 |
+| opus | 2,684 / 2,684 | 231,770,135 / 231,770,135 | 8,183,644 / 8,183,644 | 1,154,354 / 1,154,354 |
+| sonnet | 2,508 / 2,616 | 158,895,405 / 164,182,467 | 8,166,327 / 8,456,120 | 1,117,185 / 1,157,671 |
 
 ## 2. Delivered
 
@@ -30,15 +30,19 @@ Cross-check (agent-runs.csv / all subagent logs on disk, 35 logs parsed): differ
 
 | Repo | Ref | Commits | Merge commits |
 |---|---|---|---|
-| intermine-planning | HEAD | 29 | 0 |
-| intermine | maint-2026 | 54 | 11 |
-| bluegenes | maint-2026 | 45 | 0 |
+| intermine-planning | HEAD | 35 | 0 |
+| intermine | maint-2026 | 71 | 15 |
+| bluegenes | maint-2026 | 52 | 0 |
 | imcljs | maint-2026 | 8 | 0 |
 | bluegenes-tool-store | maint-2026 | 8 | 0 |
 | im-tables-3 | maint-2026 | 0 | 0 |
 
 **intermine merge commits**
 
+- `476353f95d Merge maint/im-ee7.3-plugin-gradle8: plugin on groovy.ant/groovy.xml, layout.buildDirectory, = assignment, resolvable-only configurations [im-ee7.3]`
+- `7e9227efaa merge: maint-2026 (ROOTS+TESTRES batch) into the plugin branch [im-ee7.3]`
+- `7cdc8efb9e Merge maint/im-ee7.3-roots-testres: providers.exec, java {} block, = assignment, version catalog [im-ee7.3]`
+- `11f73cb204 Merge maint/im-ee7.2-gradle-76-flip: Gradle 7.6.6 wrapper, checkstyle classpath on Gradle 7, TestReport 7.4+ API [im-ee7.2][im-ee7.17][im-ee7.18]`
 - `a794507af1 Merge maint/im-bdy.3-docs: BUILDING, TESTING, UPGRADING-build docs; README fixes [im-bdy.3]`
 - `567bb18dd7 Merge maint/im-89g.5-ci-actions: GitHub Actions current majors [im-89g.5]`
 - `d178eb5cbe Merge maint/im-89g.3-maven-publish: maven-publish, centralBundle, RELEASING.md [im-89g.3]`
@@ -53,7 +57,7 @@ Cross-check (agent-runs.csv / all subagent logs on disk, 35 logs parsed): differ
 
 **intermine unmerged maint/* branches ahead of maint-2026**
 
-- `maint/im-ee7.2-gradle-76-flip`: 1 commit(s), tip `6d3533fee6 build: flip the Gradle wrapper from 6.9.4 to 7.6.6 [im-ee7.2]`
+- `maint/im-ee7.3-catalog-modules`: 1 commit(s), tip `326c0be420 build(intermine): third-party coordinates of the intermine modules move to the version catalog [im-ee7.3]`
 
 **im-tables-3 unmerged maint/* branches ahead of maint-2026**
 
@@ -61,24 +65,25 @@ Cross-check (agent-runs.csv / all subagent logs on disk, 35 logs parsed): differ
 
 ### Beads
 
-`bd status`: total 95, open 58, in progress 5, blocked 8, ready 50, closed 32.
+`bd status`: total 111, open 68, in progress 5, blocked 4, ready 64, closed 38.
 
 | Epic | Title | Epic status | Children | Open | In progress | Closed |
 |---|---|---|---|---|---|---|
-| im-28e | Epic F: BlueGenes tests and CI | open | 4 | 2 | 1 | 1 |
+| im-28e | Epic F: BlueGenes tests and CI | open | 7 | 4 | 1 | 2 |
 | im-7os | Epic E: BlueGenes toolchain modernisation | open | 12 | 5 | 1 | 6 |
 | im-89g | Epic D: intermine CI and release pipeline | open | 9 | 4 | 0 | 5 |
-| im-8dd | Epic I: Planning repo, beads, dashboard | open | 5 | 1 | 1 | 3 |
+| im-8dd | Epic I: Planning repo, beads, dashboard | open | 5 | 0 | 2 | 3 |
 | im-bdy | Epic H: Docs and governance | open | 3 | 2 | 0 | 1 |
-| im-ee7 | Epic B: intermine build toolchain (Gradle 4.9 -> 8.x, JDK 17) | open | 25 | 18 | 1 | 6 |
+| im-ee7 | Epic B: intermine build toolchain (Gradle 4.9 -> 8.x, JDK 17) | open | 32 | 21 | 1 | 10 |
 | im-jqz | Epic C: intermine Tier 1 dependency upgrades and removals | open | 18 | 14 | 0 | 4 |
-| im-ore | Epic G: Whole-system testbed | open | 2 | 2 | 0 | 0 |
-| im-rkn | Epic A: Environment and baseline | open | 8 | 1 | 1 | 6 |
+| im-ore | Epic G: Whole-system testbed | open | 6 | 6 | 0 | 0 |
+| im-rkn | Epic A: Environment and baseline | open | 10 | 3 | 0 | 7 |
 
 #### Closed issues by epic
 
 **im-28e Epic F: BlueGenes tests and CI**
 
+- `im-28e.2` F2 Cypress 13+ migration targeting the rdfc2im mine
 - `im-28e.4` bluegenes gate: smoke must execute the JS bundle, not just HTTP 200 (lesson from E1 review)
 
 **im-7os Epic E: BlueGenes toolchain modernisation**
@@ -114,7 +119,11 @@ Cross-check (agent-runs.csv / all subagent logs on disk, 35 logs parsed): differ
 - `im-ee7.11` gate-intermine.sh header still says default Gradle 4.9; update
 - `im-ee7.15` plugin: unwarBioWebApp + addStrutsConfig -> Sync task when the plugin composes the war (P3)
 - `im-ee7.16` build files: compileTestJava.dependsOn -> test.dependsOn in bio/core, bio/model, bio/postprocess*; drop redundant mergeModels.inputs.files(processResources) in bio/model
+- `im-ee7.17` B2 flip: checkstyle 7.8.1 fails on Gradle 7.x (JavadocMethod 'Unable to get class information for @throws' x7 in intermine-api; 8.45 rejects allowUndeclaredRTE): suppress, fix tags, or bump checkstyle + config
+- `im-ee7.18` B2 flip: root testReport task destinationDir->destinationDirectory and reportOn->testResults (7.x-only APIs)
+- `im-ee7.2` B2 Gradle 7.6.4: compile->implementation/api, maven->maven-publish, plugin getByName(compile) rework
 - `im-ee7.22` plugin: fold copyMineProperties into processResources (needs DBModelUtils.mineProperties() change)
+- `im-ee7.7` intermine: regenerate the seven gradlew scripts and wrapper jars for 6.9.4 (S1-wrap)
 - `im-ee7.9` intermine: flaky IntegrationWriterDataTrackingImplTest (setUp IllegalArgumentException cascades to 17 failures) under concurrent gates
 
 **im-jqz Epic C: intermine Tier 1 dependency upgrades and removals**
@@ -130,6 +139,7 @@ Cross-check (agent-runs.csv / all subagent logs on disk, 35 logs parsed): differ
 - `im-rkn.2` Clone sibling repos imcljs, im-tables-3, bluegenes-tool-store
 - `im-rkn.3` Baseline: intermine build and tests on JDK 8 / Gradle 4.9 / Postgres 18
 - `im-rkn.4` Baseline: bluegenes cljfmt, kaocha (chromium), prod uberjar
+- `im-rkn.5` Baseline: rdfc2im full-build + make test-live + mine-tests against local stack
 - `im-rkn.6` Inventory: intermine dependencies, CVEs and usage census
 - `im-rkn.7` Inventory: bluegenes + sibling libs dependencies, advisories and usage census
 
@@ -139,7 +149,7 @@ Mean tokens per run, by model and outcome class:
 
 | Model | Outcome class | Runs | Mean input | Mean cache read | Mean cache write | Mean output |
 |---|---|---|---|---|---|---|
-| opus | success | 12 | 142 | 13,566,828 | 414,948 | 70,316 |
+| opus | success | 17 | 158 | 13,633,537 | 481,391 | 67,903 |
 | opus | failed | 0 | - | - | - | - |
 | sonnet | success | 24 | 104 | 6,620,642 | 340,264 | 46,549 |
 | sonnet | failed | 0 | - | - | - | - |
@@ -156,7 +166,7 @@ Five most expensive runs, ranked by output tokens, then cache write tokens (no p
 
 ## 4. Model usage pattern
 
-**opus** (12 runs)
+**opus** (17 runs)
 
 - Survey intermine build/test state (`im-rkn`)
 - Survey bluegenes build/test state (`im-rkn`)
@@ -170,6 +180,11 @@ Five most expensive runs, ranked by output tokens, then cache write tokens (no p
 - B2 batch P plugin rewrite (`im-ee7.2`)
 - E1 pre-merge review (`im-7os.1`)
 - Fix flaky testBatchesCache + DataTracker.clear race (`im-jqz.8`)
+- A5 rdfc2im testbed baseline (cached data) (`im-rkn.5`)
+- B2 flip: Gradle 7.6.6 + checkstyle classpath + TestReport API (`im-ee7.2`)
+- F2 Cypress 13 migration (`im-28e.2`)
+- B3 P3: plugin ready for Gradle 8/Groovy 4 (`im-ee7.3`)
+- B3 ROOTS+TESTRES: providers.exec, java{}, = assignment, version catalog (`im-ee7.3`)
 
 **sonnet** (24 runs)
 
@@ -209,5 +224,6 @@ Token counts are de-duplicated per API message id. Runs that resume an earlier a
 | Issue | Title | Status | Why listed |
 |---|---|---|---|
 | im-89g.7 | D3 follow-up: test real Central Portal upload (central.sonatype.com blocked in sandbox); human: Portal account, org.intermine namespace, GPG key, run docs/RELEASING.md for 5.1.1 | open | label human, title mentions blocked, title mentions human |
+| im-rkn.9 | sandbox/human: approve cdn.jsdelivr.net and cdn.intermine.org (BlueGenes loads scripts from them; browser tests against the local stack fail without them); Playwright's own Chromium needs 8 apt libs on Ubuntu 26.04 (PLAYWRIGHT_HOST_PLATFORM_OVERRIDE=ubuntu24.04-arm64) | open | label human, label blocked, title mentions human |
 
-`bd status` also counts 8 issue(s) as blocked by unfinished dependencies (see `bd blocked`).
+`bd status` also counts 4 issue(s) as blocked by unfinished dependencies (see `bd blocked`).

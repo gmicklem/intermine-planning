@@ -38,3 +38,12 @@ Newest first. One entry per checkpoint (about every 3 hours while unattended).
 - Gos supplied rdfc2im `cached_raw_data` (181 MB); A5 testbed baseline worker (Opus) started with `--use-cached-data`; HumanMine live model still unreachable (optional input; Gos asked for his host copies of in/humanmine_model.*).
 - Gradle 7.6.x flip worker (Opus) started on maint-2026 d178eb5cbe (im-ee7.17, im-ee7.18, wrapper regen, 7.6 deprecations baseline, flymine smoke).
 - Human steps outstanding: Central Portal account + namespace, GPG key (docs/RELEASING.md); network to humanmine/flymine/rdfportal from the sandbox; approvals for download.cypress.io and the playwright CDN.
+
+## Checkpoint 5 (15 Nov ~11:50 UTC)
+- intermine maint-2026 = 476353f95d: **Gradle 7.6.6** (flip + checkstyle bridge + TestReport API), docs (BUILDING/TESTING/UPGRADING-build), CI action majors, Gradle 8 prep batches ROOTS+TESTRES (providers.exec, java {}, = assignment, version catalog gradle/libs.versions.toml) and P3 (plugin on groovy.ant/groovy.xml, layout.buildDirectory, resolvable-only configurations). Every merge gated at baseline counts (2279 tests, 0 failures); CI green on each pushed head so far. Only 2 Gradle deprecations remain on 7.6.6 (sourcesJar/antlr, filed).
+- `release/5.1.1-candidate` (d178eb5cbe) is the last 6.9.4 state.
+- bluegenes maint-2026 = f2f2cf2a: Cypress 13.17.0 migration (7 gated commits; headless Electron on arm64); 57/152 pass against the local demo mine, all remaining failures are Biotestmine fixture data (F4 filed). CI action majors merged; CI green.
+- bluegenes-tool-store maint-2026 = 8606215 (4 fixes). rdfc2im: fork gmicklem/rdfc2im, branch maint/im-rkn.5-testbed-baseline (lookup cache).
+- Testbed (A5): demo HumanMine built from Gos's cached raw data in 10m45s, make test-live 17/17; stack left running on sandbox localhost (webapp :8090/humanmine, BlueGenes :5000, PG :15432, Solr :8983); data volumes on the host mount under repos/.sandbox-disk. Baseline in baselines/rdfc2im-2026-11-15.md; epic G prerequisites filed.
+- Sandbox: only repos/ is the host mount; transcript moved to repos/transcript.md. Network approvals received for cypress/playwright CDNs, repo1/search.maven, cdnjs, bootstrapcdn, rawgit, central.sonatype, adoptium. Still needed: cdn.jsdelivr.net, cdn.intermine.org; humanmine/flymine/rdfportal still time out.
+- Running: CATALOG batch (module coords -> catalog). Next: 3b flip to Gradle 8.14.6 (Opus), then B4 JDK 17, R7 checkstyle bump, C-tasks, E4 CDN/SRI.
