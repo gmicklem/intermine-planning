@@ -57,6 +57,8 @@ intermineorg/* or intermine/*.
   input wrapper is what stops every text input dropping keystrokes under React 18 (0/6400 keys lost,
   measured). It touches non-public reagent API, guarded by a unit test. Keep it, or revert to
   per-input components?
+- im-7os.28: BlueGenes now loads jQuery 3.7.1 (was 3.1.0) from cdnjs with SRI. Cypress is green
+  including the admin specs, but nobody has clicked through popovers and dropdowns in a real browser.
 - `decisions/package-vetting.md`: every package swap, with the vet verdict and reasons.
 - `KeySigner.java` (intermine/webapp): bcprov removed; a ~90-line hand-written DER X.509 v3
   self-signed certificate writer replaces it (C4). Please read it or say whether you would
