@@ -141,8 +141,8 @@ browser_env() { # sets LIBS
 }
 
 # ---- is the live FlyMine up? (informational; the unit tests need it) ----
-FM=$(curl -s -m 15 -o /dev/null -w '%{http_code}' https://www.flymine.org/flymine/service/version 2>/dev/null)
-if [ "$FM" = 200 ]; then record flymine INFO "-" "https://www.flymine.org/flymine reachable"; else record flymine INFO "-" "NOT reachable (http $FM): unit tests will fail for environmental reasons"; fi
+FM_ROOT=${IM_TABLES_SERVICE_ROOT:-https://www.flymine.org/flymine}; FM=$(curl -s -m 15 -o /dev/null -w "%{http_code}" "$FM_ROOT/service/version" 2>/dev/null)
+if [ "$FM" = 200 ]; then record flymine INFO "-" "$FM_ROOT reachable"; else record flymine INFO "-" "NOT reachable (http $FM): unit tests will fail for environmental reasons"; fi
 
 # ---------------- Leiningen mode ----------------
 if [ -f project.clj ]; then
