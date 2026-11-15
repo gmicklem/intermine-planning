@@ -45,6 +45,7 @@ def usage_from(path, per_model):
         for line in f:
             try: rec = json.loads(line)
             except Exception: continue
+            if not isinstance(rec, dict): continue
             msg = rec.get("message") or {}
             u = msg.get("usage")
             if not u: continue
@@ -61,6 +62,7 @@ def main():
         for line in f:
             try: rec = json.loads(line)
             except Exception: continue
+            if not isinstance(rec, dict): continue
             typ = rec.get("type"); msg = rec.get("message") or {}
             content = msg.get("content")
             ts = fmt_ts(rec.get("timestamp", ""))
