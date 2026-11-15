@@ -11,8 +11,8 @@
 #   Leiningen mode (only if project.clj exists; upstream lein, see below)
 #     lein-fmt     : lein cljfmt check
 #     lein-kaocha  : lein kaocha (the 3 unit tests in headless Chromium through an xdg-open
-#                    shim, as gate-bluegenes.sh does). They query the LIVE FlyMine
-#                    (https://www.flymine.org/flymine, read-only).
+#                    shim, as gate-bluegenes.sh does). They query the LIVE HumanMine
+#                    (https://www.humanmine.org/humanmine, read-only).
 #     lein-jar     : lein with-profile +build jar (runs the :build prep task: lessc, advanced
 #                    cljsbuild); the jar must contain public/css/im-tables.css
 #   deps.edn mode (only if deps.edn exists)
@@ -23,7 +23,7 @@
 #     fmt          : clojure -M:fmt check
 #     npm          : npm ci
 #     shadow-test  : npx shadow-cljs compile test && node out/test.js (:node-test build; the
-#                    same 3 live-FlyMine tests; a missing "Ran N tests" summary or any
+#                    same 3 live-HumanMine tests; a missing "Ran N tests" summary or any
 #                    failure/error is a gate failure)
 #     shadow-app   : npx shadow-cljs release app (advanced compile of the whole library plus
 #                    the demo page: proves every npm require resolves)
@@ -37,7 +37,7 @@
 #                    NO shim/ or compiled js, and public/css/im-tables.css present and non-empty
 #     install      : clojure -T:build install, then checks ~/.m2 has the jar+pom
 #
-# Nothing here needs a Biotestmine. The unit tests query the live FlyMine; a `flymine` INFO
+# Nothing here needs a Biotestmine. The unit tests query the live HumanMine; a `mine` INFO
 # line at the top of the summary says whether it was reachable. If it was not, the unit-test
 # steps fail: that is an environment problem, not a code problem; report it as a blocker.
 #
@@ -140,9 +140,9 @@ browser_env() { # sets LIBS
   [ -z "$LIBS" ] && [ -d "$bdir/al2023/lib" ] && LIBS=$bdir/al2023/lib
 }
 
-# ---- is the live FlyMine up? (informational; the unit tests need it) ----
-FM_ROOT=${IM_TABLES_SERVICE_ROOT:-https://www.flymine.org/flymine}; FM=$(curl -s -m 15 -o /dev/null -w "%{http_code}" "$FM_ROOT/service/version" 2>/dev/null)
-if [ "$FM" = 200 ]; then record flymine INFO "-" "$FM_ROOT reachable"; else record flymine INFO "-" "NOT reachable (http $FM): unit tests will fail for environmental reasons"; fi
+# ---- is the live HumanMine up? (informational; the unit tests need it) ----
+FM_ROOT=${IM_TABLES_SERVICE_ROOT:-https://www.humanmine.org/humanmine}; FM=$(curl -s -m 15 -o /dev/null -w "%{http_code}" "$FM_ROOT/service/version" 2>/dev/null)
+if [ "$FM" = 200 ]; then record mine INFO "-" "$FM_ROOT reachable"; else record mine INFO "-" "NOT reachable (http $FM): unit tests will fail for environmental reasons"; fi
 
 # ---------------- Leiningen mode ----------------
 if [ -f project.clj ]; then
