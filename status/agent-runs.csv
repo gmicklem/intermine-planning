@@ -42,3 +42,4 @@ started_utc,ended_utc,beads_id,agent_label,model,input_tokens,cache_read_tokens,
 2026-11-15T10:34:06.263Z,2026-11-15T11:36:48.540Z,im-ee7.3,B3 P3: plugin ready for Gradle 8/Groovy 4,opus,168,11287069,1218246,44218,success,5 gated commits + merge; flymine smoke: no plugin deprecations
 2026-11-15T11:39:10.501Z,2026-11-15T11:49:28.378Z,im-7os.4,E4 CDN assets SRI + vega bumps,sonnet,54,1660421,69391,21704,success,"3 gated commits (prod gate), all on cdnjs, 9/9 hashes verified; merged ff"
 2026-11-15T11:13:12.704Z,2026-11-15T11:52:54.763Z,im-ee7.3,B3 CATALOG: module coordinates to version catalog,sonnet,134,7072103,583742,48794,success,3 gated batches + docs; 68 libraries; POMs identical except jami-core 3.2.12 in psi-complexes
+2026-11-15T11:51:44.298Z,2026-11-15T11:59:13.680Z,im-7os.10,bluegenes npm advisories,sonnet,42,971324,39487,8553,success,22 -> 13 (high 10 -> 2); rest need Cypress 16 / shadow-cljs 3 / highlight.js 11; merged ff
