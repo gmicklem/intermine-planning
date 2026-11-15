@@ -23,3 +23,10 @@ Newest first. One entry per checkpoint (about every 3 hours while unattended).
 - Postgres max_connections raised to 400 (restart at 06:20).
 - Running: D3 maven-publish/Central Portal (Sonnet); starting B2 build-file batches I and B (Sonnet).
 - Blocked: A5 testbed baseline and G (rdfportal/humanmine unreachable); F2 Cypress (download.cypress.io approval); im-tables merge (FlyMine).
+
+## 2026-11-15 07:45 UTC — checkpoint 3
+- intermine maint-2026 @70d2644cf1 pushed (flaky-test merge c1a158f511 gating): all build files except bio core on Gradle 7 configurations; CI on the fork green except the flaky pair, now fixed (real DataTracker.clear() race found and fixed). CI fixes: Ubuntu 26 sudo -E and PG15+ public-schema privileges.
+- bluegenes maint-2026 @916483d6: shadow-cljs build + GitHub Actions green. imcljs, tool-store pushed. im-tables-3 branch still waits for live FlyMine (down from the sandbox since 03:40; humanmine.org and rdfportal.org too).
+- Disk: root overlay filled at ~06:30; freed to ~7 GB; task envs of merged tasks now destroyed at merge time.
+- Running: B2 batch B (bio core), D3 maven-publish/Central Portal. Next: Gradle 7.6 flip once both land; then 8.14; then JDK 17.
+- Needs Gos: network to flymine.org/humanmine.org/rdfportal.org from the sandbox (connections time out at the proxy CONNECT; GitHub works); approvals for download.cypress.io and playwright.download.prss.microsoft.com.
