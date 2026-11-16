@@ -292,11 +292,11 @@ deps_mode() {
   # ---- 4b. removed Closure Library predicates in the dev build (im-7os.37) ----
   # goog.isBoolean/isNumber/isString/isFunction/isArray/isDef/... were dropped from the Closure
   # Library that ClojureScript 1.11 ships; a library calling them (oops 0.7.0 did) breaks the dev
-  # build at run time, after load, where app-load cannot see it. transit-cljs 0.8.256 still names
-  # two of them in a toString path that nothing reaches; it is allowed.
+  # build at run time, after load, where app-load cannot see it. No exceptions: bluegenes pins
+  # transit-js 0.8.874, which no longer calls them (im-7os.58).
   if [ -d resources/public/js/compiled/cljs-runtime ]; then
     grep -rlE 'goog\.is(Boolean|Number|String|Function|Array|Def|DefAndNotNull|Null)\b' resources/public/js/compiled/cljs-runtime 2>/dev/null \
-      | grep -v 'com.cognitect.transit.types.js' > "$LOGS/closure-preds.txt" || true
+      > "$LOGS/closure-preds.txt" || true
     if [ ! -s "$LOGS/closure-preds.txt" ]; then
       record closure-preds PASS "0s" "no removed goog.is* predicates in the dev build"
     else
