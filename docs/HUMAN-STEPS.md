@@ -35,7 +35,7 @@ Portal:
 
 You approved cdn.jsdelivr.net and cdn.intermine.org in the sandbox. cdn.intermine.org is dead, so the
 remaining references to it in the InterMine webapp (52 files, bag upload confirm page and the JS
-code-generation templates) and im-tables are now bugs im-jqz.42 and im-7os.42, not approvals.
+code-generation templates) and im-tables are now bugs im-jqz.43 and im-7os.42, not approvals.
 
 ## 4. Merge the testbed branches you own (no bead; small)
 
