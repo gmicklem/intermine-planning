@@ -18,6 +18,7 @@
 #                  (:node-test build of test/cljs; a missing "Ran N tests"
 #                  summary or any failure/error is a gate failure)
 #   3b. test-clj : clojure -M:test-clj (server-side clojure.test, when deps.edn has the alias)
+#   4b. closure-preds : the dev build must not call goog.is* predicates removed from the Closure Library
 #   4. app-dev   : npx shadow-cljs compile app  (the dev build; warnings counted,
 #                  listed in .gate-logs/app-dev-warnings.txt)
 #      app-load  : a dev build as one file (--config-merge {:output-dir
@@ -286,6 +287,21 @@ deps_mode() {
     record app-dev PASS "${STEP_SECS}s" "$BUILT; $NWARN warnings (.gate-logs/app-dev-warnings.txt)"
   else
     record app-dev FAIL "${STEP_SECS}s" "see .gate-logs/app-dev.log"; FAILED=1
+  fi
+
+  # ---- 4b. removed Closure Library predicates in the dev build (im-7os.37) ----
+  # goog.isBoolean/isNumber/isString/isFunction/isArray/isDef/... were dropped from the Closure
+  # Library that ClojureScript 1.11 ships; a library calling them (oops 0.7.0 did) breaks the dev
+  # build at run time, after load, where app-load cannot see it. transit-cljs 0.8.256 still names
+  # two of them in a toString path that nothing reaches; it is allowed.
+  if [ -d resources/public/js/compiled/cljs-runtime ]; then
+    grep -rlE 'goog\.is(Boolean|Number|String|Function|Array|Def|DefAndNotNull|Null)\b' resources/public/js/compiled/cljs-runtime 2>/dev/null \
+      | grep -v 'com.cognitect.transit.types.js' > "$LOGS/closure-preds.txt" || true
+    if [ ! -s "$LOGS/closure-preds.txt" ]; then
+      record closure-preds PASS "0s" "no removed goog.is* predicates in the dev build"
+    else
+      record closure-preds FAIL "0s" "$(wc -l < "$LOGS/closure-preds.txt") files call removed goog.is* predicates; see .gate-logs/closure-preds.txt"; FAILED=1
+    fi
   fi
 
   rm -rf target/bundle-dev

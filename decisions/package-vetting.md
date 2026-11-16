@@ -41,3 +41,10 @@ network calls; eval/reflection on untrusted input; obfuscation or binary blobs; 
 - **Why not upgrade:** the webapp's own JS and im-tables 2.2.0-beta are written against imjs 3.x and jQuery 2.x; these are exactly the files the pages loaded before the host died, so behaviour is unchanged. Upgrading is a separate task.
 - **Vetting:** same bytes InterMine itself served for years; source is InterMine's own GitHub repository; hashes recorded. Not a new package. Known weakness: these libraries are old (jQuery 2.0.3 from 2013) and the legacy JSP webapp is retired by the grant direction, so this is a stop-gap to make 5.1.1/6.0.0 webapps work at all.
 - **Verdict:** safe to continue; **for discussion with Gos**: whether to keep serving the legacy JSP UI at all in 6.0.0, and whether the 6.9 MB belongs in the webapp jar/war or a separate artifact.
+
+## 2026-11-16: bluegenes binaryage/oops 0.7.0 -> 0.7.2 (im-7os.37)
+
+- **What:** version bump, same library (object access macros `oget`/`oset!`/`ocall`), MIT, author Antonin Hildebrand (binaryage; also devtools, env-config). Only runtime dependency env-config 0.2.2, unchanged.
+- **Why:** 0.7.0's dev-build validation called `goog.isBoolean/isNumber/isString/isFunction`, removed from the Closure Library that ClojureScript 1.11 ships; the dev build threw on the first re-frame event.
+- **Vetting:** Clojars jar sha1 `2f47298f9aa41ef6f2c4f2c49f472eb113e94ae7` matches; jar sources byte-identical to GitHub tag commit `83eb1ad`; the whole 0.7.0..0.7.2 diff read: predicate replacements, `goog.object` wrappers for CLJS 1.11 goog.module access, `^:dynamic` removed from three reporting fns. Nothing else.
+- **Verdict:** safe. Not a swap, so no discussion needed beyond this note.
