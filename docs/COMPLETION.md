@@ -116,8 +116,8 @@ already pushed to its `gmicklem/*` fork at the same head, and none is behind its
 | bluegenes-tool-store | `maint-2026` | `da4f23b` | no CI | 19 (15) over `master` `676831b2` | deps.edn, path containment and package-name validation, tarball integrity, cookie policy; `0.3.0-SNAPSHOT` |
 | humanmine | `maint-2026` | `c0731c5` | no CI | 9 (5) over `master` `afdd8e9c` | build files converted to Gradle 8.14.6 and InterMine `6.0.+` |
 | flymine | `maint-2026` | `118eb07a` | no CI | 9 (5) over `master` `a507ed84` | same as humanmine |
-| humanmine-bio-sources | `maint-2026` | `042b1a7` | **red**: its old workflow stops at "Set up python 2.7", and it needs 6.0.0 on Maven Central | 10 over `master` `3456960` | converted to the 6.0 line (Gradle 8.14.6, maven-publish, commons-lang3) |
-| flymine-bio-sources | `maint-2026` | `fd65de7` | **red**, same cause | 9 over `master` `18f5ede` | same |
+| humanmine-bio-sources | `maint-2026` | `20ad5a2` | green (16 Nov 19:45 UTC): the job builds InterMine `maint-2026` itself until 6.0.0 is on Central | 10 over `master` `3456960` | converted to the 6.0 line (Gradle 8.14.6, maven-publish, commons-lang3) |
+| flymine-bio-sources | `maint-2026` | `e9af505` | green (16 Nov 19:45 UTC), same mechanism | 9 over `master` `18f5ede` | same |
 | mine-tests | `maint-2026` | `cbbef24` | no run on this branch | 7 (6) over intermineorg `main` `f5bf8d00` | `[mines.local]` demo-mine entry, capability flags, `MINE_TESTS_BROWSER_PATH` |
 | rdfc2im | `maint/im-ore.1-intermine-src` (plus `maint/im-rkn.5-testbed-baseline`) | `27da569` | not checked | 25 over intermineorg `main` | `--intermine-src`, `--stack-name`, offline cache, demo-data fixes |
 | intermine-planning | `main` | `65303aa` | - | - | plans, decisions, gates, status (this repo) |
@@ -452,8 +452,8 @@ is what gets built and published.
   `humanmine-bio-sources`, `flymine-bio-sources` already ask for `6.0.+` on `maint-2026`. With only Maven
   Central (no `mavenLocal()` content): `./gradlew --refresh-dependencies :dbmodel:tasks` in each mine
   resolves the plugin; publish the bio-source forks to `mavenLocal` and build each mine's war
-  (UPGRADING-build.md, "Check"); remove the notes about publishing the InterMine checkout locally; replace
-  the bio-sources workflows' "Set up python 2.7" step so their CI goes green. Whether the bio-source
+  (UPGRADING-build.md, "Check"); remove the "build InterMine maint-2026 in the job" steps from the bio-sources workflows (their CI is
+  green with them since 16 Nov). Whether the bio-source
   repositories are themselves published to Central is your call (HUMAN-STEPS.md item 6; same Portal
   credentials).
 - [ ] **5.9 Testbed re-pin.** Who: Agent. rdfc2im: the `--intermine-src` path needs no change (it reads the
