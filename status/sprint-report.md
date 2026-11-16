@@ -1,29 +1,29 @@
 # Sprint report
 
-Generated 2026-11-16 18:58 by `scripts/sprint-report.py` (since 2026-11-14). Regenerate with `python3 -I scripts/sprint-report.py`. All times UTC.
+Generated 2026-11-16 21:13 by `scripts/sprint-report.py` (since 2026-11-14). Regenerate with `python3 -I scripts/sprint-report.py`. All times UTC.
 
 ## 1. Headline
 
-Sprint window (first to last timestamp in agent-runs.csv and the orchestrator log): 2026-11-14 22:38:30 UTC to 2026-11-16 18:58:07 UTC, elapsed 44:19:37.
+Sprint window (first to last timestamp in agent-runs.csv and the orchestrator log): 2026-11-14 22:38:30 UTC to 2026-11-16 21:13:01 UTC, elapsed 46:34:30.
 
-Total agent runs recorded: 169 (3 of them resumptions of an earlier agent, charged only for the tokens added since its previous row).
+Total agent runs recorded: 173 (3 of them resumptions of an earlier agent, charged only for the tokens added since its previous row).
 
 | Model | Runs | Success | Failed | Partial | Other | Input tok | Cache read tok | Cache write tok | Output tok | Wall-clock agent time | Median run |
 |---|---|---|---|---|---|---|---|---|---|---|---|
 | opus | 32 | 32 | 0 | 0 | 0 | 6,596 | 561,353,996 | 26,418,968 | 2,511,121 | 28:38:51 | 0:48:55 |
-| sonnet | 137 | 135 | 0 | 0 | 2 | 122,337 | 1,014,581,887 | 39,212,958 | 5,486,386 | 71:27:10 | 0:22:16 |
-| **all workers** | 169 | 167 | 0 | 0 | 2 | 128,933 | 1,575,935,883 | 65,631,926 | 7,997,507 | 100:06:01 | 0:23:44 |
-| orchestrator (fable) | n/a (1506 msgs) | - | - | - | - | 37,246 | 600,975,274 | 2,897,918 | 1,263,834 | - | - |
+| sonnet | 141 | 139 | 0 | 0 | 2 | 122,897 | 1,051,442,026 | 40,027,843 | 5,643,697 | 72:36:16 | 0:22:02 |
+| **all workers** | 173 | 171 | 0 | 0 | 2 | 129,493 | 1,612,796,022 | 66,446,811 | 8,154,818 | 101:15:07 | 0:23:44 |
+| orchestrator (fable) | n/a (1578 msgs) | - | - | - | - | 39,036 | 646,253,706 | 2,979,528 | 1,310,493 | - | - |
 
 Success = outcome `done`/`success`; failed = outcome starting `fail`/`error`/`abort`/`blocked`; partial = starting `partial`; other = anything else. Wall-clock agent time is the sum of ended minus started per run; agents ran in parallel, so it exceeds elapsed time. The orchestrator is the main Claude Code session (not in agent-runs.csv); its totals come from the session JSONL (1 file(s), de-duplicated per API message id) and cover its whole context re-reads, so cache read is large by nature.
 
-Cross-check (agent-runs.csv / all subagent logs on disk, 167 logs parsed): differences are agents not yet recorded or still running.
+Cross-check (agent-runs.csv / all subagent logs on disk, 171 logs parsed): differences are agents not yet recorded or still running.
 
 | Model | Input | Cache read | Cache write | Output |
 |---|---|---|---|---|
 | haiku | 0 / 2 | 0 / 0 | 0 / 9,356 | 0 / 112 |
 | opus | 6,596 / 6,328 | 561,353,996 / 539,911,758 | 26,418,968 / 25,017,650 | 2,511,121 / 2,416,630 |
-| sonnet | 122,337 / 17,652 | 1,014,581,887 / 1,044,810,451 | 39,212,958 / 42,271,029 | 5,486,386 / 5,638,214 |
+| sonnet | 122,897 / 18,212 | 1,051,442,026 / 1,081,670,590 | 40,027,843 / 43,085,914 | 5,643,697 / 5,795,525 |
 
 ## 2. Delivered
 
@@ -31,8 +31,8 @@ Cross-check (agent-runs.csv / all subagent logs on disk, 167 logs parsed): diffe
 
 | Repo | Ref | Commits | Merge commits |
 |---|---|---|---|
-| intermine-planning | HEAD | 225 | 0 |
-| intermine | maint-2026 | 290 | 69 |
+| intermine-planning | HEAD | 240 | 0 |
+| intermine | maint-2026 | 294 | 70 |
 | bluegenes | maint-2026 | 148 | 26 |
 | imcljs | maint-2026 | 12 | 2 |
 | bluegenes-tool-store | maint-2026 | 19 | 4 |
@@ -40,6 +40,7 @@ Cross-check (agent-runs.csv / all subagent logs on disk, 167 logs parsed): diffe
 
 **intermine merge commits**
 
+- `a27dcf5398 Merge maint/im-bdy.11-docs-sweep: documentation agrees with the 6.0.0 tree (BUILDING, TESTING, RELEASING, UPGRADING-build, CONTRIBUTING, RELEASE_NOTES, header comments, setup.sh echo) [im-bdy.11]`
 - `c923cc6420 Merge maint/im-jqz.67-throws-charset: chado-db @throws documented (checkThrowsDocs covers every build); sql Query UTF-8; UPGRADING XMLOutputFactory note [im-jqz.67 im-ee7.69]`
 - `44e70ad9f7 Merge maint/im-89g.30-release-notes: RELEASE_NOTES entries for 5.1.1 and 6.0.0 [im-89g.30]`
 - `7f63073aa6 Merge maint/im-jqz.64-followups: LoadQueryAction 400, explicit UTF-8 (PasswordHasher with fallback), MetabolicGeneSummaryDisplayer model-aware; dead config lines; GFF3Converter scoreType restored; @throws docs + checkThrowsDocs in the Checkstyle CI job; commons-logging docs [im-jqz.64 im-ee7.66 im-jqz.66 im-ee7.68 im-ee7.42]`
@@ -167,17 +168,17 @@ Cross-check (agent-runs.csv / all subagent logs on disk, 167 logs parsed): diffe
 
 ### Beads
 
-`bd status`: total 295, open 26, in progress 3, blocked 0, ready 26, closed 266.
+`bd status`: total 298, open 24, in progress 2, blocked 0, ready 24, closed 272.
 
 | Epic | Title | Epic status | Children | Open | In progress | Closed |
 |---|---|---|---|---|---|---|
 | im-28e | Epic F: BlueGenes tests and CI | open | 13 | 0 | 0 | 13 |
-| im-7os | Epic E: BlueGenes toolchain modernisation | open | 60 | 3 | 0 | 57 |
-| im-89g | Epic D: intermine CI and release pipeline | open | 30 | 1 | 0 | 29 |
-| im-8dd | Epic I: Planning repo, beads, dashboard | open | 9 | 1 | 2 | 6 |
-| im-bdy | Epic H: Docs and governance | open | 10 | 3 | 0 | 7 |
-| im-ee7 | Epic B: intermine build toolchain (Gradle 4.9 -> 8.x, JDK 17) | open | 67 | 1 | 1 | 65 |
-| im-jqz | Epic C: intermine Tier 1 dependency upgrades and removals | open | 66 | 7 | 0 | 59 |
+| im-7os | Epic E: BlueGenes toolchain modernisation | open | 61 | 4 | 0 | 57 |
+| im-89g | Epic D: intermine CI and release pipeline | open | 32 | 1 | 0 | 31 |
+| im-8dd | Epic I: Planning repo, beads, dashboard | open | 9 | 0 | 2 | 7 |
+| im-bdy | Epic H: Docs and governance | open | 10 | 2 | 0 | 8 |
+| im-ee7 | Epic B: intermine build toolchain (Gradle 4.9 -> 8.x, JDK 17) | open | 67 | 1 | 0 | 66 |
+| im-jqz | Epic C: intermine Tier 1 dependency upgrades and removals | open | 66 | 6 | 0 | 60 |
 | im-ore | Epic G: Whole-system testbed | open | 21 | 1 | 0 | 20 |
 | im-rkn | Epic A: Environment and baseline | open | 10 | 0 | 0 | 10 |
 
@@ -285,6 +286,8 @@ Cross-check (agent-runs.csv / all subagent logs on disk, 167 logs parsed): diffe
 - `im-89g.29` 5.1.1 backport candidates from im-jqz.56 batch: aff41f85d9 (facet escaping + model-less web config fields), c6cfc200a6 (unique temp list names, atomic rename), ed8d151727 (serialVersionUID), the ForwardParameters null guard and UTF-8 writeLargeUTF fix from 64bf2b9fce; abc225696a only if 5.1.1 has the dwr.xml hardening
 - `im-89g.3` D3 maven-publish + Central Portal publishing; docs/RELEASING.md
 - `im-89g.30` release notes: intermine RELEASE_NOTES has no 5.1.1 entry (both lines) and no 6.0.0 entry (maint-2026); bluegenes CHANGELOG has no 1.5.0 entry; write them from RELEASING.md's 5.1.1 list, the UPGRADING docs and the closed beads; fork CIs (humanmine-/flymine-bio-sources) red on an old Python 2.7 step: fix the workflow step
+- `im-89g.31` release/5.1.1-candidate docs: apply the publishing.gradle header fix and the testmine/setup.sh echo fix from im-bdy.11; UPGRADING-build.md there still says maint-2026 carries 5.1.1 (lines 7/17) and its 6.0.0 half is ~350 lines behind maint-2026's: decide whether the 5.1.1 release ships the 6.0.0 migration guide (recommended: copy maint-2026's file) 
+- `im-89g.32` release rehearsal: build the Central Portal bundles for 6.0.0 (maint-2026 a27dcf5398) and 5.1.1 (release/5.1.1-candidate be54f8d81f) locally with a throwaway GPG key per docs/RELEASING.md, verify layout (pom/jar/sources/javadoc/.asc/.md5/.sha1 per module, POM metadata Central requires: name, description, url, licenses, developers, scm), no upload; COMPLETION.md step 2 rehearsal
 - `im-89g.4` D4 PR template, CONTRIBUTING.md, README badges
 - `im-89g.5` ci (both repos): bump actions/setup-java to v5 and checkout/setup-node/cache to current majors (Node 24 runtime); or let dependabot do it
 - `im-89g.6` D3 follow-up: drop legacy-runtime fix-up in config/gradle/publishing.gradle once bio uses runtimeOnly
@@ -299,9 +302,11 @@ Cross-check (agent-runs.csv / all subagent logs on disk, 167 logs parsed): diffe
 - `im-8dd.6` gate-intermine.sh counts javac 'deprecated' lines as Gradle deprecations; separate the two counts
 - `im-8dd.7` gate/testenv: task homes share ~/.gradle via symlink, so a 'gradle --stop' from one task kills another task's daemons (seen 15 Nov); give each task its own GRADLE_USER_HOME daemon dir or drop --stop from the gate
 - `im-8dd.8` sprint infra: worker agents hang for ever when a Bash call hits a permission prompt (relative-path rm -rf under .sandbox-disk, 15 Nov 20:42Z, 78 min lost). Mitigations: worker prompts require absolute paths matching settings.local.json allow rules and run_in_background for long jobs; dashboard 'stalled' should trigger an orchestrator check within 15 min; consider allow rules for relative rm within .sandbox-disk/rdfc2im
+- `im-8dd.9` testenv docs: baselines/intermine-2026-11-15.md caveat 9 and the worker-prompt rules still describe the shared ~/.gradle symlink layout (now per-task GRADLE_USER_HOME); workers that skip im-testenv.sh still share /home/agent/.gradle/daemon; optional --role-nogrant negative mode to reproduce PG15+ privilege failures
 
 **im-bdy Epic H: Docs and governance**
 
+- `im-bdy.11` intermine docs consistency sweep after the sprint's merges (maint-2026 c923cc6420): RELEASE_NOTES, docs/UPGRADING-build.md, BUILDING.md, TESTING.md, RELEASING.md, CONTRIBUTING.md, README must agree with the code (versions, removed libraries, task names, property names, CI steps); fix drift; same for the 5.1.1 candidate's docs where they describe that line
 - `im-bdy.2` H2 Decision records: gradle-upgrade-vs-switch, jdk-target, struts-stance, bluegenes-build-tool, beads-usage, branching
 - `im-bdy.3` H1 intermine docs: building, local testing, upgrading, releasing
 - `im-bdy.4` intermine README: depsy.org badge likely dead; decide on badges (version badge 5.1.0 until release)
@@ -375,6 +380,7 @@ Cross-check (agent-runs.csv / all subagent logs on disk, 167 logs parsed): diffe
 - `im-ee7.67` intermine: install_intermine.py should substitute imVersion/bioVersion into the six .in templates from gradle/libs.versions.toml so a release bumps one place (plugin already reads the catalog, im-89g.13); the XMLOutputFactory property in intermine/gradle.properties.in is still needed by five api binding tests (empty marshalled XML without it): find out why (Woodstox from solrj?) before removing
 - `im-ee7.68` intermine: document the 17 checked exceptions javac -Xdoclint:missing reports (16 intermine, 1 bio), then add a CI step that fails on new ones (measurement and recipe in docs/BUILDING.md, im-ee7.45); cargoStartLocal smoke: confirm a request is served (curl got HTTP 000 in the sandbox smoke)
 - `im-ee7.7` intermine: regenerate the seven gradlew scripts and wrapper jars for 6.9.4 (S1-wrap)
+- `im-ee7.70` fork CIs (humanmine-/flymine-bio-sources) fail with 'Could not find any version that matches org.intermine:plugin:6.0.+' until 6.0.0 is on Central: make the workflow self-sufficient by cloning gmicklem/intermine maint-2026 and running config/lib/install_intermine.py (JDK 17) before the fork build (like the BlueGenes nightly builds the demo mine); drop that step after the 6.0.0 release; bump actions/checkout@v2 -> v4
 - `im-ee7.8` intermine: test-only files leak into bio-source/postprocess jars depending on task order (inventory row 18)
 - `im-ee7.9` intermine: flaky IntegrationWriterDataTrackingImplTest (setUp IllegalArgumentException cascades to 17 failures) under concurrent gates
 
@@ -436,6 +442,7 @@ Cross-check (agent-runs.csv / all subagent logs on disk, 167 logs parsed): diffe
 - `im-jqz.64` intermine follow-ups from im-jqz.56 batch: LoadQueryAction.xml NPE when the query parameter is missing; String.getBytes() with platform charset in PrecomputedTableManager, PasswordHasher, IqlQueryParser; MetabolicGeneSummaryDisplayer errors on models without Gene.atlasExpression (demo mine) - guard by model check
 - `im-jqz.66` follow-ups from im-jqz.16 batch: GFF3Converter dropped scoreType for every source in May 2021 (miRanda handler restored it in flymine-bio-sources d0fca59); check other GFF-based sources that relied on it; signor Protein items carry only primaryAccession (no organism); both bio-source forks declare xmlunit without users
 - `im-jqz.67` intermine follow-ups: document the 46 @throws in bio-source-chado-db and drop its checkThrowsDocs exclusion; sql/query/Query.java has three getBytes() calls on the platform charset; gate-intermine.sh should run checkThrowsDocs; flymine-bio-sources MirandaGFF3RecordHandler can drop its own scoreType lines once on 6.0.0 (GFF3Converter sets it)
+- `im-jqz.68` flymine-bio-sources: MirandaGFF3RecordHandler can drop its own scoreType lines once the fork builds against 6.0.0 (GFF3Converter sets scoreType since 9e42ee37df)
 - `im-jqz.7` C7 Weak-dependency removals from the usage census
 - `im-jqz.8` intermine: flaky testBatchesCache in FlatMode/WithNotXml ObjectStoreInterMineImplTest (test-order dependent result cache)
 - `im-jqz.9` intermine: ant 1.7.0 -> 1.10.x (3 advisories); testmine build not covered by gate
@@ -484,7 +491,7 @@ Mean tokens per run, by model and outcome class:
 |---|---|---|---|---|---|---|
 | opus | success | 32 | 206 | 17,542,312 | 825,593 | 78,473 |
 | opus | failed | 0 | - | - | - | - |
-| sonnet | success | 135 | 906 | 7,501,173 | 289,407 | 40,470 |
+| sonnet | success | 139 | 884 | 7,550,493 | 286,941 | 40,437 |
 | sonnet | failed | 0 | - | - | - | - |
 | sonnet | other | 2 | 31 | 961,750 | 71,524 | 11,446 |
 
@@ -535,7 +542,7 @@ Five most expensive runs, ranked by output tokens, then cache write tokens (no p
 - own DDL generator replaces vendored torque/velocity (6.0 line) (`im-jqz.32`)
 - COMPLETION.md + HUMAN_TESTING.md guides (`im-bdy`)
 
-**sonnet** (137 runs)
+**sonnet** (141 runs)
 
 - intermine dependency census and CVE inventory (`im-rkn.6`)
 - bluegenes dependency census and inventory (`im-rkn.7`)
@@ -674,6 +681,10 @@ Five most expensive runs, ranked by output tokens, then cache write tokens (no p
 - new BlueGenes served on 15001 (6.0.0) and 5001 (5.1.1) (`im-bdy`)
 - release notes (5.1.1, 6.0.0), bluegenes CHANGELOG 1.5.0, fork CI Python 3 (`im-89g.30`)
 - fork CIs build intermine maint-2026 in the job (`im-ee7.70`)
+- intermine docs consistency sweep (`im-bdy.11`)
+- Central bundle rehearsal, both lines (`im-89g.32`)
+- 5.1.1 doc fixes + flymine miRanda scoreType simplification (`im-89g.31`)
+- reagent master (PR 680) keystroke measurement (`im-7os.62`)
 
 ## 5. Notes
 

@@ -150,3 +150,11 @@ Newest first. One entry per checkpoint (about every 3 hours while unattended).
 - Docs for Gos: docs/COMPLETION.md, docs/HUMAN_TESTING.md, docs/INTERMINE_ORG_HOSTING.md, docs/EXPERT_TO_CHECK.md (6 items), docs/SANDBOX-NOTES.md. Upstream push URLs disabled in every checkout (Gos has admin on intermine/*).
 - Decisions today: KeySigner kept; reagent patch kept + upstream issue reagent#676; commons-lang 2 dropped on 6.0; POM runtime scope kept; 6.0.0 version.
 - Running: chado-db @throws + gate doclint step (im-jqz.67); fork CI self-sufficiency (im-ee7.70). Sprint report (im-8dd.5) due before 23:00 UK.
+
+## Checkpoint 18 (sprint close) - 2026-11-16 21:15 UTC
+
+- Every integration branch pushed and CI green: intermine maint-2026 a27dcf5398 (6.0.0 line), release/5.1.1-candidate e83e063594, bluegenes 2785384e (nightly Cypress green on 669ae3ee; 180 tests 147/0/33), im-tables-3 f780276, imcljs d96a3eb, bluegenes-tool-store da4f23b, mine-tests cbbef24, rdfc2im 22c57ae, humanmine c0731c5, flymine 118eb07a, humanmine-bio-sources 20ad5a2, flymine-bio-sources f2ec982 (fork CIs green for the first time: they build InterMine maint-2026 in the job).
+- Since checkpoint 17: chado-db @throws + gate doclint step, docs consistency sweep, release notes on both lines, Central bundle rehearsal passed for both lines (docs/RELEASE-REHEARSAL-2026-11-16.md), fork CI self-sufficiency, 5.1.1 doc fixes, flymine miRanda simplification, reagent upstream fix measured (keystroke spec fixed on master, upload textarea still needs the patch).
+- Beads: 272 closed; open: 6 epics plus human steps (Clojars, Central Portal, DNS/HTTPS, dead-host check) and items deferred to a JDK 11+ baseline or a later reagent release.
+- Testbed for Gos's manual testing: 5.1.1 on 8090/5000 (+ new BlueGenes 5001), 6.0.0 on 18090/15000 (+ new BlueGenes 15001); docs/HUMAN_TESTING.md and docs/COMPLETION.md.
+- Sprint report status/sprint-report.md regenerated at 21:15 UTC (im-8dd.5). Hourly status loop keeps running while the sandbox is up.
