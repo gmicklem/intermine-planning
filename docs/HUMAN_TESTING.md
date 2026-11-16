@@ -38,6 +38,20 @@ then and kept for comparison. Both stacks' own BlueGenes on 5000/15000 are the o
 load scripts from cdn.intermine.org, cdn.jsdelivr.net and code.jquery.com), which is why the new BlueGenes
 is started separately on 5001/15001.
 
+**New BlueGenes (maint-2026 669ae3ee) is running** since 16 Nov 19:00 UTC: http://localhost:15001 (against the
+6.0.0 mine) and http://localhost:5001 (against the 5.1.1 mine), both bound to 0.0.0.0. Restart and stop recipes:
+`/home/agent/taskhomes/im-bg-serve/README.txt` in the sandbox. To reach everything from the Mac, run on the host
+(sandbox name `claude-repos`):
+
+```bash
+for p in 15001 5001 8090 18090 5000 15000; do sbx ports claude-repos --publish $p:$p/tcp; done
+```
+
+The browser calls the mine web services directly on 8090/18090, so those two must be published too.
+Known cosmetic items on both mines: `/service/version/release` returns the placeholder `@RELEASE_VERSION@`
+(the demo build never fills it), and the branding reads "rdfc2im: 113 gene food/drug-metabolism panel".
+The sandbox blocks the home-page RSS feed (one console error) which will not happen on the Mac.
+
 **Logins.** Superuser on both mines: `superuser@intermine.org` / `intermine` (set by rdfc2im's
 `full-build.sh`; a demo account, not a secret). For ordinary-user tests register your own account
 (e.g. `gos-test-1@example.org`) on each line. Accounts and lists disappear whenever a stack is rebuilt.
