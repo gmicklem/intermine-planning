@@ -218,7 +218,7 @@ if [ $FAIL = 0 ]; then
   # in-repo consumer of the plugin's war composition and of the published intermine artefacts
   # (im-jqz.52: ~12 s). Only when the intermine suite is in the gate.
   if [ $FAIL = 0 ] && is_build intermine && [ "${GATE_SKIP_TESTMINE:-0}" != 1 ]; then
-    gradle testmine build -x test || FAIL=1
+    gradle testmine :dbmodel:copyMineProperties build -x test || FAIL=1   # copyMineProperties explicit for the 5.1.1 line, where :webapp:mergeProperties still needs it
   fi
 fi
 
