@@ -70,9 +70,9 @@ intermineorg/* or intermine/*.
 
 ## 6. Later, with a Gradle 4.9 mine of your own
 
-- im-ee7.49 (P2): convert `intermine/humanmine-bio-sources` and `flymine-bio-sources` to the
-  6.0 build line and publish them; `reference/bio-sources-6.0/` in this repo has the converted
-  build files and a README.
+- im-ee7.49: DONE 16 Nov (gmicklem/humanmine-bio-sources 5d10274 and gmicklem/flymine-bio-sources
+  9a943f7, branch maint-2026, build and publish on the 6.0 line); publishing to Central is still your
+  step (same Portal credentials as InterMine).
 - Upstream PRs `gmicklem:maint-2026 -> intermine:dev` following the contribution guide, once
   you are happy with the integration branches (intermine, bluegenes, imcljs, im-tables-3,
   bluegenes-tool-store, humanmine, flymine).
