@@ -42,6 +42,8 @@
 #   GATE_INSTALL_ARGS  extra args for install_intermine.py (e.g. --gradle_distribution_url ...)
 #   GATE_GRADLE_ARGS   extra args appended to every Gradle call (e.g. --offline, --rerun-tasks)
 #   GATE_CLEAN=1       run `clean` in every involved build before installing
+#   GATE_FAIL_ON_GRADLE_DEPRECATION=1 fail the gate when a Gradle deprecation warning appears (the JDK 8 "Executing Gradle on JVM
+#                      versions 16 and lower" note excepted). javac's deprecation notes and warnings are counted apart and never fail it (im-8dd.6)
 #   GATE_SKIP_PLUGIN_TEST=1 skip the plugin's TestKit tests (im-ee7.51)
 #   GATE_SKIP_TESTMINE=1 skip the testmine build -x test that follows the intermine suite (im-jqz.52)
 #   GATE_SKIP_INSTALL=1, GATE_SKIP_CHECKSTYLE=1   skip those steps (for quick local iteration only;
@@ -110,7 +112,7 @@ WORKERS=${GATE_MAX_WORKERS:-4}
 LOGS=$WT/.gate-logs
 mkdir -p "$LOGS"
 printf '*\n' > "$LOGS/.gitignore"
-rm -f "$LOGS"/*.log "$LOGS"/summary.txt "$LOGS"/steps.tsv "$LOGS"/deprecations.txt "$LOGS"/failed-tests.txt
+rm -f "$LOGS"/*.log "$LOGS"/summary.txt "$LOGS"/steps.tsv "$LOGS"/deprecations.txt "$LOGS"/gradle-deprecations.count "$LOGS"/failed-tests.txt
 STEPS=$LOGS/steps.tsv      # name \t status \t seconds \t peakRSS_MB
 FAIL=0
 
@@ -314,26 +316,42 @@ with open(os.path.join(logs, "failed-tests.txt"), "w") as f:
 if failed:
     print("\n%d failed/errored tests (first 30; full list in .gate-logs/failed-tests.txt):" % len(failed))
     for x in failed[:30]: print("  " + x)
-# deprecation warnings: Gradle's own (--warning-mode all) versus javac's "-Xlint:deprecation" notes
-gdep, jdep = {}, {}
+# deprecation warnings, counted apart (im-8dd.6): Gradle's own (--warning-mode all: "Deprecated Gradle features were used in this
+# build", "The X has been deprecated ...") versus javac's: "Note: F.java uses or overrides a deprecated API" and, with
+# -Xlint, "F.java:12: warning: [deprecation] m() in C has been deprecated" / "[removal]", which say "has been deprecated" too.
+# Any other line that mentions "deprecat" (a test's output, a Gradle task named after a deprecated alias) is in neither count.
+JAVAC = re.compile(r"^Note: |\[(?:deprecation|removal)\]|\.(?:java|groovy):\d+: warning:|uses or overrides a deprecated API|-Xlint:deprecation")
+GRADLE = re.compile(r"Deprecated Gradle features|has been deprecated|is deprecated|scheduled to be removed in Gradle|will fail with an error in Gradle")
+# Gradle 8 on JDK 8 always says this once per Gradle call; it is Gradle's, but not a deprecation of the build scripts
+JVM_NOTE = "Executing Gradle on JVM versions 16 and lower has been deprecated"
+gdep, jdep, odep = {}, {}, {}
 for lf in sorted(glob.glob(os.path.join(logs, "*.log"))):
     step = os.path.basename(lf)[:-4]
     for line in open(lf, errors="replace"):
         if not re.search(r"deprecat", line, re.I) or line.lstrip().startswith("at "):
             continue
         msg = re.sub(r"\s+", " ", line.strip())
-        if msg.startswith("Note:"):
+        if JAVAC.search(msg):
             msg = re.sub(r"^Note: \S+/", "Note: <file> ", msg) if "uses or overrides" in msg and "/" in msg else msg
+            msg = re.sub(r"^\S+/(\S+\.(?:java|groovy)):\d+: warning:", r"\1: warning:", msg)
             d = jdep
-        else:
+        elif GRADLE.search(msg):
             d = gdep
+        else:
+            d = odep
         e = d.setdefault(msg, [0, set()]); e[0] += 1; e[1].add(step)
 with open(os.path.join(logs, "deprecations.txt"), "w") as f:
-    for title, d in (("Gradle deprecation warnings", gdep), ("javac deprecation notes", jdep)):
+    for title, d in (("Gradle deprecation warnings", gdep), ("javac deprecation notes and warnings", jdep),
+                     ("other lines that mention 'deprecat' (in neither count)", odep)):
         f.write("== %s (%d distinct)\n" % (title, len(d)))
         for m, (c, st) in sorted(d.items(), key=lambda kv: -kv[1][0]):
             f.write("%6d  %s\n        in: %s\n" % (c, m, " ".join(sorted(st))))
-print("\nGradle deprecation warnings: %d distinct; javac deprecation notes: %d distinct (.gate-logs/deprecations.txt)" % (len(gdep), len(jdep)))
+gline = sum(c for c, st in gdep.values()); jline = sum(c for c, st in jdep.values())
+gact = [m for m in gdep if not m.startswith(JVM_NOTE)]
+with open(os.path.join(logs, "gradle-deprecations.count"), "w") as f:
+    f.write("%d\n" % len(gact))
+print("\nGradle deprecation warnings: %d distinct (%d lines; %d besides the JDK 8 note); javac deprecation notes/warnings: %d distinct (%d lines); other: %d distinct (.gate-logs/deprecations.txt)"
+      % (len(gdep), gline, len(gact), len(jdep), jline, len(odep)))
 print("total wall time: %s" % fmt(total))
 EOF
 
@@ -345,5 +363,9 @@ if [ -n "$untracked" ]; then
   echo "$untracked" | sed 's/^/  /' | tee -a "$LOGS/summary.txt"
 fi
 if [ $FAIL = 0 ] && [ -s "$LOGS/failed-tests.txt" ]; then FAIL=1; fi
+# Gradle's own deprecations (not javac's, not the JDK 8 note) fail the gate only when asked: GATE_FAIL_ON_GRADLE_DEPRECATION=1
+if [ "${GATE_FAIL_ON_GRADLE_DEPRECATION:-0}" = 1 ] && [ "$(cat "$LOGS/gradle-deprecations.count" 2>/dev/null || echo 0)" != 0 ]; then
+  echo "Gradle deprecation warnings found (GATE_FAIL_ON_GRADLE_DEPRECATION=1): see $LOGS/deprecations.txt" | tee -a "$LOGS/summary.txt"; FAIL=1
+fi
 if [ $FAIL = 0 ]; then echo "GATE PASSED" | tee -a "$LOGS/summary.txt"; else echo "GATE FAILED (logs: $LOGS)" | tee -a "$LOGS/summary.txt"; fi
 exit $FAIL

@@ -97,3 +97,10 @@ Added items get a date; checked items move to the bottom with the reviewer's ver
 - **Reviewer, please check:** whether any class in a shipped bio-source's public API (constructor
   or protected method signatures) uses a type that is now runtime scope, which would make that
   source impossible to extend without an extra declaration.
+
+### 5. chado-db SequenceProcessor: an always-true Integer comparison preserved as-is (16 Nov 2026)
+
+- **Where:** intermine `bio/sources/chado-db/.../SequenceProcessor.java` around lines 1028 and 1471 (commit 16c4648620, the boxed-constructor sweep).
+- **What we found:** `currentFeatureId != featureId` compared two distinct `new Integer(...)` objects by identity, so it was always true. Replacing the constructors with `Integer.valueOf` would have flipped it for ids up to 127 (cached boxes). The sweep kept the old behaviour as `currentFeatureId != null` with a comment.
+- **Question for the reviewer:** the apparent intent is to reset `existingAttributes` only when the feature changes. Making it do so changes which attributes get set on chado-loaded features. Decide whether to fix (and re-test a chado load) or keep the historical behaviour.
+- **To revert:** none needed; the behaviour is unchanged. The fix, if wanted, is `!Objects.equals(currentFeatureId, featureId)`.
