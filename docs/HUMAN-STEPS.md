@@ -63,7 +63,7 @@ intermineorg/* or intermine/*.
 - im-jqz.35 (P2): commons-lang 2.6 reaches a mine's compile classpath only through
   solr-solrj's POM (and objectstore for torque). Declare it `api` for deployer code, or drop
   it with torque?
-- im-7os.26: DECIDED 16 Nov (yes, HumanMine becomes the BlueGenes product default); in progress.
+- im-7os.26: DONE 16 Nov (HumanMine is the BlueGenes product default; bluegenes f2ddf4d5, imcljs 1b59843).
 - im-ee7.23 (P2): bio/sources POMs now declare most dependencies in runtime scope
   (Gradle `implementation`). A deployer whose bio-source compiles against classes in an
   org.intermine bio-source jar must declare that dependency. Intended?
