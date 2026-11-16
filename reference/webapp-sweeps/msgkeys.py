@@ -46,6 +46,14 @@ for m in re.finditer(r'''["']([A-Za-z][\w]*(?:\.[\w]+)*\.)(?:\$\{|["']\s*\+|\#\{
     prefixes.add(m.group(1))
 for m in re.finditer(r'''["']([A-Za-z][\w]*(?:\.[\w]+)*\.)["']\s*\+''', big):
     prefixes.add(m.group(1))
+# page keys: layout.jsp and headMenu.jsp read "<pageName>.title|tab|noFollow" for every pageName that a
+# tiles definition (<put name="pageName" value="X"/>, in tiles-defs.xml or a mine's tiles-defs-model.xml) sets
+pagenames = set(); pagekeys = set()
+for _, t in corpus:
+    pagenames.update(re.findall(r'<put\s+name="pageName"\s+value="([A-Za-z][\w]*)"', t))
+for pn in pagenames:
+    for suffix in ('title', 'tab', 'noFollow'):
+        pagekeys.add('%s.%s' % (pn, suffix))
 tokfiles = {}
 tokre = re.compile(r'[A-Za-z_][\w\-]*(?:\.[\w\-]+)*')
 for p, t in corpus:
@@ -55,6 +63,7 @@ res = {}
 for k in keys:
     where = tokfiles.get(k, [])
     pf = [x for x in prefixes if k.startswith(x) and x.count('.') >= 1]
+    if k in pagekeys: pf.append('<pageName> key read by layout.jsp/headMenu.jsp')
     res[k] = {'line': keys[k], 'files': where[:3], 'nfiles': len(where), 'prefix': sorted(pf)}
 unused = [k for k in keys if res[k]['nfiles'] == 0 and not res[k]['prefix']]
 pfonly = [k for k in keys if res[k]['nfiles'] == 0 and res[k]['prefix']]

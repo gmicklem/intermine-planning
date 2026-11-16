@@ -3,7 +3,7 @@
 tile never referenced, action type class missing. usage: tilescheck.py <webapp-src-main-webapp> <repo-root-for-java>..."""
 import os, re, sys
 W = sys.argv[1]; jr = sys.argv[2:]
-tiles = open(W+'/WEB-INF/tiles-defs.xml').read(); struts = open(W+'/WEB-INF/struts-config.xml').read()
+tiles = re.sub(r'<!--.*?-->', '', open(W+'/WEB-INF/tiles-defs.xml').read(), flags=re.S); struts = re.sub(r'<!--.*?-->', '', open(W+'/WEB-INF/struts-config.xml').read(), flags=re.S)
 java = set()
 for r in jr:
     for d, ds, fs in os.walk(r):

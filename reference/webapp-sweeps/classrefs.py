@@ -10,9 +10,9 @@ for r in jroots:
     for d, ds, fs in os.walk(r):
         ds[:] = [x for x in ds if x not in {'build','.git','node_modules'}]
         for f in fs:
-            if f.endswith('.java'):
+            if f.endswith(('.java', '.groovy')):
                 rel = os.path.relpath(os.path.join(d, f), r)
-                m = re.search(r'(?:^|/)(?:src/(?:main|test)/java|src)/(org/.*)\.java$', rel) or re.search(r'(?:^|/)(org/.*)\.java$', rel)
+                m = re.search(r'(?:^|/)(?:src/(?:main|test)/(?:java|groovy)|src)/(org/.*)\.(?:java|groovy)$', rel) or re.search(r'(?:^|/)(org/.*)\.(?:java|groovy)$', rel)
                 if m:
                     fq = m.group(1).replace('/', '.'); java.add(fq)
                     parts = fq.split('.')
@@ -32,10 +32,16 @@ for r in scan:
                 for m in pat.finditer(line):
                     n = m.group(0)
                     if n in java or n in pkgs: continue
+                    # classes generated from the model XML (org.intermine.model.bio.*, ...testmodel.*) have no source
+                    if (n + '.').startswith(('org.intermine.model.bio.', 'org.intermine.model.testmodel.')): continue
                     # nested class or member: strip trailing parts
                     parts = n.split('.'); ok = False
                     for k in range(len(parts)-1, 2, -1):
                         if '.'.join(parts[:k]) in java: ok = True; break
+                    # a property key below a package or class (org.intermine.x.y.featureClass): last part lower case
+                    if not ok:
+                        for k in range(len(parts)-1, 2, -1):
+                            if ('.'.join(parts[:k]) in pkgs or '.'.join(parts[:k]) in java) and all(x[:1].islower() for x in parts[k:]): ok = True; break
                     if not ok and re.search(r'\.(xml|properties|class|jsp|js)$', n): ok = True
                     if not ok: bad.setdefault(n, []).append('%s:%d' % (p, ln))
 for n in sorted(bad): print('DANGLING', n, bad[n][:3])
