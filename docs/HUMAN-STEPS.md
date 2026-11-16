@@ -19,7 +19,7 @@ coordinates and delete the CI git-dependency workaround (`.github/workflows/ci.y
 
 ## 2. Publish InterMine 5.1.1 to Maven Central (im-89g.7, P1)
 
-Branch `release/5.1.1-candidate` on gmicklem/intermine (b9355b129e), CI green on that head (16 Nov 16:40 UTC)
+Branch `release/5.1.1-candidate` on gmicklem/intermine (be54f8d81f), CI dispatched on that head (16 Nov 18:45 UTC; previous head b9355b129e green); RELEASE_NOTES carries the 5.1.1 entry
 Gradle 6.9.4 line with the Tier 1 security fixes and the bug-fix backports listed as items 1-22 of RELEASING.md's 5.1.1 changes; it
 loads and runs in a Gradle 4.9 mine. OSSRH is dead, so publishing goes through the Central
 Portal:
