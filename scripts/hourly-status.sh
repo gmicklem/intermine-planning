@@ -19,6 +19,8 @@ run_once() {
   echo "== $(date -u +%Y-%m-%dT%H:%MZ) hourly-status" >> "$LOG"
   python3 -I scripts/dashboard.py >> "$LOG" 2>&1 || echo "dashboard failed" >> "$LOG"
   python3 -I scripts/beads-history.py append >> "$LOG" 2>&1 || echo "beads-history failed" >> "$LOG"
+  /home/agent/venvs/plots/bin/python -I scripts/plot-beads-history.py >> "$LOG" 2>&1 || echo "beads plots failed" >> "$LOG"
+  /home/agent/venvs/plots/bin/python -I scripts/plot-commits.py >> "$LOG" 2>&1 || echo "commits plot failed" >> "$LOG"
   if [ -n "$(git status --porcelain status/)" ]; then
     git add status/ && git commit -q -m "status: hourly beads report $(date -u +%H:%MZ) [im-8dd.2]
 
