@@ -44,7 +44,7 @@ sbx policy allow network cdn.jsdelivr.net,cdn.intermine.org
 
 - intermineorg/rdfc2im: `maint/im-ore.1-intermine-src` (pushed to gmicklem/rdfc2im) adds
   `--intermine-src DIR` and `--stack-name` so the demo mine builds from a local InterMine
-  checkout; `maint/im-rkn.5-testbed-baseline` holds the baseline fixes. BUILD.md documents both.
+  checkout (5.1.1 and 6.0 lines, 9b0f6be); `maint/im-rkn.5-testbed-baseline` holds the baseline fixes. BUILD.md documents both.
 - intermineorg/mine-tests: `maint-2026` (pushed to gmicklem/mine-tests) adds the
   `[mines.local]` entry, capability flags and `MINE_TESTS_BROWSER_PATH`.
 
