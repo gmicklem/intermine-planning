@@ -46,7 +46,7 @@ Added items get a date; checked items move to the bottom with the reviewer's ver
   patch 27; 2.0.1 on React 18 without the patch 100, with the patch 0; 2.0.1 on React 19 without 80, with 0.
   Under reagent 2 the loss moves from ratom-backed inputs to the inputs whose on-change dispatches a
   re-frame event (flushSync render queue). The patch carries over unchanged and its guard test passes on 2.0.1.
-  Upstream issue drafted in `docs/drafts/reagent-issue-keystrokes.md` (mechanism analysis included).
+  Upstream issue posted 16 Nov 2026: https://github.com/reagent-project/reagent/issues/676 (draft kept in `docs/drafts/reagent-issue-keystrokes.md`).
 - **Reviewer, please check:** the mechanism analysis in the draft issue, the interaction with im-tables' own
   inputs, and IME / composition events, which the Cypress keystroke spec does not cover.
 

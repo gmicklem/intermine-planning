@@ -39,3 +39,8 @@ that changes it fails the unit tests rather than silently disabling the patch. T
 relied on reagent taking back an ignored key (regions extend-by, viz cases number) now call
 `inputs/reject-input!` themselves. Alternative if Gos prefers no monkey-patch: revert to the
 `text-input` component and convert the remaining ~90 sites (im-7os.35 history has the numbers).
+
+
+## Update 16 Nov 2026
+
+reagent 2.0.1 (React 18 and 19) measured: the loss persists without the patch (100 and 80 of 1600 keys, concentrated in inputs whose on-change dispatches a re-frame event) and is 0 with it (im-7os.53). Reported upstream as https://github.com/reagent-project/reagent/issues/676 (Gos approved posting).
