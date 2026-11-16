@@ -28,3 +28,20 @@ Added items get a date; checked items move to the bottom with the reviewer's ver
   AlgorithmIdentifier OIDs for the supported algorithms, time encoding UTCTime vs GeneralizedTime
   for dates after 2049), and whether any external consumer ever reads these certificates (we found
   none).
+
+### 2. BlueGenes: start-up monkey-patch of reagent's input wrapper (16 Nov 2026)
+
+- **Where:** bluegenes maint-2026, commit a2894c0d; design and measurements in
+  `decisions/0007-reagent-input-patch.md` in the planning repo.
+- **Why:** under React 18 (reagent 1.2, createRoot) stock reagent drops keystrokes in controlled text
+  inputs: 57 of 5600 lost with createRoot, 277 of 6400 with legacy render, 309 of 6400 with flushSync.
+  The patch replaces reagent's internal input handling so the DOM value is never overwritten by a stale
+  render: 0 of 6400 lost.
+- **Risk:** it touches reagent.impl.input, which is not public API. A unit test fails the build if
+  the patched vars or their arity change, so a reagent upgrade cannot break it silently.
+- **Decision (Gos, 16 Nov 2026):** keep for now; a ClojureScript developer should review it before
+  the upstream PR. Alternative if rejected: an uncontrolled-input component at every text input in
+  BlueGenes and im-tables.
+- **Reviewer, please check:** whether a newer reagent release fixes the underlying issue (then drop
+  the patch), the interaction with im-tables' own inputs, and IME / composition events, which the
+  Cypress keystroke spec does not cover.

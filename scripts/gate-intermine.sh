@@ -178,8 +178,9 @@ fi
 
 gradle() {  # gradle <dir> <task> [more gradle args...]  == run.sh run_gradle
   local dir=$1 task=$2; shift 2
+  local label; label=$(printf '%s' "$task $*" | sed -e 's/ -x [^ ]*//g' -e 's/^://' -e 's/ :/ /g' -e 's/[: ]/_/g')
   # shellcheck disable=SC2086
-  run_step "$(echo "$dir" | tr / -)-$task" "$dir" ./gradlew -Dorg.gradle.jvmargs=-Xmx$XMX --max-workers=$WORKERS \
+  run_step "$(echo "$dir" | tr / -)-$label" "$dir" ./gradlew -Dorg.gradle.jvmargs=-Xmx$XMX --max-workers=$WORKERS \
     --no-daemon --warning-mode all --stacktrace $M2_ARGS ${GATE_GRADLE_ARGS:-} "$task" "$@"
 }
 
@@ -233,7 +234,7 @@ if [ $FAIL = 0 ]; then
   # in-repo consumer of the plugin's war composition and of the published intermine artefacts
   # (im-jqz.52: ~12 s). Only when the intermine suite is in the gate.
   if [ $FAIL = 0 ] && is_build intermine && [ "${GATE_SKIP_TESTMINE:-0}" != 1 ]; then
-    gradle testmine build :dbmodel:copyMineProperties -x test || FAIL=1   # copyMineProperties explicit for the 5.1.1 line, where :webapp:mergeProperties still needs it
+    gradle testmine :dbmodel:copyMineProperties build -x test || FAIL=1   # copyMineProperties explicit for the 5.1.1 line, where :webapp:mergeProperties still needs it
   fi
 fi
 

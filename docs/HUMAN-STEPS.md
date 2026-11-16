@@ -19,8 +19,8 @@ coordinates and delete the CI git-dependency workaround (`.github/workflows/ci.y
 
 ## 2. Publish InterMine 5.1.1 to Maven Central (im-89g.7, P1)
 
-Branch `release/5.1.1-candidate` on gmicklem/intermine (e9873ad0e3), CI green on that head (16 Nov 09:00 UTC), is the non-breaking
-Gradle 6.9.4 line with the Tier 1 security fixes and eight jar/war hygiene backports; it
+Branch `release/5.1.1-candidate` on gmicklem/intermine (b8cab9939a), CI dispatched on that head (16 Nov 13:00 UTC; previous head e9873ad0e3 green), is the non-breaking
+Gradle 6.9.4 line with the Tier 1 security fixes and nine jar/war hygiene and bug backports (latest: RDF/XML export fix); it
 loads and runs in a Gradle 4.9 mine. OSSRH is dead, so publishing goes through the Central
 Portal:
 
@@ -50,10 +50,8 @@ intermineorg/* or intermine/*.
 
 ## 5. Review items flagged "for discussion with Gos"
 
-- `decisions/0007-reagent-input-patch.md` (bluegenes a2894c0d): a start-up monkey-patch of reagent's
-  input wrapper is what stops every text input dropping keystrokes under React 18 (0/6400 keys lost,
-  measured). It touches non-public reagent API, guarded by a unit test. Keep it, or revert to
-  per-input components?
+- `decisions/0007-reagent-input-patch.md`: DECIDED 16 Nov (keep the patch for now); logged for review by a
+  ClojureScript developer in `docs/EXPERT_TO_CHECK.md` item 2.
 - im-7os.28: BlueGenes now loads jQuery 3.7.1 (was 3.1.0) from cdnjs with SRI. Cypress is green
   including the admin specs, but nobody has clicked through popovers and dropdowns in a real browser.
 - `decisions/package-vetting.md`: every package swap, with the vet verdict and reasons.
