@@ -125,3 +125,10 @@ Newest first. One entry per checkpoint (about every 3 hours while unattended).
 - BlueGenes 76bd3f20, im-tables 0fc6eba, tool-store be4678f (tarball URL/integrity/size hardening) all pushed and green.
 - Beads: 176 of 250 closed at 09:00.
 - Running at sleep time: Google Charts shim for list-widgets (im-jqz.47, intermine worktree im-jqz.47-charts-shim) and gate infrastructure (im-8dd.7 + im-rkn.8, planning scripts im-testenv.sh/gate-intermine.sh edited in place, uncommitted, verified via worktree im-8dd.7-gate-infra). If the laptop sleeps, both may need relaunching; their worktrees hold any partial work. Everything merged is pushed.
+
+## Checkpoint 15 (laptop sleep) - 2026-11-16 10:30 UTC
+
+- intermine maint-2026 92219f54ee pushed, CI green: charts shim (no third-party script left on the legacy webapp), second orphan sweep (218 dead message keys, dangling tiles, unreferenced JS, sweep scripts in docs/tools with a release step).
+- rdfc2im maint/im-ore.1-intermine-src 7780407 pushed: artifacts staged per stack; ut stack rebuilt from maint-2026 (test-live 20/20), default stack untouched.
+- Planning: per-task GRADLE_USER_HOME and Postgres role modes in im-testenv.sh; gate helper fix.
+- No workers running at sleep time; nothing in flight. All integration branches pushed and green. On "back": relaunch from `bd ready` (P2 im-jqz.10/29/32, P3 im-7os.50, im-jqz.58/59, im-ee7.62/63/65, im-ore.18, im-8dd.9); Gos decisions (HUMAN-STEPS section 5) still open.
