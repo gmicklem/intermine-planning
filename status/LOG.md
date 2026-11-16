@@ -109,7 +109,7 @@ Newest first. One entry per checkpoint (about every 3 hours while unattended).
 - Infra: a fourth permission-prompt hang (relative rm in a scratch dir) recovered by TaskStop + resume of the same agent; worker rules unchanged, prompts now spell out "never ./*".
 - Running: Solr facet filter quoting (im-jqz.53). Next: 5.1.1 backport of the psi-complexes JAXB fix (im-89g.23), remaining P3 cleanups, sprint report Monday (im-8dd.5).
 
-## Checkpoint 13 - 2026-11-16 09:00 UTC
+## Checkpoint 13 - 2026-11-16 08:26 UTC
 
 - intermine maint-2026 0f6b9ce82a pushed, CI green through 51556c9469 (later heads dispatched). Merged since checkpoint 12: Solr facet filters quoted (values with spaces returned nothing; bag-id filter was a broken varargs call), the P1 userprofile id collision (id allocation skips ids already in the database and refills under a lock; profile loading reports a collision instead of stopping the webapp; root cause was the testbed's template SQL inserting hardcoded ids, fixed in rdfc2im too), Jena narrowed to jena-core + jena-arq 3.17.0 and solrj without Netty/Jetty/Snappy (RDF output byte-identical), dwr.xml publishes only the 36 called methods with no exception details to clients, and 11 Gradle TestKit tests for the plugin (which found and fixed two plugin bugs and a stale-directory Copy in bio/webapp). The gate now also runs the plugin tests and builds testmine.
 - release/5.1.1-candidate 47c6e413ad pushed and CI green: psi-complexes JAXB fix, Solr facet fix, id-collision fix, Jena/solrj narrowing all backported; the DWR hardening backport is running.
