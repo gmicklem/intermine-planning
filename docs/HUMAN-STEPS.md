@@ -57,9 +57,8 @@ intermineorg/* or intermine/*.
 - im-7os.28: BlueGenes now loads jQuery 3.7.1 (was 3.1.0) from cdnjs with SRI. Cypress is green
   including the admin specs, but nobody has clicked through popovers and dropdowns in a real browser.
 - `decisions/package-vetting.md`: every package swap, with the vet verdict and reasons.
-- `KeySigner.java` (intermine/webapp): bcprov removed; a ~90-line hand-written DER X.509 v3
-  self-signed certificate writer replaces it (C4). Please read it or say whether you would
-  rather keep bcprov at a current version.
+- `KeySigner.java`: DECIDED 16 Nov (keep the hand-written writer); logged for technical review in
+  `docs/EXPERT_TO_CHECK.md` item 1.
 - im-jqz.35 (P2): commons-lang 2.6 reaches a mine's compile classpath only through
   solr-solrj's POM (and objectstore for torque). Declare it `api` for deployer code, or drop
   it with torque?
