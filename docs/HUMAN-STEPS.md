@@ -61,9 +61,8 @@ intermineorg/* or intermine/*.
   solr-solrj's POM (and objectstore for torque). Declare it `api` for deployer code, or drop
   it with torque?
 - im-7os.26: DONE 16 Nov (HumanMine is the BlueGenes product default; bluegenes f2ddf4d5, imcljs 1b59843).
-- im-ee7.23 (P2): bio/sources POMs now declare most dependencies in runtime scope
-  (Gradle `implementation`). A deployer whose bio-source compiles against classes in an
-  org.intermine bio-source jar must declare that dependency. Intended?
+- im-ee7.23: DECIDED 16 Nov (keep runtime scope); logged with reversion steps in `docs/EXPERT_TO_CHECK.md` item 4.
+- im-jqz.35: DECIDED 16 Nov (drop commons-lang 2 on 6.0; deployers move to lang3; agents migrate the bio-source forks).
 
 ## 6. Later, with a Gradle 4.9 mine of your own
 

@@ -63,3 +63,33 @@ Added items get a date; checked items move to the bottom with the reviewer's ver
   `net.sf.cglib.proxy.Factory` (the parser skips the name; confirm nothing else persists it), the
   `setoBJECT` path now throwing UnsupportedOperationException, and any deployer code that tested
   `instanceof Factory`.
+
+### 4. bio-source POMs publish most dependencies in runtime scope (16 Nov 2026)
+
+- **Where:** intermine `bio/sources/build.gradle` (dependencies block, comment at lines ~105-125) and
+  `bio/postprocess`; the POM mapping (`implementation` → runtime, `api` → compile) is in
+  `config/gradle/publishing.gradle`; deployer notes in `docs/UPGRADING-build.md`, section
+  "Dependency scopes in the bio-source POMs". Both lines: 5.1.1 (release/5.1.1-candidate) and 6.0
+  (maint-2026).
+- **What changed:** the 5.1.0 POMs listed every dependency of each `bio-source-*` jar in compile
+  scope (the old `maven` plugin mapped Gradle's `compile` that way). Since the conversion to
+  `implementation`/`api` (sprint batch I, 323 dependencies), only `bio-core`, `intermine-objectstore`,
+  `intermine-model`, `ant`, `commons-collections`, the logging bridge, and what a source exposes in
+  its converter constructors are compile scope; HikariCP, postgresql, commons-io, commons-lang3,
+  commons-lang 2.6, commons-logging, jakarta.activation-api and `bio-model` are runtime.
+- **Effect:** nothing for the mine build (the plugin puts bio-source jars on a runtime classpath).
+  A deployer's own `*-bio-sources` project that compiles against classes inside an `org.intermine`
+  bio-source jar gets only the compile-scope entries; a library its code imports that used to
+  arrive by accident must now be declared (compile error names the package).
+- **Verified:** installed POMs for all 76 artifacts diffed before/after the publishing cleanup
+  (identical); humanmine-bio-sources and flymine-bio-sources forks build on the 6.0 line
+  (im-ee7.49, 5d10274 / 9a943f7).
+- **Decision (Gos, 16 Nov 2026):** keep runtime scope.
+- **To revert:** in `bio/sources/build.gradle` and `bio/postprocess/build.gradle` change
+  `implementation`/`runtimeOnly` to `api` for the third-party libraries (or add
+  `java-library` + `api` for the whole block), rebuild, and check `build/publications/*/pom-default.xml`
+  shows `<scope>compile</scope>`; no Java changes are involved. Partial alternative: promote only
+  the libraries deployers report missing.
+- **Reviewer, please check:** whether any class in a shipped bio-source's public API (constructor
+  or protected method signatures) uses a type that is now runtime scope, which would make that
+  source impossible to extend without an extra declaration.
