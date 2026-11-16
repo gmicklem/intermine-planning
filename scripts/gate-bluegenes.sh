@@ -17,6 +17,7 @@
 #   3. test      : npx shadow-cljs compile test && node target/test/node-tests.js
 #                  (:node-test build of test/cljs; a missing "Ran N tests"
 #                  summary or any failure/error is a gate failure)
+#   3b. test-clj : clojure -M:test-clj (server-side clojure.test, when deps.edn has the alias)
 #   4. app-dev   : npx shadow-cljs compile app  (the dev build; warnings counted,
 #                  listed in .gate-logs/app-dev-warnings.txt)
 #      app-load  : a dev build as one file (--config-merge {:output-dir
@@ -260,6 +261,19 @@ deps_mode() {
     record test PASS "${STEP_SECS}s" "$SUMMARY $COUNTS"
   else
     record test FAIL "${STEP_SECS}s" "${SUMMARY:-no cljs.test summary} ${COUNTS:-}; see .gate-logs/test.log"; FAILED=1
+  fi
+
+  # ---- 3b. server-side Clojure tests (:test-clj alias, added by im-7os.30) ----
+  if grep -q ':test-clj' deps.edn 2>/dev/null; then
+    run_step test-clj "$LOGS/test-clj.log" "$CLJ" -M:test-clj
+    local CSUMMARY CCOUNTS
+    CSUMMARY=$(nocolor "$LOGS/test-clj.log" | grep -E '^Ran [0-9]+ tests containing [0-9]+ assertions' | tail -1)
+    CCOUNTS=$(nocolor "$LOGS/test-clj.log" | grep -E '^[0-9]+ failures, [0-9]+ errors' | tail -1)
+    if [ $STEP_RC -eq 0 ] && [ -n "$CSUMMARY" ] && echo "$CCOUNTS" | grep -q '^0 failures, 0 errors'; then
+      record test-clj PASS "${STEP_SECS}s" "$CSUMMARY $CCOUNTS"
+    else
+      record test-clj FAIL "${STEP_SECS}s" "${CSUMMARY:-no clojure.test summary} ${CCOUNTS:-}; see .gate-logs/test-clj.log"; FAILED=1
+    fi
   fi
 
   # ---- 4. dev build of :app ----
