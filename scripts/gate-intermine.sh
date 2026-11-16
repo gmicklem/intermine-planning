@@ -34,6 +34,7 @@
 #   GATE_INSTALL_ARGS  extra args for install_intermine.py (e.g. --gradle_distribution_url ...)
 #   GATE_GRADLE_ARGS   extra args appended to every Gradle call (e.g. --offline, --rerun-tasks)
 #   GATE_CLEAN=1       run `clean` in every involved build before installing
+#   GATE_SKIP_TESTMINE=1 skip the testmine build -x test that follows the intermine suite (im-jqz.52)
 #   GATE_SKIP_INSTALL=1, GATE_SKIP_CHECKSTYLE=1   skip those steps (for quick local iteration only;
 #                      a real gate run must not skip them)
 #   GATE_INSTALL_TASK  Gradle task of step 2 (default publishToMavenLocal; `install` is a deprecated alias of it)
@@ -190,6 +191,7 @@ INSTALL=(plugin intermine)
 # for builds that are not installed, right before `build`. Order matters: the bio builds cannot even
 # be configured (and so cannot be cleaned) until plugin/intermine have been installed.
 is_install() { local x; for x in "${INSTALL[@]}"; do [ "$x" = "$1" ] && return 0; done; return 1; }
+is_build() { local x; for x in "${BUILDS[@]}"; do [ "$x" = "$1" ] && return 0; done; return 1; }
 if [ "${GATE_SKIP_INSTALL:-0}" != 1 ]; then
   for d in "${INSTALL[@]}"; do
     if [ "${GATE_CLEAN:-0}" = 1 ]; then gradle "$d" clean || { FAIL=1; break; }; fi
@@ -207,6 +209,12 @@ if [ $FAIL = 0 ]; then
     fi
     gradle "$d" build || FAIL=1
   done
+  # testmine is not published and has no unit tests of its own, but its webapp war is the only
+  # in-repo consumer of the plugin's war composition and of the published intermine artefacts
+  # (im-jqz.52: ~12 s). Only when the intermine suite is in the gate.
+  if [ $FAIL = 0 ] && is_build intermine && [ "${GATE_SKIP_TESTMINE:-0}" != 1 ]; then
+    gradle testmine build -x test || FAIL=1
+  fi
 fi
 
 # ---------- 4. checkstyle ----------
