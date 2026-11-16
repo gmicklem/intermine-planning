@@ -141,3 +141,12 @@ Newest first. One entry per checkpoint (about every 3 hours while unattended).
 - Decisions by Gos today: KeySigner kept, reagent patch kept (upstream issue reagent-project/reagent#676 posted), commons-lang 2 dropped on 6.0, bio-source POM runtime scope kept; docs/EXPERT_TO_CHECK.md started (6 items).
 - Root disk filled once (8 workers); ~3 GB freed; watch it.
 - Running at sleep time: the merge re-gate and the 5.1.1 backport worker; both pause and resume.
+
+## Checkpoint 17 - 2026-11-16 19:00 UTC
+
+- intermine maint-2026 44e70ad9f7 (CI green): since checkpoint 16 the plugin batch, bio batch, version catalog consolidation (StAX flush root cause), 6.0.0 version bump (Gos: major release justified), follow-ups batch (LoadQuery 400, UTF-8, doclint @throws CI step, GFF3 scoreType), RELEASE_NOTES for 5.1.1 and 6.0.0. release/5.1.1-candidate be54f8d81f (CI green) with the webapp bug backports and its release-notes entry.
+- BlueGenes 2785384e (CI green; nightly Cypress running): reagent 2 readiness, im-tables f780276 pin, CHANGELOG 1.5.0. im-tables f780276, imcljs d96a3eb, tool-store da4f23b, mine-tests cbbef24, rdfc2im 22c57ae, mine forks on 6.0.+ (humanmine c0731c5, flymine 118eb07a), bio-sources forks 6de696c/f26d6e3 (CI red until 6.0.0 is on Central; a worker is making the job build maint-2026 itself).
+- Testbed: default stack rebuilt from the 5.1.1 candidate (8090/5000, "5.1.1"), ut stack from 6.0.0 (18090/15000); 13 reference counts identical; new BlueGenes 669ae3ee served on 5001 and 15001 for Gos's manual testing (docs/HUMAN_TESTING.md has the sbx ports recipe).
+- Docs for Gos: docs/COMPLETION.md, docs/HUMAN_TESTING.md, docs/INTERMINE_ORG_HOSTING.md, docs/EXPERT_TO_CHECK.md (6 items), docs/SANDBOX-NOTES.md. Upstream push URLs disabled in every checkout (Gos has admin on intermine/*).
+- Decisions today: KeySigner kept; reagent patch kept + upstream issue reagent#676; commons-lang 2 dropped on 6.0; POM runtime scope kept; 6.0.0 version.
+- Running: chado-db @throws + gate doclint step (im-jqz.67); fork CI self-sufficiency (im-ee7.70). Sprint report (im-8dd.5) due before 23:00 UK.
