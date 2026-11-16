@@ -132,3 +132,12 @@ Newest first. One entry per checkpoint (about every 3 hours while unattended).
 - rdfc2im maint/im-ore.1-intermine-src 7780407 pushed: artifacts staged per stack; ut stack rebuilt from maint-2026 (test-live 20/20), default stack untouched.
 - Planning: per-task GRADLE_USER_HOME and Postgres role modes in im-testenv.sh; gate helper fix.
 - No workers running at sleep time; nothing in flight. All integration branches pushed and green. On "back": relaunch from `bd ready` (P2 im-jqz.10/29/32, P3 im-7os.50, im-jqz.58/59, im-ee7.62/63/65, im-ore.18, im-8dd.9); Gos decisions (HUMAN-STEPS section 5) still open.
+
+## Checkpoint 16 (laptop sleep ~17:00) - 2026-11-16 16:35 UTC
+
+- intermine maint-2026 PUSHED head 47430e9bd6 (CI dispatched): since checkpoint 15 the RDF/XML export fix, Byte Buddy replacing cglib, commons-lang 2 off mine classpaths, the webapp/api bug batch (facets, concurrent uploads, dead JS, sessions, multi-class reports), the small cleanups batch (DataTracker recovery). LOCAL, NOT PUSHED: 05a1f192ee = 47430e9bd6 + build/CI batch (plugin TestKit in CI, catalog version, valueOf sweep) + torque/velocity replacement, with three build.gradle conflicts and one test conflict resolved by hand; a full re-gate is running in worktrees/intermine/merge-maint-2026 (log /home/agent/taskhomes/im-merge/gate-05a1f192ee.log). Push + CI once it passes.
+- release/5.1.1-candidate b8cab9939a pushed, CI green (RDF fix backported); a worker is backporting the webapp bugs and DataTracker fixes (worktree im-89g.29-backports).
+- BlueGenes e55d8b02 (CI green), im-tables 1be6530, imcljs d96a3eb, tool-store da4f23b, mine-tests cbbef24, rdfc2im 27da569, humanmine 3f91e7c, flymine 7fcd4637, both bio-sources forks on lang3: all pushed.
+- Decisions by Gos today: KeySigner kept, reagent patch kept (upstream issue reagent-project/reagent#676 posted), commons-lang 2 dropped on 6.0, bio-source POM runtime scope kept; docs/EXPERT_TO_CHECK.md started (6 items).
+- Root disk filled once (8 workers); ~3 GB freed; watch it.
+- Running at sleep time: the merge re-gate and the 5.1.1 backport worker; both pause and resume.
