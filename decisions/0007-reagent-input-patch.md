@@ -44,3 +44,8 @@ relied on reagent taking back an ignored key (regions extend-by, viz cases numbe
 ## Update 16 Nov 2026
 
 reagent 2.0.1 (React 18 and 19) measured: the loss persists without the patch (100 and 80 of 1600 keys, concentrated in inputs whose on-change dispatches a re-frame event) and is 0 with it (im-7os.53). Reported upstream as https://github.com/reagent-project/reagent/issues/676 (Gos approved posting).
+
+
+## Update 16 Nov 2026, 20:50 UTC: fixed upstream
+
+reagent-project/reagent#676 was closed as completed via PR #680 (merged 20:12 UTC, master b708d451f7d6b96e236a16ac70756764b1aecf55; not yet in a release, latest tag v2.0.1). The upstream fix in reagent.impl.input takes the same approach as this patch: the input remembers the values on-change reported, ignores renders whose value is one of them (lagging state), and runs the revert check after a setTimeout and the next render, only for the latest change; it also fixes Korean IME input (#587). Plan (bead im-7os.62): when a release carries it, bump reagent, delete the monkey-patch and its guard test, keep the keystroke Cypress spec. The reagent 2 readiness work (im-7os.57, im-7os.61) is already merged, so the bump is small.

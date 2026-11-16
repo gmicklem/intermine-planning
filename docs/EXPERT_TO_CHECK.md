@@ -47,8 +47,11 @@ Added items get a date; checked items move to the bottom with the reviewer's ver
   Under reagent 2 the loss moves from ratom-backed inputs to the inputs whose on-change dispatches a
   re-frame event (flushSync render queue). The patch carries over unchanged and its guard test passes on 2.0.1.
   Upstream issue posted 16 Nov 2026: https://github.com/reagent-project/reagent/issues/676 (draft kept in `docs/drafts/reagent-issue-keystrokes.md`).
-- **Reviewer, please check:** the mechanism analysis in the draft issue, the interaction with im-tables' own
-  inputs, and IME / composition events, which the Cypress keystroke spec does not cover.
+- **Upstream fix (16 Nov 20:12 UTC):** reagent PR #680 merged on master with the same approach; the patch is
+  to be dropped when a reagent release carries it (bead im-7os.62). The review question becomes: confirm the
+  released reagent behaves the same on BlueGenes' inputs (keystroke spec) before deleting the patch.
+- **Reviewer, please check:** the interaction with im-tables' own inputs and IME / composition events
+  (upstream says #680 also fixes Korean IME), which the Cypress keystroke spec does not cover.
 
 ### 3. objectstore: Byte Buddy replaces cglib for dynamic (multi-class) objects (16 Nov 2026)
 
