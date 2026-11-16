@@ -28,6 +28,14 @@
 # Environment:
 #   HOME must be a task home made by im-testenv.sh (checked: $HOME/.intermine/intermine-test.properties
 #   exists and HOME is not the real home, unless GATE_ALLOW_REAL_HOME=1).
+#   GRADLE_USER_HOME   the task's own Gradle home (<taskhome>/.gradle, exported by im-testenv.sh): private daemon
+#                      registry, caches/wrapper/jdks shared by symlink. Defaults to $HOME/.gradle. The gate refuses
+#                      to run when it resolves to the shared /home/agent/.gradle (a `gradle --stop` from any task
+#                      would then kill this gate's daemons; im-8dd.7), unless GATE_ALLOW_REAL_HOME=1. Every Gradle call
+#                      of the gate uses --no-daemon, but Gradle still starts a single-use daemon process
+#                      that registers in GRADLE_USER_HOME/daemon, which is why the isolation matters. Workers who run
+#                      ad-hoc `./gradlew` must use the task env; `gradle --stop` then only reaches this task's daemons
+#                      (so never run it with the task env while this task's gate is running).
 #   GATE_JAVA_HOME     JDK to use (default /usr/lib/jvm/java-8-openjdk-arm64)
 #   GATE_PYTHON        python with xunitparser (default /home/agent/venvs/intermine-ci/bin/python;
 #                      created automatically if missing)
@@ -75,6 +83,12 @@ for b in "${BUILDS[@]}"; do case $b in bio*) NEED_BIO=1 ;; esac; done
 if [ "${GATE_ALLOW_REAL_HOME:-0}" != 1 ]; then
   [ "$HOME" != /home/agent ] || { echo "HOME is the real home; eval \"\$(im-testenv.sh <task-id>)\" first" >&2; exit 2; }
 fi
+export GRADLE_USER_HOME=${GRADLE_USER_HOME:-$HOME/.gradle}
+if [ "${GATE_ALLOW_REAL_HOME:-0}" != 1 ] && [ "$(readlink -f "$GRADLE_USER_HOME")" = "$(readlink -f /home/agent/.gradle)" ]; then
+  echo "GRADLE_USER_HOME ($GRADLE_USER_HOME) is the shared /home/agent/.gradle: daemons would be shared with, and killable by, other tasks." >&2
+  echo "Re-run: im-testenv.sh <task-id> create --src <worktree> (it makes <taskhome>/.gradle a private home) and eval its output / source <taskhome>/env.sh" >&2
+  exit 2
+fi
 for f in intermine-test.properties intermine-bio-test.properties testmodel.properties; do
   [ -f "$HOME/.intermine/$f" ] || { echo "missing $HOME/.intermine/$f (run im-testenv.sh)" >&2; exit 2; }
 done
@@ -103,6 +117,7 @@ FAIL=0
 {
   echo "gate-intermine $(date -Is)"
   echo "worktree: $WT  ($(git -C "$WT" rev-parse --short HEAD 2>/dev/null) $(git -C "$WT" rev-parse --abbrev-ref HEAD 2>/dev/null)$(git -C "$WT" diff --quiet 2>/dev/null || echo ', dirty'))"
+  echo "GRADLE_USER_HOME=$GRADLE_USER_HOME  PSQL_USER=$PSQL_USER"
   echo "HOME=$HOME  JAVA_HOME=$JAVA_HOME  LANG=$LANG"
   "$JAVA_HOME/bin/java" -version 2>&1 | grep -v JAVA_TOOL_OPTIONS | head -1
   echo "builds: ${BUILDS[*]}"
