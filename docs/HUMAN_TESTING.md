@@ -28,12 +28,15 @@ stack before it was taken down, then 6.0.0 on the `ut` stack). Anything not chec
 | Solr / Postgres | :8983 / :15432 | :18983 / :25432 |
 | Built from | `release/5.1.1-candidate` `b9355b129e` (rdfc2im `--intermine-src`) | `maint-2026` (rdfc2im `--intermine-src --stack-name ut`) |
 
-State on 16 Nov 18:40 UTC: the **default stack is down**; until this afternoon it ran the *published
-5.0.8* artefacts (`/service/version/intermine` "5.0.8"). The orchestrator rebuilds it from the 5.1.1
-candidate (COMPLETION.md 2.6) before you start. The `ut` stack is up with 6.0.0
-(`/service/version/intermine` "6.0.0", `/service/version` 35). Both stacks' own BlueGenes on 5000/15000
-are the old 1.4.5 (they still load scripts from cdn.intermine.org, cdn.jsdelivr.net and code.jquery.com),
-which is why the new BlueGenes is started separately on 5001/15001.
+State on 16 Nov 19:00 UTC: **both stacks are up and built from the sprint branches**: the default
+stack from `release/5.1.1-candidate` b9355b129e (`/service/version/intermine` "5.1.1"), the `ut` stack from
+`maint-2026` 5351d0c301 (`/service/version/intermine` "6.0.0"; two small commits behind the branch head,
+which only adds webapp fixes). Both pass the 20 live tests and return identical counts for 13 reference
+queries (113 genes, 13,546 proteins, 2,883 pathways, 78,100 GO terms, 450 gene-pathway rows, ...). Before
+this afternoon the default stack ran the published 5.0.8; mentions of 5.0.8 below are measurements taken
+then and kept for comparison. Both stacks' own BlueGenes on 5000/15000 are the old released 1.4.5 (they still
+load scripts from cdn.intermine.org, cdn.jsdelivr.net and code.jquery.com), which is why the new BlueGenes
+is started separately on 5001/15001.
 
 **Logins.** Superuser on both mines: `superuser@intermine.org` / `intermine` (set by rdfc2im's
 `full-build.sh`; a demo account, not a secret). For ordinary-user tests register your own account
