@@ -1,29 +1,29 @@
 # Sprint report
 
-Generated 2026-11-16 08:07 by `scripts/sprint-report.py` (since 2026-11-14). Regenerate with `python3 -I scripts/sprint-report.py`. All times UTC.
+Generated 2026-11-16 08:26 by `scripts/sprint-report.py` (since 2026-11-14). Regenerate with `python3 -I scripts/sprint-report.py`. All times UTC.
 
 ## 1. Headline
 
-Sprint window (first to last timestamp in agent-runs.csv and the orchestrator log): 2026-11-14 22:38:30 UTC to 2026-11-16 08:07:27 UTC, elapsed 33:28:56.
+Sprint window (first to last timestamp in agent-runs.csv and the orchestrator log): 2026-11-14 22:38:30 UTC to 2026-11-16 08:26:49 UTC, elapsed 33:48:18.
 
-Total agent runs recorded: 127 (3 of them resumptions of an earlier agent, charged only for the tokens added since its previous row).
+Total agent runs recorded: 129 (3 of them resumptions of an earlier agent, charged only for the tokens added since its previous row).
 
 | Model | Runs | Success | Failed | Partial | Other | Input tok | Cache read tok | Cache write tok | Output tok | Wall-clock agent time | Median run |
 |---|---|---|---|---|---|---|---|---|---|---|---|
-| opus | 28 | 28 | 0 | 0 | 0 | 5,548 | 472,812,627 | 23,604,666 | 2,109,661 | 25:17:10 | 0:48:55 |
-| sonnet | 99 | 97 | 0 | 0 | 2 | 11,554 | 654,283,658 | 27,208,559 | 3,900,043 | 53:29:13 | 0:22:02 |
-| **all workers** | 127 | 125 | 0 | 0 | 2 | 17,102 | 1,127,096,285 | 50,813,225 | 6,009,704 | 78:46:23 | 0:23:44 |
-| orchestrator (fable) | n/a (1120 msgs) | - | - | - | - | 28,312 | 413,993,330 | 2,091,162 | 956,192 | - | - |
+| opus | 29 | 29 | 0 | 0 | 0 | 5,736 | 485,375,074 | 23,808,479 | 2,183,057 | 25:40:54 | 0:47:03 |
+| sonnet | 100 | 98 | 0 | 0 | 2 | 11,648 | 657,636,267 | 27,413,663 | 3,923,910 | 53:38:28 | 0:21:37 |
+| **all workers** | 129 | 127 | 0 | 0 | 2 | 17,384 | 1,143,011,341 | 51,222,142 | 6,106,967 | 79:19:22 | 0:23:44 |
+| orchestrator (fable) | n/a (1149 msgs) | - | - | - | - | 28,814 | 439,181,138 | 2,126,498 | 972,193 | - | - |
 
 Success = outcome `done`/`success`; failed = outcome starting `fail`/`error`/`abort`/`blocked`; partial = starting `partial`; other = anything else. Wall-clock agent time is the sum of ended minus started per run; agents ran in parallel, so it exceeds elapsed time. The orchestrator is the main Claude Code session (not in agent-runs.csv); its totals come from the session JSONL (1 file(s), de-duplicated per API message id) and cover its whole context re-reads, so cache read is large by nature.
 
-Cross-check (agent-runs.csv / all subagent logs on disk, 126 logs parsed): differences are agents not yet recorded or still running.
+Cross-check (agent-runs.csv / all subagent logs on disk, 128 logs parsed): differences are agents not yet recorded or still running.
 
 | Model | Input | Cache read | Cache write | Output |
 |---|---|---|---|---|
 | haiku | 0 / 2 | 0 / 0 | 0 / 9,356 | 0 / 112 |
-| opus | 5,548 / 5,328 | 472,812,627 / 453,636,834 | 23,604,666 / 22,348,664 | 2,109,661 / 2,052,827 |
-| sonnet | 11,554 / 11,868 | 654,283,658 / 676,404,517 | 27,208,559 / 29,951,550 | 3,900,043 / 4,000,701 |
+| opus | 5,736 / 5,468 | 485,375,074 / 463,932,836 | 23,808,479 / 22,407,161 | 2,183,057 / 2,088,566 |
+| sonnet | 11,648 / 11,988 | 657,636,267 / 680,302,742 | 27,413,663 / 30,194,164 | 3,923,910 / 4,030,277 |
 
 ## 2. Delivered
 
@@ -31,8 +31,8 @@ Cross-check (agent-runs.csv / all subagent logs on disk, 126 logs parsed): diffe
 
 | Repo | Ref | Commits | Merge commits |
 |---|---|---|---|
-| intermine-planning | HEAD | 159 | 0 |
-| intermine | maint-2026 | 211 | 50 |
+| intermine-planning | HEAD | 162 | 0 |
+| intermine | maint-2026 | 218 | 52 |
 | bluegenes | maint-2026 | 125 | 19 |
 | imcljs | maint-2026 | 10 | 1 |
 | bluegenes-tool-store | maint-2026 | 13 | 2 |
@@ -40,6 +40,8 @@ Cross-check (agent-runs.csv / all subagent logs on disk, 126 logs parsed): diffe
 
 **intermine merge commits**
 
+- `0f6b9ce82a Merge maint/im-ee7.51-plugin-testkit: 11 Gradle TestKit tests for the plugin (createSoModel, mergeProperties, war composition, unwarBioWebApp, Ant logging); mergeProperties no longer glues intermine.properties onto a web.properties without a final newline; createSoModel sees a mine's log4j config; bio/webapp unwarIMWebApp syncs [im-ee7.51]`
+- `96ab7070d3 Merge maint/im-jqz.52-dwr-hardening: dwr.xml publishes only the 36 AjaxServices methods the pages call; no JDate creator, no exception details to the client, bean converter only for api.beans [im-jqz.52]`
 - `51556c9469 Merge maint/im-jqz.5-jena-solrj: Jena narrowed to jena-core + jena-arq and bumped to 3.17.0 (last Java 8 release; RDF output byte-identical, pinned by a test); solrj without Netty, Jetty and Snappy; solrj and Lucene 3 stances documented [im-jqz.5]`
 - `194dce17d8 Merge maint/im-jqz.55-userprofile-ids: id allocation skips ids already in the database and refills under a lock; profile loading skips and reports a colliding object instead of a ClassCastException that stopped the webapp [im-jqz.55]`
 - `16e2e40976 Merge maint/im-jqz.53-solr-facet: keyword search facet selections are exact phrase filters on the facet_ string fields (values with spaces or Solr syntax chars returned nothing or a SyntaxError); bag-id filter was a broken varargs call [im-jqz.53]`
@@ -91,6 +93,10 @@ Cross-check (agent-runs.csv / all subagent logs on disk, 126 logs parsed): diffe
 - `42e105197e Merge maint/im-ee7.2-plugin-gradle7: plugin lazy tasks, no init tasks, input wiring [im-ee7.2]`
 - `31d15fa725 Merge maint/im-ee7.1-gradle-6: Gradle 6.9.4 across all builds [im-ee7.1]`
 
+**intermine unmerged maint/* branches ahead of maint-2026**
+
+- `maint/im-89g.27-511-dwr`: 38 commit(s), tip `78143be92b webapp: DWR servlet without debug pages or GET remoting [im-jqz.31 im-89g.27]`
+
 **bluegenes merge commits**
 
 - `76bd3f20 Merge maint/im-28e.13-repin: im-tables 0fc6eba; nightly builds the demo mine from rdfc2im 31eeae9 (green on the fork, 139/0/33) [im-28e.13]`
@@ -134,17 +140,17 @@ Cross-check (agent-runs.csv / all subagent logs on disk, 126 logs parsed): diffe
 
 ### Beads
 
-`bd status`: total 256, open 81, in progress 3, blocked 0, ready 81, closed 172.
+`bd status`: total 259, open 81, in progress 3, blocked 0, ready 81, closed 175.
 
 | Epic | Title | Epic status | Children | Open | In progress | Closed |
 |---|---|---|---|---|---|---|
 | im-28e | Epic F: BlueGenes tests and CI | open | 13 | 2 | 0 | 11 |
 | im-7os | Epic E: BlueGenes toolchain modernisation | open | 49 | 14 | 0 | 35 |
-| im-89g | Epic D: intermine CI and release pipeline | open | 26 | 6 | 0 | 20 |
+| im-89g | Epic D: intermine CI and release pipeline | open | 27 | 6 | 1 | 20 |
 | im-8dd | Epic I: Planning repo, beads, dashboard | open | 8 | 3 | 2 | 3 |
 | im-bdy | Epic H: Docs and governance | open | 7 | 2 | 0 | 5 |
-| im-ee7 | Epic B: intermine build toolchain (Gradle 4.9 -> 8.x, JDK 17) | open | 59 | 15 | 1 | 43 |
-| im-jqz | Epic C: intermine Tier 1 dependency upgrades and removals | open | 57 | 25 | 0 | 32 |
+| im-ee7 | Epic B: intermine build toolchain (Gradle 4.9 -> 8.x, JDK 17) | open | 60 | 15 | 0 | 45 |
+| im-jqz | Epic C: intermine Tier 1 dependency upgrades and removals | open | 58 | 25 | 0 | 33 |
 | im-ore | Epic G: Whole-system testbed | open | 18 | 3 | 0 | 15 |
 | im-rkn | Epic A: Environment and baseline | open | 10 | 2 | 0 | 8 |
 
@@ -277,10 +283,12 @@ Cross-check (agent-runs.csv / all subagent logs on disk, 126 logs parsed): diffe
 - `im-ee7.49` deployer sources: convert intermine/humanmine-bio-sources and intermine/flymine-bio-sources (Gradle 4.9, compile/maven/signing/bintray) to the 6.0 line and publish; needed because a mine's webapp compiles against all sources in project.xml
 - `im-ee7.5` B5 Deployer migration: update humanmine/flymine build files; docs/UPGRADING-build.md
 - `im-ee7.50` humanmine/flymine forks: simplify webapp/build.gradle per the new plugin war composition (delete warWebApp, copyWebappContent, explodedWebAppDir, propsDir, mergeProperties input block, classpath filter); rebuild the wars to confirm byte-equivalence
+- `im-ee7.51` plugin: add Gradle TestKit tests for unwarBioWebApp, mergeProperties, createSoModel and the war composition (plugin has no src/test); check bio/webapp's own unwarIMWebApp Copy for the stale-directory problem
 - `im-ee7.52` UPGRADING-build.md: a mine's dbmodel build must add commons-lang3 (InterMine code now imports lang3) and keep commons-lang 2.6 for the vendored torque at build time; or have the plugin add both (im-jqz.20 follow-up)
 - `im-ee7.53` deployer re-verification on the new plugin: humanmine/flymine forks simplified per the war composition change, rebuilt (buildDB + war) against maint-2026 45c10e48ee; lang3 transitivity checked; UPGRADING-build.md updated (covers im-ee7.50, im-ee7.52)
 - `im-ee7.57` docs/UPGRADING-build.md 6.0.0: deployer-visible effects of the plugin task wiring (950dfc7858): merged model in dbmodel/build/im/mergeModels (repoint any doLast on mergeModels), run clean once after upgrading, dbmodel.jar no longer carries default.intermine.properties/so.obo/keys, generateKeys output preferred over a same-named mine resource, bio-model jar carries its own default.intermine.properties; re-run buildDB+war on the humanmine/flymine forks
 - `im-ee7.6` intermine plugin: tasks without declared outputs rerun every build (bio/sources install ~100 s with no changes)
+- `im-ee7.61` plugin: a mine's createSoModel does not get the build directory on its Ant classpath, so a mine's own log4j.properties is ignored there and 'No appenders' returns (buildDB honours it); also UPGRADING says mergeModels runs only when dbmodel/build has no model, the real condition is dbmodel/build/gen missing
 - `im-ee7.7` intermine: regenerate the seven gradlew scripts and wrapper jars for 6.9.4 (S1-wrap)
 - `im-ee7.8` intermine: test-only files leak into bio-source/postprocess jars depending on task order (inventory row 18)
 - `im-ee7.9` intermine: flaky IntegrationWriterDataTrackingImplTest (setUp IllegalArgumentException cascades to 17 failures) under concurrent gates
@@ -313,6 +321,7 @@ Cross-check (agent-runs.csv / all subagent logs on disk, 126 logs parsed): diffe
 - `im-jqz.5` C5 Jena 4.x, solrj latest 8.x, Lucene 3 stance
 - `im-jqz.50` intermine objectstore: ObjectStoreInterMineImpl.getSerialWithConnection is not thread-safe on a multi-connection ObjectStore (resets sequenceOffset before updating sequenceBase); two concurrent uploads of the same list name give 500 BagDoesNotExistException 'Attempting to rename l0_temp'
 - `im-jqz.51` [bug] bio/sources/psi-complexes: the converter test is vacuous - swr1_yeast-1.xml yields a Complex with no participants/identifiers/names (jami onInteractionWithoutParticipants) under every jami version tried, so only Complex/DataSet/DataSource/Ontology items are produced and assertEquals(4) passes; find why participantList is not read and whether production complexes lose participants
+- `im-jqz.52` intermine webapp dwr.xml hardening: remove the java.util.Date 'JDate' new-creator and the exception converter that sends stack traces to clients ('disable in production'); gate-intermine.sh should run testmine build -x test; 5.1.1 candidate: cherry-pick the web.xml DWR values (f034052342)
 - `im-jqz.53` [bug] intermine search: SolrKeywordSearchHandler (~line 303) builds facet filters as field:value without quoting, so a facet value with a space (organism.shortName 'H. sapiens') gives totalHits 0 on the demo mine although the facet counts 64; escaped value works; public HumanMine accepts the unescaped value (different Solr setup?). Fix the quoting; then un-skip bluegenes search_test 'can filter search results by organism'
 - `im-jqz.55` [bug] intermine userprofile: a saved bag got id 2000001, an id also used by savedtemplatequery rows, so ProfileManager.wrapUserProfile threw ClassCastException and the webapp would not start after a restart (ut stack, bag ore16-list created 16 Nov; renumbered by hand to 2500001). Find how the userprofile ObjectStoreWriter allocated an id already used by another class (serial vs id ranges; related to im-jqz.50 getSerialWithConnection) and make startup tolerate/repair it
 - `im-jqz.6` C6 JUnit 4.13.2, xmlunit, mockobjects/easymock cleanup, vendored jars -> Maven artefacts
@@ -355,9 +364,9 @@ Mean tokens per run, by model and outcome class:
 
 | Model | Outcome class | Runs | Mean input | Mean cache read | Mean cache write | Mean output |
 |---|---|---|---|---|---|---|
-| opus | success | 28 | 198 | 16,886,165 | 843,024 | 75,345 |
+| opus | success | 29 | 198 | 16,737,072 | 820,982 | 75,278 |
 | opus | failed | 0 | - | - | - | - |
-| sonnet | success | 97 | 118 | 6,725,362 | 279,026 | 39,971 |
+| sonnet | success | 98 | 118 | 6,690,947 | 278,272 | 39,806 |
 | sonnet | failed | 0 | - | - | - | - |
 | sonnet | other | 2 | 31 | 961,750 | 71,524 | 11,446 |
 
@@ -373,7 +382,7 @@ Five most expensive runs, ranked by output tokens, then cache write tokens (no p
 
 ## 4. Model usage pattern
 
-**opus** (28 runs)
+**opus** (29 runs)
 
 - Survey intermine build/test state (`im-rkn`)
 - Survey bluegenes build/test state (`im-rkn`)
@@ -403,8 +412,9 @@ Five most expensive runs, ranked by output tokens, then cache write tokens (no p
 - nightly Cypress in GitHub Actions (demo mine built in the job) (`im-28e.7`)
 - plugin task inputs/outputs batch (ee7.6/13/12/8) (`im-ee7.6`)
 - userprofile id collision: allocation past existing ids + collision-tolerant profile load (`im-jqz.55`)
+- plugin TestKit tests (11) + 2 plugin bugs + unwarIMWebApp Sync (`im-ee7.51`)
 
-**sonnet** (99 runs)
+**sonnet** (100 runs)
 
 - intermine dependency census and CVE inventory (`im-rkn.6`)
 - bluegenes dependency census and inventory (`im-rkn.7`)
@@ -505,6 +515,7 @@ Five most expensive runs, ranked by output tokens, then cache write tokens (no p
 - default rdfc2im stack rebuilt with the corrected data (`im-ore.20`)
 - 5.1.1 backport: Jena narrowed + solrj exclusions (`im-89g.26`)
 - BlueGenes pins: im-tables 0fc6eba, nightly rdfc2im 31eeae9 (`im-28e.13`)
+- dwr.xml hardening + testmine gate step (`im-jqz.52`)
 
 ## 5. Notes
 
