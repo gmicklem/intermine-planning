@@ -31,14 +31,11 @@ Portal:
 - Then 6.0.0 from `maint-2026` (Gradle 8.14.6, JDK 8 and 17): same steps; im-89g.10 lists
   the wording and pin changes (humanmine/flymine forks from exact 5.1.1 to 6.0.+).
 
-## 3. Approve two CDN hosts in the sandbox (im-rkn.9, P1)
+## 3. CDN hosts: done (16 Nov)
 
-BlueGenes still loads scripts from `cdn.jsdelivr.net` and `cdn.intermine.org`; browser tests
-against the local stack fail without them. On the host:
-
-```bash
-sbx policy allow network cdn.jsdelivr.net,cdn.intermine.org
-```
+You approved cdn.jsdelivr.net and cdn.intermine.org in the sandbox. cdn.intermine.org is dead, so the
+remaining references to it in the InterMine webapp (52 files, bag upload confirm page and the JS
+code-generation templates) and im-tables are now bugs im-jqz.42 and im-7os.42, not approvals.
 
 ## 4. Merge the testbed branches you own (no bead; small)
 
