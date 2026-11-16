@@ -305,7 +305,7 @@ deps_mode() {
   fi
 
   rm -rf target/bundle-dev
-  run_step app-load "$LOGS/app-load.log" bash -c "npx shadow-cljs compile app --config-merge '{:output-dir \"target/bundle-dev\" :devtools {:loader-mode :eval}}' && node '$HERE/bluegenes-runbundle.js' --allow-fail=day8.re_frame_10x.preload.js target/bundle-dev/app.js"
+  run_step app-load "$LOGS/app-load.log" bash -c "npx shadow-cljs compile app --config-merge '{:output-dir \"target/bundle-dev\" :devtools {:loader-mode :eval}}' && node '$HERE/bluegenes-runbundle.js' --allow-fail=day8.re_frame_10x.preload.react_18.js target/bundle-dev/app.js"
   if [ $STEP_RC -eq 0 ]; then record app-load PASS "${STEP_SECS}s" "$(grep -E '^LOADED OK' "$LOGS/app-load.log" | sed 's/ (.*bytes)//')"
   else record app-load FAIL "${STEP_SECS}s" "$(grep -E '^LOAD' "$LOGS/app-load.log" | cut -c1-200) (see .gate-logs/app-load.log)"; FAILED=1; fi
 

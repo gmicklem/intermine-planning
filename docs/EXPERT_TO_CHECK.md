@@ -45,3 +45,21 @@ Added items get a date; checked items move to the bottom with the reviewer's ver
 - **Reviewer, please check:** whether a newer reagent release fixes the underlying issue (then drop
   the patch), the interaction with im-tables' own inputs, and IME / composition events, which the
   Cypress keystroke spec does not cover.
+
+### 3. objectstore: Byte Buddy replaces cglib for dynamic (multi-class) objects (16 Nov 2026)
+
+- **Where:** intermine maint-2026 (6.0 line only), commits fb900f033f and f7dfc76a7b; vetting entry in
+  `decisions/package-vetting.md`; deployer notes in `docs/UPGRADING-build.md` ("cglib is gone").
+- **What changed:** `DynamicBean` is now an `InvocationHandler` behind a Byte Buddy generated subclass
+  implementing the model interfaces plus a new marker `org.intermine.model.DynamicObject`
+  (replaces `net.sf.cglib.proxy.Factory`); generated names are `<Interfaces>_<Class>$$Dynamic`; classes
+  are cached and loaded via a child class loader, so JDK 17 needs no `--add-opens`. NotXmlParser,
+  Util.decomposeClass, CollectionUtil and TypeUtil follow. JDK proxies were rejected because the
+  test model combines concrete classes with interfaces.
+- **Verified:** 8 new tests; JDK 8 gate 2161/92/64/12 and JDK 17 suite 2161, 0 failures; testmine on
+  JDK 17 loads Broke+Company/Contractor/CEO objects and serves them via the query service; getter
+  cost unchanged, object creation about 30 ns slower.
+- **Reviewer, please check:** stored class lists in existing databases that name
+  `net.sf.cglib.proxy.Factory` (the parser skips the name; confirm nothing else persists it), the
+  `setoBJECT` path now throwing UnsupportedOperationException, and any deployer code that tested
+  `instanceof Factory`.
