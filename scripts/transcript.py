@@ -5,7 +5,8 @@ Usage: transcript.py SESSION.jsonl OUT.md [TASKS_DIR]
 Keeps user and assistant text in full, summarises each tool call on one line,
 and appends token totals per model (main session plus subagent task logs).
 """
-import json, re, sys, glob, os
+import json
+import os, re, sys, glob, os
 from collections import defaultdict
 from datetime import datetime, timezone
 
@@ -41,6 +42,8 @@ def fmt_ts(ts):
         return ts or ""
 
 def usage_from(path, per_model):
+    if not os.path.exists(path):  # a background task whose output file was cleaned up
+        return
     with open(path, errors="replace") as f:
         for line in f:
             try: rec = json.loads(line)
