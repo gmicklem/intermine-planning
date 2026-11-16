@@ -34,6 +34,7 @@
 #   GATE_INSTALL_ARGS  extra args for install_intermine.py (e.g. --gradle_distribution_url ...)
 #   GATE_GRADLE_ARGS   extra args appended to every Gradle call (e.g. --offline, --rerun-tasks)
 #   GATE_CLEAN=1       run `clean` in every involved build before installing
+#   GATE_SKIP_PLUGIN_TEST=1 skip the plugin's TestKit tests (im-ee7.51)
 #   GATE_SKIP_TESTMINE=1 skip the testmine build -x test that follows the intermine suite (im-jqz.52)
 #   GATE_SKIP_INSTALL=1, GATE_SKIP_CHECKSTYLE=1   skip those steps (for quick local iteration only;
 #                      a real gate run must not skip them)
@@ -203,6 +204,10 @@ fi
 BUILT=0
 if [ $FAIL = 0 ]; then
   BUILT=1
+  # TestKit tests of the Gradle plugin (plugin/src/test, im-ee7.51); publishToMavenLocal does not run them
+  if is_build intermine && [ "${GATE_SKIP_PLUGIN_TEST:-0}" != 1 ]; then
+    gradle plugin test || FAIL=1
+  fi
   for d in "${BUILDS[@]}"; do
     if [ "${GATE_CLEAN:-0}" = 1 ] && { [ "${GATE_SKIP_INSTALL:-0}" = 1 ] || ! is_install "$d"; }; then
       gradle "$d" clean || FAIL=1
