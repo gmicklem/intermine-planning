@@ -21,6 +21,8 @@
 #   3. `build` in each requested build (tests run with ignoreFailures=true, as in CI).
 #   4. `checkstyleMain` in requested builds among intermine, bio, bio/sources, bio/postprocess
 #      (checkstyle.yml / run.sh "checkstyle"), then config/lib/parse_checkstyle_report.py <worktree>.
+#   4b. `checkThrowsDocs` in the same builds (a checked exception in a throws clause needs a @throws tag; CI's Checkstyle
+#      job runs it too); skipped when the checkout has no config/gradle/doclint-throws.gradle (older lines).
 #   5. config/lib/parse_test_report.py on intermine, bio, bio/sources, bio/postprocess-test (as
 #      run.sh), plus bio/postprocess if it produced test results.
 #   Exit status is non-zero if any step fails or any test fails/errors.
@@ -46,6 +48,7 @@
 #                      versions 16 and lower" note excepted). javac's deprecation notes and warnings are counted apart and never fail it (im-8dd.6)
 #   GATE_SKIP_PLUGIN_TEST=1 skip the plugin's TestKit tests (im-ee7.51)
 #   GATE_SKIP_TESTMINE=1 skip the testmine build -x test that follows the intermine suite (im-jqz.52)
+#   GATE_SKIP_THROWSDOCS=1 skip the checkThrowsDocs step (4b)
 #   GATE_SKIP_INSTALL=1, GATE_SKIP_CHECKSTYLE=1   skip those steps (for quick local iteration only;
 #                      a real gate run must not skip them)
 #   GATE_INSTALL_TASK  Gradle task of step 2 (default publishToMavenLocal; `install` is a deprecated alias of it)
@@ -249,6 +252,16 @@ if [ $FAIL = 0 ] && [ "${GATE_SKIP_CHECKSTYLE:-0}" != 1 ]; then
   if [ $CS = 1 ]; then
     run_step checkstyle-report . "$PY" "$WT/config/lib/parse_checkstyle_report.py" "$WT" || FAIL=1
   fi
+fi
+
+# ---------- 4b. @throws docs ----------
+# checkThrowsDocs (config/gradle/doclint-throws.gradle, im-jqz.64/im-jqz.67): a checked exception in a throws clause needs a
+# Javadoc @throws tag. CI runs it in the Checkstyle job; a missing tag fails the task, so it fails the gate. Checkouts of
+# older lines (5.1.1) have no config/gradle/doclint-throws.gradle and no such task: the step is skipped there.
+if [ $FAIL = 0 ] && [ "${GATE_SKIP_THROWSDOCS:-0}" != 1 ] && [ -f "$WT/config/gradle/doclint-throws.gradle" ]; then
+  for d in "${BUILDS[@]}"; do
+    case $d in intermine|bio|bio/sources|bio/postprocess) gradle "$d" checkThrowsDocs || FAIL=1 ;; esac
+  done
 fi
 
 # ---------- 5. test reports ----------
