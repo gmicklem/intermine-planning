@@ -117,3 +117,11 @@ Newest first. One entry per checkpoint (about every 3 hours while unattended).
 - rdfc2im maint/im-ore.1-intermine-src 31eeae9 pushed: demo data fixes verified, templates take ids from the sequence, single public service root (favicon redirect leaked the compose service name), per-stack data root. Both local stacks rebuilt with the corrected data (ut from maint-2026, default from published 5.0.8); root overlay cleaned (4.5 GB free).
 - Beads: 169 of 256 closed at 08:00. HUMAN-STEPS unchanged apart from status notes (Gos deferred the decisions).
 - Running: 5.1.1 DWR backport (im-89g.27). Next: remaining P2/P3 cleanups, sprint report Monday (im-8dd.5). Gos expected to sleep the laptop ~10:00 UK; this checkpoint is the pre-sleep state.
+
+## Checkpoint 14 (pre-sleep) - 2026-11-16 09:30 UTC
+
+- intermine maint-2026 bca41e465b pushed and CI green: publishing cleanup (dead legacy-runtime block, stale comments, testmine unwarIMWebApp) with installed POMs and jars identical before/after. Since checkpoint 13 also: the gate's gradle helper now passes extra arguments (the testmine step had only been running copyMineProperties), gate scripts made executable.
+- release/5.1.1-candidate e9873ad0e3 pushed and CI green: DWR web.xml settings and dwr.xml hardening backported (39 included methods on this line).
+- BlueGenes 76bd3f20, im-tables 0fc6eba, tool-store be4678f (tarball URL/integrity/size hardening) all pushed and green.
+- Beads: 176 of 250 closed at 09:00.
+- Running at sleep time: Google Charts shim for list-widgets (im-jqz.47, intermine worktree im-jqz.47-charts-shim) and gate infrastructure (im-8dd.7 + im-rkn.8, planning scripts im-testenv.sh/gate-intermine.sh edited in place, uncommitted, verified via worktree im-8dd.7-gate-infra). If the laptop sleeps, both may need relaunching; their worktrees hold any partial work. Everything merged is pushed.
