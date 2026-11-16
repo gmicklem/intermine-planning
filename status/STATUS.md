@@ -1,16 +1,16 @@
-# STATUS 2026-11-16 06:00 UTC
+# STATUS 2026-11-16 06:20 UTC
 
-Generated 2026-11-16 06:00 UTC / 2026-11-16 06:00 GMT. Sprint dashboard for the InterMine and BlueGenes maintenance effort.
+Generated 2026-11-16 06:20 UTC / 2026-11-16 06:20 GMT. Sprint dashboard for the InterMine and BlueGenes maintenance effort.
 
 Times are UTC. Agent state: running = unfinished and written to in the last 10 min; stalled = unfinished and silent for 10 min or more; finished = last message ended its turn (no tool call pending).
 
-Subagents: 1 running, 2 stalled, 109 finished.
+Subagents: 1 running, 2 stalled, 111 finished.
 
 ## Agents
 
 | Agent | Model | State | Started | Last | In | Cache | Out |
 |---|---|---|---|---|---|---|---|
-| main session | fable-5-1 | running | 11-14 22:38 | 05:55 | 25.4k | 322.57M | 869.5k |
+| main session | fable-5-1 | running | 11-14 22:38 | 06:20 | 25.9k | 337.37M | 886.8k |
 | Survey intermine build/test state | opus-5-5 | finished | 11-15 00:18 | 11-15 00:20 | 42 | 1.05M | 9.0k |
 | Survey bluegenes build/test state | opus-5-5 | finished | 11-15 00:18 | 11-15 00:20 | 22 | 347.5k | 8.3k |
 | Survey rdfc2im, docker_template, mine-tests… | opus-5-5 | finished | 11-15 00:18 | 11-15 00:21 | 26 | 863.6k | 7.5k |
@@ -67,7 +67,7 @@ Subagents: 1 running, 2 stalled, 109 finished.
 | C4 Tier 2 CVE check: bcprov, oltu, JOpenId,… | sonnet-5-5 | finished | 11-15 16:46 | 11-15 17:36 | 118 | 5.40M | 36.0k |
 | HumanMine as default test mine | sonnet-5-5 | finished | 11-15 16:48 | 11-15 17:09 | 120 | 5.65M | 38.8k |
 | R7 checkstyle 7.8.1 to 10.x, delete bridge | sonnet-5-5 | finished | 11-15 17:08 | 11-15 17:41 | 118 | 5.14M | 35.7k |
-| Fix missing window.React for BlueGenes tools | sonnet-5-5 | finished | 11-15 17:11 | 11-15 17:34 | 112 | 4.06M | 23.4k |
+| Fix missing window.React for BlueGenes tools | sonnet-5-5 | finished | 11-15 17:11 | 06:15 | 114 | 4.17M | 23.8k |
 | Bundle imjs global for BlueGenes tools | sonnet-5-5 | finished | 11-15 17:35 | 11-15 17:52 | 102 | 3.96M | 29.7k |
 | C6 JUnit 4.13.2, xmlunit, mocks, vendored j… | sonnet-5-5 | finished | 11-15 17:37 | 11-15 18:49 | 190 | 12.19M | 60.3k |
 | F4 Cypress specs for the demo mine | sonnet-5-5 | finished | 11-15 17:54 | 04:23 | 464 | 55.31M | 164.8k |
@@ -78,7 +78,7 @@ Subagents: 1 running, 2 stalled, 109 finished.
 | Deployer re-check on new plugin: humanmine,… | sonnet-5-5 | finished | 11-15 19:57 | 11-15 20:15 | 112 | 5.77M | 37.6k |
 | BlueGenes P1 bugs: ids case, search submit | sonnet-5-5 | finished | 11-15 20:18 | 11-15 21:53 | 268 | 22.84M | 94.5k |
 | Siblings: imcljs pin for im-tables and tool… | sonnet-5-5 | finished | 11-15 20:19 | 11-15 20:24 | 38 | 1.31M | 16.1k |
-| Testbed: 5.1.1 candidate stack + smoke tests | sonnet-5-5 | stalled 8.0h | 11-15 20:40 | 11-15 22:00 | 32 | 956.0k | 9.4k |
+| Testbed: 5.1.1 candidate stack + smoke tests | sonnet-5-5 | stalled 8.3h | 11-15 20:40 | 11-15 22:00 | 32 | 956.0k | 9.4k |
 | BlueGenes controlled inputs fix | opus-5-5 | finished | 11-15 21:56 | 11-15 23:15 | 254 | 18.13M | 86.3k |
 | intermine docs final pass | sonnet-5-5 | finished | 11-15 21:57 | 11-15 22:08 | 126 | 9.15M | 51.4k |
 | Testbed: 5.1.1 stack relaunch + smoke | sonnet-5-5 | finished | 11-15 22:01 | 11-15 22:25 | 144 | 6.17M | 32.0k |
@@ -88,7 +88,7 @@ Subagents: 1 running, 2 stalled, 109 finished.
 | intermine JSP EL reserved-word bugs | sonnet-5-5 | finished | 11-15 22:56 | 11-15 23:12 | 140 | 6.50M | 39.4k |
 | 5.1.1 backport of JSP EL fixes | sonnet-5-5 | finished | 11-15 23:14 | 11-15 23:23 | 38 | 964.4k | 12.3k |
 | BlueGenes CDN leftovers + sibling pins | sonnet-5-5 | finished | 11-15 23:17 | 04:23 | 94 | 3.66M | 19.3k |
-| rdfc2im testbed fixes for maint-2026 | sonnet-5-5 | stalled 6.2h | 11-15 23:24 | 11-15 23:47 | 30 | 1.11M | 13.5k |
+| rdfc2im testbed fixes for maint-2026 | sonnet-5-5 | stalled 6.6h | 11-15 23:24 | 11-15 23:47 | 30 | 1.11M | 13.5k |
 | rdfc2im testbed fixes for maint-2026 (retry) | sonnet-5-5 | finished | 11-15 23:48 | 00:01 | 62 | 1.95M | 13.6k |
 | BlueGenes nightly Cypress in GitHub Actions | opus-5-5 | finished | 11-15 23:51 | 01:23 | 248 | 19.84M | 66.2k |
 | intermine dead JSPs + abbreviate.tag | sonnet-5-5 | finished | 00:03 | 00:14 | 88 | 3.14M | 23.5k |
@@ -120,32 +120,34 @@ Subagents: 1 running, 2 stalled, 109 finished.
 | rdfc2im demo data quality fixes | sonnet-5-5 | finished | 05:03 | 05:26 | 260 | 22.07M | 88.4k |
 | im-tables dropdown and static-toolbar bugs | sonnet-5-5 | finished | 05:13 | 05:35 | 144 | 6.93M | 55.0k |
 | tool-store path safety fix | sonnet-5-5 | finished | 05:28 | 05:31 | 36 | 1.11M | 13.3k |
-| psi-complexes converter loses participants | sonnet-5-5 | running | 05:32 | 05:54 | 186 | 9.41M | 48.8k |
+| psi-complexes converter loses participants | sonnet-5-5 | finished | 05:32 | 06:09 | 196 | 10.24M | 54.1k |
 | BlueGenes sibling pin bumps + Cypress | sonnet-5-5 | finished | 05:36 | 05:50 | 102 | 3.00M | 15.6k |
-| Cypress specs for the corrected demo data | sonnet-5-5 | finished | 05:48 | 05:55 | 88 | 2.93M | 19.8k |
+| Cypress specs for the corrected demo data | sonnet-5-5 | finished | 05:48 | 06:03 | 104 | 3.59M | 24.6k |
+| intermine Solr facet filter quoting | sonnet-5-5 | running | 06:05 | 06:20 | 72 | 2.22M | 19.9k |
+| BlueGenes dev build goog.isBoolean | sonnet-5-5 | finished | 06:10 | 06:18 | 82 | 2.48M | 16.8k |
 
-Note: 390 non-agent .output file(s) skipped (empty or plain-text task output)
+Note: 401 non-agent .output file(s) skipped (empty or plain-text task output)
 
 ## Totals by model
 
 | Scope | Model | Msgs | In | Cache rd | Cache wr | Out |
 |---|---|---|---|---|---|---|
-| main | fable-5-1 | 999 | 25.4k | 320.64M | 1.93M | 869.5k |
+| main | fable-5-1 | 1020 | 25.9k | 335.41M | 1.96M | 886.8k |
 | subagents | haiku-5-5 | 1 | 2 | 0 | 9.4k | 112 |
 | subagents | opus-5-5 | 2550 | 5.1k | 442.38M | 21.90M | 1.96M |
-| subagents | sonnet-5-5 | 5352 | 10.7k | 629.11M | 27.82M | 3.71M |
+| subagents | sonnet-5-5 | 5442 | 10.9k | 634.98M | 28.26M | 3.76M |
 
 Tokens are de-duplicated per API message (streamed records share one message id).
 
 ## Beads summary
 
-bd status: total 240, open 83, in progress 4, blocked 0, ready 83, deferred 0, closed 153.
+bd status: total 244, open 85, in progress 3, blocked 0, ready 85, deferred 0, closed 156.
 
 | Status | Count |
 |---|---|
-| closed | 153 |
-| in_progress | 4 |
-| open | 83 |
+| closed | 156 |
+| in_progress | 3 |
+| open | 85 |
 
 ### By priority (tasks and bugs; epics counted apart)
 
@@ -153,26 +155,24 @@ bd status: total 240, open 83, in progress 4, blocked 0, ready 83, deferred 0, c
 |---|---|---|---|---|---|---|---|---|
 | P0 | 0 | 1 | 0 | 0 | 14 | 15 | 93% | 2 |
 | P1 | 2 | 1 | 0 | 0 | 53 | 56 | 95% | 5 |
-| P2 | 19 | 2 | 0 | 0 | 77 | 98 | 79% | 2 |
-| P3 | 53 | 0 | 0 | 0 | 9 | 62 | 15% | 0 |
-| all | 74 | 4 | 0 | 0 | 153 | 231 | 66% | 9 |
+| P2 | 19 | 1 | 0 | 0 | 80 | 100 | 80% | 2 |
+| P3 | 55 | 0 | 0 | 0 | 9 | 64 | 14% | 0 |
+| all | 76 | 3 | 0 | 0 | 156 | 235 | 66% | 9 |
 
-### im-28e Epic F: BlueGenes tests and CI [open, 8/12 closed]
+### im-28e Epic F: BlueGenes tests and CI [open, 9/12 closed]
 
 | ID | Title | Status | P | Labels |
 |---|---|---|---|---|
-| im-28e.12 | bluegenes cypress: search_test (1) and enrichment… | in_progress | 2 | epic |
 | im-28e.8 | tests: default public mine is HumanMine (Gos): im… | open | 2 | bluegenes,epic,im-tables,tests |
 | im-28e.10 | bluegenes docs/building.md Cypress section still … | open | 3 | epic |
 | im-28e.11 | bluegenes cypress: add a spec for the results-tab… | open | 3 | epic |
 
-### im-7os Epic E: BlueGenes toolchain modernisation [open, 33/47 closed]
+### im-7os Epic E: BlueGenes toolchain modernisation [open, 34/48 closed]
 
 | ID | Title | Status | P | Labels |
 |---|---|---|---|---|
 | im-7os.33 | HUMAN (Gos): release imcljs 1.7.0, im-tables 0.16… | open | 1 | epic |
 | im-7os.32 | [bug] bluegenes: chromosome chart throws unhandle… | open | 2 | epic |
-| im-7os.37 | bluegenes dev build (shadow-cljs compile app) fai… | open | 2 | epic |
 | im-7os.12 | tool-store: clj-http 'Invalid cookie header' warn… | open | 3 | epic,followup,tool-store |
 | im-7os.14 | bluegenes viz/cases.cljs uses deprecated vega-lit… | open | 3 | bluegenes,epic |
 | im-7os.16 | bluegenes dev advisories needing majors: Cypress … | open | 3 | bluegenes,epic,security |
@@ -184,13 +184,15 @@ bd status: total 240, open 83, in progress 4, blocked 0, ready 83, deferred 0, c
 | im-7os.41 | bluegenes cypress: drop the remaining {delay:100}… | open | 3 | epic |
 | im-7os.45 | bluegenes/im-tables: confirm date constraints aga… | open | 3 | epic |
 | im-7os.47 | tool-store: require https for the registry tarbal… | open | 3 | epic |
+| im-7os.48 | bluegenes: transit-cljs 0.8.256's com.cognitect.t… | open | 3 | epic |
 
-### im-89g Epic D: intermine CI and release pipeline [open, 16/22 closed]
+### im-89g Epic D: intermine CI and release pipeline [open, 16/23 closed]
 
 | ID | Title | Status | P | Labels |
 |---|---|---|---|---|
 | im-89g.7 | D3 follow-up: test real Central Portal upload (ce… | open | 1 | epic,followup,human,intermine |
 | im-89g.10 | release 6.0.0: change humanmine/flymine fork pins… | open | 2 | epic |
+| im-89g.23 | release/5.1.1-candidate: psi-complexes JAXB fix b… | open | 2 | epic |
 | im-89g.6 | D3 follow-up: drop legacy-runtime fix-up in confi… | open | 2 | epic,followup,intermine |
 | im-89g.13 | intermine release checklist: plugin/build.gradle … | open | 3 | epic |
 | im-89g.15 | intermine: the bio-fulldata-test objectstore is d… | open | 3 | epic |
@@ -234,7 +236,7 @@ bd status: total 240, open 83, in progress 4, blocked 0, ready 83, deferred 0, c
 | im-ee7.60 | flymine-bio-sources: 2 tests fail on stale test d… | open | 3 | epic |
 | im-ee7.61 | plugin: a mine's createSoModel does not get the b… | open | 3 | epic |
 
-### im-jqz Epic C: intermine Tier 1 dependency upgrades and … [open, 26/50 closed]
+### im-jqz Epic C: intermine Tier 1 dependency upgrades and … [open, 27/52 closed]
 
 | ID | Title | Status | P | Labels |
 |---|---|---|---|---|
@@ -244,7 +246,7 @@ bd status: total 240, open 83, in progress 4, blocked 0, ready 83, deferred 0, c
 | im-jqz.32 | intermine: replace torque-3.2-dev, torque-gen-3.2… | open | 2 | epic |
 | im-jqz.35 | Decision for Gos: commons-lang 2.6 reaches a mine… | open | 2 | epic |
 | im-jqz.5 | C5 Jena 4.x, solrj latest 8.x, Lucene 3 stance | open | 2 | epic |
-| im-jqz.51 | [bug] bio/sources/psi-complexes: the converter te… | in_progress | 2 | epic |
+| im-jqz.53 | [bug] intermine search: SolrKeywordSearchHandler … | in_progress | 2 | epic |
 | im-jqz.13 | intermine: pathquery and model rely on org.json v… | open | 3 | epic |
 | im-jqz.14 | intermine: JAXB/annotation shims (inventory R14) … | open | 3 | epic |
 | im-jqz.15 | intermine: objenesis redundant with easymock; rem… | open | 3 | epic |
@@ -262,6 +264,7 @@ bd status: total 240, open 83, in progress 4, blocked 0, ready 83, deferred 0, c
 | im-jqz.49 | intermine webapp: remaining orphans from the im-j… | open | 3 | epic |
 | im-jqz.50 | intermine objectstore: ObjectStoreInterMineImpl.g… | open | 3 | epic |
 | im-jqz.52 | intermine webapp dwr.xml hardening: remove the ja… | open | 3 | epic |
+| im-jqz.54 | bio/sources after im-jqz.51: verify on JDK 17 at … | open | 3 | epic |
 
 ### im-ore Epic G: Whole-system testbed [open, 11/16 closed]
 
@@ -284,46 +287,44 @@ bd status: total 240, open 83, in progress 4, blocked 0, ready 83, deferred 0, c
 
 | Repo | WT | Branch | Last commit | vs dev \| subject |
 |---|---|---|---|---|
-| intermine | 5 (im-89g.12-511-tes…, im-jqz.51-psi-par…, im-ore.14-testbed…...) | maint-2026 | 05:01 (58m) | ahead 199 vs dev \| Merge maint/im-jqz.28-webapp-hardening:… |
-| intermine | 5 (im-89g.12-511-tes…, im-jqz.51-psi-par…, im-ore.14-testbed…...) | maint/im-89g.1-ci-actions | 11-15 04:45 (25.2h) | - \| docs: update README badges, PR template… |
-| intermine | 5 (im-89g.12-511-tes…, im-jqz.51-psi-par…, im-ore.14-testbed…...) | maint/im-89g.1-ci-fix | 11-15 06:28 (23.5h) | - \| ci: stop using sudo -E -u postgres; con… |
-| intermine | 5 (im-89g.12-511-tes…, im-jqz.51-psi-par…, im-ore.14-testbed…...) | maint/im-89g.1-ci-fix2 | 11-15 06:54 (23.1h) | - \| ci: fix PostgreSQL 15+ public schema pr… |
-| intermine | 5 (im-89g.12-511-tes…, im-jqz.51-psi-par…, im-ore.14-testbed…...) | maint/im-89g.3-maven-publish | 11-15 09:40 (20.3h) | - \| docs: add RELEASING.md (version bump, b… |
-| intermine | 5 (im-89g.12-511-tes…, im-jqz.51-psi-par…, im-ore.14-testbed…...) | maint/im-89g.5-ci-actions | 11-15 09:55 (20.1h) | - \| ci: bump GitHub Actions to current majo… |
-| intermine | 5 (im-89g.12-511-tes…, im-jqz.51-psi-par…, im-ore.14-testbed…...) | maint/im-ee7.1-gradle-6 | 11-15 03:57 (26.0h) | - \| build: default to Gradle 6.9.4 and veri… |
-| intermine | 5 (im-89g.12-511-tes…, im-jqz.51-psi-par…, im-ore.14-testbed…...) | maint/im-ee7.2-batch-bio | 11-15 09:32 (20.5h) | - \| build(bio): fold copyMineProperties int… |
-| intermine | 5 (im-89g.12-511-tes…, im-jqz.51-psi-par…, im-ore.14-testbed…...) | maint/im-ee7.2-batch-intermine | 11-15 06:21 (23.6h) | - \| intermine: convert all build files to G… |
-| intermine | 5 (im-89g.12-511-tes…, im-jqz.51-psi-par…, im-ore.14-testbed…...) | maint/im-ee7.2-batch-sources | 11-15 07:16 (22.7h) | - \| testmine: convert build files to Gradle… |
-| intermine | 5 (im-89g.12-511-tes…, im-jqz.51-psi-par…, im-ore.14-testbed…...) | maint/im-ee7.2-gradle-76-flip | 11-15 10:27 (19.5h) | - \| build: root testReport tasks use the Gr… |
-| intermine | 5 (im-89g.12-511-tes…, im-jqz.51-psi-par…, im-ore.14-testbed…...) | maint/im-ee7.2-plugin-gradle7 | 11-15 05:06 (24.9h) | - \| build(plugin): lazy tasks, no init task… |
-| intermine | 5 (im-89g.12-511-tes…, im-jqz.51-psi-par…, im-ore.14-testbed…...) | maint/im-ee7.3-catalog-modules | 11-15 11:52 (18.1h) | - \| docs: describe the version catalog; the… |
-| intermine | 5 (im-89g.12-511-tes…, im-jqz.51-psi-par…, im-ore.14-testbed…...) | maint/im-ee7.3-gradle-814-flip | 11-15 13:27 (16.5h) | - \| build(plugin): addStrutsConfig no longe… |
-| intermine | 5 (im-89g.12-511-tes…, im-jqz.51-psi-par…, im-ore.14-testbed…...) | maint/im-ee7.3-plugin-gradle8 | 11-15 11:34 (18.4h) | - \| merge: maint-2026 (ROOTS+TESTRES batch)… |
-| intermine | 5 (im-89g.12-511-tes…, im-jqz.51-psi-par…, im-ore.14-testbed…...) | maint/im-ee7.3-roots-testres | 11-15 11:09 (18.8h) | - \| build: version catalog gradle/libs.vers… |
-| intermine | 5 (im-89g.12-511-tes…, im-jqz.51-psi-par…, im-ore.14-testbed…...) | maint/im-jqz.1-jdbc-jackson | 11-15 03:31 (26.5h) | - \| deps: drop duplicate commons-math3 3.0 … |
-| intermine | 5 (im-89g.12-511-tes…, im-jqz.51-psi-par…, im-ore.14-testbed…...) | maint/im-jqz.51-psi-participants | 05:01 (58m) | - \| Merge maint/im-jqz.28-webapp-hardening:… |
-| intermine | 5 (im-89g.12-511-tes…, im-jqz.51-psi-par…, im-ore.14-testbed…...) | maint/im-jqz.7-weak-deps | 11-15 05:51 (24.1h) | - \| deps: remove orphan vendored bobo-brows… |
-| intermine | 5 (im-89g.12-511-tes…, im-jqz.51-psi-par…, im-ore.14-testbed…...) | maint/im-jqz.8-flaky-tests | 11-15 07:24 (22.6h) | - \| integrate: make DataTracker.clear() saf… |
-| intermine | 5 (im-89g.12-511-tes…, im-jqz.51-psi-par…, im-ore.14-testbed…...) | maint/im-rkn.3-baseline | 06-12 11:01 (156d) | - \| Merge pull request #2460 from intermine… |
-| bluegenes | 2 (im-ore.10-cypress…) | maint-2026 | 05:51 (9m) | ahead 113 vs dev \| Merge maint/im-7os.46-sibling-pins: im-… |
-| bluegenes | 2 (im-ore.10-cypress…) | maint/im-28e.2-cypress-13 | 11-15 11:09 (18.8h) | - \| docs, cypress: how to run the suite; ta… |
-| bluegenes | 2 (im-ore.10-cypress…) | maint/im-28e.3-gh-actions | 11-15 05:31 (24.5h) | - \| docs: CI badge and Continuous integrati… |
-| bluegenes | 2 (im-ore.10-cypress…) | maint/im-7os.1-shadow-cljs | 11-15 05:17 (24.7h) | - \| comments: drop stale lein/figwheel refe… |
-| bluegenes | 2 (im-ore.10-cypress…) | maint/im-7os.10-npm-advisories | 11-15 11:58 (18.0h) | - \| deps: override qs to 6.17.1 (same major… |
-| bluegenes | 2 (im-ore.10-cypress…) | maint/im-7os.18-sibling-deps | 11-15 12:49 (17.2h) | - \| docs: how the sibling libraries are pin… |
-| bluegenes | 2 (im-ore.10-cypress…) | maint/im-7os.4-cdn-sri | 11-15 11:48 (18.2h) | - \| script: cdn-sri.sh prints SRI hashes fo… |
-| bluegenes | 2 (im-ore.10-cypress…) | maint/im-7os.5-removals | 11-15 02:59 (27.0h) | - \| npm: remove unused clipboardy [im-7os.5] |
-| bluegenes | 2 (im-ore.10-cypress…) | maint/im-89g.5-ci-actions | 11-15 09:55 (20.1h) | - \| ci: bump GitHub Actions to current majo… |
-| bluegenes | 2 (im-ore.10-cypress…) | maint/im-ore.10-cypress-data | 03:24 (2.6h) | - \| Merge maint/im-7os.22-date-input: a dat… |
-| bluegenes | 2 (im-ore.10-cypress…) | maint/im-ore.16-nightly-repin | 05:26 (33m) | - \| ci(nightly): rdfc2im at d169a7f (organi… |
-| bluegenes | 2 (im-ore.10-cypress…) | maint/im-rkn.4-baseline | 01-26 21:58 (658d) | - \| dynamic favicon slows down dx |
-| imcljs | 1 | maint-2026 | 00:35 (5.4h) | ahead 10 vs dev \| Merge maint/im-7os.26-default-humanmine… |
-| imcljs | 1 | maint/im-7os.3-imcljs-deps-edn | 11-15 02:46 (27.2h) | - \| deps: bump clj-http 3.10.0 to 3.13.0 [i… |
-| im-tables-3 | 1 | maint-2026 | 05:36 (24m) | ahead 29 vs dev \| Merge maint/im-7os.44-dropdown-bugs: ni… |
-| im-tables-3 | 1 | maint/im-7os.3-im-tables-deps-edn | 11-15 12:05 (17.9h) | - \| test: lein kaocha honours IM_TABLES_SER… |
-| bluegenes-tool-store | 1 | maint-2026 | 05:31 (28m) | ahead 13 vs master \| Merge maint/im-7os.11-path-safety: real… |
-| bluegenes-tool-store | 1 | maint/im-7os.3-tool-store-deps-edn | 11-15 02:33 (27.4h) | - \| deps: remove unused ring/ring-defaults … |
-| bluegenes-tool-store | 1 | maint/im-7os.6-tool-store-fixes | 11-15 09:48 (20.2h) | - \| deps: bump commons-compress 1.19 -> 1.2… |
+| intermine | 5 (im-89g.12-511-tes…, im-jqz.53-solr-fa…, im-ore.14-testbed…...) | maint-2026 | 06:09 (11m) | ahead 201 vs dev \| Merge maint/im-jqz.51-psi-participants:… |
+| intermine | 5 (im-89g.12-511-tes…, im-jqz.53-solr-fa…, im-ore.14-testbed…...) | maint/im-89g.1-ci-actions | 11-15 04:45 (25.6h) | - \| docs: update README badges, PR template… |
+| intermine | 5 (im-89g.12-511-tes…, im-jqz.53-solr-fa…, im-ore.14-testbed…...) | maint/im-89g.1-ci-fix | 11-15 06:28 (23.9h) | - \| ci: stop using sudo -E -u postgres; con… |
+| intermine | 5 (im-89g.12-511-tes…, im-jqz.53-solr-fa…, im-ore.14-testbed…...) | maint/im-89g.1-ci-fix2 | 11-15 06:54 (23.4h) | - \| ci: fix PostgreSQL 15+ public schema pr… |
+| intermine | 5 (im-89g.12-511-tes…, im-jqz.53-solr-fa…, im-ore.14-testbed…...) | maint/im-89g.3-maven-publish | 11-15 09:40 (20.7h) | - \| docs: add RELEASING.md (version bump, b… |
+| intermine | 5 (im-89g.12-511-tes…, im-jqz.53-solr-fa…, im-ore.14-testbed…...) | maint/im-89g.5-ci-actions | 11-15 09:55 (20.4h) | - \| ci: bump GitHub Actions to current majo… |
+| intermine | 5 (im-89g.12-511-tes…, im-jqz.53-solr-fa…, im-ore.14-testbed…...) | maint/im-ee7.1-gradle-6 | 11-15 03:57 (26.4h) | - \| build: default to Gradle 6.9.4 and veri… |
+| intermine | 5 (im-89g.12-511-tes…, im-jqz.53-solr-fa…, im-ore.14-testbed…...) | maint/im-ee7.2-batch-bio | 11-15 09:32 (20.8h) | - \| build(bio): fold copyMineProperties int… |
+| intermine | 5 (im-89g.12-511-tes…, im-jqz.53-solr-fa…, im-ore.14-testbed…...) | maint/im-ee7.2-batch-intermine | 11-15 06:21 (24.0h) | - \| intermine: convert all build files to G… |
+| intermine | 5 (im-89g.12-511-tes…, im-jqz.53-solr-fa…, im-ore.14-testbed…...) | maint/im-ee7.2-batch-sources | 11-15 07:16 (23.1h) | - \| testmine: convert build files to Gradle… |
+| intermine | 5 (im-89g.12-511-tes…, im-jqz.53-solr-fa…, im-ore.14-testbed…...) | maint/im-ee7.2-gradle-76-flip | 11-15 10:27 (19.9h) | - \| build: root testReport tasks use the Gr… |
+| intermine | 5 (im-89g.12-511-tes…, im-jqz.53-solr-fa…, im-ore.14-testbed…...) | maint/im-ee7.2-plugin-gradle7 | 11-15 05:06 (25.2h) | - \| build(plugin): lazy tasks, no init task… |
+| intermine | 5 (im-89g.12-511-tes…, im-jqz.53-solr-fa…, im-ore.14-testbed…...) | maint/im-ee7.3-catalog-modules | 11-15 11:52 (18.5h) | - \| docs: describe the version catalog; the… |
+| intermine | 5 (im-89g.12-511-tes…, im-jqz.53-solr-fa…, im-ore.14-testbed…...) | maint/im-ee7.3-gradle-814-flip | 11-15 13:27 (16.9h) | - \| build(plugin): addStrutsConfig no longe… |
+| intermine | 5 (im-89g.12-511-tes…, im-jqz.53-solr-fa…, im-ore.14-testbed…...) | maint/im-ee7.3-plugin-gradle8 | 11-15 11:34 (18.8h) | - \| merge: maint-2026 (ROOTS+TESTRES batch)… |
+| intermine | 5 (im-89g.12-511-tes…, im-jqz.53-solr-fa…, im-ore.14-testbed…...) | maint/im-ee7.3-roots-testres | 11-15 11:09 (19.2h) | - \| build: version catalog gradle/libs.vers… |
+| intermine | 5 (im-89g.12-511-tes…, im-jqz.53-solr-fa…, im-ore.14-testbed…...) | maint/im-jqz.1-jdbc-jackson | 11-15 03:31 (26.8h) | - \| deps: drop duplicate commons-math3 3.0 … |
+| intermine | 5 (im-89g.12-511-tes…, im-jqz.53-solr-fa…, im-ore.14-testbed…...) | maint/im-jqz.53-solr-facet | 06:14 (7m) | - \| search: facet filter values are escaped… |
+| intermine | 5 (im-89g.12-511-tes…, im-jqz.53-solr-fa…, im-ore.14-testbed…...) | maint/im-jqz.7-weak-deps | 11-15 05:51 (24.5h) | - \| deps: remove orphan vendored bobo-brows… |
+| intermine | 5 (im-89g.12-511-tes…, im-jqz.53-solr-fa…, im-ore.14-testbed…...) | maint/im-jqz.8-flaky-tests | 11-15 07:24 (22.9h) | - \| integrate: make DataTracker.clear() saf… |
+| intermine | 5 (im-89g.12-511-tes…, im-jqz.53-solr-fa…, im-ore.14-testbed…...) | maint/im-rkn.3-baseline | 06-12 11:01 (156d) | - \| Merge pull request #2460 from intermine… |
+| bluegenes | 1 | maint-2026 | 06:19 (2m) | ahead 119 vs dev \| Merge maint/im-7os.37-dev-build: oops 0… |
+| bluegenes | 1 | maint/im-28e.2-cypress-13 | 11-15 11:09 (19.2h) | - \| docs, cypress: how to run the suite; ta… |
+| bluegenes | 1 | maint/im-28e.3-gh-actions | 11-15 05:31 (24.8h) | - \| docs: CI badge and Continuous integrati… |
+| bluegenes | 1 | maint/im-7os.1-shadow-cljs | 11-15 05:17 (25.1h) | - \| comments: drop stale lein/figwheel refe… |
+| bluegenes | 1 | maint/im-7os.10-npm-advisories | 11-15 11:58 (18.4h) | - \| deps: override qs to 6.17.1 (same major… |
+| bluegenes | 1 | maint/im-7os.18-sibling-deps | 11-15 12:49 (17.5h) | - \| docs: how the sibling libraries are pin… |
+| bluegenes | 1 | maint/im-7os.4-cdn-sri | 11-15 11:48 (18.5h) | - \| script: cdn-sri.sh prints SRI hashes fo… |
+| bluegenes | 1 | maint/im-7os.5-removals | 11-15 02:59 (27.4h) | - \| npm: remove unused clipboardy [im-7os.5] |
+| bluegenes | 1 | maint/im-89g.5-ci-actions | 11-15 09:55 (20.4h) | - \| ci: bump GitHub Actions to current majo… |
+| bluegenes | 1 | maint/im-rkn.4-baseline | 01-26 21:58 (658d) | - \| dynamic favicon slows down dx |
+| imcljs | 1 | maint-2026 | 00:35 (5.8h) | ahead 10 vs dev \| Merge maint/im-7os.26-default-humanmine… |
+| imcljs | 1 | maint/im-7os.3-imcljs-deps-edn | 11-15 02:46 (27.6h) | - \| deps: bump clj-http 3.10.0 to 3.13.0 [i… |
+| im-tables-3 | 1 | maint-2026 | 05:36 (45m) | ahead 29 vs dev \| Merge maint/im-7os.44-dropdown-bugs: ni… |
+| im-tables-3 | 1 | maint/im-7os.3-im-tables-deps-edn | 11-15 12:05 (18.3h) | - \| test: lein kaocha honours IM_TABLES_SER… |
+| bluegenes-tool-store | 1 | maint-2026 | 05:31 (49m) | ahead 13 vs master \| Merge maint/im-7os.11-path-safety: real… |
+| bluegenes-tool-store | 1 | maint/im-7os.3-tool-store-deps-edn | 11-15 02:33 (27.8h) | - \| deps: remove unused ring/ring-defaults … |
+| bluegenes-tool-store | 1 | maint/im-7os.6-tool-store-fixes | 11-15 09:48 (20.5h) | - \| deps: bump commons-compress 1.19 -> 1.2… |
 
 WT = number of git worktrees (extra ones named). Branches shown: maint-2026 and maint/*.
 
@@ -331,7 +332,10 @@ WT = number of git worktrees (extra ones named). Branches shown: maint-2026 and 
 
 | Start | Bead | Agent | Model | In | Cache | Out | Outcome | Notes |
 |---|---|---|---|---|---|---|---|---|
+| 06:10 | im-7os.37 | BlueGenes dev build: oops 0… | sonnet | 82 | 2.48M | 16.8k | success | 3a6ec8da merged as 89169e30; oops 0.7.0… |
+| 05:48 | im-28e.12 | Cypress specs for the corre… | sonnet | 104 | 3.59M | 24.6k | success | aa139119 merged; 4 enrichment tests der… |
 | 05:36 | im-7os.46 | BlueGenes sibling pins (im-… | sonnet | 102 | 3.00M | 15.6k | success | 0bd56ad6 + 63fd1354 merged; one of each… |
+| 05:32 | im-jqz.51 | psi-complexes: JAXB runtime… | sonnet | 196 | 10.24M | 54.1k | success | 443d49bdda merged; cause bedb1094d3 (20… |
 | 05:28 | im-7os.11 | tool-store path containment… | sonnet | 36 | 1.11M | 13.3k | success | 79ec629 + 1596b3a merged; inside-dir? r… |
 | 05:13 | im-7os.44 | im-tables: nil-safe dropdow… | sonnet | 144 | 6.93M | 55.0k | success | 342cd35 + 14af85a merged; two separate … |
 | 05:03 | im-ore.16 | rdfc2im demo data: organism… | sonnet | 260 | 22.07M | 88.4k | success | 4 commits pushed (d169a7f); ut rebuilt … |
@@ -348,8 +352,5 @@ WT = number of git worktrees (extra ones named). Branches shown: maint-2026 and 
 | 01:37 | im-89g.20 | 5.1.1 backport: logo + thir… | sonnet | 36 | 714.3k | 4.4k | success | 3 commits pushed, release/5.1.1-candida… |
 | 01:31 | im-ore.17 | rdfc2im: cached mode clones… | sonnet | 60 | 2.11M | 19.6k | success | ae106ec pushed; 191 passed/17 skipped; … |
 | 01:14 | im-jqz.44 | widget 500 on null organism… | sonnet | 128 | 5.17M | 25.7k | success | 705df40aa7 merged; pre-existing on 5.0.… |
-| 01:13 | im-7os.43 | BlueGenes im-tables pin a36… | sonnet | 132 | 4.21M | 22.7k | success | b57dd96b merged; one im-tables/one imcl… |
-| 01:01 | im-7os.42 | im-tables: dead cdn.intermi… | sonnet | 60 | 1.65M | 13.6k | success | af08ae1 + 68db7b3 merged; snippet loads… |
-| 01:00 | im-jqz.45 | legacy webapp: remaining ex… | sonnet | 170 | 9.04M | 54.4k | success | c868487d6d + 04cc83f46f merged; logo ve… |
 
-Showing the 20 most recent of 112 runs.
+Showing the 20 most recent of 115 runs.
