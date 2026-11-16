@@ -866,7 +866,7 @@ def main(argv=None):
         # same page under the file name the current Claude artifact is published from
         # (https://claude.ai/code/artifact/cd45aac8-c4af-484d-99d6-58067cfdb478, since 15 Nov 2026 19:00 UTC;
         # the earlier artifact 15983604-... stopped accepting republishes with HTTP 403)
-        write_atomic(os.path.join(outdir, "sprint-dashboard.html"), render_artifact(doc, agents, beads))
+        write_atomic(os.path.join(outdir, "sprint-dashboard-3.html"), render_artifact(doc, agents, beads))
         wrote = "wrote status/STATUS.md, index.html and artifact.html"
     except Exception as e:
         wrote = "WRITE FAILED: %s" % e
