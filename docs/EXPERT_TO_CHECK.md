@@ -42,9 +42,13 @@ Added items get a date; checked items move to the bottom with the reviewer's ver
 - **Decision (Gos, 16 Nov 2026):** keep for now; a ClojureScript developer should review it before
   the upstream PR. Alternative if rejected: an uncontrolled-input component at every text input in
   BlueGenes and im-tables.
-- **Reviewer, please check:** whether a newer reagent release fixes the underlying issue (then drop
-  the patch), the interaction with im-tables' own inputs, and IME / composition events, which the
-  Cypress keystroke spec does not cover.
+- **Checked 16 Nov 2026 (im-7os.53):** reagent 2.0.1 does not fix it. Keys lost per 1600 typed: 1.2.0 without the
+  patch 27; 2.0.1 on React 18 without the patch 100, with the patch 0; 2.0.1 on React 19 without 80, with 0.
+  Under reagent 2 the loss moves from ratom-backed inputs to the inputs whose on-change dispatches a
+  re-frame event (flushSync render queue). The patch carries over unchanged and its guard test passes on 2.0.1.
+  Upstream issue drafted in `docs/drafts/reagent-issue-keystrokes.md` (mechanism analysis included).
+- **Reviewer, please check:** the mechanism analysis in the draft issue, the interaction with im-tables' own
+  inputs, and IME / composition events, which the Cypress keystroke spec does not cover.
 
 ### 3. objectstore: Byte Buddy replaces cglib for dynamic (multi-class) objects (16 Nov 2026)
 

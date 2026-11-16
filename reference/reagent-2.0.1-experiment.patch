@@ -1,0 +1,48 @@
+diff --git a/deps.edn b/deps.edn
+index 053c0deb..efb08586 100644
+--- a/deps.edn
++++ b/deps.edn
+@@ -54,7 +54,7 @@
+                       re-frame/re-frame {:mvn/version "1.4.7"}
+                       day8.re-frame/async-flow-fx {:mvn/version "0.3.0"}
+                       day8.re-frame/forward-events-fx {:mvn/version "0.0.6"}
+-                      reagent/reagent {:mvn/version "1.2.0"}
++                      reagent/reagent {:mvn/version "2.0.1"}
+                       prismatic/dommy {:mvn/version "1.1.0"}
+                       metosin/reitit {:mvn/version "0.7.2"}
+                       json-html/json-html {:mvn/version "0.4.7"}
+diff --git a/src/cljs/bluegenes/core.cljs b/src/cljs/bluegenes/core.cljs
+index eee840d4..73a3caa2 100644
+--- a/src/cljs/bluegenes/core.cljs
++++ b/src/cljs/bluegenes/core.cljs
+@@ -5,6 +5,7 @@
+             [bluegenes.imjs-globals]
+             [cljsjs.react-select]
+             [reagent.dom.client :as rdc]
++            [bluegenes.reagent-compat]
+             [bluegenes.reagent-inputs :as reagent-inputs]
+             [re-frame.core :as re-frame]
+             [bluegenes.utils]
+diff --git a/src/cljs/bluegenes/reagent_compat.cljs b/src/cljs/bluegenes/reagent_compat.cljs
+new file mode 100644
+index 00000000..1262e8fa
+--- /dev/null
++++ b/src/cljs/bluegenes/reagent_compat.cljs
+@@ -0,0 +1,17 @@
++(ns bluegenes.reagent-compat
++  "Reagent 2.0 removed reagent.dom/dom-node (React 19 has no findDOMNode), but
++  im-tables 0.16 still calls it (head/controls.cljs force-close and
++  components/bootstrap.cljs Tooltip). This puts a stand-in in its place: the
++  first DOM node below the component, found through the fiber."
++  (:require [reagent.dom]))
++
++(defn dom-node
++  "The first DOM element rendered by the class component `this`, or nil."
++  [^js this]
++  (loop [fiber (.-_reactInternals this)]
++    (cond
++      (nil? fiber) nil
++      (instance? js/Element (.-stateNode fiber)) (.-stateNode fiber)
++      :else (recur (.-child fiber)))))
++
++(js* "(reagent.dom.dom_node = ~{})" dom-node)
