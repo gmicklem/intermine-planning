@@ -28,8 +28,9 @@ Portal:
 - Run `docs/RELEASING.md` in the intermine checkout (version bump, bundle build, Portal
   upload). central.sonatype.com is blocked in the sandbox, so the upload itself has never
   been exercised; expect to iterate once on the bundle layout.
-- Then 6.0.0 from `maint-2026` (Gradle 8.14.6, JDK 8 and 17): same steps; im-89g.10 lists
-  the wording and pin changes (humanmine/flymine forks from exact 5.1.1 to 6.0.+).
+- Then 6.0.0 from `maint-2026` (Gradle 8.14.6, JDK 8 and 17): same steps. DECIDED 16 Nov 17:50 UTC: the
+  line is versioned 6.0.0 (im-89g.10 in progress: catalog bump, fork pins 6.0.+, wording); Gos will do
+  manual testing on the 6.0.0 artefacts before publishing.
 
 ## 3. CDN hosts: done (16 Nov)
 
