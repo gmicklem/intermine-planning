@@ -1,0 +1,73 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "description": "Shared Renovate preset for the gmicklem InterMine/BlueGenes forks (docs/DEPENDENCY-MAINTENANCE.md in intermine-planning). Repositories extend it with: {\"extends\": [\"local>gmicklem/renovate-config\"]}",
+  "extends": ["config:recommended"],
+  "timezone": "Europe/London",
+  "schedule": ["before 6am on monday"],
+  "minimumReleaseAge": "3 days",
+  "labels": ["dependencies"],
+  "prConcurrentLimit": 5,
+  "prHourlyLimit": 2,
+  "rebaseWhen": "behind-base-branch",
+  "dependencyDashboard": true,
+  "lockFileMaintenance": { "enabled": true, "schedule": ["before 6am on monday"] },
+  "vulnerabilityAlerts": { "enabled": true, "schedule": ["at any time"], "labels": ["dependencies", "security"] },
+  "packageRules": [
+    {
+      "description": "Our own artefacts are released, never bumped by the bot",
+      "matchPackagePatterns": ["^org\\.intermine[:/]", "^org/intermine/"],
+      "enabled": false
+    },
+    {
+      "description": "reagent stays at 1.2.0 until decision 0007 is lifted (keystroke loss under React 18)",
+      "matchPackageNames": ["reagent/reagent", "reagent"],
+      "enabled": false
+    },
+    {
+      "description": "bootstrap 3 is end of life; replacing it is a project, not a bump",
+      "matchPackageNames": ["bootstrap"],
+      "enabled": false
+    },
+    {
+      "description": "GitHub Actions versions: automerge when the repository's checks pass",
+      "matchManagers": ["github-actions"],
+      "automerge": true
+    },
+    {
+      "description": "Patch releases of anything: automerge when checks pass (Renovate never automerges a PR with no checks)",
+      "matchUpdateTypes": ["patch"],
+      "automerge": true
+    },
+    {
+      "description": "npm devDependencies, minor and patch: automerge when checks pass",
+      "matchManagers": ["npm"],
+      "matchDepTypes": ["devDependencies"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "automerge": true
+    },
+    {
+      "description": "Clojure libraries grouped into one PR per schedule run",
+      "matchManagers": ["clojure", "leiningen"],
+      "groupName": "clojure dependencies"
+    },
+    {
+      "description": "Gradle non-major bumps grouped",
+      "matchManagers": ["gradle"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "groupName": "gradle dependencies (non-major)"
+    },
+    {
+      "description": "Majors: opened only after approval from the dependency dashboard, labelled, never automerged",
+      "matchUpdateTypes": ["major"],
+      "dependencyDashboardApproval": true,
+      "addLabels": ["major"],
+      "automerge": false
+    },
+    {
+      "description": "Base images (Postgres, Solr, Tomcat, Temurin) are deployment decisions",
+      "matchDatasources": ["docker"],
+      "automerge": false,
+      "addLabels": ["docker-image"]
+    }
+  ]
+}
