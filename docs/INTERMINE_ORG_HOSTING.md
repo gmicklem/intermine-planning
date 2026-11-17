@@ -163,3 +163,36 @@ Update these when intermine.org and the other hosts go https. Paths are relative
 7. **Is http-only intermine.org a known issue** that someone deliberately avoided (for example because a partner's embedded iframe or an old mine webapp depends on http)? Check for an existing issue in `intermine/intermine.github.io` before changing DNS.
 8. **Should the homepage be rebuilt?** The last deploy is from May 2022 and its CI image (`ubuntu-18.04`, Hugo 0.82) no longer exists on GitHub; changing `baseurl` needs a working build, or the checked-in output in `intermine.github.io` can be edited with a `sed` replacement of `http://intermine.org` as a stop-gap.
 9. **GitHub Pages IPs**: please double-check the four `185.199.x.153` addresses and the AAAA set against the live GitHub docs before changing DNS; I quoted them from memory.
+
+## Update 17 Nov 2026: the registry IS the Heroku app (confirmed by Gos)
+
+Gos found the Heroku account: one personal app, the InterMine Registry, on the **Heroku-16 stack**, which
+reached end of life on 1 May 2021 (no security updates; the app can no longer be rebuilt or redeployed
+on that stack). Repo: https://github.com/intermine/intermine-registry (default branch `dev`, last commit
+23 Nov 2020, GSoC 2017 project by Leonardo Kuffo, LGPL-2.1). Facts from the repo:
+- Node/Express app (`node ./bin/www`, `PORT` env), MongoDB via `MONGODB_URL` (mongoose 5.7); admin users
+  created with `createUser.js`; `initRegistry.js` seeds the mine list; `swagger.json` hard-codes
+  `"schemes":["http"]`. No Dockerfile, no Procfile (Heroku infers `npm start`), no `engines` field, so Heroku
+  picked whatever Node was current in 2017-2018; dependencies include `request` (deprecated), `bcrypt ^3`
+  (native, will not build on current Node without a bump), `passport 0.3`, `express-session 1.16`.
+- The sandbox proxy returns 403 for registry.intermine.org, so its live state is unverified from here.
+
+Why Heroku [inference, consistent with the repo]: a 2017 GSoC student needed a zero-ops public demo of a
+Node+Mongo app; Heroku's free dyno plus the mLab MongoDB add-on was the standard way to get one without
+shell access to the lab VM, and the app simply stayed there after the project ended. The registry then
+became load-bearing (BlueGenes' mine list, imcljs, mine webapps, R/iOS clients) without ever getting an owner.
+
+Recommended course of action (details in section B above):
+1. Do not try to upgrade the stack in place on Heroku: the app cannot be rebuilt on Heroku-16, a stack
+   upgrade forces a rebuild on current Node, and `bcrypt ^3`/`mongoose 5.7` will not build; the Mongo add-on
+   (mLab) was discontinued in 2020, so wherever the data lives now (Atlas? Heroku add-on?) needs checking.
+2. Export the data first: `mongodump` against the current `MONGODB_URL` from Heroku's config (`heroku config`),
+   keep the dump in a private place; it is the only copy of the instance list and admin users.
+3. Modernise the app in the fork (agents): Node 22, `bcrypt` 5 or `bcryptjs`, mongoose 8, `request` ->
+   `undici`/fetch, `express-session` current, a Dockerfile, `schemes: ["https"]`, health endpoint, tests for
+   `/service/instances`; keep the API shape identical (clients depend on it).
+4. Host it with the other InterMine services: Docker Compose (registry + MongoDB + Caddy for TLS and
+   http->https) on the Cambridge VM that already runs the Dokku apps, or Fly.io/Render if nobody wants a VM;
+   point `registry.intermine.org` at it; keep http redirecting to https for the old clients.
+5. Then switch the clients' hard-coded `http://registry.intermine.org` references to https (bead im-bdy.10)
+   and delete the Heroku app.
