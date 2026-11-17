@@ -1,4 +1,4 @@
-<!-- DRAFT for Gos to approve; not posted. Measurement: reference/reagent-2.1.0-snapshot-build2-measurement.md (im-7os.63). -->
+<!-- POSTED as https://github.com/reagent-project/reagent/issues/676#issuecomment-6951981693 (17 Nov 2026); measurement: reference/reagent-2.1.0-snapshot-build2-measurement.md (im-7os.63/64). -->
 
 Thanks for #686. I rebuilt BlueGenes against the new snapshot, `2.1.0-20261117.092548-2` (Clojars build 2, revision cad0b51c; your comment names `-20261116.204953-1`, which is the previous build), with our workaround removed, and measured the same way as last time.
 
