@@ -59,3 +59,16 @@ Keystroke spec: 0/1600 lost with master and the patch off (fixed). But the list-
 Keystroke spec 0/1600 without the patch (fixed). Upload-wizard textarea after a report page: 233/800 keys lost, 10/20 repetitions wrong without the patch; 0/800 with it. report_page_test fails 3/10 without, 0/5 with; the full suite without the patch 146/1 (one typeahead keystroke lost). Decision unchanged: keep the patch; reply drafted (docs/drafts/reagent-676-followup.md) for Gos to approve. Details: reference/reagent-2.1.0-snapshot-measurement.md.
 
 Reply posted (Gos approved): https://github.com/reagent-project/reagent/issues/676#issuecomment-6933344772
+
+## Update 17 Nov 2026, snapshot build 2 (im-7os.63)
+
+Clojars `2.1.0-20261117.092548-2` (master cad0b51c: PRs #686 "Fix controlled input keys lost when
+re-rendered with lagging state", #687, #689) re-measured with the patch removed: keystroke spec 4/1600
+lost (one typeahead rep), upload-wizard textarea after a report page 303/800 lost (14/20 reps wrong;
+7 of them momentarily empty), report_page_test 2/10 failures; with the patch 0/0. A diagnostic build
+with only the deferred revert check (`setTimeout` -> `do-after-render` -> `input-component-set-value`)
+removed from `input-handle-change` loses nothing, so the residual loss is that check writing the
+parent's stale rendered value (`""`) into the node, not the path #686 fixed. Decision unchanged: keep
+the patch; drop it only after a reagent *release* passes the upload probe without it, plus the steps
+listed in reference/reagent-2.1.0-snapshot-build2-measurement.md. Draft reply:
+docs/drafts/reagent-676-build2-reply.md (posted only on Gos's say-so).
