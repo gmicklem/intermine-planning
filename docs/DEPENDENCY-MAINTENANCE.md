@@ -73,10 +73,16 @@ mechanical. The agent is the second line (section 6), for the bumps that fail th
 3. **Human steps (Gos)**: install the Renovate app (GitHub Marketplace, "Renovate", choose the
    eleven repositories); enable "Allow auto-merge" in each repository's settings; add a branch
    protection rule on `maint-2026` requiring the CI check to pass. Dependabot alerts: already on.
-4. **First week**: Renovate opens its onboarding PR per repository; merge after reading its
+4. **Forks are skipped by default.** Renovate's `forkProcessing` defaults to skipping forked
+   repositories when the app is installed for "all repositories" (which is how it was installed on
+   17 Nov). So each fork carries its own two-line `renovate.json` on `maint-2026`:
+   `{"extends": ["local>gmicklem/renovate-config"], "forkProcessing": "enabled"}` (pushed to all
+   eleven on 17 Nov). A repository with that file counts as onboarded; no onboarding PR is opened.
+   intermine-planning, rdfc2im and renovate-config carry `{"enabled": false}` instead.
+5. **First week**: Renovate opens its onboarding PR per repository; merge after reading its
    dependency dashboard; expect a burst of PRs on day one (the inventories list roughly 20 bumps in
    intermine and 15 in the BlueGenes family that are minor/patch-level).
-5. **Measure** (section 7) for two weeks, then decide the automerge policy.
+6. **Measure** (section 7) for two weeks, then decide the automerge policy.
 
 ## 5. Automerge policy (proposal, start conservative)
 
