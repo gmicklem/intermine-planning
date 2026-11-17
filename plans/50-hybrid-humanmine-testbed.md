@@ -652,6 +652,11 @@ sprint's practice.
 | D-9 | Where milestone 3 (the full build) runs | **Decided (Gos):** on the DBCLS server that hosts HumanMine and FlyMine (about 256 GB RAM). It needs preparation there (T3.1). This sandbox cannot do it: 15 GB RAM now, Docker on a 10 GB volume (§6). The next sandbox session gets 75% of the Mac's RAM instead of 50% (about 22 to 24 GB, *est.*), which is more room for hybrid demo builds but still not enough for the full build |
 | D-10 | Approve sandbox network allows for the data hosts in §3 | Needed before T0.4 and T1.x fetches |
 
+**Decided 17 Nov 2026 (Gos):** D-1 all genes as identifiers, panel-deep; D-2 stock loaders now;
+D-3 protein viewer, alignment, JBrowse 2, Cytoscape, expression; D-4 yes; D-5 5.1.1 baseline, hybrid on
+6.0.0; D-6 Swiss-Prot + varsplic; D-7 local copies only, never in CI; D-8 Green, all panels, archive
+first; D-9 DBCLS server; D-10 allows approved. Record: decisions/0009-hybrid-humanmine-testbed.md.
+
 ### Milestone 1: the demo gene report page shows HumanMine's tools for the subset genes
 
 **Milestone gate.**
