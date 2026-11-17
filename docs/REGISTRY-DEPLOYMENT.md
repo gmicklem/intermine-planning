@@ -2,8 +2,8 @@
 
 For Gos. This guide moves registry.intermine.org from the Heroku app `intermine-registry`
 (Node, stack heroku-16, data in MongoDB Atlas) to the rewritten registry (Clojure, no database,
-branch `maint-2026` of gmicklem/intermine-registry) on a small server, with no gap in https
-service. Then it retires the Heroku app and the Atlas cluster. Bead im-bdy.13.
+branch `maint-2026` of gmicklem/intermine-registry) on a server, with no gap in https
+service (recommended: the DBCLS server that already runs the mines; fallback: a small VPS). Then it retires the Heroku app and the Atlas cluster. Bead im-bdy.13.
 
 How to read it:
 
@@ -32,47 +32,63 @@ registry needs no MongoDB, no Atlas and no backups of its own. That is why Atlas
 
 ### Three ways to host it
 
-| | (a) Small VPS (recommended) | (b) The mines' server | (c) Managed container host |
+| | (a) Small VPS (fallback) | (b) The DBCLS mines server (recommended) | (c) Managed container host |
 |---|---|---|---|
-| What | A 2-4 GB Debian/Ubuntu VPS (Hetzner, DigitalOcean ...) with Docker Compose and Caddy | The same Compose stack on the server that runs HumanMine/FlyMine from docker_template | Fly.io or Render runs the image; no server |
+| What | A 2-4 GB Debian/Ubuntu VPS (Hetzner, DigitalOcean ...) with Docker Compose and Caddy | One more container on the DBCLS server (133.39.78.111) that runs HumanMine, FlyMine and both JBrowse hosts as Docker containers behind nginx; the Compose stack holds the registry only (no Caddy) | Fly.io or Render runs the image; no server |
 | Rough cost per month | Hetzner about EUR 4-6; DigitalOcean USD 6 (1 GB) to 12 (2 GB). Provider backups add about 20 %, and are not needed | Nothing extra | Fly.io about USD 3-6; Render about USD 7 (the free tier sleeps, so it is not suitable) |
-| You look after | OS updates (automatic), Docker updates (monthly `apt upgrade`), the stack | Same, shared with the mines | Only the app; the provider patches the host |
-| TLS | Caddy, automatic | That server's existing front proxy | Provider, automatic |
+| You look after | OS updates (automatic), Docker updates (monthly `apt upgrade`), the stack | Shared with the mines; who administers the server and what their change process is must be confirmed (see "What you need") | Only the app; the provider patches the host |
+| TLS | Caddy, automatic | The server's existing nginx, one Let's Encrypt certificate per hostname | Provider, automatic |
 | Backups | None needed: data is in git, cache is disposable | Same | Same |
 | Who notices an outage | Nobody, unless monitoring is set up (step 8 does that; it emails you) | Same | Same; the provider fixes host failures |
 
 Prices are rough and change. Check them on the day. For comparison, the Heroku app costs a dyno
 (Eco about USD 5 or Basic about USD 7 per month) plus whatever the Atlas cluster costs.
 
-**Recommendation: (a), unless a server for the mines already exists by then, in which case (b).**
-Reasons:
+**Recommendation (revised 17 Nov 2026): (b), the DBCLS server, with (a) as the fallback.** The first
+version of this guide recommended (a) because it believed no InterMine server existed. One does: the old
+Cambridge VM was taken down, but HumanMine and FlyMine run today as Docker containers behind nginx on a server
+at DBCLS (docs/INTERMINE_ORG_HOSTING.md, "Update 17 Nov 2026 (Gos)"). Reasons:
 
-- No InterMine server exists today (the Cambridge VM is gone), so (b) is not available yet.
-- The registry is tiny. It needs no database, so a cheap VPS is enough and costs about what Heroku
-  costs now.
-- It uses the same pieces as docker_template (Docker Compose, a reverse proxy in front), so the
-  knowledge carries over. A VPS of this size cannot run a mine (HumanMine needs Solr 8 GB, Tomcat
-  4 GB and Postgres, and up to 32 GB while building), but the Caddy set up here can become the front
-  proxy for a mines server later, or the registry stack can move to that server in an hour.
+- The server exists, already serves valid https for www.humanmine.org, flymine.org, www.flymine.org and
+  jbrowse.intermine.org (and jbrowse2), and has about 256 GB RAM, so one more small container costs nothing:
+  no new provider, no new bill, no new server to patch.
+- The registry is tiny and needs no database: one container.
+- The layout is the one docker_template started from (Docker Compose behind a reverse proxy), so the
+  knowledge carries over. Routing there is by hostname with a Let's Encrypt certificate per hostname:
+  registry.intermine.org (and registry-new.intermine.org for the test phase) get a server block and a
+  certificate of their own, with no new ports.
+- (a) stays as the fallback if DBCLS access or policy prevents (b): no SSH access, no permission to run
+  another container or to add an nginx server block, or a change process too slow. The registry then runs on a
+  VPS exactly as sections 2 and 3 describe, and can move to the DBCLS server later in an hour. A VPS of this
+  size cannot run a mine, so it is only ever a home for the registry.
 - (c) is a good choice if you never want to log in to a server. Its weak point is another account
   and another vendor-specific config file. One real advantage: Fly.io can validate the certificate
   for registry.intermine.org before DNS moves (with an `_acme-challenge` record), so the switch has
   no certificate gap at all. This guide does not give the Fly.io steps.
 
 If you choose (b): the docker_template stacks do not terminate TLS themselves. Each mine's nginx
-listens on `HTTP_PORT` (for example 14808) and "the proxy in front" handles https. On such a
-server, skip the Caddy service in step 3 and instead add a site for registry-new.intermine.org and
-registry.intermine.org to that front proxy, forwarding to `127.0.0.1:3000`. Do not start a second
+listens on `HTTP_PORT` (for example 14808) and "the proxy in front" handles https; on the DBCLS server that
+proxy is the nginx 1.27.1 that also serves jbrowse. So skip section 2 (except the test DNS name in 2.2,
+which points at 133.39.78.111; see the note at the start of section 2), skip the Caddy service in step 3,
+and use the nginx variant in step 3.6: a server block for registry-new.intermine.org and
+registry.intermine.org in that front proxy, forwarding to `127.0.0.1:3000`. Do not start a second
 proxy on ports 80/443. Everything else in this guide is the same. Note that Docker publishes
-each mine's `HTTP_PORT` on all addresses and bypasses ufw (step 2.6), so on such a server those
-ports should be closed by the provider's firewall or bound to `127.0.0.1`.
+each mine's `HTTP_PORT` on all addresses and bypasses ufw (step 2.6), so on that server those
+ports should be closed by the provider's firewall or bound to `127.0.0.1`; that is for its administrators
+to decide, not something to change as part of this guide.
 
 ### What you need before starting
 
 1. **GitHub**: access to https://github.com/gmicklem/intermine-registry (public). The code to deploy
    is branch `maint-2026` (at the time of writing 683c4a6 on GitHub; e8b5332 or later is fine).
-2. **SSH key on the Mac**. Check with `ls ~/.ssh/id_ed25519.pub`. If it is missing, run
-   `ssh-keygen -t ed25519` and accept the defaults.
+2. **SSH access.** For option (b), the recommendation: SSH access to the DBCLS server (133.39.78.111) as
+   a user who may run `docker` and edit the nginx configuration, or a named DBCLS administrator who does
+   those steps with you. Find out first: who administers the server; what their change process is (a
+   request, an agreed time window, a review of nginx changes); and how the mines' containers are run there
+   (Docker Compose, which directory). If you cannot get access or permission, stop and use option (a).
+   For either option you need an **SSH key on the Mac**: check with `ls ~/.ssh/id_ed25519.pub`. If it is
+   missing, run `ssh-keygen -t ed25519` and accept the defaults. For (b), the public key is what the DBCLS
+   administrator authorises.
 3. **DNS login for intermine.org.** Find out who runs the DNS:
 
    On the Mac:
@@ -86,8 +102,8 @@ ports should be closed by the provider's firewall or bound to `127.0.0.1`.
    University of Cambridge IT runs it and you send them a request. If you cannot get a login, stop
    here: nothing else can happen without it.
 4. **Certificate authority check.** On the Mac: `dig CAA intermine.org +short`. Empty output is
-   fine (any authority may issue). If there is output, it must include `letsencrypt.org`, or Caddy
-   cannot get a certificate. Add `0 issue "letsencrypt.org"` at the DNS host if it is missing.
+   fine (any authority may issue). If there is output, it must include `letsencrypt.org`, or neither Caddy
+   nor certbot can get a certificate. Add `0 issue "letsencrypt.org"` at the DNS host if it is missing.
 5. **Heroku CLI**, already installed and logged in (`heroku auth:whoami`). The app's owner account
    is intermineorg@gmail.com. Check what you see:
 
@@ -102,7 +118,8 @@ ports should be closed by the provider's firewall or bound to `127.0.0.1`.
    the only copy of the old admin accounts; keep it at least a year.
 7. **jq on the Mac** (a JSON tool). Check with `jq --version`; if missing, `brew install jq`.
 8. **About 2 hours** for steps 1-4, then a 24-hour wait, then **about 30 minutes** for the switch
-   (step 5), then 7 days of light checks, then **about 30 minutes** to retire Heroku and Atlas.
+   (step 5), then 7 days of light checks, then **about 30 minutes** to retire Heroku and Atlas. For option (b), add whatever time the DBCLS
+   administrators need for their change process.
 
 ---
 
@@ -220,6 +237,19 @@ On the server, in step 3's `docker-compose.yml`, replace the two lines `build:` 
 ---
 
 ## 2. Provision the server (option a)
+
+**Option (b), the DBCLS server, skips this section** except for two things. In 2.2, the `registry-new` A
+record points at `133.39.78.111` instead of `<IPV4>` (confirm that address with the administrators).
+And instead of 2.3 to 2.8 (the server already exists and is administered by DBCLS), check on the server that
+what step 3 needs is there:
+
+On the DBCLS server:
+```bash
+docker --version && docker compose version
+ss -ltn | grep ':3000 ' || echo "port 3000 is free"
+```
+Success looks like: Docker and a Compose 2.x version, and "port 3000 is free". If port 3000 is taken, choose
+another free port and use it everywhere this guide says `127.0.0.1:3000`.
 
 ### 2.1 Create the VPS
 
@@ -366,7 +396,7 @@ repository's `docker-compose.example.yml` would be open to the internet on a VPS
 
 Outgoing traffic is allowed, which the registry needs: every six hours it fetches
 `/service/version*`, `/service/branding` and a logo from each mine (the hosts are listed in
-docs/SANDBOX-NETWORK.md). On a server with an outgoing firewall (option b at a university), those
+docs/SANDBOX-NETWORK.md). On a server with an outgoing firewall (possible on the DBCLS server for option b: ask), those
 hosts must be allowed on port 443 and 80.
 
 ### 2.7 Automatic security updates
@@ -401,6 +431,9 @@ Success looks like: `free -h` shows 2.0Gi of swap.
 ---
 
 ## 3. The Compose stack with Caddy
+
+(Option (b), the DBCLS server, uses the same layout and `docker-compose.yml` without the `caddy` service;
+its proxy part is the nginx variant in step 3.6 instead of 3.4. The Caddy steps below are option (a).)
 
 Layout on the server, all owned by `deploy`:
 ```
@@ -589,6 +622,114 @@ If it fails:
   than a few times an hour (Let's Encrypt's failure limit).
 - The registry is not healthy: `docker compose logs registry | tail -50`.
 
+### 3.6 On the DBCLS server (nginx instead of Caddy)
+
+Use this instead of the `caddy` service, step 3.4 and the Caddy parts of 3.5. The server already terminates
+TLS in nginx 1.27.1, with one Let's Encrypt certificate per hostname and routing by hostname, so the registry
+is one more container and one more server block.
+
+**Compose.** Write the same `docker-compose.yml` as in 3.2, minus the `caddy` service (and its `depends_on`
+and the `ACME_EMAIL` line) and minus the `caddy-data` and `caddy-config` volumes. Keep
+`"127.0.0.1:3000:3000"` on the registry: the host's nginx reaches the container there, and the port is not
+open to the internet. `.env` holds only `REGISTRY_ADMIN_TOKEN` (the first line of 3.3). Put `/srv/registry`
+where the mines' stacks live if DBCLS has a convention. Build and start with `docker compose build` and
+`docker compose up -d`, then `curl -fsS http://127.0.0.1:3000/health | jq .`.
+
+**Read the existing setup first. Do not invent the certbot command.** The exact certbot invocation (nginx
+plugin, webroot with a particular path, or standalone) must be read off the server's existing setup, not
+guessed.
+
+On the DBCLS server:
+```bash
+sudo certbot certificates
+ls /etc/nginx /etc/nginx/conf.d /etc/nginx/sites-enabled 2>/dev/null
+sudo grep -rn -E 'server_name|ssl_certificate|proxy_pass|acme-challenge' /etc/nginx
+sudo ls /etc/letsencrypt/renewal
+```
+`certbot certificates` lists the certificates, their hostnames and expiry. The files in
+`/etc/letsencrypt/renewal/` say which authenticator each certificate uses (`authenticator = nginx` or
+`webroot`, with `webroot_path`). The server blocks under `/etc/nginx/` show where such files live on this
+server and whether an `/.well-known/acme-challenge/` location exists. Copy that pattern.
+
+**Check before you run this**: this changes a shared production proxy that also serves HumanMine, FlyMine
+and JBrowse. Agree it with the administrators first (their change process). Keep a copy of every file you
+change. Run `sudo nginx -t` before every reload, and use `sudo systemctl reload nginx` (a reload does not
+drop the mines' connections; a restart might).
+
+Step 1, port 80 only (a block that names the 443 certificate before it exists makes `nginx -t` fail).
+Path below is an example: follow the existing layout.
+
+On the DBCLS server:
+```nginx
+# /etc/nginx/conf.d/registry.conf
+server {
+    listen 80;
+    # listen [::]:80;   # only if the existing blocks listen on IPv6
+    server_name registry-new.intermine.org registry.intermine.org;
+
+    # If the existing hosts renew by webroot, copy their /.well-known/acme-challenge/ location here,
+    # above the redirect.
+
+    # Plain http: permanent redirect to https. The CORS header lets old pages that still call
+    # http://registry.intermine.org/service/... from a browser follow it (as in the Caddy variant).
+    location / {
+        add_header Access-Control-Allow-Origin "*" always;
+        return 301 https://$host$request_uri;
+    }
+}
+```
+Then `sudo nginx -t && sudo systemctl reload nginx`.
+
+Step 2, the certificate for `registry-new.intermine.org` only (the real name waits for step 5.5, for the same
+reason as in 3.4: Let's Encrypt limits failed validations). Run the same kind of command that created the
+other hosts' certificates, with `-d registry-new.intermine.org`. As an illustration only, if the server's
+certificates use the nginx plugin it looks like `sudo certbot --nginx -d registry-new.intermine.org`; if
+`certbot certificates` and the renewal files show webroot, it is a `certonly --webroot -w <WEBROOT-PATH> -d
+registry-new.intermine.org`. Use what the server shows, not this sentence. `<WEBROOT-PATH>`: the
+`webroot_path` in an existing renewal file.
+
+Step 3, the https block (if certbot's nginx plugin already wrote one, check it against this instead of
+adding a second):
+
+On the DBCLS server:
+```nginx
+server {
+    listen 443 ssl;
+    http2 on;
+    server_name registry-new.intermine.org;
+
+    ssl_certificate     /etc/letsencrypt/live/registry-new.intermine.org/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/registry-new.intermine.org/privkey.pem;
+    # include the same ssl_* / options file the other hosts' blocks include, if they have one
+
+    # no includeSubDomains and no preload, on purpose (other intermine.org names are still http-only)
+    add_header Strict-Transport-Security "max-age=31536000" always;
+
+    gzip on;
+    gzip_types application/json text/css application/javascript image/svg+xml;
+
+    location / {
+        proxy_pass http://127.0.0.1:3000;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+}
+```
+Copy the proxy headers from the mines' existing blocks if they differ. Then
+`sudo nginx -t && sudo systemctl reload nginx`.
+
+Success looks like: `curl -fsS https://registry-new.intermine.org/health | jq .` from the Mac answers
+`"status": "ok"`, and `sudo certbot certificates` lists a certificate for `registry-new.intermine.org`.
+Confirm that the server's automatic renewal covers it: `sudo certbot renew --dry-run`.
+
+If it fails: `sudo nginx -t` names the file and line. A certificate error usually means DNS for
+`registry-new` does not yet answer with the server's address, or port 80 is not reaching nginx; check
+`dig +short registry-new.intermine.org` and the nginx error log (path in the existing config, often
+`/var/log/nginx/error.log`). To back out, remove the `registry.conf` file and reload; the mines are
+untouched.
+
 ---
 
 ## 4. Verify on the new name
@@ -669,7 +810,8 @@ curl -6 -sS -o /dev/null -w '%{http_code}\n' --resolve registry-new.intermine.or
 ```
 `<IPV6>`: the server's IPv6 address. If this prints `200`, add an AAAA record `registry-new` ->
 `<IPV6>` at the DNS host (**Check before you run this**: outward-facing, but only for the test
-name). If it fails, leave IPv6 out; IPv4 alone is fine.
+name). If it fails, leave IPv6 out; IPv4 alone is fine. On the DBCLS server, skip this unless the existing
+hosts have AAAA records and the nginx blocks listen on IPv6.
 
 ### 4.5 Check from a real BlueGenes page
 
@@ -746,6 +888,11 @@ cd /srv/registry && docker compose logs -f --since 1m caddy | grep -i -E 'regist
 ```
 Success looks like: health "ok", TTL 300 or less, CAA empty or allowing letsencrypt.org.
 
+On the DBCLS server (nginx) there is no Caddy to watch. Instead, in a terminal on the server, watch nginx's
+error log (path from the existing config, often `/var/log/nginx/error.log`) with
+`sudo tail -f /var/log/nginx/error.log`, and have the administrators on hand if the change process requires
+it.
+
 What users may notice during the switch: between the DNS change and Caddy's new certificate (a few
 minutes with TTL 300, one or two with TTL 60), some clients reach the new server before it has a
 certificate for registry.intermine.org and get a TLS error. In BlueGenes that shows as the toast
@@ -812,6 +959,21 @@ or a Heroku address in the error means Let's Encrypt still sees the old record; 
 itself, so wait another TTL. If after 15 minutes there is still no certificate, roll back (5.7) and
 investigate without time pressure.
 
+**On the DBCLS server (nginx), the same moment, the same rule** (do not wait for 8.8.8.8, and do not run this
+before the authoritative name server shows the new value). **Check before you run this**: a production proxy
+(see 3.6). `server_name registry.intermine.org` is already in the port-80 block from 3.6. Now:
+
+1. Get a certificate for `registry.intermine.org` with the same kind of certbot command that you read off the
+   server for `registry-new` in 3.6, with `-d registry.intermine.org` (its own certificate, as for the other
+   hosts).
+2. Add an https server block as in 3.6 step 3, with `server_name registry.intermine.org;` and the
+   `/etc/letsencrypt/live/registry.intermine.org/` certificate paths.
+3. `sudo nginx -t && sudo systemctl reload nginx`.
+
+Success looks like: `sudo certbot certificates` lists `registry.intermine.org`, and section 5.6's checks pass.
+If certbot fails because DNS still shows Heroku, wait a TTL and retry; after 15 minutes without a certificate
+roll back (5.7). Do not retry more than a few times an hour (failed-validation limit).
+
 ### 5.6 Verify on the real name
 
 On the Mac:
@@ -866,6 +1028,9 @@ docker compose logs --since 24h registry | grep -c Refreshed
 docker compose logs --since 24h registry | grep -i -E 'error|warn' | tail -20
 df -h /
 ```
+(On the DBCLS server there is one container, `intermine-registry`, and no Caddy lines; check nginx's error
+log for the two hostnames instead.)
+
 Success looks like: both containers `Up`, the registry `(healthy)`; few or no Caddy errors (the odd
 TLS handshake error from scanners is normal); about 60 `Refreshed` lines per day (one per mine per
 refresh, four refreshes a day, counted from the last start, not from midnight); disk use well under
@@ -1013,7 +1178,7 @@ simpler than transferring it.
 ### 8.1 Update the documents
 
 - `intermine-planning/docs/INTERMINE_ORG_HOSTING.md`: add a dated section "Registry moved": the
-  provider and server name, who pays, the DNS record (`registry` CNAME `registry-new`), and that
+  provider and server name (for option b: the DBCLS server and who administers it), who pays, the DNS record (`registry` CNAME `registry-new`), and that
   Heroku and Atlas were retired on that date. Mark the older Mongo/Atlas recommendations there as
   superseded by decision 0008.
 - Registry README: add a "Production deployment" paragraph that points to this guide and says
@@ -1038,7 +1203,7 @@ intermine (branches `maint-2026`; excluding node_modules, target, .git):
 | `intermine/intermine/webapp/src/main/java/org/intermine/web/fair/SemanticMarkupFormatter.java:71` (`:67` on `dev`) | `https://registry.intermine.org/` | none |
 | `intermine/docs/UPGRADING-build.md:460` | host name only | none |
 
-im-tables-3 and bluegenes-tool-store have no references. The http redirect in step 3.4 keeps the
+im-tables-3 and bluegenes-tool-store have no references. The http redirect in step 3.4 (3.6 on the DBCLS server) keeps the
 old http references working for GET requests, so these changes are tidying, not urgent.
 
 ### 8.3 Monitoring
@@ -1093,7 +1258,9 @@ Nothing on the server needs a regular backup:
   for the first minute).
 - The `caddy-data` volume holds the certificates and the Let's Encrypt account. Also disposable:
   Caddy gets new certificates at start-up. Do not throw it away often, though: Let's Encrypt allows
-  only 5 identical certificates per week.
+  only 5 identical certificates per week. On the DBCLS server (nginx) there is no `caddy-data`: the
+  certificates are in `/etc/letsencrypt`, backed up and renewed with the server's other certificates;
+  check `sudo certbot renew --dry-run` after adding them.
 - Keep, outside the server: the admin token (password manager), and copies of
   `docker-compose.yml` and `caddy/Caddyfile` (they are in this guide; any change you make to them
   should be copied back here). Rebuilding the whole server from this guide takes about an hour.
@@ -1103,6 +1270,11 @@ Nothing on the server needs a regular backup:
 ## 9. Operations cheat-sheet
 
 All on the server, in `/srv/registry` (`ssh registry-vps`, then `cd /srv/registry`).
+
+On the DBCLS server (option b): log in as arranged with its administrators and use the directory chosen in
+3.6. There is no Caddy, so leave out the Caddy lines below (the `caddy` log line and the monthly
+`docker compose pull caddy`); the proxy is reloaded with `sudo nginx -t && sudo systemctl reload nginx`;
+OS and Docker updates are the administrators', unless agreed otherwise.
 
 **State at a glance**
 ```bash

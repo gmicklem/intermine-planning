@@ -21,7 +21,7 @@ Sandbox caveat: the sandbox resolver answers only A records and returns empty an
 - I could not find any evidence that anything **current** runs on Heroku. The only Heroku hostnames in InterMine repos are historic: `staircase.herokuapp.com` (repo archived 2019), `intermine-neo4jwebapp.herokuapp.com` (GSoC 2017 neo4j prototype), `cross-intermine-search-tool.herokuapp.com` (GSoC 2018; the live homepage now links `cross-intermine-search-tool.apps.intermine.org` instead) [repo]. I could not reach any of them to see if they still respond [unreachable].
 - `*.apps.intermine.org` and `*.labs.intermine.org` are almost certainly **self-hosted Dokku** ("Docker-powered mini-Heroku"), not Heroku: the repo `intermine/dokku-default-site` says "Default placeholder for when dokku on bert-vm is asked to serve an unknown subdomain" and `mineversions` says its live copy is at `mineversions.apps.intermine.org` [repo]. Dokku speaks the same `Procfile`/`.buildpacks` conventions as Heroku, which explains why BlueGenes (`Procfile`, `.buildpacks` pinning Heroku buildpacks) and `iodocs`/`intermod-site` (`Procfile`) look "Heroku-shaped" [repo]. `bert-vm` is a named VM; the owner (probably the Cambridge Micklem lab) is not stated [inference].
 - Where Gos saw Heroku is therefore uncertain. The best candidate [inference] is **registry.intermine.org** (a Node/Express + MongoDB app, an obvious Heroku-plus-mLab/Atlas shape), but I could not resolve or fetch it from the sandbox [unreachable], and the registry repo contains no Procfile or Heroku reference [repo]. Heroku's free tier ended Nov 2022, so if the registry is on Heroku someone is paying (or it was moved to Dokku/another host); who is unknown.
-- Recommendation: do not move anything *to* Heroku. Static parts stay on GitHub Pages (free, TLS automatic once DNS is fixed). The registry (the one dynamic service everything depends on) should be inventoried first, then moved, if it is on Heroku, to the same small VM/Dokku/Docker Compose host that already runs the apps and BlueGenes, with Caddy or the Dokku letsencrypt plugin for TLS. Details in the Heroku section.
+- Recommendation: do not move anything *to* Heroku. Static parts stay on GitHub Pages (free, TLS automatic once DNS is fixed). The registry (the one dynamic service everything depends on) should be inventoried first, then moved, if it is on Heroku, to the DBCLS server that already runs HumanMine, FlyMine and both JBrowse hosts (Docker containers behind nginx, a Let's Encrypt certificate per hostname; see "Update 17 Nov 2026 (Gos): the DBCLS server" at the end). Details in the Heroku section.
 
 ## Inventory
 
@@ -47,7 +47,7 @@ DNS data comes from the sandbox resolver (A records only). "n/r" = not resolvabl
 | api.intermine.org, mines.intermine.org, data.intermine.org, apps.intermine.org, blog/training/bluegenes.intermine.org | no answer [n/r] | likely do not exist [inference] | n/r | n/r | none referenced in any repo | n/a |
 | intermineorg.wordpress.com | n/t | WordPress.com (SaaS) | blocked | blocked | project blog | `blog-container` is an obsolete dockerised WordPress |
 
-Notes on the last four rows with data: the flymine.org / humanmine / jbrowse results all point at one IP, 133.39.78.111, with a Let's Encrypt certificate, and the BlueGenes page there displays "Debug: Stylesheets not compiled" with version tag `46c4cc8`. This looks like a recent self-hosted deployment, possibly one of the sprint's own, but I could not tell from outside whether that is the production FlyMine/HumanMine or an environment particular to the sandbox network [inference; ask Gos]. http does not redirect to https on those hosts, and no `Strict-Transport-Security` header was returned on `www.flymine.org` [observed].
+Notes on the last four rows with data: the flymine.org / humanmine / jbrowse results all point at one IP, 133.39.78.111, with a Let's Encrypt certificate, and the BlueGenes page there displays "Debug: Stylesheets not compiled" with version tag `46c4cc8`. This looks like a recent self-hosted deployment, possibly one of the sprint's own, but I could not tell from outside whether that is the production FlyMine/HumanMine or an environment particular to the sandbox network [inference; ask Gos]. [Resolved 17 Nov 2026 by Gos: it is the production DBCLS server, not a sandbox artefact; see the update at the end.] http does not redirect to https on those hosts, and no `Strict-Transport-Security` header was returned on `www.flymine.org` [observed].
 
 ## HTTPS plan
 
@@ -79,7 +79,8 @@ Who can do it: whoever controls the host (Heroku account / Dokku VM / cloud cons
 
 - If it is on **Heroku**: add the custom domain with `heroku domains:add registry.intermine.org` on a paid dyno (Eco/Basic or higher); Automated Certificate Management (Let's Encrypt-based, as I remember Heroku's current offering, verify) is on by default for paid dynos. DNS: CNAME the host to the `*.herokudns.com` target Heroku gives. Then set the app to force https (an `x-forwarded-proto` redirect middleware in `app.js`, since Heroku terminates TLS).
 - If it is on **Dokku**: `dokku letsencrypt:enable registry` after installing the `dokku-letsencrypt` plugin, plus `dokku letsencrypt:cron-job --add`; port 80 must be reachable from the internet for the HTTP-01 challenge.
-- If on a **plain VM**: Caddy in front (automatic certificates, http->https redirect built in) is the least-maintenance path.
+- If it moves to the **DBCLS server** (the preferred home, see the 17 Nov 2026 update): one more container behind the existing nginx, a new server block and its own Let's Encrypt certificate for the hostname, issued the way the server already issues the other hosts' certificates; no Caddy and no new ports.
+- If on a **plain VM**: Caddy in front (automatic certificates, http->https redirect built in) is the least-maintenance path (this is now the fallback if DBCLS access or policy prevents the preferred home).
 - In all cases: update `swagger.json` `schemes` from `["http"]` to `["https"]` and the README API URLs (`http://intermine.org/registry/service/`, `http://registry.intermine.org/api-docs/`) [repo].
 - Clients already use https for the registry in the places that matter (see Code references), so no client breakage is expected once TLS works; the old http clients (vendored imjs 3.18.1 inside mine webapps) will break on https-only if the redirect is a 301 on a non-GET method or if HSTS blocks mixed content, so keep http->https as 301 on GET and test the vendored imjs.
 
@@ -88,9 +89,9 @@ Who can do it: whoever controls the host (Heroku account / Dokku VM / cloud cons
 - On Dokku: `dokku letsencrypt:enable <app>` per app, or install the plugin and enable globally with `dokku letsencrypt:auto-renew`. Wildcard certificates are not needed; each app gets its own.
 - Alternatively retire the apps that nobody uses (cross-intermine-search-tool, iodocs, mineversions, go-intermod, data-browser are all untouched since 2018-2020 [repo]) and stop linking to them. BlueGenes `home/views.cljs` currently links two of them over http (see below).
 
-### D. flymine.org / humanmine / jbrowse (nginx + Let's Encrypt, 133.39.78.111)
+### D. flymine.org / humanmine / jbrowse (nginx + Let's Encrypt, 133.39.78.111, the DBCLS production server)
 
-- Certificates are already valid. Missing: an http -> 301 -> https server block and optional HSTS in the nginx config (http currently serves 200) [observed]. `docker_template` is the likely source of the config [inference]; the cert for flymine.org expires 2026-12-14, so confirm renewal is automated.
+- Certificates are already valid. Missing: an http -> 301 -> https server block and optional HSTS in the nginx config (http currently serves 200) [observed]. The container layout on this server was the starting point for `docker_template` (Gos, 17 Nov 2026), and each hostname has its own Let's Encrypt certificate [observed 17 Nov 2026]. The cert for flymine.org expires 2026-12-14, so confirm renewal is automated.
 
 ## Heroku findings and self-hosting recommendation
 
@@ -104,10 +105,10 @@ What I could and could not establish:
 Recommendation [inference, for Gos to confirm]:
 
 1. **Static content (homepage, docs, user docs, workshops)**: stay on GitHub Pages. It is free, has no servers to patch, and TLS becomes automatic once the A records are corrected. Self-hosting these would add cost and duty with no benefit.
-2. **The registry**: it is the only dynamic service that BlueGenes, imcljs, mine webapps (SemanticMarkupFormatter) and mobile/R clients depend on; an outage degrades the mine switcher in BlueGenes (`events/registry.cljs` shows an error toast). Keep one canonical home for it. Minimum viable self-host: one small VM (1-2 vCPU, 2 GB RAM) running Docker Compose with three services: the registry (`node ./bin/www`), MongoDB, and Caddy (automatic Let's Encrypt, http->https redirect, HSTS). Cost: a few USD per month from any VPS provider, or free on an existing university VM; needs a DNS A/AAAA record and port 80/443 open. Maintenance: OS patches, Mongo backups (a cron `mongodump`), and updating the app's ancient dependencies (`bcrypt ^3`, `mongoose ~5.7`, `request`) which no longer build on current Node.
+2. **The registry**: it is the only dynamic service that BlueGenes, imcljs, mine webapps (SemanticMarkupFormatter) and mobile/R clients depend on; an outage degrades the mine switcher in BlueGenes (`events/registry.cljs` shows an error toast). Keep one canonical home for it. Preferred home (Gos, 17 Nov 2026): the DBCLS server that already runs the mines, as one more container behind its nginx, routed by hostname, no new ports (the rewritten registry has no database, so it is a single container). Fallback if DBCLS access or policy prevents that, the minimum viable self-host: one small VM (1-2 vCPU, 2 GB RAM) running Docker Compose with three services: the registry (`node ./bin/www`), MongoDB, and Caddy (automatic Let's Encrypt, http->https redirect, HSTS). Cost: a few USD per month from any VPS provider, or free on an existing university VM; needs a DNS A/AAAA record and port 80/443 open. Maintenance: OS patches, Mongo backups (a cron `mongodump`), and updating the app's ancient dependencies (`bcrypt ^3`, `mongoose ~5.7`, `request`) which no longer build on current Node.
 3. **Alternatives**: Fly.io or Render (small paid instance plus managed Mongo/Atlas free tier, automatic TLS, git-push deploys) trade a few USD per month for no VM maintenance; keep Heroku only if an account is found that already pays for it and someone with owner rights will keep paying. Either way the registry needs an owner named in the repo, which it lacks (last commit 2020).
 4. **Dokku apps**: nobody should add new apps; consolidate or retire. If kept, enable the letsencrypt plugin.
-5. **TLS everywhere**: Caddy or the Dokku plugin handle renewal; a plain nginx + certbot setup (as flymine.org appears to use) needs a monitored renewal timer, because the flymine.org cert expires 2026-12-14.
+5. **TLS everywhere**: Caddy or the Dokku plugin handle renewal; a plain nginx + certbot setup (as the DBCLS server uses for flymine.org, humanmine and jbrowse) needs a monitored renewal timer, because the flymine.org cert expires 2026-12-14.
 
 ## Code references that hard-code http:// intermine hosts
 
@@ -158,11 +159,15 @@ Update these when intermine.org and the other hosts go https. Paths are relative
 2. **Does Gos's GitHub account have admin on `intermine/intermine.github.io`?** The Pages "Enforce HTTPS" checkbox and domain re-add need it. (The sandbox token reported admin on `intermine/im-docs`; I did not attempt any changes.)
 3. **Where does registry.intermine.org actually run, and who pays?** I could not resolve or fetch it. Candidates: a Heroku app on a personal account, the Dokku VM `bert-vm`, or another host. Ask whoever deployed it (the registry's last committer was Daniela Butano in 2020; the original author was GSoC 2017 student Leonardo Kuffo). If nobody answers, `host registry.intermine.org` from a normal network will show a `*.herokudns.com` / `*.herokuapp.com` CNAME if it is Heroku, or an IP in a university range if it is Dokku or a VM.
 4. **Who maintains the registry** going forward? The sprint plan treats it as a dependency (BlueGenes mine list); a named owner and a backup of its Mongo data are needed before any migration.
-5. **Is 133.39.78.111 the production host for flymine.org / www.humanmine.org / jbrowse.intermine.org**, or is it an environment peculiar to this sandbox? If production, it should get the http->https redirect and HSTS, and its flymine.org certificate renews by 2026-12-14.
+5. **Is 133.39.78.111 the production host for flymine.org / www.humanmine.org / jbrowse.intermine.org**, or is it an environment peculiar to this sandbox? **Answered 17 Nov 2026 (Gos): it is the DBCLS production host** for HumanMine, FlyMine and both JBrowse hosts (Docker containers behind nginx, Let's Encrypt per hostname; see the last section). It should still get the http->https redirect and HSTS, and its flymine.org certificate renews by 2026-12-14 (confirm who runs renewal).
 6. **Which `*.apps.intermine.org` apps are still wanted?** Most are not touched since 2018-2020; retire or move rather than add TLS everywhere.
 7. **Is http-only intermine.org a known issue** that someone deliberately avoided (for example because a partner's embedded iframe or an old mine webapp depends on http)? Check for an existing issue in `intermine/intermine.github.io` before changing DNS.
 8. **Should the homepage be rebuilt?** The last deploy is from May 2022 and its CI image (`ubuntu-18.04`, Hugo 0.82) no longer exists on GitHub; changing `baseurl` needs a working build, or the checked-in output in `intermine.github.io` can be edited with a `sed` replacement of `http://intermine.org` as a stop-gap.
 9. **GitHub Pages IPs**: please double-check the four `185.199.x.153` addresses and the AAAA set against the live GitHub docs before changing DNS; I quoted them from memory.
+10. **Who administers the DBCLS server (133.39.78.111)**, and what is their change process (a request, an agreed
+    window, a review of nginx changes)? Needed to add the registry and the alignment service there.
+11. **Can the sprint get SSH access to it** (a user allowed to run `docker` and edit the nginx configuration), or
+    must a DBCLS administrator do those steps?
 
 ## Update 17 Nov 2026: the registry IS the Heroku app (confirmed by Gos)
 
@@ -203,3 +208,35 @@ host the registry on. The hosting choice is therefore a new small VM (any provid
 managed platform (Fly.io / Render) with a managed MongoDB (Atlas free tier). Gos pays for the Heroku account and
 gmicklem can own the app, so the Heroku side of the migration needs no third party. Backup instructions:
 docs/REGISTRY-BACKUP.md.
+
+[Superseded in part, 17 Nov 2026: the statement above that "there is no InterMine VM to host the registry on" was
+wrong. Only the Cambridge Dokku VM was taken down; see the next section. The new-VM / Fly.io / Render choice
+remains the fallback.]
+
+## Update 17 Nov 2026 (Gos): the DBCLS server
+
+HumanMine (www.humanmine.org) and FlyMine (flymine.org, www.flymine.org) DO run today. They run as a set of Docker
+containers on a server at DBCLS (the Database Center for Life Science, Japan) at 133.39.78.111 (the host in the
+inventory above), behind an nginx 1.27.1 reverse proxy that also serves jbrowse.intermine.org and
+jbrowse2.intermine.org. Each hostname has its own Let's Encrypt certificate (observed 17 Nov 2026:
+CN=www.humanmine.org, CN=flymine.org, CN=www.flymine.org, CN=jbrowse.intermine.org, each its own certificate), and
+routing is by hostname. That container layout was the starting point for the `docker_template` repository. The
+server has about 256 GB RAM (Gos). The earlier belief in this document that no InterMine server exists any more,
+and that 133.39.78.111 might be peculiar to the sandbox, was wrong: what was taken down was the old Cambridge Dokku
+VM (`bert-vm`, the `*.apps` / `*.labs` apps). The inventory tables above are kept as observed; only their
+interpretation changes.
+
+What follows from it [recommendations; the first two replace the earlier ones that assumed no server]:
+
+1. **The registry** should be one more container on this server, behind the same nginx, with a new server block and
+   its own Let's Encrypt certificate for `registry.intermine.org` (and `registry-new.intermine.org` for the test
+   phase), routed by hostname, no new ports. The Compose stack is the registry alone (no MongoDB, no Caddy). The
+   VM / Fly.io / Render options above are the fallback if DBCLS access or policy prevents this. Step by step:
+   docs/REGISTRY-DEPLOYMENT.md.
+2. **The sequence alignment service** (the dead `sequencealignment.apps.intermine.org`, which the tests already
+   treat as dead) should likewise live on this server as a container behind the same nginx, on its own hostname,
+   with no new ports, rather than on a new host.
+3. The existing hosts there still lack the http -> 301 -> https redirect and HSTS (section D), and the renewal of
+   the flymine.org certificate (expires 2026-12-14) should be confirmed.
+4. Unknown, and needed before any of this: who administers the DBCLS server, what their change process is, and
+   whether the sprint's accounts get SSH access (new open questions 10 and 11).
