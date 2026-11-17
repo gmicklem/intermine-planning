@@ -48,6 +48,11 @@ for p in 15001 5001 8090 18090 5000 15000; do sbx ports claude-repos --publish $
 ```
 
 The browser calls the mine web services directly on 8090/18090, so those two must be published too.
+The compose files bind the mine and old-BlueGenes ports to the sandbox's loopback only, so a forwarder
+(`/home/agent/taskhomes/im-bg-serve/forward.sh`, socat on the eth0 address for 8090, 18090, 5000, 15000)
+must be running for `sbx ports` to reach them; the new BlueGenes on 5001/15001 listens on all interfaces
+already. If a page says "Failed to acquire token", the browser cannot reach the mine port: check
+`curl http://localhost:8090/humanmine/service/version` on the Mac first.
 Known cosmetic items on both mines: `/service/version/release` returns the placeholder `@RELEASE_VERSION@`
 (the demo build never fills it), and the branding reads "rdfc2im: 113 gene food/drug-metabolism panel".
 The sandbox blocks the home-page RSS feed (one console error) which will not happen on the Mac.
