@@ -62,3 +62,11 @@ sbx policy allow network ftp.ncbi.nlm.nih.gov,ftp.uniprot.org,rest.uniprot.org,f
 
 Not in that command, on purpose: omim.org, www.disgenet.org, depmap.org (restricted or account-gated
 data; loaded only from Gos's local copies, decision D-7). jbrowse2.intermine.org is already allowed.
+
+Checked 17 Nov 2026 22:40 UTC after Gos ran the command: every host answers (NCBI, rest.uniprot.org,
+EBI x2, geneontology, PANTHER, MGI, BioGRID, Reactome, RCSB, Protein Atlas, GTEx on
+storage.googleapis.com, PanelApp, Orphadata; purl.obolibrary.org redirects to
+release-assets.githubusercontent.com, which also works). One exception: `ftp.uniprot.org` over https
+connects through the proxy and then times out after 30 s (the host, not the policy); use the EBI mirror
+`https://ftp.ebi.ac.uk/pub/databases/uniprot/current_release/knowledgebase/taxonomic_divisions/`
+for the UniProt XML and FASTA files instead.
