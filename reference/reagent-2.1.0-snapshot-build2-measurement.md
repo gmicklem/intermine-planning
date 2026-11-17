@@ -62,3 +62,60 @@ npm run test:unit              # S-on
 Scripts, probe specs (keep/), diffs, logs: /home/agent/taskhomes/im-7os.63/ (cys-*.log/tsv, counts-*.txt/jsonl, upls-*.jsonl,
 releases-*.log, unit-Son.log, snap-path.txt, reagent-src/input-build2.cljs, Soff.diff, Dnodefer.diff).
 Build artefacts (node_modules, .shadow-cljs, .cpcache, compiled js/css, target) deleted from the worktree afterwards.
+
+## Variant (im-7os.64): skip the deferred check while the input has not rendered a new value
+
+reference/reagent-676-variant.patch (unified diff against cad0b51c, src/reagent/impl/input.cljs, input-handle-change only, +8/-2):
+input-handle-change records cljsRenderedValue when the change is handled; the deferred setTimeout -> do-after-render check then calls
+input-component-set-value only if cljsPendingValues is nil or cljsRenderedValue has changed since (otherwise it skips, like #686's did-update).
+
+The draft's literal condition (cljsRenderedValue = cljsCommittedValue while values are pending) cannot be used in the deferred check:
+input-component-did-update sets cljsCommittedValue to cljsRenderedValue after every commit, so the two are always equal by the time the
+check runs. The patch expresses the same intent, "the input has not rendered newer state since this change", by comparing with the rendered
+value captured at change time. It skips equally whether the input did not re-render at all or re-rendered with the same (stale) value.
+#686's input-component-did-update and everything else are unchanged.
+
+Setup: BlueGenes worktree .../im-7os.63-reagent-snap2 in its S-off state, with deps.edn reagent -> {:local/root "/home/agent/taskhomes/im-7os.64/reagent"}
+(Voff.diff; classpath checked: only /home/agent/taskhomes/im-7os.64/reagent/src, no reagent jar). The clone is at cad0b51c, with the patch applied (V) or
+not (control C = plain cad0b51c). Release builds V and C are both named app.4d77b70.js (the name hash does not cover dependency sources)
+but differ: sha256 5c63cd32... (V) vs 62b27299... (C), and the served file was checked. Baseline B = maint-2026 tree (reagent 1.2.0, our patch on), app.3b3cb7d.js.
+Mine: ut demo mine :18090/humanmine, BlueGenes on :5295.
+
+| config | keystroke spec lost/1600 | upload probe lost/800 | upload reps wrong/20 | reject probe reps wrong/10 | report_page_test fails |
+|---|---|---|---|---|---|
+| **V: variant, patch off** | **0** | **0** | **0** | **0** | **0 of 5** |
+| C: plain cad0b51c via :local/root, patch off (control) | not run | 205 | 9 | 0 | not run |
+| B: baseline 1.2.0, patch on (checks the reject probe) | not run | - | - | 0 | not run |
+| (yesterday: build 2 jar cad0b51c, patch off) | 4 | 303 | 14 | - | 2 of 10 |
+
+C upload probe, the 9 wrong reps (right after typing / 400 ms later): 6 x '' / 'D6', '6' or '2D6'; 3 x tail on both reads ('2D6', 'D6').
+Same pattern as yesterday's S-off, so the variant is the only change that matters.
+Reject probe (keep/zz_reject_probe.js): regions page, extend-region text input (pages/regions/views.cljs input-slider, :on-change rejects
+anything parse-bp's /(\d*\.?\d*)([kKmM]?)/ does not match via reject-input!): clear, type "1x2.y5.kq" (Cypress default 10 ms), expect
+"12.5k" right after typing and 400 ms later. 10 reps per config; all exact in V, C and B. The viz cases number input (components/viz/cases.cljs)
+was not tested: its tool needs the class Cases, which the demo mine's model does not have. Caveat: the probe passes in all three because
+reject-input! writes the node itself, so it shows our rejecting inputs still work with V, not that reagent's own revert works.
+
+Reagent's own tests (clone at cad0b51c, npm ci; Chromium 153 from /home/agent/browser-scratch/chromium-arm64, --no-sandbox):
+- unit (shadow-cljs release test + karma, test-environments/shadow-cljs-prod with keep/karma.local.conf.js): C 246/246 pass;
+  V 238 pass, 8 fail, all rejection tests in reagenttest.testinput: on-change-rejects-key, async-on-change-rejects-key,
+  async-on-change-rejects-key-with-rerender, strict-mode-rejects-first-key (each --fn and --class); e.g. state "12" but node "1x2", async: state "ab" but node "ab1".
+- e2e (shadow-cljs release e2e + playwright, keep/playwright.local.config.js): C 28/28 pass; V 25 pass, 3 fail: "rejected change is reverted"
+  reject-sync and reject-async (typed 'ab1c2d' with digits rejected, node stays 'ab1c2d', expected 'abcd'), and the known issue
+  "caret mid-text when on-change changes the value, number-nozero-sync" now passes (marked test.fail, so reported as a failure): the dropped
+  zero is no longer written back, so the caret does not jump before the next key. All #676 tests (fast typing, re-render with lagging state) pass in V.
+So V keeps every key in our app but removes reagent's automatic revert of a rejected key until the input renders a different value; apps
+that reject keys must put the text back themselves (as BlueGenes' reject-input! does).
+
+Commands (scripts copied from im-7os.63, paths changed; serve.sh now runs in the foreground under run_in_background, stopped by port):
+git -c core.fsync=none clone https://github.com/reagent-project/reagent.git /home/agent/taskhomes/im-7os.64/reagent; git checkout cad0b51c; git apply reference/reagent-676-variant.patch
+clojure -Sforce -A:cljs -Spath | tr ':' '\n' | grep reagent; npm ci
+bin-snap/build.sh Voff|Ctl|Base; bin-snap/serve.sh <label>; bin-snap/upl.sh <label>; bin-snap/count.sh Voff; bin-snap/rej.sh <label>
+bin-snap/cy.sh report-Voff-rN cypress/integration/report_page_test.js     # x5, retries=0
+(reagent) npx shadow-cljs release test; CHROME_BIN=.../chromium npx karma start test-environments/shadow-cljs-prod/karma.local.conf.js --single-run
+(reagent) npx shadow-cljs release e2e; E2E_PORT=8097 npx playwright test --config playwright.local.config.js
+Logs: /home/agent/taskhomes/im-7os.64/ (upls-*.jsonl, counts-Voff.*, rejs-*.jsonl/txt, cys-*.log/tsv, releases-*.log, server-*.log,
+reagent-unit-{plain,variant}.log, reagent-e2e-{plain,variant}.log, appsha-*.txt, Voff.diff, Soff-at-start.diff, keep/, bin-snap/).
+After the runs the worktree was put back to its S-off state (Soff-at-start.diff: deps.edn 2.1.0-SNAPSHOT), and build artefacts were deleted
+(worktree .cpcache, .shadow-cljs, node_modules, resources/public/{css,js}; clone node_modules, target, .shadow-cljs, test-results).
+The clone keeps the variant applied plus the two local test configs.

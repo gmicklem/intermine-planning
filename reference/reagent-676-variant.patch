@@ -1,0 +1,25 @@
+diff --git a/src/reagent/impl/input.cljs b/src/reagent/impl/input.cljs
+index f4b57ff..bfbda17 100644
+--- a/src/reagent/impl/input.cljs
++++ b/src/reagent/impl/input.cljs
+@@ -138,12 +138,18 @@
+       ;; updated on a later tick (setTimeout, re-frame dispatch) is rendered
+       ;; first. Only the check of the latest change runs, so it isn't done
+       ;; before the state for that change had a chance to update.
+-      (let [n (inc (or (.-cljsChangeCount this) 0))]
++      ;; Skip it if the input hasn't rendered a new value since this change
++      ;; while on-change values are pending: its state still lags behind the
++      ;; DOM, as in input-component-did-update.
++      (let [n (inc (or (.-cljsChangeCount this) 0))
++            rendered-value (.-cljsRenderedValue this)]
+         (set! (.-cljsChangeCount this) n)
+         (js/setTimeout (fn []
+                          (batch/do-after-render
+                           (fn []
+-                            (when (== n (.-cljsChangeCount this))
++                            (when (and (== n (.-cljsChangeCount this))
++                                       (not (and (some? (.-cljsPendingValues this))
++                                                 (= rendered-value (.-cljsRenderedValue this)))))
+                               (input-component-set-value this)))))
+                        0)))))
+ 
