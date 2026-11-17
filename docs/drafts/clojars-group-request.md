@@ -1,3 +1,4 @@
+<!-- FILED as https://github.com/clojars/administration/issues/349 (17 Nov 2026) -->
 Title: Request to join the org.intermine group (maintainer change)
 
 Dear Clojars Administrators,

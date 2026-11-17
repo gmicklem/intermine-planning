@@ -80,3 +80,13 @@ intermineorg/* or intermine/*.
   each remote operation.
 - Hourly `status/STATUS.md` commits continue while the sandbox is up; sleeping the laptop
   pauses everything and the workers resume or are relaunched when you say "back".
+
+## Clojars group membership (17 Nov 2026)
+
+- `org.intermine` members (dani, julie, sergio, uosl, yo) are all former developers; no self-service route.
+- TXT record `clojars gmicklem` is live on intermine.org (verified by clojars.org/verify/group, which
+  refuses only for lack of membership).
+- Request filed with the Clojars administrators: https://github.com/clojars/administration/issues/349
+  (draft: docs/drafts/clojars-group-request.md). When granted: verify the group at
+  clojars.org/verify/group, then releases per docs/COMPLETION.md (imcljs 1.7.0 -> im-tables 0.16.0
+  -> tool-store 0.3.0 -> bluegenes 1.5.0; bead im-7os.33).
