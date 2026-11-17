@@ -17,6 +17,18 @@ running demo stacks (`:8090` 5.1.1, `:18090` 6.0.0, BlueGenes with tools on `:15
 with about 25 read-only requests to www.humanmine.org. Anything marked *unverified* could not
 be checked from the sandbox; most data hosts are blocked (§3).
 
+**Where the public mines run.**
+- HumanMine and FlyMine run today as a set of Docker containers on a **DBCLS server**,
+  `133.39.78.111` (`docs/INTERMINE_ORG_HOSTING.md`).
+- An nginx reverse proxy with Let's Encrypt certificates fronts them.
+- The same server also serves `jbrowse.intermine.org`.
+- That container layout was the starting point for the `docker_template` repo.
+- Every "HumanMine" reference below (`www.humanmine.org`, its JBrowse, its patched tools)
+  is that deployment.
+- Hosting rule for new services (the aligner, T1.14; the registry, which is covered
+  elsewhere): they go on the same DBCLS server, behind its existing reverse proxy, by
+  hostname, with no new ports.
+
 **Correction to the brief.** `rdfc2im/tools/reduce_mine.py` does **not** choose the gene
 subset. It trims HumanMine's config files (project.xml sources, priorities, webconfig,
 objectstore summary) down to the classes a reduced model actually has. The subset is chosen
@@ -139,7 +151,7 @@ The "Candidate source" column uses these keys:
 | **Exons, Introns, Transcripts, UTRs, intergenic regions** | No (0) | GFF features. Introns and intergenic regions come from postprocesses (`create-intron-features`, `create-intergenic-region-features`); neither is in HumanMine's list, and PAX6 has 0 UTRs and 0 intergenic regions on HumanMine | **IM ncbi-gff** (Gene, Transcript/MRNA, Exon; no CDS/UTR handling). Alternative: **RP-possible** Ensembl transcripts/exons |
 | **Proteins** collection | Yes (58 for CYP2D6, TrEMBL included) | already there | **RP-has** uniprot |
 | **Protein Visualizer** (PDB) | Shown, broken in two ways: (1) its query selects `Protein.canonicalProtein.primaryAccession`, which is absent from the demo model, so 400; (2) bundle 2.1.1 calls RCSB `search.rcsb.org/rcsbsearch/v1/query`, which returns 404 (checked). v2 works: CYP2D6 P10635 returns 14 entries | `Gene.proteins.primaryAccession`, `Protein.canonicalProtein`. **PDB ids come live from RCSB in the browser; no PDB data is loaded into the mine** | **IM uniprot** (stock UniProt XML; sources.yaml already declares `uniprot: alongside: [uniprot]`), plus the static bundle patch v1 to v2 |
-| **MSA Viewer** | Shown, broken in three ways: (1) selects `isUniprotCanonical` and `isFragment` (absent); (2) `sequence.residues` is empty; (3) it posts to `https://sequencealignment.apps.intermine.org`, which fails TLS from here and per the repo README "is gone" | `Protein.sequence.residues` (canonical and isoforms), `isUniprotCanonical`, `isFragment`; an aligner | **IM uniprot** (canonical sequence) + **IM fasta** (uniprot-fasta, `uniprot_sprot_varsplic.fasta`, isoforms). **RP-possible**: UniProt `core:sequence` rdf:value. **static**: `repos/sequence-alignment-service` container plus the bundle patch to the same-origin `/align-sequence` |
+| **MSA Viewer** | Shown, broken in three ways: (1) selects `isUniprotCanonical` and `isFragment` (absent); (2) `sequence.residues` is empty; (3) it posts to `https://sequencealignment.apps.intermine.org`, which fails TLS from here: the name no longer serves a valid certificate, and the repo README says InterMine "no longer hosts" the service there. The mines themselves still run on the DBCLS server; only this service was not carried over. Reinstating it there is T1.14 | `Protein.sequence.residues` (canonical and isoforms), `isUniprotCanonical`, `isFragment`; an aligner | **IM uniprot** (canonical sequence) + **IM fasta** (uniprot-fasta, `uniprot_sprot_varsplic.fasta`, isoforms). **RP-possible**: UniProt `core:sequence` rdf:value. **static**: `repos/sequence-alignment-service` container plus the bundle patch to the same-origin `/align-sequence` |
 | **GO Annotation** + `Gene_GO`; GO term / GO concept tools; `go_enrichment_for_gene` widget | No (`OntologyAnnotation` 0; the widget is dropped by `reduce_mine.py webconfig`) | `GOAnnotation(subject Protein/Gene, ontologyTerm, evidence)` and `GOTerm.parents` | **IM go-annotation** (GAF `goa_human`; annotates `Protein.primaryAccession`, and `GoPostprocess` copies to Gene), plus **IM interpro-go**. **RP-possible**: UniProt `core:classifiedWith` with no evidence codes (D4); bead im-ore.18 covers this route |
 | **Homologues** + `Gene_Orth2` | No (no class) | `Homologue(gene, homologue, type, evidence)`; partner genes in 6 organisms | **IM panther** (RefGenomeOrthologs). Partner symbols also need **IM mgi-identifiers**, **IM rgd-identifiers**. **RP-possible**: homologene (D7 blocks it; HomoloGene has been frozen upstream since 2014), and OMA (rdf-config `oma`, own endpoint `sparql.omabrowser.org`, not RDF Portal) |
 | **Pathways** | Yes (6 for CYP2D6) | already there | **RP-has** reactome + stock reactome alongside |
@@ -428,7 +440,7 @@ and a new CI release asset (`demo-data-*`). **Gos decides (D-4).**
 | orphanet | `www.orphadata.com/data/xml/en_product1.xml` | est. about 5 MB | Feb 2022 | none |
 | hgnc (only if the stock source is kept) | `storage.googleapis.com/public-download-files/hgnc/tsv/tsv/hgnc_complete_set.txt` | **verified 17,007,798 B** (2026-11-13) | Feb 2022 | replaced by RDF |
 | reactome (already used) | `reactome.org/download/current/UniProt2Reactome.txt` | **verified 200**, last-modified 2026-10-18 | 79 | as now |
-| Milestone 2 only | protein2ipr (`protein2ipr.dat.gz`, est. over 20 GB for all of UniProt); interpro (`interpro.xml.gz`, est. about 150 MB); interpro-go; clinvar full (RDF); gene2pubmed (est. about 200 MB); mgi/rgd reports; depmap; disgenet; GTEx eQTL; ncbi-summaries (no public file; HumanMine's `gene_summaries.txt` came from a script in the external `intermine-scripts` repo, not cloned here) | | | |
+| Milestone 3 only | protein2ipr (`protein2ipr.dat.gz`, est. over 20 GB for all of UniProt); interpro (`interpro.xml.gz`, est. about 150 MB); interpro-go; clinvar full (RDF); gene2pubmed (est. about 200 MB); mgi/rgd reports; depmap; disgenet; GTEx eQTL; ncbi-summaries (no public file; HumanMine's `gene_summaries.txt` came from a script in the external `intermine-scripts` repo, not cloned here) | | | |
 
 Overall, milestone 1 needs about **0.7 to 1.2 GB of downloads** without the genome FASTA
 (est.), or about 2 GB with it. After filtering, the panel data is small: under 50 MB, which
@@ -510,10 +522,10 @@ This matters because `cached_raw_data/` is published as a **GitHub release asset
 | HM-bs hpo-annotation | requires `phenotype_annotation.tab`, `phenotype_annotation_negated.tab`, `genes_to_phenotype.txt` | HPO replaced the `.tab` files with `phenotype.hpoa` (2021-22) and changed the `genes_to_phenotype.txt` columns (2023) (*unverified*) | 2026-11-16; **test class deleted** (27323d2), 6 orphan fixtures | **Converter fix needed** (about 2 h, including restoring the test) |
 | HM-bs hpo | OBO loader | stable | 2020-06-12; 0 | Replace with rdfc2im `hpo` |
 | HM-bs orphanet | `en_product1.xml` (throws on other names) | *unverified* | 2021-11-12; 1 | Low |
-| HM-bs clinvar, huge-gwas, hgnc | as tabled by the converters | replaced by rdfc2im `clinvar`, `gwascatalog`, `hgnc` | 2026-11-16 | Keep as the fallback for milestone 2 |
+| HM-bs clinvar, huge-gwas, hgnc | as tabled by the converters | replaced by rdfc2im `clinvar`, `gwascatalog`, `hgnc` | 2026-11-16 | Keep as the fallback for milestone 3 |
 | HM-bs disgenet | `curated_gene_disease_associations.tsv` | licensing changed (*unverified*) | 2026-11-16; empty stub test | Decision D-7 |
-| HM-bs depmap-* | `CCLE_expression.csv`, `sample_info.csv` | DepMap renamed its release files after 2022 (*unverified*) | 2026-11-16; stub test (expression) | Milestone 2, about 1 to 2 h |
-| HM-bs ncbi-summaries | `gene_summaries.txt` (Entrez, summary) | no upstream file; made by a script (intermine-scripts, not cloned) | 2026-11-16; 1 | Milestone 2: write a small E-utilities fetcher, or take `Gene.description` from RDF ncbigene, which already maps it |
+| HM-bs depmap-* | `CCLE_expression.csv`, `sample_info.csv` | DepMap renamed its release files after 2022 (*unverified*) | 2026-11-16; stub test (expression) | Milestone 3, about 1 to 2 h |
+| HM-bs ncbi-summaries | `gene_summaries.txt` (Entrez, summary) | no upstream file; made by a script (intermine-scripts, not cloned) | 2026-11-16; 1 | Milestone 3: write a small E-utilities fetcher, or take `Gene.description` from RDF ncbigene, which already maps it |
 | HM-bs mgi-alleles, IM mgi-identifiers, rgd-identifiers | MGI and RGD report files | *unverified* | 2026-11-16 / 2022; mgi-alleles and rgd have no tests | Low to medium |
 | HM-bs humanmine-static | items XML `datasets.xml` from a `humanmine-datasets` git repo | not in any cloned repo; Gos to locate | 2026-11-16 | It is the source of `DataSet.version`/`description` on HumanMine |
 | **Tools** | protein-visualizer 2.1.1 (RCSB v1), msa-viewer 2.1.1 (dead aligner host), jbrowse2-tool (not on npm) | RCSB v2 verified; aligner repo ready; jbrowse2 repo "implemented and tested, not yet deployed" | npm latest 2.1.1 for both, 2021-06-11 | The upstream PRs are already tracked as **im-7os.49** (do not duplicate) |
@@ -566,10 +578,20 @@ sprint's practice.
     `version_created`. `/api/v1/panels/signedoff/` gives the signed-off subset.
   - `GET /api/v1/panels/<id>/` gives `genes[]` with `confidence_level` (`"3"` = Green),
     `gene_data.hgnc_id`, `gene_data.gene_symbol`, `gene_data.ensembl_genes.GRch38`.
+- **Policy (Gos, decided).**
+  - Refresh with whatever PanelApp currently provides: **all panels, Green genes only**, with
+    each panel's PanelApp version recorded in its description.
+  - Before any rebuild or refresh, **archive the current HumanMine public lists** (all 184:
+    names, descriptions, tags, members) in a new repository **`gmicklem/historic_artefacts`**.
+    A user who asks for the 2021 lists can then be given them.
+  - The archive is a separate bead (T2.1), and **archiving is the first step of every future
+    list refresh**. Each refresh adds a dated directory; earlier ones are never overwritten.
+  - **Wish, to raise with Genomics England:** that they publish the panels in a versioned
+    repository (for example a git repository or a release per PanelApp snapshot). Old panel
+    sets would then not depend on mine archives at all.
 - **Script.** A new `rdfc2im/tools/panelapp_lists.py`:
-  1. Fetch every panel, or only signed-off panels (decision D-8). Keep Green genes. Save the
-     raw JSON as cache group `panelapp/` with `META.json` holding the panel versions and
-     the fetch date.
+  1. Fetch every panel. Keep Green genes. Save the raw JSON as cache group `panelapp/` with
+     `META.json` holding the panel versions and the fetch date.
   2. Map genes to mine identifiers by **HGNC id first**, then Ensembl GRCh38 id, then
      symbol. The demo's Gene keys are Entrez (`primaryIdentifier`) and Ensembl
      (`secondaryIdentifier`). HGNC ids reach the mine only as rdfc2im hgnc
@@ -579,13 +601,16 @@ sprint's practice.
      Use the same names, a description carrying the PanelApp panel version and the date,
      and tags `Genomics England gene panel` and `im:public` (`POST /service/list/tags`).
      Write an "unresolved identifiers" report per panel.
-  4. Re-create the 13 non-PanelApp `PL_` lists from a one-off export of their identifiers
-     from public HumanMine (read-only `/service/lists` plus a list-contents query), kept in
-     `rdfc2im/curation/public_lists/`.
-- **Where it belongs.** A new phase `apply_public_lists` after `apply_templates`, run only
-  when the mine is a full build. On a panel build almost every panel would be empty or
-  partial, so there it runs only with `--public-lists demo` and a "subset" note in each
-  description. In production the same script runs after a HumanMine release.
+  4. Re-create the 13 non-PanelApp `PL_` lists from the archive export (T2.1). Their
+     identifiers come from public HumanMine (read-only `/service/lists` plus a list-contents
+     query), and a copy is kept in `rdfc2im/curation/public_lists/`.
+- **Where it belongs.** A new phase `apply_public_lists` after `apply_templates`.
+  - It is first developed and tested against the **small demo database** (milestone 2).
+    With D-1 option (b), all about 64,000 human genes exist there as identifiers, so the
+    panels resolve almost completely even on a subset build. With option (a) most panels
+    would be partial, and each description must carry a "subset" note.
+  - The same phase then runs on the full build (milestone 3) and after every production
+    HumanMine release. Each run is preceded by the archive step.
 
 ---
 
@@ -623,8 +648,8 @@ sprint's practice.
 | D-5 | Keep both 5.1.1 (`:8090`) and 6.0.0 (`:18090`) stacks | Keep 5.1.1 as the **RDF-only baseline** (unchanged) and do the hybrid on `ut` only. The humanmine-bio-sources fork is converted to 6.0 only, and the Docker volume disk holds about 5 GB free |
 | D-6 | Stock UniProt: Swiss-Prot only, or also TrEMBL | Swiss-Prot plus varsplic. TrEMBL already arrives from RDF. Note the demo has 58 proteins for CYP2D6 against HumanMine's 2, so the MSA viewer would try to align 58 sequences. Consider limiting `Gene.proteins` to reviewed entries (an rdfc2im `core:reviewed` filter) |
 | D-7 | Restricted data (OMIM, DisGeNET, KEGG) | Load only from Gos's local copies; never in the cache release asset; skip on CI |
-| D-8 | PanelApp: all panels or signed-off only; Green only (as in 2021) | Green, all panels (same as 2021); record the panel version in the description |
-| D-9 | Where milestone 2 (the full build) runs | Probably not this sandbox: 15 GB RAM, Docker on a 10 GB volume (§6). Gos's build host, or a larger VM |
+| D-8 | PanelApp scope | **Decided (Gos):** whatever PanelApp currently provides; all panels, Green genes, panel version recorded; archive the current 184 lists in `gmicklem/historic_artefacts` first (T2.1) |
+| D-9 | Where milestone 3 (the full build) runs | **Decided (Gos):** on the DBCLS server that hosts HumanMine and FlyMine (about 256 GB RAM). It needs preparation there (T3.1). This sandbox cannot do it: 15 GB RAM now, Docker on a 10 GB volume (§6). The next sandbox session gets 75% of the Mac's RAM instead of 50% (about 22 to 24 GB, *est.*), which is more room for hybrid demo builds but still not enough for the full build |
 | D-10 | Approve sandbox network allows for the data hosts in §3 | Needed before T0.4 and T1.x fetches |
 
 ### Milestone 1: the demo gene report page shows HumanMine's tools for the subset genes
@@ -659,9 +684,10 @@ sprint's practice.
 | T1.10 | Hybrid: the disease section, using rdfc2im `hpo` (RDF) plus a fixed hpo-annotation (phenotype.hpoa, restored test), orphanet and omim (local licensed copy); templates Gene_Disease2, Gene_Disease_HPO, Gene_HPOphenotype_2, Gene_SigSNP (gtex eQTL, optional) | M-L, 4 h | T0.3, D-7 | `Gene.diseases` > 0 for PAX6; the templates run with rows | Sonnet; Gos supplies OMIM |
 | T1.11 | Demo report layout: apply HumanMine's Gene `layout.report` (bluegenes-properties) and the report templates whose paths resolve, in apply_templates | S-M, 2 h | T1.1-T1.10 (incremental) | `/service/bluegenes-properties` holds the layout; every referenced template exists | Sonnet |
 | T1.12 | mine-tests: `[mines.local]` tools enabled, plus a test comparing the demo's rendered tool panels with HumanMine's for the same gene | S, 1-2 h | T0.4 | the milestone gate above | Sonnet |
+| T1.14 | Reinstate repos/sequence-alignment-service on the DBCLS server behind its existing reverse proxy with a valid certificate, at sequencealignment.apps.intermine.org (or a new name), so the MSA viewer works on the public mines as well as the demo | M: 2-3 h agent (container, nginx server block, cert, health check, mine-tests run against www.humanmine.org) + Gos (DNS for apps.intermine.org, server access) | none (parallel with T1.3) | `curl https://<name>/` returns `{"api_working":true}` with a valid cert; mine-tests `test_msa_viewer_calls_the_aligner` passes against public HumanMine and against the demo. With the original name restored, the unpatched 2.1.1 bundle's hard-coded URL works again; only the msa-library crash patch remains | Sonnet + Gos |
 | T1.13 | Full ut demo rebuild with all milestone 1 sources from cache; record timings and disk in BUILD.md; refresh the release asset (redistributable groups only) | S, 1 h (+ build about 15-25 min, est.) | all of the above | test-live, mine-tests service and browser suites green; timings recorded | Sonnet; Gos approves the asset |
 
-**Milestone 1 total: about 42 to 50 agent-hours.**
+**Milestone 1 total: about 44 to 53 agent-hours**, including T1.14 (the public aligner, 2-3 h plus Gos for DNS and server access).
 - A **tools-only cut**, matching the six tools in mine-tests' HumanMine list, is about 30 h.
   It covers T0.1-T0.4, T1.1-T1.5, T1.8, the T1.9 Protein Atlas and Human Tissue part, and
   T1.12.
@@ -671,7 +697,7 @@ sprint's practice.
 
 ### Workstream A: replace the ad hoc supplements with the original loaders
 
-This runs alongside milestone 1 and must be finished before milestone 2: a full build must not
+This runs alongside milestone 1 and must be finished before milestone 3: a full build must not
 depend on the HumanMine web service or on hard-coded constants. Each bead removes one row of
 §1.3.
 
@@ -694,37 +720,48 @@ depend on the HumanMine web service or on hard-coded constants. Each bead remove
 **Workstream A extra effort: about 10 agent-hours.** TA.1, TA.6 and TA.7 are counted inside
 the milestone 1 beads.
 
-### Milestone 2: complete HumanMine build, subset flag off, on the ut stack
+### Milestone 2: Genomics England lists refreshed (on the small demo database)
+
+**Gate.**
+- The archive repository exists, with all 184 lists.
+- `apply_public_lists` has loaded the current PanelApp panels plus the 13 legacy `PL_` lists
+  into the demo mine, public and tagged.
+- BlueGenes' hard-coded `PL_GenomicsEngland_GenePanel:Radial_dysplasia` resolves.
+- A diff report against the December 2021 lists exists.
+
+| ID | Title | Size | Deps | Gate | Who |
+|---|---|---|---|---|---|
+| T2.1 | Archive the current 184 HumanMine public lists (names, descriptions, tags, types, member identifiers) from public HumanMine into a new repository gmicklem/historic_artefacts, read-only export, dated directory, README; also copied to rdfc2im/curation/public_lists/ | S, 1-2 h | Gos creates the repository (or approves its creation) | 184 lists; member counts equal the `/service/lists` sizes; a README says how to hand a list to a user | Sonnet + Gos |
+| T2.2 | rdfc2im tools/panelapp_lists.py: fetch all current PanelApp v1 panels, Green genes, cache group `panelapp/` (panel versions, date), map by Ensembl/HGNC/symbol | M, 2-3 h | D-10 (panelapp host allow) | a unit test on a recorded panel JSON; the unresolved report is empty or explained | Sonnet |
+| T2.3 | full-build.sh phase apply_public_lists: run the archive step (T2.1 script) first, then upload the PanelApp lists plus the 13 legacy PL_ lists as superuser, tag them `im:public` and `Genomics England gene panel`, keep the names stable | M, 2 h | T2.1, T2.2 | on the demo, `/service/lists` shows them public; `Radial_dysplasia` resolves; a re-run adds a new archive directory and replaces the lists without duplicates | Sonnet |
+| T2.4 | Run on the demo database; compare with the December 2021 lists (panels added, removed and changed; genes per panel) and write it up | S, 1 h | T2.3 | diff report in baselines/ | Sonnet; Gos reviews |
+| T2.5 | Ask Genomics England whether they would publish PanelApp panels in a versioned repository (git or per-release snapshots) | human | none | answer recorded in decisions/ | Gos |
+
+**Milestone 2 total: about 6 to 8 agent-hours.**
+- It can start as soon as the PanelApp host is allowed and the archive repository exists.
+- It does not wait for the full build. Milestone 3 re-runs T2.3 on the full mine.
+
+### Milestone 3: complete HumanMine build, subset flag off, on the DBCLS server
 
 **Gate.** Per-class and per-dataset counts are compared with public HumanMine (for example
 64,160 human genes, 253,611 genes in all, and the DataSet list in §2.3). Each difference over
 5% is explained (newer upstream releases are expected). mine-tests `[mines.humanmine]`
-fixtures (PAX6) pass against the local build. This needs D-9.
+fixtures (PAX6) pass against the new build. It runs on the DBCLS server (D-9).
+The build database is kept separate from the live HumanMine and FlyMine containers, so the
+public mines are not disturbed. Then T2.3 re-runs the list import on the full mine.
 
 | ID | Title | Size | Deps | Gate | Who |
 |---|---|---|---|---|---|
-| T2.1 | Provision a build host for the full HumanMine (disk at least 500 GB est., RAM at least 32 GB est.; HumanMine's production database size is *unverified*); allow-list the data hosts | human | D-9 | host reachable; `full-build.sh --dry-run` passes there | Gos |
-| T2.2 | rdfc2im full-build.sh: `--genes all` mode (no pre-filter, the full RDF extracts with `--limit 0` for every source, the full resolver), plus `reduce_mine.py` as a no-op when every stock source is present | M, 3 h | T0.1 | `--dry-run` shows no subset steps; the cache meta records `scope=full` | Opus |
-| T2.3 | Wire the remaining milestone 2 sources: interpro, protein2ipr (stream filter by human accession), pubmed-gene, mgi-alleles, depmap-*, humanmine-static (datasets.xml), update-publications, update-data-sources, entrez-organism | L, 6-8 h | T2.2 | each integrates on a panel build first | Sonnet |
-| T2.4 | Converter fixes found by current upstream files (est. 6-10 fixes at about 1 h: depmap file names, ncbi-gff MT and CDS, hpo, HPA, GTEx, uniprot XML drift, PANTHER 19, ...), each test-first | L, 8-12 h | T2.3 | fork CI green per fix | Sonnet |
-| T2.5 | Decide replaced-or-stock per overlapping source at full scale (clinvar, gwascatalog, hgnc, ncbigene vs ncbi-gene, go vs go-annotation obo, hpo); fix the integration keys (GWASResult key, D14 ambiguity, Pathway/MeshTerm DRAFT keys, STATUS.md next steps 2-3) | M, 4 h | T2.2 | no duplicate Gene, Protein or Pathway objects (a duplicate-key query is empty) | Opus |
-| T2.6 | First full build on the host; watch, fix, resume (`--from`) | L, 6 h agent + about 1-2 days wall (est., *unverified*) | T2.1-T2.5 | build reaches verify | Opus |
-| T2.7 | Count comparison against public HumanMine, plus mine-tests humanmine fixtures; write `baselines/humanmine-full-<date>.md` | M, 3 h | T2.6 | the milestone 2 gate | Sonnet |
+| T3.1 | Prepare the DBCLS server (about 256 GB RAM) for full builds: build account; disk for the raw data directory and a separate build Postgres/Solr (size *unverified*; at least 500 GB est.); JDK, Docker, Gradle caches; outbound access to the data hosts; isolation from the live mine containers | human + Sonnet (runbook), 2 h agent | D-9 | `full-build.sh --dry-run` passes there; the live mines are untouched | Gos |
+| T3.2 | rdfc2im full-build.sh: `--genes all` mode (no pre-filter, the full RDF extracts with `--limit 0` for every source, the full resolver), plus `reduce_mine.py` as a no-op when every stock source is present | M, 3 h | T0.1 | `--dry-run` shows no subset steps; the cache meta records `scope=full` | Opus |
+| T3.3 | Wire the remaining milestone 3 sources: interpro, protein2ipr (stream filter by human accession), pubmed-gene, mgi-alleles, depmap-*, humanmine-static (datasets.xml), update-publications, update-data-sources, entrez-organism | L, 6-8 h | T3.2 | each integrates on a panel build first | Sonnet |
+| T3.4 | Converter fixes found by current upstream files (est. 6-10 fixes at about 1 h: depmap file names, ncbi-gff MT and CDS, hpo, HPA, GTEx, uniprot XML drift, PANTHER 19, ...), each test-first | L, 8-12 h | T3.3 | fork CI green per fix | Sonnet |
+| T3.5 | Decide replaced-or-stock per overlapping source at full scale (clinvar, gwascatalog, hgnc, ncbigene vs ncbi-gene, go vs go-annotation obo, hpo); fix the integration keys (GWASResult key, D14 ambiguity, Pathway/MeshTerm DRAFT keys, STATUS.md next steps 2-3) | M, 4 h | T3.2 | no duplicate Gene, Protein or Pathway objects (a duplicate-key query is empty) | Opus |
+| T3.6 | First full build on the DBCLS server; watch, fix, resume (`--from`) | L, 6 h agent + about 1-2 days wall (est., *unverified*) | T3.1-T3.5 | build reaches verify | Opus |
+| T3.7 | Count comparison against public HumanMine, plus mine-tests humanmine fixtures; write `baselines/humanmine-full-<date>.md` | M, 3 h | T3.6 | the milestone 3 gate | Sonnet |
 
-**Milestone 2 total: about 30 to 36 agent-hours**, plus host provisioning and about two days
-of wall time.
-
-### Milestone 3: Genomics England lists refreshed
-
-| ID | Title | Size | Deps | Gate | Who |
-|---|---|---|---|---|---|
-| T3.1 | Export the 184 public lists from public HumanMine (names, descriptions, tags, member identifiers) to rdfc2im/curation/public_lists/, read-only | S, 1 h | none | 184 files; member counts equal the `/service/lists` sizes | Sonnet |
-| T3.2 | rdfc2im tools/panelapp_lists.py: fetch PanelApp v1 panels, Green genes, cache group `panelapp/` (versions, date), map by Ensembl/HGNC/symbol | M, 2-3 h | D-8, D-10 (panelapp host allow) | a unit test on a recorded panel JSON; the unresolved report is empty or explained | Sonnet |
-| T3.3 | full-build.sh phase apply_public_lists: upload the PanelApp lists plus the 13 legacy PL_ lists as superuser, tag them `im:public` and `Genomics England gene panel`, keep the names stable | M, 2 h | T3.1, T3.2 | `/service/lists` on the mine shows them public; BlueGenes' hard-coded `PL_GenomicsEngland_GenePanel:Radial_dysplasia` resolves | Sonnet |
-| T3.4 | Run on the milestone 2 build; compare with the December 2021 lists (panels added, removed and changed) and write it up | S, 1 h | T2.6, T3.3 | diff report in baselines/ | Sonnet; Gos reviews |
-
-**Milestone 3 total: about 6 to 7 agent-hours.** Only T3.4 waits for milestone 2. T3.1 and
-T3.2 can start now, once the PanelApp host is allowed.
+**Milestone 3 total: about 32 to 38 agent-hours**, plus server preparation and about two
+days of wall time (*est.*; the 256 GB server may be faster).
 
 ### Milestone 4 (later): shrink the HumanMine-loader dependency
 
@@ -753,9 +790,14 @@ load.
      `RDFC2IM_PGDATA` / `RDFC2IM_SOLRDATA` bind mounts and the data root. That mount is
      virtiofs, where plain `cp` has produced NUL-filled files (BUILD.md) and fsync behaves
      differently (memory note "clone fsync quirk"). Postgres on it is *unverified*.
-   - RAM is 15 GB, with a 9 GB peak per demo build. That, rather than disk, is the likely
-     limit for a full HumanMine here; milestone 2 probably still needs a bigger host (D-9).
-     The full database size is *unverified*, likely hundreds of GB.
+   - RAM is 15 GB now, with a 9 GB peak per demo build. The next sandbox session gets 75% of
+     the Mac's RAM instead of 50% (about 22 to 24 GB, *est.*). That helps the hybrid demo
+     builds, but **this sandbox cannot do the full build**.
+   - The full build (milestone 3) runs on the **DBCLS server** that already hosts HumanMine
+     and FlyMine (about 256 GB RAM, Gos; D-9). The risks move there:
+     - the disk needed for raw data plus a second (build) database is *unverified*, likely
+       hundreds of GB;
+     - the build must not starve or disturb the live mine containers on the same host.
 2. **Upstream drift is mostly unverified.** All but six data hosts are blocked from the
    sandbox. Every "format still OK" in §3 needs re-checking once D-10 is approved. HumanMine's
    own data dates from **February 2022**, so 4.5 years of format change are untested.
@@ -767,7 +809,8 @@ load.
      (D14) can split or merge genes wrongly.
    - `genomic_priorities.properties` must list the stock source first for every field the
      alongside source also writes. The duplicate-object check belongs in every gate.
-4. **Tool fragility.**
+4. **Tool fragility.** The alignment service stops being a patch-only fix once T1.14
+   restores it on the DBCLS server.
    - Two tools work only through hand patches to built bundles. A tool-store reinstall
      silently restores the broken bundles.
    - jbrowse2-tool is not on npm.
@@ -784,16 +827,19 @@ load.
      PanelApp's terms are unchecked.
    - A missing flag would publish restricted data in a GitHub release; T0.3's refusal test
      is the guard.
-8. **Frozen or vanished upstreams.** The ArrayExpress Atlas API (E-MTAB-62), the
+8. **Public list continuity.** A rebuild loses all 184 public lists unless they are
+   re-created. The 2021 versions survive only in the `gmicklem/historic_artefacts` archive
+   (T2.1), and only if that runs before any rebuild or refresh.
+9. **Frozen or vanished upstreams.** The ArrayExpress Atlas API (E-MTAB-62), the
    `gene_summaries.txt` generator, `humanmine-static`'s `datasets.xml` repo, and how the
    2021 lists were made are all outside the cloned repos. Gos's `/micklem` copies may be the
    only source.
-9. **5.1.1 compatibility.** The humanmine-bio-sources fork is on the 6.0 line, so the hybrid
+10. **5.1.1 compatibility.** The humanmine-bio-sources fork is on the 6.0 line, so the hybrid
    is 6.0.0 only. If Gos wants the 5.1.1 stack hybrid too, that is a second jar set and is
    *unverified*.
-10. **Demo-versus-HumanMine protein counts.** The RDF uniprot loads TrEMBL linked by symbol
+11. **Demo-versus-HumanMine protein counts.** The RDF uniprot loads TrEMBL linked by symbol
     (58 proteins for CYP2D6 against 2 on HumanMine). The MSA and protein tools will behave
     differently until D-6 is settled.
-11. **Unverified in a browser.** None of the tool behaviour in §1.2 was observed in a
+12. **Unverified in a browser.** None of the tool behaviour in §1.2 was observed in a
     rendered page in this session. It was derived from the tools' source and queries, the
     mine model, and the mine-tests and docker_template records.
