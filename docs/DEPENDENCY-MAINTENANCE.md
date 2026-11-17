@@ -128,3 +128,26 @@ share is below one PR a week the routine can run weekly instead of daily.
   *ours*; Renovate must not bump them (ignore pattern `org.intermine:*`), releases do that.
 - Tomcat/Postgres/Solr images in docker_template and rdfc2im: watched (docker manager) but never
   automerged; a database or search-server major is a deployment decision.
+
+## 9. Supply-chain screening of automated bumps (Gos, 17 Nov 2026)
+
+The vetting rule in decisions/package-vetting.md covers *replacement* packages; routine bumps had no
+screening. The xz-utils backdoor (2024) is the benchmark: the payload was in binary test files and a
+build macro present only in the release tarball, invisible in the source diff, and was found through
+a runtime anomaly (slow ssh logins). So the controls are layered; code reading is one layer.
+
+| # | Control | Catches | Cost |
+|---|---|---|---|
+| 1 | `minimumReleaseAge: 3 days` (in the preset) | malicious releases pulled within hours or days | none |
+| 2 | `actions/dependency-review-action` on every PR in each repo | versions listed as malware or vulnerable in the GitHub Advisory Database | one workflow step |
+| 3 | Mend merge-confidence signals as an automerge condition (`matchConfidence: ["high","very high"]`) | versions nobody else has adopted yet | preset change |
+| 4 | Runner hardening with egress audit in the gate workflows (e.g. StepSecurity harden-runner, audit mode first, then block) | exfiltration or unexpected downloads during build/test, compromised build plugins | one step per workflow; an allow-list to maintain |
+| 5 | Agent screening pass per bump: fetch the exact artefact to be used (npm tarball, Maven jar + sources jar, Clojars jar), diff against the previous version, flag new install scripts (npm `scripts` pre/postinstall), new network calls, obfuscated/minified code in a source package, binary blobs added, changes to build scripts and test fixtures; full read for small diffs, heuristic screen + change summary for large ones; result posted as a PR comment and recorded | the common case: compromised maintainer or typosquat shipping an obvious payload | about 5-10 min Sonnet per bump, est. 1 h/week |
+
+What this does not cover: a patient actor hiding a payload where the diff cannot show it. The
+defences there are behavioural (controls 4 and gate timings) and fewer dependencies (the sprint's
+weak-dependency removal rule continues to apply).
+
+Implementation order: 2 and 3 (hours), 4 (a day, with the allow-list learned from audit mode), 5 (the
+agent routine of section 6 gains the screening step; the measurement of section 7 records its
+findings and time).
