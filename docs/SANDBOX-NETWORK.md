@@ -29,11 +29,14 @@ To see what is in force: `sbx policy ls`; recent blocks: `sbx policy log`.
 | the mine hosts (Missouri x4, bar.utoronto.ca, JGI x2, planmine.mpinat.mpg.de, URGI inra.fr and inrae.fr, alliancegenome.org x2, mousemine.org) and s.gravatar.com | 17 Nov 2026 | the new registry's demo on port 3300 checks every mine's `/service/version*`, `/service/branding` and logo every six hours |
 | mizuguchilab.org, www.mizuguchilab.org, targetmine.mizuguchilab.org | 17 Nov 2026 | TargetMine (re-added to the registry; server under repair) and its icon |
 
-## Reachable without a rule (default policy)
+## Reachable from the first day (rule origin not verified from inside)
 
 github.com and api.github.com, clojars.org, repo.maven.apache.org, plugins.gradle.org,
 services.gradle.org, registry.npmjs.org, pypi.org, Ubuntu apt mirrors, Docker Hub, rdfportal.org,
-humanmine.org, flymine.org, cdn.rawgit.com, the reagent GitHub issue tracker.
+humanmine.org, flymine.org, cdn.rawgit.com. The sandbox cannot see which of these are the sandbox
+default policy and which are rules Gos added when the sandbox was created (`sbx policy ls` on the Mac
+shows the rules and their origin); humanmine.org and flymine.org in particular were probably added by
+Gos for the sprint rather than being defaults.
 
 ## Deliberately not allowed
 
