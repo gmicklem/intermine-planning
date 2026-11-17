@@ -1,0 +1,16 @@
+HTTP/1.0 200 Connection established
+
+HTTP/2 200 
+access-control-allow-headers: Origin, X-Requested-With, Content-Type, Accept
+access-control-allow-origin: *
+content-type: application/json; charset=utf-8
+date: Tue, 17 Nov 2026 02:11:25 GMT
+etag: W/"4d892-RjuhL1D1dFV+FiG50k2J6g/7Wlg"
+nel: {"report_to":"heroku-nel","response_headers":["Via"],"max_age":3600,"success_fraction":0.01,"failure_fraction":0.1}
+report-to: {"group":"heroku-nel","endpoints":[{"url":"https://nel.heroku.com/reports?s=crH9CzyRhAoIhjaYpgqiAepe2eOYLi7MCl0s8ftLxvw%3D\u0026sid=67ff5de4-ad2b-4112-9289-cf96be89efed\u0026ts=1794881484"}],"max_age":3600}
+reporting-endpoints: heroku-nel="https://nel.heroku.com/reports?s=crH9CzyRhAoIhjaYpgqiAepe2eOYLi7MCl0s8ftLxvw%3D&sid=67ff5de4-ad2b-4112-9289-cf96be89efed&ts=1794881484"
+server: Heroku
+via: 2.0 heroku-router
+x-powered-by: Express
+content-length: 317586
+

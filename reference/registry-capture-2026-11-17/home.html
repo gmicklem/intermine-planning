@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>InterMine Registry</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+   <!-- Bootstrap Core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/bootstrap-material-design.css">
+  <link rel="stylesheet" href="/css/ripples.min.css">
+  <link rel="stylesheet" type="text/css" href="/stylesheets/custom-bootstrap-margin-padding.css">
+  <link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
+  <link rel="stylesheet" type="text/css" href="/leaflet-search.min.css">
+  <link rel="stylesheet" type="text/css" href="/stylesheets/navbar.css">
+  <link rel="stylesheet" type="text/css" href="/stylesheets/customButtons.css">
+  <link rel='stylesheet' href='/stylesheets/animate.css' />
+  <link rel="stylesheet" type="text/css" href="/stylesheets/alerts.css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="/stylesheets/default.css" />
+  <link rel="stylesheet" type="text/css" href="/stylesheets/gridComponent.css" />
+  <!-- <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" /> -->
+  <link rel="stylesheet" href="/stylesheets/leafletMap.css" />
+  <link href="https://fonts.googleapis.com/css?family=Coda:800" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="/stylesheets/addInstance.css" />
+  <style>
+    #map { height: 500px; }
+  </style>
+</head>
+
+<body>
+	<nav class="navbar navbar-default pb-10 navbar-fixed" id="principal-nav">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed btn btn-default" data-toggle="collapse" data-target="#myTopnav" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+      <ul class="nav navbar-nav" id="normal-title">
+        <li>
+          <a href="/" style="padding-bottom: 0px; padding-top: 0px;">
+            <h2 id="title" class="ml-20 bold">InterMine Registry</h2>
+          </a>
+        </li>
+        <li>
+          <div>
+            <p id="title-desc" class="vertical-align-middle align-center mt-30"> Information on all registered InterMine instances in one place. </p>
+          </div>
+        </li>
+      </ul>
+    <div class="collapse navbar-collapse" id="myTopnav">
+      
+      <ul class="nav navbar-nav navbar-right mt-5 align-right">
+        <li>
+         <a class="mr-20 drop-toggle-item" href="/login" >Log In</a>
+        </li>
+      </ul>
+      
+      <ul class="nav navbar-nav navbar-right pt-10">
+        <li class="pt-10">
+          <a class="nopadding align-center" href="https://github.com/intermine/intermine-registry" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Source" target="_blank">
+              <i class="fa fa-github nav-icons" style="font-size: 30px; vertical-align: middle;" aria-hidden="true"></i>
+          </a>
+        </li>
+        <li class="ml-50 mr-50 pt-10">
+          <a class="nopadding align-center" href="/api-docs" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Documentation" target="_blank">
+            <i class="fa fa-book nav-icons" style="font-size: 30px;" aria-hidden="true"></i>
+          </a>
+        </li>
+        <li class="ml-50">
+          <li class="dropdown">
+           <a class="align-center nopadding mt-10 mb-10" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+             <img class="centered" src="/images/interminelogo.png" width="30" height="30">
+             <span class="caret"></span>
+           </a>
+           <ul class="dropdown-menu animated fadeIn">
+             <li>
+               <a href="http://intermine.org/" target="_blank">
+                 <img class="" src="/images/intermine_web_ready.png" style="width: 140px; height: 18px;">
+               </a>
+             </li>
+             <li><a class='drop-toggle-item' href="http://intermineorg.wordpress.com" target="_blank">Blog</a></li>
+             <li><a class='drop-toggle-item' target="_github" href="https://github.com/intermine/intermine" target="_blank">GitHub</a></li>
+             <li><a class='drop-toggle-item' href="http://intermine.readthedocs.io/en/latest/support/mailing-list/" target="_blank">Mailing list</a></li>
+             <li><a class='drop-toggle-item' href="http://chat.intermine.org" target="_blank">Support chat</a></li>
+             <li><a class='drop-toggle-item' href="http://bluegenes.apps.intermine.org/" target="_blank">BlueGenes</a></li>
+           </ul>
+          </li>
+        </li>
+      </ul>
+
+    </div>
+    <ul class="nav navbar-nav" id="responsive-title">
+      <li>
+        <a href="/" style="padding-bottom: 0px; padding-top: 0px;">
+          <h2 id="title" class="ml-20 bold">InterMine Registry</h2>
+        </a>
+      </li>
+      <li>
+        <div>
+          <p id="title-desc" class="vertical-align-middle align-center mt-30"> All InterMine instances up-to-date information in one place. </p>
+        </div>
+      </li>
+    </ul>
+</nav>
+
+	
+	<nav class="navbar navbar-default pb-15 animated fadeInUp" id="tools-bar">
+
+    <div class="row">
+
+          
+						<div class="col-md-10">
+		            <div class="form-group animated fadeInLeft">
+		                <input type="text" class="form-control" id="search-instance" placeholder="Search for an instance..." />
+		            </div>
+		        </div>
+          
+
+
+        <div class="col-md-2 pt-20 align-right animated fadeInRight">
+            <ul class="nav nav-pills navbar-right mr-20 vertical-align-middle" role="tablist" id='intances-tabs'>
+              <li role="presentation" class="active"><a href="#instances-list" title="List View" id="list-tab" class="glyphicon glyphicon-list" style="font-size:20px;" aria-controls="list" role="tab" data-toggle="tab"></a></li>
+              <li role="presentation"><a href="#instances-grid" id="grid-tab" title="Grid View" class="glyphicon glyphicon-th" style="font-size:20px;" aria-controls="grid" role="tab" data-toggle="tab"></a></li>
+              <li role="presentation"><a href="#instances-world" id="world-tab" title="World View" class="glyphicon glyphicon-globe" style="font-size:20px;" aria-controls="world" role="tab" data-toggle="tab"></a></li>
+            </ul>
+        </div>
+    </div>
+  </nav>
+    <!-- <section id = 'intro' class = 'pt-70 pl-50'>
+
+      <div class="container-fluid">
+        <div class="row">
+          <div class = 'container'>
+            <div class = 'row pt-sm-30'>
+              <div class="col-lg-12 col-xs-12">
+                <h1 class="header-title ttl-rsp">
+                  <span id="typo"></span><span id="cursor"> InterMine Registry</span>
+                </h1>
+              </div>
+            </div>
+            <div class="row pt-lg-20">
+              <div class="col-lg-8">
+                <div class="header-text header-dsc">
+                  <p class = 'header-desc pb-0 mb-0 pt-0 mt-0'><span class="bold">InterMine Registry</span> is a web application that allow users to view information about existing InterMine instances.</p>
+                  <p class = 'header-desc pb-0 mb-0 pt-0 mt-0'> All InterMine instances information in one place. </p>
+                  <p class = 'header-desc pb-0 mb-0 pt-0 mt-0'></p>
+                <div class="pt-50">
+	                  <a class="github-button" style="vertical-align: middle;" href="https://github.com/intermine/intermine-registry" data-size="large" aria-label="InterMine-Registry on GitHub">Source</a>
+										<a class="github-btn ml-30" target="_blank" href="/api-docs" data-size="large">Documentation</a>
+                </div>
+                </div>
+              </div>
+              <div class="col-lg-4">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section> -->
+    <section id="registry-body">
+			<div id="dimmer"></div>
+			<div id="loader"></div>
+			<div id="loader-text" class="align-center"> Synchronizing Instances </div>
+    	<div class="container pt-20">
+        <!-- <h2 class='align-center' id="view-type"> Instances List View </h2> -->
+    		<div class="row">
+    			<div class="col-lg-10 col-lg-offset-1">
+						<div id="successAlertDiv">
+						</div>
+            
+            <!-- <div class="row main-center">
+							
+              	<div class="col-md-9">
+								</div>
+			        
+							<div class="col-md-5">
+                <div class="inner-addon left-addon">
+                    <i class="glyphicon glyphicon-search"></i>
+                    <input type="text" class="form-control" id="search-instance" placeholder="Search for an instance..." />
+                </div>
+              </div>
+            </div> -->
+
+    				<!-- List View -->
+            <div class='pt-20'> </div>
+    				<div class="tab-content mt-lg-20">
+    					<div role="tabpanel" class="tab-pane fade in active" id="instances-list">
+                <table style="width:100%" class="table table-hover table-responsive">
+                  <thead>
+                    <tr>
+                      <th class="col-md-1"></th>
+                      <th class="col-md-1">Name</th>
+                      <th class="col-md-1">Namespace</th>
+                      <th class="col-md-6 list-desc">Description</th>
+					  <th class="col-md-6 list-url" style="display:none;">URL</th>
+                      <th class="col-md-3 org-col">Organisms</th>
+                      
+                    </tr>
+                  </thead>
+		  <tbody id="list-table-body">
+                  </tbody>
+                </table>
+		<div class="no-results"></div>
+                <div id="mine-modals" class="modal fade" tabindex="-1" role="dialog">
+                  <div class="modal-dialog">
+                  	<div class="modal-content">
+                  		<div class="modal-header" id="list-modal-header">
+                  		<button type="button" class="close closeb" data-dismiss="modal">×</button>
+                  			<h3 id="modal-mine-title" style="display: inline;">Modal header</h3>
+												<img id="modal-mine-img" class='ml-20' src='#' alt='Icon'>
+                  	  </div>
+                    	<div class="modal-body pb-30" id="mine-modal-body">
+
+
+                    	</div>
+
+												
+											<div class="modal-footer pb-15">
+													<button class="btn btn-raised closeb mr-10 close-btn" data-dismiss="modal">
+														<span class="text">Close</span>
+													</button>
+                    	</div>
+											  
+                  	</div>
+                  </div>
+                </div>
+
+                <div id="delete-modal" class="modal fade" tabindex="-1" role="dialog">
+                  <div class="modal-dialog">
+                  	<div class="modal-content">
+                  		<div class="modal-header">
+	                  		<button type="button" class="close closeb" data-dismiss="modal">×</button>
+                  			<h3 id="modal-delete-mine-title">Modal header</h3>
+                  	  </div>
+                    	<div class="modal-body mb-20" id="mine-delete-modal-body">
+                    	</div>
+                    	<div class="modal-footer pb-15">
+                        <button class="btn btn-raised btn-danger confirmdeleteb" data-dismiss="modal">Confirm</button>
+                    		<button class="btn btn-raised closeb mr-10" data-dismiss="modal">Close</button>
+                    	</div>
+                  	</div>
+                  </div>
+                </div>
+
+
+    					</div>
+
+    				  <!-- Grid View -->
+  						<div role="tabpanel" class="tab-pane fade" id="instances-grid">
+                <div class="container">
+            			<!-- Codrops top bar -->
+
+            			<div class="main">
+            				<ul id="og-grid" class="og-grid">
+		
+            				</ul>
+				 	<div class="no-results"></div>			
+            			</div>
+            		</div><!-- /container -->
+  						</div>
+
+
+  						<div role="tabpanel" class="tab-pane fade" id="instances-world">
+                <div id="map" class="align-center"></div>
+  						</div>
+
+    				</div>
+    			</div>
+    		</div>
+      </div>
+    </section>
+		
+        
+
+        
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript">
+      var jQuery_1_9_1 = $.noConflict(true);
+    </script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script type="text/javascript">
+      var jQuery_2_1_3 = $.noConflict(true);
+    </script>
+    <script language="javascript" src="/javascripts/headerAnimation.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/js/material.js"></script>
+		<script src="/js/ripples.min.js"></script>
+
+    <script src="/javascripts/leaflet.js"></script>
+    <!-- <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script> -->
+
+    <script language="javascript" type="text/javascript" src="/javascripts/map.js"></script>
+    <script language="javascript" src="/js/bootstrap.min.js"></script>
+    <script language="javascript" src="/javascripts/index.js"></script>
+		<script>
+		  $.material.init();
+			$('[data-toggle="tooltip"]').tooltip();
+		</script>
+    <script type="text/javascript">
+			if (localStorage.getItem("message")){
+				$("#successAlertDiv").append( '<div class = "successalert" id = "indexActionAlert"> ' +
+												'<span class="closebtn" onclick="this.parentElement.style.display='+"'none'" + ';">&times;</span> ' +
+												localStorage.getItem("message") 		 +
+												'</div>'
+											);
+				localStorage.clear();
+			}
+    </script>
+
+
+  </body>
+</html>
