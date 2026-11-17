@@ -1,0 +1,49 @@
+# Sandbox network allow-list
+
+The Docker sandbox (`sbx`) blocks outbound hosts that are not on an allow rule; a blocked
+request returns HTTP 403 "Approval required for <host>". Rules added with
+`sbx policy allow network` are global (every sandbox on the Mac), so they should survive a new
+`sbx` session; this file is the record of what Gos has approved, so that a new sandbox or a new
+Mac can be set up in one command, and so that the orchestrator never asks twice.
+
+Run on the Mac (safe to repeat; existing rules are kept):
+
+```bash
+sbx policy allow network repo1.maven.org,intermine.org,download.clojure.org,download.cypress.io,cdn.cypress.io,cdn.jsdelivr.net,registry.intermine.org
+sbx policy allow network aquamine.rnet.missouri.edu,bar.utoronto.ca,faangmine.rnet.missouri.edu,hymenopteramine.rnet.missouri.edu,maizemine.rnet.missouri.edu,phytozome.jgi.doe.gov,phytozome-next.jgi.doe.gov,planmine.mpinat.mpg.de,s.gravatar.com,urgi.versailles.inra.fr,urgi.versailles.inrae.fr,www.alliancegenome.org,alliancemine.alliancegenome.org,www.mousemine.org
+sbx policy allow network mizuguchilab.org,www.mizuguchilab.org,targetmine.mizuguchilab.org
+```
+
+To see what is in force: `sbx policy ls`; recent blocks: `sbx policy log`.
+
+## Why each host
+
+| Host(s) | Approved | Used for |
+|---|---|---|
+| repo1.maven.org | 15 Nov 2026 | intermine's configured Maven Central URL |
+| intermine.org | 15 Nov 2026 | contribution guide, docs (https has a TLS fault; http works) |
+| download.clojure.org | 15 Nov 2026 | Clojure CLI install |
+| download.cypress.io, cdn.cypress.io | 15 Nov 2026 | Cypress binary for the BlueGenes nightly tests |
+| cdn.jsdelivr.net | 16 Nov 2026 | BlueGenes CDN assets check |
+| registry.intermine.org | 17 Nov 2026 | capturing the old registry's API before the rewrite |
+| the mine hosts (Missouri x4, bar.utoronto.ca, JGI x2, planmine.mpinat.mpg.de, URGI inra.fr and inrae.fr, alliancegenome.org x2, mousemine.org) and s.gravatar.com | 17 Nov 2026 | the new registry's demo on port 3300 checks every mine's `/service/version*`, `/service/branding` and logo every six hours |
+| mizuguchilab.org, www.mizuguchilab.org, targetmine.mizuguchilab.org | 17 Nov 2026 | TargetMine (re-added to the registry; server under repair) and its icon |
+
+## Reachable without a rule (default policy)
+
+github.com and api.github.com, clojars.org, repo.maven.apache.org, plugins.gradle.org,
+services.gradle.org, registry.npmjs.org, pypi.org, Ubuntu apt mirrors, Docker Hub, rdfportal.org,
+humanmine.org, flymine.org, cdn.rawgit.com, the reagent GitHub issue tracker.
+
+## Deliberately not allowed
+
+- cdn.intermine.org: dead (502); references to it are bugs to remove, not a host to allow.
+- api.adoptium.net, oss.sonatype.org, jitpack.io: not needed (JDKs come from apt; publishing goes to
+  the Central Portal from the Mac).
+
+## Keeping this file current
+
+When the orchestrator asks for a new host, it adds the host here in the same commit as the work
+that needed it, with the date and the reason. The planning repo is public; hostnames are not
+secrets. If a host ever is sensitive (an internal server, a staging box), keep it out of this file
+and in a private note instead.
