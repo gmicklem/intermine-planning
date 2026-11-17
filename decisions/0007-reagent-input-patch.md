@@ -57,3 +57,5 @@ Keystroke spec: 0/1600 lost with master and the patch off (fixed). But the list-
 ## reagent 2.1.0-SNAPSHOT (16 Nov 2026, 20:49 build f655d00f) measured 23:40 UTC
 
 Keystroke spec 0/1600 without the patch (fixed). Upload-wizard textarea after a report page: 233/800 keys lost, 10/20 repetitions wrong without the patch; 0/800 with it. report_page_test fails 3/10 without, 0/5 with; the full suite without the patch 146/1 (one typeahead keystroke lost). Decision unchanged: keep the patch; reply drafted (docs/drafts/reagent-676-followup.md) for Gos to approve. Details: reference/reagent-2.1.0-snapshot-measurement.md.
+
+Reply posted (Gos approved): https://github.com/reagent-project/reagent/issues/676#issuecomment-6933344772

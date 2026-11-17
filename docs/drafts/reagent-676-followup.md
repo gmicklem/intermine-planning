@@ -1,4 +1,4 @@
-<!-- DRAFT reply for reagent-project/reagent#676 (maintainer asked us to try 2.1.0-SNAPSHOT). Not posted. Gos to approve. -->
+<!-- Posted 17 Nov 2026 00:10 UTC as https://github.com/reagent-project/reagent/issues/676#issuecomment-6933344772 -->
 
 Thank you, and for the quick turnaround. I rebuilt BlueGenes against 2.1.0-SNAPSHOT (Clojars build 20261116.204953-1, revision f655d00f) with our start-up workaround removed, and measured the same way as before.
 
