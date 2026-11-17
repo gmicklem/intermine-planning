@@ -50,3 +50,15 @@ When the orchestrator asks for a new host, it adds the host here in the same com
 that needed it, with the date and the reason. The planning repo is public; hostnames are not
 secrets. If a host ever is sensitive (an internal server, a staging box), keep it out of this file
 and in a private note instead.
+
+## Hybrid HumanMine testbed data hosts (plans/50, approved in principle by Gos 17 Nov 2026, D-10)
+
+Run before milestone 1 fetching starts (the loaders download from these; `www.humanmine.org` and
+`registry.npmjs.org` already work):
+
+```bash
+sbx policy allow network ftp.ncbi.nlm.nih.gov,ftp.uniprot.org,rest.uniprot.org,ftp.ebi.ac.uk,www.ebi.ac.uk,current.geneontology.org,purl.obolibrary.org,data.pantherdb.org,www.informatics.jax.org,downloads.thebiogrid.org,reactome.org,search.rcsb.org,www.proteinatlas.org,storage.googleapis.com,panelapp.genomicsengland.co.uk,www.orphadata.com
+```
+
+Not in that command, on purpose: omim.org, www.disgenet.org, depmap.org (restricted or account-gated
+data; loaded only from Gos's local copies, decision D-7). jbrowse2.intermine.org is already allowed.
