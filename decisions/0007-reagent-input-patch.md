@@ -53,3 +53,7 @@ reagent-project/reagent#676 was closed as completed via PR #680 (merged 20:12 UT
 ## Measurement of reagent master with PR #680 (16 Nov 2026, 21:40 UTC)
 
 Keystroke spec: 0/1600 lost with master and the patch off (fixed). But the list-upload textarea reached from a report page loses 209/800 keys on master without the patch when the organisms request finishes mid-typing and re-renders the parent with the pre-typing value; 0/800 with the patch; report_page_test fails 8 of 20 runs without it. Master ignores only renders whose value on-change reported; our patch also skips a render whose value has not changed. Decision: keep the patch; drop it only when a release carries #680 plus a fix for the unchanged-value re-render (follow-up comment drafted in docs/drafts/reagent-676-followup.md, Gos to approve); add the upload-after-report case to keystrokes_test.js (bead im-7os.62). Details: reference/reagent-master-pr680-measurement.md.
+
+## reagent 2.1.0-SNAPSHOT (16 Nov 2026, 20:49 build f655d00f) measured 23:40 UTC
+
+Keystroke spec 0/1600 without the patch (fixed). Upload-wizard textarea after a report page: 233/800 keys lost, 10/20 repetitions wrong without the patch; 0/800 with it. report_page_test fails 3/10 without, 0/5 with; the full suite without the patch 146/1 (one typeahead keystroke lost). Decision unchanged: keep the patch; reply drafted (docs/drafts/reagent-676-followup.md) for Gos to approve. Details: reference/reagent-2.1.0-snapshot-measurement.md.
