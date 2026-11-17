@@ -134,7 +134,7 @@ Notes:
 - Last releases: intermine `intermine-5.1.0` (26 Aug 2022, annotated tag on `master`, message
   "InterMine 5.1.0", GitHub release "InterMine 5.1.0 (RDF & SPARQL)"); BlueGenes `v1.4.5`; Clojars
   has bluegenes 1.4.5, imcljs 1.6.0, im-tables 0.15.0, bluegenes-tool-store 0.2.3.
-- `gmicklem/intermine`'s default branch is `maint-2026`; the others keep upstream's default.
+- Every gmicklem fork's default branch is `maint-2026` (since 17 Nov; rdfc2im stays on `main`), see the addendum at the end.
 - The demo testbed: default stack (`:8090` mine, `:5000` BlueGenes) runs the **published 5.0.8**
   artefacts (`/service/version` 34, `/service/version/intermine` "5.0.8"); the `ut` stack (`:18090`,
   `:15000`) is down, being rebuilt from `maint-2026`. Both stacks serve the **released BlueGenes
@@ -193,7 +193,7 @@ what "the orchestrator ran the gates" means.
   gh workflow run nightly-cypress.yml --repo gmicklem/bluegenes --ref maint-2026
   gh run list --repo gmicklem/bluegenes -w nightly-cypress.yml -L 1   # "success", about 20 minutes
   ```
-  The nightly does not run by itself: the schedule only fires from the default branch (`dev`), which has
+  The nightly now runs by itself: a schedule only fires from the default branch, and since 17 Nov that is `maint-2026` (before, it was `dev`, which has
   no such workflow. Check: all PASS; the nightly's job summary shows 0 failed (the 23 skipped are the
   region and sequence specs, which need Location data the demo mine does not have).
 
