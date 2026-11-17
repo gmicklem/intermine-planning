@@ -42,3 +42,11 @@ on a new sandbox is `apt-get install xvfb libgtk-3-0t64 libgbm1 libxss1` (names 
   operation. Push events never fire the intermine workflows on the fork: dispatch
   `im-build.yml` and `checkstyle.yml` with `gh workflow run --ref <branch>`; the concurrency group
   cancels an in-progress run when a newer one starts on the same branch.
+
+## Long-lived servers started from the Bash tool
+
+A `run_in_background` Bash call is killed when its timeout (max 10 min) expires, taking a foreground
+server with it (the first registry demo on port 3300 died that way on 17 Nov). Start daemons as
+`nohup <cmd> > log 2>&1 & disown` from a short foreground call instead; socat forwarders and the
+BlueGenes/registry demo servers all run that way now (restart recipes in
+`/home/agent/taskhomes/im-bg-serve/README.txt`).
