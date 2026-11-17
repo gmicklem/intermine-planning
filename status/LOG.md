@@ -174,7 +174,7 @@ Newest first. One entry per checkpoint (about every 3 hours while unattended).
 - Reagent: Gos: no further work for Juho (im-7os.65 closed). Await his test/fix.
 - Next (gate beads from the design): intermine CI pull_request trigger; ci.yml for imcljs/im-tables-3/tool-store; humanmine/flymine build workflow; mine-tests/rdfc2im lint+pytest; tiered gates by dependency type.
 
-## Checkpoint 21, 17 Nov 2026 ~20:00 UTC
+## Checkpoint 21, 17 Nov 2026 ~19:00 UTC
 
 - Renovate: Gos reconfigured the app to the eleven repos; each fork's maint-2026 carries renovate.json (extends gmicklem/renovate-config, forkProcessing enabled); no dashboards/PRs seen yet (Renovate batches runs; version bumps are scheduled Monday before 06:00 UK, security any time).
 - CI gates now exist on all eleven and are green on their first run: intermine (pull_request + weekly + paths-ignore; PR #1 test proved both workflows run on PRs and pass), imcljs 51d08ec, im-tables-3 42bb067, bluegenes-tool-store a7fc13d, humanmine 268dc31, flymine 76af4bb (build intermine 6.0.0 + own bio-sources in-job, dbmodel buildDB + war with contents check), mine-tests 841bc95 (lint + collection). Found: commons-logging 1.2 + 1.3.5 in both mine wars (im-ee7.71, warning for now).
