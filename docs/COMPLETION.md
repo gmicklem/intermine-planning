@@ -729,3 +729,15 @@ When an agent writes the draft, it ends with the line `🤖 Generated with [Clau
 - [ ] **8.6 What to archive.** The planning repo (tagged), the forks with their `maint-2026` branches, the
   upstream releases and tags, the rdfc2im data asset. Possibly transfer `gmicklem/intermine-planning` to
   `intermineorg/` (the name first proposed in plans/00-overview.md).
+
+## Addendum (17 Nov 2026): fork default branches and Dependabot
+
+- The default branch of every gmicklem fork that has one is now `maint-2026` (intermine already was;
+  bluegenes, imcljs, im-tables-3, bluegenes-tool-store, intermine-registry, humanmine, flymine,
+  both bio-sources forks and mine-tests switched on 17 Nov; rdfc2im stays on `main`). This changes
+  nothing upstream: the upstream PRs in step 7 name `intermine:dev` (or the repo's own default) as
+  base explicitly. To revert one: `gh api -X PATCH repos/gmicklem/<repo> -f default_branch=dev`.
+- Dependabot alerts are enabled on all twelve forks (`gh api -X PUT repos/gmicklem/<repo>/vulnerability-alerts`);
+  they scan the default branch, hence the switch above. Only bluegenes has a `.github/dependabot.yml`
+  (npm, github-actions); intermine has none yet (Gradle with the version catalog is supported). See
+  docs/DEPENDENCY-MAINTENANCE.md for the daily-maintenance design once written.
