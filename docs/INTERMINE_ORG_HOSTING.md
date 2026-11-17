@@ -196,3 +196,10 @@ Recommended course of action (details in section B above):
    point `registry.intermine.org` at it; keep http redirecting to https for the old clients.
 5. Then switch the clients' hard-coded `http://registry.intermine.org` references to https (bead im-bdy.10)
    and delete the Heroku app.
+
+Correction 17 Nov 2026 (Gos): the Cambridge VM is not available. The `*.apps.intermine.org` / `*.labs.intermine.org`
+Dokku apps inferred above from the 2018 `dokku-default-site` README were taken down; there is no InterMine VM to
+host the registry on. The hosting choice is therefore a new small VM (any provider, Docker Compose + Caddy) or a
+managed platform (Fly.io / Render) with a managed MongoDB (Atlas free tier). Gos pays for the Heroku account and
+gmicklem can own the app, so the Heroku side of the migration needs no third party. Backup instructions:
+docs/REGISTRY-BACKUP.md.
