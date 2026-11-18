@@ -108,4 +108,13 @@ sbx policy allow network www.nlm.nih.gov,www.uniprot.org,wiki.thebiogrid.org,int
 
 ## Requested, not yet allowed
 
-(none on 18 Nov 2026, 21:40 UTC)
+```bash
+sbx policy allow network gtexportal.org,www.bgee.org
+```
+
+- `gtexportal.org` (asked 18 Nov, bead im-9n4.47; `www.gtexportal.org` is allowed but redirects to
+  it): GTEx release notes, licence and terms.
+- `www.bgee.org` (asked 18 Nov): Bgee download files, licence, SPARQL endpoint.
+- `depmap.org` was also wanted, to read DepMap's licence and latest release. It is on the
+  "deliberately not allowed" list (decision D-7: account-gated data); allow it only if Gos wants the
+  licence page read: `sbx policy allow network depmap.org`.

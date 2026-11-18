@@ -258,3 +258,47 @@ default `--gene-identifiers panel`, or `git revert 3e5ffc9` / `git revert 9e4681
 - **Disease.dataSets:** the build deletes that line from the hpo-annotation additions in its own copy
   because rdfc2im makes `Disease extends BioEntity`. HumanMine's Disease extends Annotatable and needs
   the line, so the fork is deliberately NOT changed. **Please check:** should Disease be a BioEntity?
+
+### 12. InterMine go-annotation: GAF `UniProtKB:` With/From ids now make `GOEvidence.with` Proteins (18 Nov 2026, im-9n4.46)
+
+intermine `maint-2026`, commit 079ef219c2 (test a649372658; merged in 3dd6108dec; fixture cut from
+goa_human.gaf of 2026-05-21, README beside it). GoConverter accepted only the prefix `UniProt:` in
+column 8, so every GAF 2.x row (`UniProtKB:`) left `with` empty (the text was always kept in
+`withText`). `UniProtKB` now maps to Protein by `primaryAccession` through the same no-organism branch;
+the old spelling is kept.
+
+- **Effect:** in the human GAF, 434,009 of 592,504 With/From rows now link, to 38,824 accessions.
+  23,288 of those are not human Swiss-Prot entries and become stub Proteins with no organism and no
+  other data (1,413 in the 114-gene panel build), including 3,514 isoform accessions (`P41271-2`)
+  that never merge with a canonical Protein.
+- **To revert:** `git revert 079ef219c2`.
+- **Please check:** whether stub Proteins with no organism are acceptable, or whether with-links should
+  be limited to loaded proteins, or isoforms reduced to their base accession; whether GoPostprocess or
+  templates treat `with` Proteins as annotated products. MGI, RGD, PANTHER, InterPro and the other
+  prefixes stay text only.
+
+### 13. InterMine psi (IntAct): `InteractionExperiment.hostOrganism` is set (18 Nov 2026, im-9n4.46)
+
+Commit 9ee7a6fb37 (test 5dfe26f648; fixture cut from IntAct human.zip of 2026-10-24). The host's
+fullName was never stored because the parser's marker was reset by every start tag. It is now taken
+from `experimentDescription/hostOrganismList/hostOrganism/names/fullName` only, so the 245,774
+participant-level host lists in human.zip and cell-type names cannot overwrite it. The value stored is
+the fullName string ("In vitro" for taxon -1, "Homo sapiens HEK293T embryonic kidney cell"); the
+taxon id is not stored; the model is unchanged. `PsiConverterTest_tgt.xml` encoded the bug and was
+updated.
+
+- **To revert:** `git revert 9ee7a6fb37`.
+- **Please check:** whether fullName (cell line included), shortLabel or the taxon is the wanted value;
+  whether biogrid's `hostOrganism` follows the same convention; experiments merged by shortLabel keep
+  the first host stored (51 labels have different hosts in different occurrences; already so before).
+
+### 14. InterMine psi (IntAct): DataSet licence CC BY 4.0 instead of Apache 2.0 (18 Nov 2026, im-9n4.46)
+
+Commit 6e1209b48c (test babbf505cb). The Apache-2.0 URL was a 2018 test placeholder (4a5181bc4f, "add
+dummy licence info just for testing."). IntAct's licence page
+(https://www.ebi.ac.uk/intact/about#license_privacy, read 18 Nov 2026) puts all data under CC BY 4.0
+and only software and database dumps under Apache 2.0.
+
+- **To revert:** `git revert 6e1209b48c`.
+- **Please check:** the URL form (`https://creativecommons.org/licenses/by/4.0/`). The same 2018 commit
+  set PANTHER's GPL URL, for which no statement by PANTHER has been found; it is not changed yet.

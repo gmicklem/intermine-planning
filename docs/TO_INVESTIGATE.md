@@ -17,24 +17,6 @@ Status words: **open** (nobody is on it), **in progress** (bead named), **answer
 
 ## Open
 
-### 1. Is there more recent expression data that should replace E-MTAB-62 and E-MTAB-513? (Gos, 18 Nov 2026)
-
-- **Status:** in progress (bead im-9n4.47, started 18 Nov 2026; report will be `reference/expression-data-options-2026-11.md`).
-- **Question:** which current, maintained human expression data sets should a rebuilt HumanMine load,
-  and can they drive the gene-page expression tools?
-- **Why it matters:** three tools on HumanMine's gene page (the ArrayExpress disease and tissue
-  expression visualizers and the box-swarm plot) need p-values and t-statistics from E-MTAB-62, a 2011
-  data set from a retired service; the only copy is Gos's (`/micklem/data/metabolic/array-express/
-  E-MTAB-62-wrong-p-value/`). The demo excuses those three tools for now (mine-tests
-  `compare_exceptions`). The Illumina Body Map data (E-MTAB-513) is from 2014.
-- **Known:** the demo already loads GTEx v8 median TPM and Human Protein Atlas RNA consensus (2026
-  files). GTEx v10 exists (format unverified; eQTL files possibly parquet). Expression Atlas still
-  serves baseline and differential experiments. Bgee and RefEx are in RDF Portal (plan 50, section 1.2).
-  Gos expects that more recent expression data is available.
-- **A good answer:** a short list of candidate data sets (source, release date, licence, size, whether
-  differential or baseline, whether RDF Portal has them), what each tool's query needs, and a
-  recommendation: load new data and adapt the tools, or retire the three tools.
-
 ### 2. Why does PAX6 have 5 pathways on the demo and 10 on HumanMine?
 
 - **Status:** open.
@@ -89,4 +71,22 @@ Status words: **open** (nobody is on it), **in progress** (bead named), **answer
 
 ## Answered
 
-(none yet)
+### 1. Is there more recent expression data that should replace E-MTAB-62 and E-MTAB-513? (Gos, 18 Nov 2026)
+
+- **Status:** answered 18 Nov 2026 (bead im-9n4.47); decisions for Gos remain.
+- **Answer:** yes. Report: `reference/expression-data-options-2026-11.md`. Load GTEx v11 median TPM and
+  Human Protein Atlas v26.0 (existing converters read both), keep the Illumina Body Map, and add
+  EMBL-EBI Expression Atlas human differential contrasts (1,528 experiments, 4,315 contrasts, log2 fold
+  change and adjusted p-value, CC BY 4.0; needs a new converter), which can feed the disease tool and
+  the box-swarm plot after a small tool change. Retire the ArrayExpress tissue tool: nobody publishes
+  its one-against-rest statistic today. E-MTAB-62 was 6,279,840 rows for 11,624 genes of
+  one-tissue-against-all-others t-tests in one 2011 microarray atlas; its matrix is still on EBI's
+  legacy FTP site, its per-gene statistics are published nowhere. RDF Portal is not the route for
+  expression, except possibly Bgee.
+- **Not verified in the report:** GTEx v10/v11 licence, Bgee details, DepMap licence, sizes of the
+  Expression Atlas files (hosts gtexportal.org, www.bgee.org, depmap.org were blocked).
+- **Decisions for Gos:** adopt the recommendation or not; whether to load the 14 GTEx "LCM pilot"
+  sub-tissue columns; whether a new converter for Expression Atlas contrasts is wanted now or with
+  the full build.
+
+
