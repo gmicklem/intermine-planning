@@ -106,21 +106,22 @@ sbx policy allow network www.nlm.nih.gov,www.uniprot.org,wiki.thebiogrid.org,int
   pages of `www.ebi.ac.uk`; IntAct's text is readable at
   `raw.githubusercontent.com/Intact-portal/intact-portal-documentation` (allowed).
 
-## Requested, not yet allowed
+## Allowed on 18 Nov 2026 (third batch; Gos ran it, checked 23:10 UTC)
 
 ```bash
 sbx policy allow network gtexportal.org,www.bgee.org,jun2026.archive.ensembl.org
 ```
 
-- `gtexportal.org` (asked 18 Nov, bead im-9n4.47; `www.gtexportal.org` is allowed but redirects to
-  it): GTEx release notes, licence and terms.
-- `www.bgee.org` (asked 18 Nov): Bgee download files, licence, SPARQL endpoint.
-- `depmap.org` was also wanted, to read DepMap's licence and latest release. It is on the
-  "deliberately not allowed" list (decision D-7: account-gated data); allow it only if Gos wants the
-  licence page read: `sbx policy allow network depmap.org`.
-- `jun2026.archive.ensembl.org` (asked 18 Nov, bead im-9n4.45): `www.ensembl.org` redirects there for
-  the Ensembl disclaimer and licence page. The archive host name changes with each Ensembl release.
+- `gtexportal.org` (GTEx licence and release notes; `www.gtexportal.org` redirects to it),
+  `www.bgee.org` (Bgee downloads, licence, SPARQL), `jun2026.archive.ensembl.org` (where
+  `www.ensembl.org` redirects for the Ensembl disclaimer; the archive name changes with each release).
+- `www.bgee.org` still answers 403 to a plain client from the site itself (not from the sandbox).
 - No allow rule helps for these; a person must read them in a normal browser: PANTHER's terms
-  (`https://www.pantherdb.org/tou.jsp`, Cloudflare check), TogoVar's terms
-  (`https://togovar.org/doc/terms`, Cloudflare check), ClinVar's own data-use page (reCAPTCHA).
+  (`https://www.pantherdb.org/tou.jsp`), TogoVar's terms (`https://togovar.org/doc/terms`), ClinVar's
+  own data-use page (reCAPTCHA).
+- `depmap.org` stays on the "deliberately not allowed" list (decision D-7); it was wanted only to read
+  DepMap's licence page: `sbx policy allow network depmap.org` if Gos wants that.
 
+## Requested, not yet allowed
+
+(none on 18 Nov 2026, 23:10 UTC)
