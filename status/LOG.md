@@ -219,3 +219,13 @@ Newest first. One entry per checkpoint (about every 3 hours while unattended).
 - Bead ids corrected: T1.15 is im-9n4.40 (im-9n4.36/.37 never existed: bd rejected the long titles).
 - Expert log entry 11 (gene merge rules, ontology cross-references).
 - Waiting on Gos: ArrayExpress tools (data or exceptions); demo-data asset upload; MSA Swiss-Prot only or all; Orphanet diseases with HPO annotations; RGD host allow; hand-written HPA tissue grouping needs a check.
+
+## Checkpoint 26, 18 Nov 2026 ~11:20 UTC (milestone 1 build work complete)
+
+- Merged and closed since checkpoint 25: T1.13 im-9n4.19 (clean offline rebuild of the whole hybrid ut mine in 23 min 50 s; autocomplete index bug fixed), T2.2 im-9n4.21 (tools/panelapp_lists.py; 433 panels, 29,609 Green entries, all resolve on the demo).
+- Heads: rdfc2im maint/im-ore.1-intermine-src d8c50d2 (make test 422/56; test-live 56/56); mine-tests bf6c391; humanmine-bio-sources d67fc5d. Canonical driver on this machine: repos/.sandbox-disk/rdfc2im/drive-ut-hybrid.sh (templates in rdfc2im trial/). ut mine 1,120,120 objects; Postgres 3.4 GB.
+- Milestone 1 gate: browser 10 pass / 1 fail / 1 skip; the failure is three ArrayExpress tools needing E-MTAB-62 (Gos's copy): Gos decides data or exceptions. Open milestone 1 items: T1.1b im-9n4.32 (TrEMBL sequences; decision), T1.7b im-9n4.35 (RGD host), T1.14 im-9n4.18 (public aligner; Gos's server access), im-9n4.33 (ncbi-gff CDS/UTR, expert).
+- Finding (T2.2): HumanMine's 171 Genomics England lists of December 2021 are the rare-disease-100k panels and many were mis-made (79 share a gene set with another list; 66 of 154 unchanged names overlap their panel by under 20%). baselines/panelapp-2026-11-18-vs-2021.md.
+- Release tarballs prepared, NOT uploaded (repos/rdfc2im/): cached_raw_data-2026-11-18b.tar.gz 29,399,194 B sha256 5d4a1a3d...; stock_filtered-2026-11-18.tar.gz 25,602,753 B d6204335...; cached_raw_data_allgenes-2026-11-18.tar.gz 8,004,400 B 657c93f3....
+- Running: T2.3 im-9n4.22 (apply_public_lists on the demo mine; 2021 names kept for the 17 renamed panels pending Gos).
+- Waiting on Gos: ArrayExpress tools; asset uploads; MSA Swiss-Prot only or all; Orphanet diseases with HPO; renamed-panel list names; hosts download.rgd.mcw.edu and prod-media-panelapp.genomicsengland.co.uk; HPA tissue grouping check.
