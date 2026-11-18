@@ -226,3 +226,35 @@ because the 2026 files needed them; each changes what a HumanMine user would see
   gene pair; every InteractionDetail has an experiment and a type; live tests 42/42.
 - **Known gap:** the 5,994 human partner genes outside the panel are stubs with an Entrez id and no
   symbol until all human genes are loaded as identifiers (bead im-9n4.40).
+
+### 11. rdfc2im hybrid build: gene merge rules with all human genes loaded; ontology cross-references (18 Nov 2026, im-9n4.40, im-9n4.41)
+
+rdfc2im commits 3e5ffc9 and 9e46813 (merged in 9323d9d). With `--gene-identifiers all` the RDF `ncbigene`
+and `hgnc` sources load every human gene (64,470; HumanMine 2022: 64,160). **To revert:** build with the
+default `--gene-identifiers panel`, or `git revert 3e5ffc9` / `git revert 9e46813` in rdfc2im.
+
+- **ncbigene and hgnc key Gene on the Entrez id only** (own keys files); ensembl, uniprot and
+  gwascatalog keep the symbol and Ensembl keys. Reason: the NCBI and HGNC snapshots assign 9 symbols and
+  109 Ensembl ids to different Entrez genes (e.g. KCNIP4-AS2; "RNR1" versus MT-RNR1), which would merge
+  two genes through those keys.
+- **Where they disagree, HGNC gives way to NCBI** (9 symbols and 106 Ensembl ids dropped from hgnc);
+  Ensembl ids shared within a source are dropped (hgnc 6, ncbigene 492); ten tRNA symbols shared by 2
+  to 17 records are dropped from every holder, as the stock loader does. Result: 111 genes without a
+  symbol. **Please check:** these precedence rules against what HumanMine's stock ncbi-gene and hgnc
+  loaders do.
+- **`Gene.secondaryIdentifier` priority: hgnc before ncbigene** (applies to every build, panel
+  included): ncbigene's missing value had starved the Ensembl id on 7,337 genes.
+- **NCBI records of type biological-region, other and unknown are dropped** (130,304 of 194,018), as
+  the stock loader does; chromosomes are limited to 1-22, X, Y (no MT, Un or X|Y objects).
+- **Ontology cross-references follow InterMine's `obo_xrefs.properties`** (only FBbt, FMA, MA, WBbt,
+  ZFA prefixes kept), for every RDF ontology source. Before, the RDF go source created 29,760 nameless
+  "GOTerm" objects for Reactome/RHEA/EC targets; GOTerm is now 48,348 with 8 cross-references, as on
+  HumanMine. HPOTerm 20,413, all named.
+- **Item keys are ASCII-folded** ("Albers-Schonberg" and "Albers-Schönberg" synonyms were two items
+  but one database key, which broke the hpo load).
+- **Verified:** 0 duplicate Gene by primaryIdentifier, by (symbol, organism) and by
+  (secondaryIdentifier, organism); PAX6 and CYP2D6 deep-annotation counts unchanged; live tests 56/56.
+- **Known leftover:** hgnc at full scope brings 25,899 Publication stubs without titles.
+- **Disease.dataSets:** the build deletes that line from the hpo-annotation additions in its own copy
+  because rdfc2im makes `Disease extends BioEntity`. HumanMine's Disease extends Annotatable and needs
+  the line, so the fork is deliberately NOT changed. **Please check:** should Disease be a BioEntity?

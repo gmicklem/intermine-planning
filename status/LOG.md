@@ -209,3 +209,13 @@ Newest first. One entry per checkpoint (about every 3 hours while unattended).
 - Expert log entries 7 to 10 added (CrossReference key/load order; expression converters; hpo-annotation incl. Orphanet diseases; interaction filter rules).
 - Waiting on Gos: demo-data-2026-11-18 upload; MSA Swiss-Prot only or all proteins; Orphanet diseases with HPO annotations; sbx policy allow network download.rgd.mcw.edu.
 - To file: 29,760 RDF 'GOTerm' objects are Reactome/RHEA/EC identifiers without names (pre-existing, rdfc2im go source).
+
+## Checkpoint 25, 18 Nov 2026 ~09:30 UTC
+
+- Merged and closed since checkpoint 24: T1.9 im-9n4.14 and T1.10 im-9n4.15 build halves (expression, disease), im-9n4.41 (RDF hpo loads; HPO term names), im-9n4.38 (go cross-references), T1.15 im-9n4.40 (all human genes as identifiers, --gene-identifiers all).
+- Heads: rdfc2im maint/im-ore.1-intermine-src 9323d9d (make test 396/56; test-live 56/56); mine-tests bf6c391; humanmine-bio-sources d67fc5d. ut mine: 1,120,120 objects, 64,470 human genes; build 19.5 min; cache for the all-genes build: repos/rdfc2im/cached_raw_data.allgenes-2026-11-18 (integration worktree symlink points at it; panel cache unchanged and still the CI asset source).
+- Milestone gate (orchestrator run after merge): browser 10 pass / 1 fail / 1 skip, service 25 / 2 / 2. The one browser failure is test_tool_panels_match_reference on three ArrayExpress tools that need E-MTAB-62 (Gos's copy only): Gos decides data or exceptions.
+- Memory: integrate ran with 0.66 to 2.6 GB available; one all-genes run stalled with the Gradle daemon heap full (now --no-daemon per source). Sandbox still 16 GB.
+- Bead ids corrected: T1.15 is im-9n4.40 (im-9n4.36/.37 never existed: bd rejected the long titles).
+- Expert log entry 11 (gene merge rules, ontology cross-references).
+- Waiting on Gos: ArrayExpress tools (data or exceptions); demo-data asset upload; MSA Swiss-Prot only or all; Orphanet diseases with HPO annotations; RGD host allow; hand-written HPA tissue grouping needs a check.
