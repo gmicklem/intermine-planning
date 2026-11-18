@@ -203,3 +203,26 @@ release v2026-09-01 (README with URLs, sha256 and licence beside them). **To rev
 - **Not checked:** the converter was tested on fixtures and a column count of the full files, not run
   over the full 21 MB and 36 MB files; the first mine build with it is that check.
 - **orphanet:** unchanged; a fixture test on the current `en_product1.xml` (JDBOR 1.3.42) passes.
+
+### 10. rdfc2im hybrid build: interaction filter rules for IntAct and BioGRID (18 Nov 2026, im-9n4.13)
+
+rdfc2im `tools/subset_raw.py filter --format psi-xml` (commits a0639c6, c2420b9; merged in d267d68). The
+demo keeps an interaction when at least one participant is a panel gene. Three further rules were added
+because the 2026 files needed them; each changes what a HumanMine user would see. **To revert:**
+`git revert c2420b9 a0639c6` in rdfc2im (the two loaders then go back to unfiltered input).
+
+- **Ensembl version suffixes are stripped from interactor xrefs** (`ENSG....27` becomes `ENSG...`;
+  94,341 ids). IntAct now writes versioned ids, and PsiConverter resolves human interactors through
+  `gene_info`, which has none: without this no human interactor resolves. **Please check:** whether
+  PsiConverter itself should strip versions (a full, unfiltered build would hit the same problem).
+- **Negative interactions are dropped** (923 records from IntAct's `*_negative.xml` files). Neither
+  converter reads the negative flag, so they would load as real interactions. **Please check:** what
+  HumanMine did with these in 2022, and whether the converters should model them.
+- **Records with more than two participants are trimmed** to the panel participants and the ones the
+  converter would pair with them (1,792 records). `InteractionDetail.allInteractors` on those records
+  lists only the kept participants, not the whole complex. This is a subset-build device and must be
+  off in a full build.
+- **Verified:** Interaction 22,351, 0 duplicates; IntAct and BioGRID share one Interaction per ordered
+  gene pair; every InteractionDetail has an experiment and a type; live tests 42/42.
+- **Known gap:** the 5,994 human partner genes outside the panel are stubs with an Entrez id and no
+  symbol until all human genes are loaded as identifiers (bead im-9n4.36).
