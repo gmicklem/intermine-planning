@@ -89,9 +89,22 @@ here, so a new session on a new machine can be set up from this file alone.
 
 ```bash
 sbx policy allow network rgd.mcw.edu,web.archive.org,archive.org
+sbx policy allow network www.pantherdb.org,www.gtexportal.org,hpo.jax.org,www.genenames.org,www.ensembl.org,www.ncbi.nlm.nih.gov,togovar.org,geneontology.org
+sbx policy allow network www.nlm.nih.gov,www.uniprot.org,wiki.thebiogrid.org,interpro-documentation.readthedocs.io
 ```
 
 - `rgd.mcw.edu` (asked 18 Nov): RGD's main site, for its licence and citation wording (the download
   host `download.rgd.mcw.edu` is already allowed and carries no licence text).
 - `web.archive.org`, `archive.org` (asked 18 Nov): the Wayback Machine, to fetch TargetMine's logo
   while targetmine.mizuguchilab.org is down (registry placeholder icon).
+
+- Licence pages (asked 18 Nov, bead im-9n4.45; each answered 403 once): `www.pantherdb.org` (PANTHER
+  terms), `www.gtexportal.org` (GTEx licence), `hpo.jax.org` (HPO licence, stock and RDF),
+  `www.genenames.org` (HGNC), `www.ensembl.org` (Ensembl disclaimer), `www.ncbi.nlm.nih.gov` (NCBI
+  policy and ClinVar data-use pages), `togovar.org` (TogoVar terms; the GWAS Catalog RDF comes through
+  it), `geneontology.org` (GO licence and citation). Until they are read, those sources are recorded
+  as "not verified" in rdfc2im docs/LICENCES.md.
+- Optional, third line of the command: `www.nlm.nih.gov`, `www.uniprot.org`, `wiki.thebiogrid.org`,
+  `interpro-documentation.readthedocs.io` (second statements for sources already verified or partial).
+- Not solvable by an allow rule: IntAct's and InterPro's licence statements are on JavaScript pages of
+  `www.ebi.ac.uk` (already allowed); they need a browser.
