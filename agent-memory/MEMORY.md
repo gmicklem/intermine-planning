@@ -4,4 +4,4 @@
 - [Laptop sleep plan](laptop-sleep-plan.md) — Gos sleeps the Mac ~10:00 UK Mon 16 Nov; checkpoint before, relaunch dead workers on 'back'
 - [Worker permission-prompt hang](worker-permission-prompt-hang.md) — relative-path rm hangs workers for ever; absolute paths + run_in_background, check stalled agents
 - [Registry and Dependabot state](registry-and-dependabot-state.md) — 17 Nov open threads: registry demo, reagent #676 posted, Dependabot scans default branch only
-- [Next session hand-over](next-session-handover.md) — start epic im-9n4 (hybrid testbed), check Renovate/Clojars/reagent first; DBCLS host facts
+- [Next session hand-over](next-session-handover.md) — 18 Nov: im-9n4 milestones 1+2 on the ut demo; rebuild command; what waits on Gos

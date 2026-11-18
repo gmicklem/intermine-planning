@@ -1,4 +1,4 @@
-# STATISTICS 2026-11-18 11:29 UTC
+# STATISTICS 2026-11-18 21:52 UTC
 
 Jobs are worker runs recorded in `status/agent-runs.csv`, counted in the hour they started, by model. The orchestrator is one long Fable session and is not a job, so the Fable column counts only runs recorded with that model; the orchestrator's work shows in the Merges column. Commits are non-merge commits on the integration branches of the eleven code repositories and rdfc2im, by author time; the planning repository is left out. Hours with nothing in them are not shown. Written by `scripts/statistics.py` (hourly, with STATUS.md); since 2026-11-14 22:00 UTC.
 
@@ -9,8 +9,8 @@ Jobs are worker runs recorded in `status/agent-runs.csv`, counted in the hour th
 | 2026-11-15 |  | 26 | 57 |  |  | 268 | 51 |
 | 2026-11-16 |  | 6 | 85 |  |  | 197 | 83 |
 | 2026-11-17 |  | 8 | 12 |  |  | 22 | 12 |
-| 2026-11-18 |  | 5 | 15 |  |  | 51 | 24 |
-| **All** |  | 45 | 169 |  |  | 538 | 170 |
+| 2026-11-18 |  | 6 | 19 |  |  | 70 | 33 |
+| **All** |  | 46 | 173 |  |  | 557 | 179 |
 
 ## 2026-11-18, by hour
 
@@ -26,6 +26,9 @@ Jobs are worker runs recorded in `status/agent-runs.csv`, counted in the hour th
 | 07:00 |  |  |  |  |  | 1 |  |
 | 09:00 |  | 1 |  |  |  | 2 | 1 |
 | 10:00 |  |  | 3 |  |  | 3 | 3 |
+| 12:00 |  | 1 | 2 |  |  | 5 | 4 |
+| 19:00 |  |  | 1 |  |  | 5 | 3 |
+| 21:00 |  |  | 1 |  |  | 9 | 2 |
 
 ## 2026-11-17, by hour
 

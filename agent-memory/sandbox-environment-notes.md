@@ -29,3 +29,10 @@ metadata:
 - 16 Nov 2026: im-testenv.sh gives each task its own GRADLE_USER_HOME (caches/wrapper/jdks symlinked to /home/agent/.gradle); gate-intermine.sh refuses to run with the shared Gradle home unless GATE_ALLOW_REAL_HOME=1, so orchestrator re-gates must source a task env (im-testenv.sh <id> create --src WT; eval "$(im-testenv.sh <id> env)"). `gradle --stop` with a task's own env aborts its running gate.
 
 - 16 Nov 2026 18:35 UTC: push URLs of every remote pointing at github.com/intermine/* or intermineorg/* are set to DISABLED_UPSTREAM_PUSH in all checkouts (Gos's account has admin on upstream, so a plain `git push origin` would have reached InterMine). Fetch still works. Re-enable with `git remote set-url --push <remote> <url>` only when Gos opens upstream PRs.
+
+- 18 Nov 2026: `/var/lib/docker` is its OWN 10 GB volume (/dev/vdd), not the root overlay: pruning Docker
+  images or build cache does not free the root disk. Root-disk hogs are worktree copies of rdfc2im
+  `in/` + `out/` (about 950 MB per build worktree), the session scratchpad under /tmp/claude-1000
+  (workers leave extracted tarballs and test builds: 2.9 GB found, including the PREVIOUS session's
+  directory), /home/agent/.gradle (3.9 GB, needed) and package caches. Clean worker scratch after each
+  merge; tell workers to put large scratch under repos/.sandbox-disk/.

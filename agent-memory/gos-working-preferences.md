@@ -22,3 +22,20 @@ metadata:
 - 16 Nov 2026: KeySigner decision: keep the hand-written DER writer (bcprov stays removed). Gos wants a running log of issues for an InterMine expert developer to check: repos/intermine-planning/docs/EXPERT_TO_CHECK.md; add an entry whenever a change is correct by tests but touches history-laden code.
 
 - 16 Nov 2026 (17:50 UTC): Gos agreed the maint-2026 line becomes 6.0.0 (major maintenance release); decisions taken today: keep KeySigner DER writer, keep reagent input patch (upstream issue reagent-project/reagent#676 posted from gmicklem), drop commons-lang 2 on 6.0 (forks migrated), keep runtime scope in bio-source POMs. Gos plans manual testing once the beads are nearly done; expert review log docs/EXPERT_TO_CHECK.md must carry reversion steps for every entry.
+
+- 18 Nov 2026 (Gos): whenever a host is blocked by the sandbox, tell him the exact
+  `sbx policy allow network <host>` command at once, and add the host to
+  repos/intermine-planning/docs/SANDBOX-NETWORK.md (section "Requested, not yet allowed", moved up once
+  he has run it), so a new session on a new machine can be set up from that file. **Why:** he had to
+  ask which hosts were needed; the file is the single list. Also from 18 Nov: STATUS.md shows beads and
+  epics before the agent list; questions needing research go in docs/TO_INVESTIGATE.md; licences must
+  be read from the sources as stated today, never carried over from old notes; show him an image
+  before committing it.
+
+- 18 Nov 2026 (Gos), **permanent session-close policy:** before a session ends or the sandbox is
+  restarted, run `scripts/save-agent-memory.sh` in intermine-planning (copies these notes to
+  `agent-memory/`), write a LOG.md checkpoint, remove `repos/.sandbox-disk/scratch/` and merged
+  worktrees, commit and push. **Why:** at the end of the 17 Nov session he nearly restarted the sandbox
+  with more memory, which wipes the sandbox home and these notes; it was caught just in time. The
+  hourly status loop now saves them too. Large scratch goes under `repos/.sandbox-disk/scratch/<task>/`
+  (his instruction: scratch inside the repos directory, cleaned up at the end of the session).

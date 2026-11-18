@@ -16,3 +16,12 @@ A worker agent's Bash call that needs a permission the allow rules do not cover 
 **Third instance (16 Nov 02:11Z):** `cd $B && mkdir -p newjar && cd newjar && rm -rf ./* && jar xf ...` inside the worker's own /home/agent/taskhomes dir; 20 min lost. Even with the rule in the brief, workers write relative rm inside their scratch dirs. Recovery that worked: TaskStop the agent, then SendMessage to the same id (it resumes with its context) telling it which call hung and to redo it with absolute paths.
 
 - 5th instance 16 Nov 18:30 UTC (im-jqz.67): `rm -rf $(cat .../builddirs.txt)` after the gate had finished; 25 min lost. Rule added to CLAUDE.md: no command substitution or variables in rm calls; literal absolute paths only.
+
+- 6th instance 18 Nov 2026 01:09 UTC (im-9n4.5): a read-only compound call hung 15 min:
+  `S=...; bash $S/counts.sh | tee ...; cd <wt>; grep ...; curl ...; for c in ...; do p=$([ $c ...`. No rm
+  involved: `cd dir;` plus `$(...)` inside a loop is enough. Briefs should say: one simple command per
+  Bash call, absolute paths, no `cd x;` prefix, no `$(...)`/loops building commands. Stall watch must
+  read the transcript's last JSONL timestamp (file mtime is unreliable) and drop finished agents;
+  recovery (TaskStop then SendMessage to the same id naming the hung call) worked again.
+- Servers a worker starts with run_in_background get SIGTERM when that worker finishes: lasting
+  servers must be started `setsid nohup ... &` (found 17 Nov with the BlueGenes jar on :15001).

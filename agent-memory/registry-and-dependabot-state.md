@@ -44,3 +44,8 @@ since fixed. Idea: scripts/ci-failures.sh in the hourly status to list non-green
 **Why:** these are the open threads when Gos paused on 17 Nov ~16:10 UTC.
 **How to apply:** on "back", confirm the checkpoint push went through, redo the latest-run CI scan,
 then raise the default-branch question before any Dependabot work. Related: [[intermine-maintenance-sprint]], [[gos-working-preferences]].
+
+**18 Nov 2026:** Issues were disabled on all eleven forks, so Renovate could not create its Dependency
+Dashboard; Gos approved and I enabled them (`gh api -X PATCH repos/gmicklem/<r> -F has_issues=true`;
+revert with `false`). Reagent: PR #690 measured clean with the patch off; reply posted on #676
+(issuecomment-6965689626); patch stays until a reagent release carries the fix.
