@@ -220,7 +220,7 @@ Newest first. One entry per checkpoint (about every 3 hours while unattended).
 - Expert log entry 11 (gene merge rules, ontology cross-references).
 - Waiting on Gos: ArrayExpress tools (data or exceptions); demo-data asset upload; MSA Swiss-Prot only or all; Orphanet diseases with HPO annotations; RGD host allow; hand-written HPA tissue grouping needs a check.
 
-## Checkpoint 26, 18 Nov 2026 ~11:20 UTC (milestone 1 build work complete)
+## Checkpoint 26, 18 Nov 2026 ~10:30 UTC (milestone 1 build work complete)
 
 - Merged and closed since checkpoint 25: T1.13 im-9n4.19 (clean offline rebuild of the whole hybrid ut mine in 23 min 50 s; autocomplete index bug fixed), T2.2 im-9n4.21 (tools/panelapp_lists.py; 433 panels, 29,609 Green entries, all resolve on the demo).
 - Heads: rdfc2im maint/im-ore.1-intermine-src d8c50d2 (make test 422/56; test-live 56/56); mine-tests bf6c391; humanmine-bio-sources d67fc5d. Canonical driver on this machine: repos/.sandbox-disk/rdfc2im/drive-ut-hybrid.sh (templates in rdfc2im trial/). ut mine 1,120,120 objects; Postgres 3.4 GB.
@@ -229,3 +229,4 @@ Newest first. One entry per checkpoint (about every 3 hours while unattended).
 - Release tarballs prepared, NOT uploaded (repos/rdfc2im/): cached_raw_data-2026-11-18b.tar.gz 29,399,194 B sha256 5d4a1a3d...; stock_filtered-2026-11-18.tar.gz 25,602,753 B d6204335...; cached_raw_data_allgenes-2026-11-18.tar.gz 8,004,400 B 657c93f3....
 - Running: T2.3 im-9n4.22 (apply_public_lists on the demo mine; 2021 names kept for the 17 renamed panels pending Gos).
 - Waiting on Gos: ArrayExpress tools; asset uploads; MSA Swiss-Prot only or all; Orphanet diseases with HPO; renamed-panel list names; hosts download.rgd.mcw.edu and prod-media-panelapp.genomicsengland.co.uk; HPA tissue grouping check.
+- 10:57 UTC: T2.3 im-9n4.22 and T2.4 im-9n4.23 closed: rdfc2im c78b0f1 (make test 483/59, test-live 59/59); demo mine has 438 public lists (425 PanelApp, 13 legacy), re-run idempotent; canonical driver passes --public-lists. Milestone 2 is done on the demo except T2.5 (Gos asks Genomics England about versioned panel releases).
