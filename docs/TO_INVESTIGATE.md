@@ -19,7 +19,7 @@ Status words: **open** (nobody is on it), **in progress** (bead named), **answer
 
 ### 1. Is there more recent expression data that should replace E-MTAB-62 and E-MTAB-513? (Gos, 18 Nov 2026)
 
-- **Status:** open.
+- **Status:** in progress (bead im-9n4.47, started 18 Nov 2026; report will be `reference/expression-data-options-2026-11.md`).
 - **Question:** which current, maintained human expression data sets should a rebuilt HumanMine load,
   and can they drive the gene-page expression tools?
 - **Why it matters:** three tools on HumanMine's gene page (the ArrayExpress disease and tissue
