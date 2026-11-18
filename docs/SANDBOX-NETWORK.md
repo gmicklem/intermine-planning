@@ -81,3 +81,17 @@ command above, so a new machine gets them with the rest:
 
 No other host was requested on 18 Nov. `jbrowse2.intermine.org` and `www.orphadata.com` were already
 reachable. Still deliberately not allowed: omim.org, www.disgenet.org, depmap.org (decision D-7).
+
+## Requested, not yet allowed (keep this list current; move a host up when Gos has run the command)
+
+Rule (Gos, 18 Nov 2026): whenever a request is blocked, tell Gos the exact command and add the host
+here, so a new session on a new machine can be set up from this file alone.
+
+```bash
+sbx policy allow network rgd.mcw.edu,web.archive.org,archive.org
+```
+
+- `rgd.mcw.edu` (asked 18 Nov): RGD's main site, for its licence and citation wording (the download
+  host `download.rgd.mcw.edu` is already allowed and carries no licence text).
+- `web.archive.org`, `archive.org` (asked 18 Nov): the Wayback Machine, to fetch TargetMine's logo
+  while targetmine.mizuguchilab.org is down (registry placeholder icon).
