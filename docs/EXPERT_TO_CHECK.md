@@ -225,4 +225,4 @@ because the 2026 files needed them; each changes what a HumanMine user would see
 - **Verified:** Interaction 22,351, 0 duplicates; IntAct and BioGRID share one Interaction per ordered
   gene pair; every InteractionDetail has an experiment and a type; live tests 42/42.
 - **Known gap:** the 5,994 human partner genes outside the panel are stubs with an Entrez id and no
-  symbol until all human genes are loaded as identifiers (bead im-9n4.36).
+  symbol until all human genes are loaded as identifiers (bead im-9n4.40).
