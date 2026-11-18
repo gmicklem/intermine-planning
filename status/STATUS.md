@@ -1,16 +1,16 @@
-# STATUS 2026-11-18 00:00 UTC
+# STATUS 2026-11-18 01:00 UTC
 
-Generated 2026-11-18 00:00 UTC / 2026-11-18 00:00 GMT. Sprint dashboard for the InterMine and BlueGenes maintenance effort.
+Generated 2026-11-18 01:00 UTC / 2026-11-18 01:00 GMT. Sprint dashboard for the InterMine and BlueGenes maintenance effort.
 
 Times are UTC. Agent state: running = unfinished and written to in the last 10 min; stalled = unfinished and silent for 10 min or more; finished = last message ended its turn (no tool call pending).
 
-Subagents: 3 running, 2 stalled, 195 finished.
+Subagents: 1 running, 2 stalled, 200 finished.
 
 ## Agents
 
 | Agent | Model | State | Started | Last | In | Cache | Out |
 |---|---|---|---|---|---|---|---|
-| main session | fable-5-2 | running | 11-17 23:40 | 11-17 23:59 | 98 | 7.28M | 47.7k |
+| main session | fable-5-2 | running | 11-17 23:40 | 01:00 | 332 | 27.19M | 85.0k |
 | Read-only survey of the InterMine Java back… | opus-5-5 | finished | 11-15 00:18 | 11-15 00:20 | 42 | 1.05M | 9.0k |
 | Read-only survey of BlueGenes, the ClojureS… | opus-5-5 | finished | 11-15 00:18 | 11-15 00:20 | 22 | 347.5k | 8.3k |
 | Read-only survey of four repos under /Users… | opus-5-5 | finished | 11-15 00:18 | 11-15 00:21 | 26 | 863.6k | 7.5k |
@@ -206,35 +206,38 @@ Subagents: 3 running, 2 stalled, 195 finished.
 | You are a worker on the InterMine maintenan… | sonnet-5-5 | finished | 11-17 22:02 | 11-17 22:07 | 16 | 309.7k | 7.5k |
 | You are a technical writer on the InterMine… | sonnet-5-5 | finished | 11-17 22:02 | 11-17 22:05 | 12 | 493.2k | 24.8k |
 | T0.2 subset_raw.py (im-9n4.3) | sonnet-5-5 | finished | 11-17 23:46 | 11-17 23:51 | 46 | 1.73M | 39.8k |
-| T0.1 stock-source support (im-9n4.2) | opus-5-5 | running | 11-17 23:46 | 11-17 23:59 | 90 | 7.73M | 65.4k |
-| Reagent PR 690 measurement (im-7os.62) | sonnet-5-5 | running | 11-17 23:47 | 11-17 23:58 | 62 | 2.22M | 9.4k |
+| T0.1 stock-source support (im-9n4.2) | opus-5-5 | finished | 11-17 23:46 | 00:23 | 282 | 34.60M | 135.3k |
+| Reagent PR 690 measurement (im-7os.62) | sonnet-5-5 | finished | 11-17 23:47 | 00:05 | 90 | 3.50M | 17.8k |
 | T1.2 testbed tools (im-9n4.7) | sonnet-5-5 | finished | 11-17 23:48 | 11-17 23:59 | 82 | 3.47M | 33.6k |
 | Read-only research, medium thoroughness. Fo… | opus-5-5 | finished | 11-17 23:50 | 11-17 23:55 | 64 | 1.67M | 20.2k |
-| T1.3 aligner and front proxy (im-9n4.8) | sonnet-5-5 | running | 11-17 23:57 | 11-17 23:59 | 32 | 829.6k | 7.5k |
+| T1.3 aligner and front proxy (im-9n4.8) | sonnet-5-5 | finished | 11-17 23:57 | 00:01 | 52 | 1.52M | 14.7k |
+| T0.3 resolver gate (im-9n4.4) | sonnet-5-5 | finished | 00:24 | 00:32 | 92 | 5.22M | 42.1k |
+| T0.4 panel fixtures and refetch (im-9n4.5) | sonnet-5-5 | running | 00:25 | 00:59 | 154 | 5.56M | 15.3k |
+| T1.1 stock UniProt load (im-9n4.6) | opus-5-5 | finished | 00:34 | 01:00 | 220 | 16.84M | 56.8k |
 
-Note: 983 non-agent .output file(s) skipped (empty or plain-text task output)
+Note: 1004 non-agent .output file(s) skipped (empty or plain-text task output)
 
 ## Totals by model
 
 | Scope | Model | Msgs | In | Cache rd | Cache wr | Out |
 |---|---|---|---|---|---|---|
-| main | fable-5-2 | 45 | 98 | 7.10M | 179.9k | 47.7k |
+| main | fable-5-2 | 123 | 332 | 26.92M | 272.9k | 85.0k |
 | subagents | fable-5-1 | 1 | 4 | 712.4k | 3.9k | 428 |
 | subagents | haiku-5-5 | 1 | 2 | 0 | 9.4k | 112 |
-| subagents | opus-5-5 | 3805 | 7.7k | 617.20M | 27.48M | 3.03M |
-| subagents | sonnet-5-5 | 9461 | 19.0k | 1.11B | 44.39M | 6.14M |
+| subagents | opus-5-5 | 3992 | 8.1k | 660.56M | 27.83M | 3.16M |
+| subagents | sonnet-5-5 | 9590 | 19.3k | 1.12B | 44.67M | 6.21M |
 
 Tokens are de-duplicated per API message (streamed records share one message id).
 
 ## Beads summary
 
-bd status: total 353, open 57, in progress 5, blocked 0, ready 57, deferred 0, closed 291.
+bd status: total 353, open 55, in progress 4, blocked 0, ready 55, deferred 0, closed 294.
 
 | Status | Count |
 |---|---|
-| closed | 291 |
-| in_progress | 5 |
-| open | 57 |
+| closed | 294 |
+| in_progress | 4 |
+| open | 55 |
 
 ### By priority (tasks and bugs; epics counted apart)
 
@@ -242,9 +245,9 @@ bd status: total 353, open 57, in progress 5, blocked 0, ready 57, deferred 0, c
 |---|---|---|---|---|---|---|---|---|
 | P0 | 0 | 1 | 0 | 0 | 14 | 15 | 93% | 2 |
 | P1 | 2 | 0 | 0 | 0 | 59 | 61 | 97% | 5 |
-| P2 | 19 | 4 | 0 | 0 | 129 | 152 | 85% | 3 |
+| P2 | 17 | 3 | 0 | 0 | 132 | 152 | 87% | 3 |
 | P3 | 26 | 0 | 0 | 0 | 89 | 115 | 77% | 0 |
-| all | 47 | 5 | 0 | 0 | 291 | 343 | 85% | 10 |
+| all | 45 | 4 | 0 | 0 | 294 | 343 | 86% | 10 |
 
 ### im-28e Epic F: BlueGenes tests and CI [open, 13/13 closed]
 
@@ -255,7 +258,7 @@ No open child issues.
 | ID | Title | Status | P | Labels |
 |---|---|---|---|---|
 | im-7os.33 | HUMAN (Gos): release imcljs 1.7.0, im-tables 0.16… | open | 1 | epic |
-| im-7os.62 | bluegenes: reagent upstream fixed the keystroke l… | in_progress | 2 | epic |
+| im-7os.62 | bluegenes: reagent upstream fixed the keystroke l… | open | 2 | epic |
 | im-7os.16 | bluegenes dev advisories needing majors: Cypress … | open | 3 | bluegenes,epic,security |
 | im-7os.29 | bluegenes: imjs 4.0.0 unmaintained since 2020 (no… | open | 3 | epic |
 
@@ -271,7 +274,7 @@ No open child issues.
 |---|---|---|---|---|
 | im-8dd.2 | I2 Dashboard generator (STATUS.md, index.html) an… | in_progress | 0 | epic |
 
-### im-9n4 EPIC: hybrid HumanMine testbed: rdfc2im (RDF-port… [open, 3/31 closed]
+### im-9n4 EPIC: hybrid HumanMine testbed: rdfc2im (RDF-port… [open, 6/31 closed]
 
 | ID | Title | Status | P | Labels |
 |---|---|---|---|---|
@@ -285,11 +288,8 @@ No open child issues.
 | im-9n4.17 | T1.12 mine-tests: [mines.local] tools enabled, pl… | open | 2 |  |
 | im-9n4.18 | T1.14 Reinstate repos/sequence-alignment-service … | open | 2 |  |
 | im-9n4.19 | T1.13 Full ut demo rebuild with all milestone 1 s… | open | 2 |  |
-| im-9n4.2 | T0.1 rdfc2im full-build.sh: generic stock-source … | in_progress | 2 |  |
-| im-9n4.4 | T0.3 rdfc2im: ID-resolver gate (filtered entrez g… | open | 2 |  |
-| im-9n4.5 | T0.4 Demo panel: add PAX6 (+ mine-tests fixture g… | open | 2 |  |
-| im-9n4.6 | T1.1 Hybrid: load the stock uniprot (Swiss-Prot h… | open | 2 |  |
-| im-9n4.8 | T1.3 Testbed aligner: run sequence-alignment-serv… | in_progress | 2 |  |
+| im-9n4.5 | T0.4 Demo panel: add PAX6 (+ mine-tests fixture g… | in_progress | 2 |  |
+| im-9n4.6 | T1.1 Hybrid: load the stock uniprot (Swiss-Prot h… | in_progress | 2 |  |
 | im-9n4.9 | T1.4 Hybrid: load ncbi-gff (filtered to the panel… | open | 2 |  |
 | im-9n4.20 | T2.1 Archive the current 184 HumanMine public lis… | open | 3 |  |
 | im-9n4.21 | T2.2 rdfc2im tools/panelapp_lists.py: fetch all c… | open | 3 |  |
@@ -355,7 +355,7 @@ No open child issues.
 
 | Repo | WT | Branch | Last commit | vs dev \| subject |
 |---|---|---|---|---|
-| intermine | 4 (im-89g.12-511-tes…, im-ore.14-testbed…, merge-maint-2026) | maint-2026 | 11-17 18:41 (5.3h) | ahead 297 vs dev \| Merge maint/im-8dd.10-ci-pr: CI on pull… |
+| intermine | 4 (im-89g.12-511-tes…, im-ore.14-testbed…, merge-maint-2026) | maint-2026 | 11-17 18:41 (6.3h) | ahead 297 vs dev \| Merge maint/im-8dd.10-ci-pr: CI on pull… |
 | intermine | 4 (im-89g.12-511-tes…, im-ore.14-testbed…, merge-maint-2026) | maint/im-89g.1-ci-actions | 11-15 04:45 (2d) | - \| docs: update README badges, PR template… |
 | intermine | 4 (im-89g.12-511-tes…, im-ore.14-testbed…, merge-maint-2026) | maint/im-89g.1-ci-fix | 11-15 06:28 (2d) | - \| ci: stop using sudo -E -u postgres; con… |
 | intermine | 4 (im-89g.12-511-tes…, im-ore.14-testbed…, merge-maint-2026) | maint/im-89g.1-ci-fix2 | 11-15 06:54 (2d) | - \| ci: fix PostgreSQL 15+ public schema pr… |
@@ -375,7 +375,7 @@ No open child issues.
 | intermine | 4 (im-89g.12-511-tes…, im-ore.14-testbed…, merge-maint-2026) | maint/im-jqz.7-weak-deps | 11-15 05:51 (2d) | - \| deps: remove orphan vendored bobo-brows… |
 | intermine | 4 (im-89g.12-511-tes…, im-ore.14-testbed…, merge-maint-2026) | maint/im-jqz.8-flaky-tests | 11-15 07:24 (2d) | - \| integrate: make DataTracker.clear() saf… |
 | intermine | 4 (im-89g.12-511-tes…, im-ore.14-testbed…, merge-maint-2026) | maint/im-rkn.3-baseline | 06-12 11:01 (158d) | - \| Merge pull request #2460 from intermine… |
-| bluegenes | 3 (im-7os.62-reagent…, im-7os.63-reagent…) | maint-2026 | 11-17 18:15 (5.7h) | ahead 151 vs dev \| renovate: use the shared gmicklem prese… |
+| bluegenes | 3 (im-7os.62-reagent…, im-7os.63-reagent…) | maint-2026 | 11-17 18:15 (6.7h) | ahead 151 vs dev \| renovate: use the shared gmicklem prese… |
 | bluegenes | 3 (im-7os.62-reagent…, im-7os.63-reagent…) | maint/im-28e.2-cypress-13 | 11-15 11:09 (2d) | - \| docs, cypress: how to run the suite; ta… |
 | bluegenes | 3 (im-7os.62-reagent…, im-7os.63-reagent…) | maint/im-28e.3-gh-actions | 11-15 05:31 (2d) | - \| docs: CI badge and Continuous integrati… |
 | bluegenes | 3 (im-7os.62-reagent…, im-7os.63-reagent…) | maint/im-7os.1-shadow-cljs | 11-15 05:17 (2d) | - \| comments: drop stale lein/figwheel refe… |
@@ -383,15 +383,15 @@ No open child issues.
 | bluegenes | 3 (im-7os.62-reagent…, im-7os.63-reagent…) | maint/im-7os.18-sibling-deps | 11-15 12:49 (2d) | - \| docs: how the sibling libraries are pin… |
 | bluegenes | 3 (im-7os.62-reagent…, im-7os.63-reagent…) | maint/im-7os.4-cdn-sri | 11-15 11:48 (2d) | - \| script: cdn-sri.sh prints SRI hashes fo… |
 | bluegenes | 3 (im-7os.62-reagent…, im-7os.63-reagent…) | maint/im-7os.5-removals | 11-15 02:59 (2d) | - \| npm: remove unused clipboardy [im-7os.5] |
-| bluegenes | 3 (im-7os.62-reagent…, im-7os.63-reagent…) | maint/im-7os.62-reagent-pr690 | 11-17 18:15 (5.7h) | - \| renovate: use the shared gmicklem prese… |
-| bluegenes | 3 (im-7os.62-reagent…, im-7os.63-reagent…) | maint/im-7os.63-reagent-snap2 | 11-16 18:40 (29.3h) | - \| Merge maint/im-89g.30-changelog: CHANGE… |
+| bluegenes | 3 (im-7os.62-reagent…, im-7os.63-reagent…) | maint/im-7os.62-reagent-pr690 | 11-17 18:15 (6.7h) | - \| renovate: use the shared gmicklem prese… |
+| bluegenes | 3 (im-7os.62-reagent…, im-7os.63-reagent…) | maint/im-7os.63-reagent-snap2 | 11-16 18:40 (30.3h) | - \| Merge maint/im-89g.30-changelog: CHANGE… |
 | bluegenes | 3 (im-7os.62-reagent…, im-7os.63-reagent…) | maint/im-89g.5-ci-actions | 11-15 09:55 (2d) | - \| ci: bump GitHub Actions to current majo… |
 | bluegenes | 3 (im-7os.62-reagent…, im-7os.63-reagent…) | maint/im-rkn.4-baseline | 01-26 21:58 (660d) | - \| dynamic favicon slows down dx |
-| imcljs | 1 | maint-2026 | 11-17 18:48 (5.2h) | ahead 15 vs dev \| Merge maint/im-8dd.11-ci: GitHub Action… |
+| imcljs | 1 | maint-2026 | 11-17 18:48 (6.2h) | ahead 15 vs dev \| Merge maint/im-8dd.11-ci: GitHub Action… |
 | imcljs | 1 | maint/im-7os.3-imcljs-deps-edn | 11-15 02:46 (2d) | - \| deps: bump clj-http 3.10.0 to 3.13.0 [i… |
-| im-tables-3 | 1 | maint-2026 | 11-17 18:48 (5.2h) | ahead 47 vs dev \| Merge maint/im-8dd.11-ci: GitHub Action… |
+| im-tables-3 | 1 | maint-2026 | 11-17 18:48 (6.2h) | ahead 47 vs dev \| Merge maint/im-8dd.11-ci: GitHub Action… |
 | im-tables-3 | 1 | maint/im-7os.3-im-tables-deps-edn | 11-15 12:05 (2d) | - \| test: lein kaocha honours IM_TABLES_SER… |
-| bluegenes-tool-store | 1 | maint-2026 | 11-17 18:48 (5.2h) | ahead 22 vs master \| Merge maint/im-8dd.11-ci: GitHub Action… |
+| bluegenes-tool-store | 1 | maint-2026 | 11-17 18:48 (6.2h) | ahead 22 vs master \| Merge maint/im-8dd.11-ci: GitHub Action… |
 | bluegenes-tool-store | 1 | maint/im-7os.3-tool-store-deps-edn | 11-15 02:33 (2d) | - \| deps: remove unused ring/ring-defaults … |
 | bluegenes-tool-store | 1 | maint/im-7os.6-tool-store-fixes | 11-15 09:48 (2d) | - \| deps: bump commons-compress 1.19 -> 1.2… |
 
@@ -401,6 +401,10 @@ WT = number of git worktrees (extra ones named). Branches shown: maint-2026 and 
 
 | Start | Bead | Agent | Model | In | Cache | Out | Outcome | Notes |
 |---|---|---|---|---|---|---|---|---|
+| 00:33 | im-9n4.4 | T0.3 resolver gate | sonnet | 0 | 0 | 0 | success | [tokens: 161616 total from the task not… |
+| 00:23 | im-9n4.2 | T0.1 stock-source support | opus | 0 | 0 | 0 | success | [tokens: 381330 total from the task not… |
+| 00:05 | im-7os.62 | reagent PR 690 measurement | sonnet | 0 | 0 | 0 | success | [tokens: 101139 total from the task not… |
+| 00:02 | im-9n4.8 | T1.3 aligner and front | sonnet | 0 | 0 | 0 | success | [tokens: 75596 total from the task noti… |
 | 11-17 23:57 | im-9n4.7 | T1.2 testbed tools | sonnet | 0 | 0 | 0 | success | [tokens: 114157 total from the task not… |
 | 11-17 23:52 | im-9n4.3 | T0.2 subset_raw.py | sonnet | 0 | 0 | 0 | success | [tokens: 101630 total from the task not… |
 | 11-17 22:08 | im-9n4.1 | archive HumanMine public li… | sonnet | 45.0k | 0 | 0 | success | [tokens: 45011 total from the task noti… |
@@ -417,9 +421,5 @@ WT = number of git worktrees (extra ones named). Branches shown: maint-2026 and 
 | 11-17 11:49 | im-bdy.21 | registry: add TargetMine en… | sonnet | 88.1k | 0 | 0 | success | [tokens: 88109 total from the task noti… |
 | 11-17 10:41 | im-5mt | registry world map page | opus | 163.5k | 0 | 0 | success | [tokens: 163517 total from the task not… |
 | 11-17 09:51 | im-bdy.20 | registry per-mine logo over… | opus | 147.2k | 0 | 0 | success | [tokens: 147211 total from the task not… |
-| 11-17 09:20 | im-bdy.18 | registry logo tiles + theme… | opus | 183.8k | 0 | 0 | success | [tokens: 183843 total from the task not… |
-| 11-17 02:51 | im-bdy.16 | registry: cached logos on w… | sonnet | 84 | 5.04M | 58.7k | success | 34fc314 + fc8db36 merged as 3bfac6d (pu… |
-| 11-17 02:44 | im-bdy.15 | registry: unreachable mines… | sonnet | 58 | 2.61M | 37.1k | success | 42b4615 + 4293692 merged as d30f812 (pu… |
-| 11-17 02:18 | im-bdy.13 | InterMine Registry rewrite … | opus | 152 | 10.94M | 94.9k | success | 3 commits merged as gmicklem/intermine-… |
 
-Showing the 20 most recent of 194 runs.
+Showing the 20 most recent of 198 runs.
