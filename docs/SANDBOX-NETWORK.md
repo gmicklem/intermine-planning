@@ -82,10 +82,10 @@ command above, so a new machine gets them with the rest:
 No other host was requested on 18 Nov. `jbrowse2.intermine.org` and `www.orphadata.com` were already
 reachable. Still deliberately not allowed: omim.org, www.disgenet.org, depmap.org (decision D-7).
 
-## Requested, not yet allowed (keep this list current; move a host up when Gos has run the command)
+## Allowed on 18 Nov 2026 (second batch; Gos ran all three commands, checked 21:40 UTC)
 
 Rule (Gos, 18 Nov 2026): whenever a request is blocked, tell Gos the exact command and add the host
-here, so a new session on a new machine can be set up from this file alone.
+to this file, so a new session on a new machine can be set up from it alone.
 
 ```bash
 sbx policy allow network rgd.mcw.edu,web.archive.org,archive.org
@@ -93,18 +93,19 @@ sbx policy allow network www.pantherdb.org,www.gtexportal.org,hpo.jax.org,www.ge
 sbx policy allow network www.nlm.nih.gov,www.uniprot.org,wiki.thebiogrid.org,interpro-documentation.readthedocs.io
 ```
 
-- `rgd.mcw.edu` (asked 18 Nov): RGD's main site, for its licence and citation wording (the download
-  host `download.rgd.mcw.edu` is already allowed and carries no licence text).
-- `web.archive.org`, `archive.org` (asked 18 Nov): the Wayback Machine, to fetch TargetMine's logo
-  while targetmine.mizuguchilab.org is down (registry placeholder icon).
+- `rgd.mcw.edu`: RGD's licence and citation wording. `web.archive.org`, `archive.org`: the Wayback
+  Machine (TargetMine's logo while its site is down).
+- Licence pages (bead im-9n4.45): `www.pantherdb.org`, `www.gtexportal.org`, `hpo.jax.org`,
+  `www.genenames.org`, `www.ensembl.org`, `www.ncbi.nlm.nih.gov`, `togovar.org`, `geneontology.org`;
+  second statements: `www.nlm.nih.gov`, `www.uniprot.org`, `wiki.thebiogrid.org`,
+  `interpro-documentation.readthedocs.io`.
+- All answer through the proxy. Two still return 403 FROM THE SITE, not from the sandbox:
+  `www.pantherdb.org` (its own HTML error page for a plain client) and `togovar.org` (a Cloudflare
+  "Just a moment" challenge). A browser, or another route to the same statement, is needed for those.
+- Not solvable by an allow rule either: IntAct's and InterPro's licence statements are on JavaScript
+  pages of `www.ebi.ac.uk`; IntAct's text is readable at
+  `raw.githubusercontent.com/Intact-portal/intact-portal-documentation` (allowed).
 
-- Licence pages (asked 18 Nov, bead im-9n4.45; each answered 403 once): `www.pantherdb.org` (PANTHER
-  terms), `www.gtexportal.org` (GTEx licence), `hpo.jax.org` (HPO licence, stock and RDF),
-  `www.genenames.org` (HGNC), `www.ensembl.org` (Ensembl disclaimer), `www.ncbi.nlm.nih.gov` (NCBI
-  policy and ClinVar data-use pages), `togovar.org` (TogoVar terms; the GWAS Catalog RDF comes through
-  it), `geneontology.org` (GO licence and citation). Until they are read, those sources are recorded
-  as "not verified" in rdfc2im docs/LICENCES.md.
-- Optional, third line of the command: `www.nlm.nih.gov`, `www.uniprot.org`, `wiki.thebiogrid.org`,
-  `interpro-documentation.readthedocs.io` (second statements for sources already verified or partial).
-- Not solvable by an allow rule: IntAct's and InterPro's licence statements are on JavaScript pages of
-  `www.ebi.ac.uk` (already allowed); they need a browser.
+## Requested, not yet allowed
+
+(none on 18 Nov 2026, 21:40 UTC)

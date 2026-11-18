@@ -18,12 +18,13 @@ run_once() {
   cd "$PLANNING" || return 1
   echo "== $(date -u +%Y-%m-%dT%H:%MZ) hourly-status" >> "$LOG"
   python3 -I scripts/dashboard.py >> "$LOG" 2>&1 || echo "dashboard failed" >> "$LOG"
+  scripts/save-agent-memory.sh >> "$LOG" 2>&1 || echo "save-agent-memory failed" >> "$LOG"
   python3 -I scripts/statistics.py >> "$LOG" 2>&1 || echo "statistics failed" >> "$LOG"
   python3 -I scripts/beads-history.py append >> "$LOG" 2>&1 || echo "beads-history failed" >> "$LOG"
   /home/agent/venvs/plots/bin/python -I scripts/plot-beads-history.py >> "$LOG" 2>&1 || echo "beads plots failed" >> "$LOG"
   /home/agent/venvs/plots/bin/python -I scripts/plot-commits.py >> "$LOG" 2>&1 || echo "commits plot failed" >> "$LOG"
-  if [ -n "$(git status --porcelain status/)" ]; then
-    git add status/ && git commit -q -m "status: hourly beads report $(date -u +%H:%MZ) [im-8dd.2]
+  if [ -n "$(git status --porcelain status/ agent-memory/)" ]; then
+    git add status/ agent-memory/ && git commit -q -m "status: hourly beads report $(date -u +%H:%MZ) [im-8dd.2]
 
 Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>" >> "$LOG" 2>&1
     # push only when the token still belongs to gmicklem (sprint rule)
