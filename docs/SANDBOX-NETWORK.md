@@ -109,7 +109,7 @@ sbx policy allow network www.nlm.nih.gov,www.uniprot.org,wiki.thebiogrid.org,int
 ## Requested, not yet allowed
 
 ```bash
-sbx policy allow network gtexportal.org,www.bgee.org
+sbx policy allow network gtexportal.org,www.bgee.org,jun2026.archive.ensembl.org
 ```
 
 - `gtexportal.org` (asked 18 Nov, bead im-9n4.47; `www.gtexportal.org` is allowed but redirects to
@@ -118,3 +118,9 @@ sbx policy allow network gtexportal.org,www.bgee.org
 - `depmap.org` was also wanted, to read DepMap's licence and latest release. It is on the
   "deliberately not allowed" list (decision D-7: account-gated data); allow it only if Gos wants the
   licence page read: `sbx policy allow network depmap.org`.
+- `jun2026.archive.ensembl.org` (asked 18 Nov, bead im-9n4.45): `www.ensembl.org` redirects there for
+  the Ensembl disclaimer and licence page. The archive host name changes with each Ensembl release.
+- No allow rule helps for these; a person must read them in a normal browser: PANTHER's terms
+  (`https://www.pantherdb.org/tou.jsp`, Cloudflare check), TogoVar's terms
+  (`https://togovar.org/doc/terms`, Cloudflare check), ClinVar's own data-use page (reCAPTCHA).
+
