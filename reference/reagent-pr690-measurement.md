@@ -58,7 +58,7 @@ Build artefacts (node_modules, .shadow-cljs, .cpcache, target, resources/public/
 
 ---
 
-## Draft reply for reagent-project/reagent#676 (not posted)
+## Reply posted on reagent-project/reagent#676 (18 Nov 2026, issuecomment-6965689626; Gos approved)
 
 I ran BlueGenes against #690 at d7474c24 (`claude/input-drop-auto-revert`) and it fixes everything we had measured.
 
