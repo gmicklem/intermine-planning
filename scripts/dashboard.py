@@ -645,6 +645,9 @@ def build_doc(agents, beads, repos, runs, runs_err, planning, stall_min):
         if len(runs) > len(recent):
             blocks.append(("p", "Showing the %d most recent of %d runs." % (len(recent), len(runs))))
     doc.append(("Recent agent runs", blocks))
+    # Gos, 18 Nov 2026: the beads and epic summaries come first, before the agent list.
+    order = {"Beads summary": 1}
+    doc[1:] = sorted(doc[1:], key=lambda sec: order.get(sec[0], 2))
     return doc
 
 

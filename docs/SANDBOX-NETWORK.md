@@ -57,7 +57,7 @@ Run before milestone 1 fetching starts (the loaders download from these; `www.hu
 `registry.npmjs.org` already work):
 
 ```bash
-sbx policy allow network ftp.ncbi.nlm.nih.gov,ftp.uniprot.org,rest.uniprot.org,ftp.ebi.ac.uk,www.ebi.ac.uk,current.geneontology.org,purl.obolibrary.org,data.pantherdb.org,www.informatics.jax.org,downloads.thebiogrid.org,reactome.org,search.rcsb.org,www.proteinatlas.org,storage.googleapis.com,panelapp.genomicsengland.co.uk,www.orphadata.com
+sbx policy allow network ftp.ncbi.nlm.nih.gov,ftp.uniprot.org,rest.uniprot.org,ftp.ebi.ac.uk,www.ebi.ac.uk,current.geneontology.org,purl.obolibrary.org,data.pantherdb.org,www.informatics.jax.org,downloads.thebiogrid.org,reactome.org,search.rcsb.org,www.proteinatlas.org,storage.googleapis.com,panelapp.genomicsengland.co.uk,www.orphadata.com,download.rgd.mcw.edu,prod-media-panelapp.genomicsengland.co.uk
 ```
 
 Not in that command, on purpose: omim.org, www.disgenet.org, depmap.org (restricted or account-gated
@@ -70,3 +70,14 @@ release-assets.githubusercontent.com, which also works). One exception: `ftp.uni
 connects through the proxy and then times out after 30 s (the host, not the policy); use the EBI mirror
 `https://ftp.ebi.ac.uk/pub/databases/uniprot/current_release/knowledgebase/taxonomic_divisions/`
 for the UniProt XML and FASTA files instead.
+
+Added 18 Nov 2026 (Gos ran both; each answered 200 from the sandbox at 11:25 UTC) and now part of the
+command above, so a new machine gets them with the rest:
+
+- `download.rgd.mcw.edu`: RGD gene reports, for the rat partner-gene symbols of the PANTHER
+  homologues (bead im-9n4.35).
+- `prod-media-panelapp.genomicsengland.co.uk`: where PanelApp serves its Terms of Use PDF; needed to
+  decide whether the cached panel data may be redistributed.
+
+No other host was requested on 18 Nov. `jbrowse2.intermine.org` and `www.orphadata.com` were already
+reachable. Still deliberately not allowed: omim.org, www.disgenet.org, depmap.org (decision D-7).

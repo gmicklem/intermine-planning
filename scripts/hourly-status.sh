@@ -18,6 +18,7 @@ run_once() {
   cd "$PLANNING" || return 1
   echo "== $(date -u +%Y-%m-%dT%H:%MZ) hourly-status" >> "$LOG"
   python3 -I scripts/dashboard.py >> "$LOG" 2>&1 || echo "dashboard failed" >> "$LOG"
+  python3 -I scripts/statistics.py >> "$LOG" 2>&1 || echo "statistics failed" >> "$LOG"
   python3 -I scripts/beads-history.py append >> "$LOG" 2>&1 || echo "beads-history failed" >> "$LOG"
   /home/agent/venvs/plots/bin/python -I scripts/plot-beads-history.py >> "$LOG" 2>&1 || echo "beads plots failed" >> "$LOG"
   /home/agent/venvs/plots/bin/python -I scripts/plot-commits.py >> "$LOG" 2>&1 || echo "commits plot failed" >> "$LOG"
