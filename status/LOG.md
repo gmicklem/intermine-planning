@@ -189,3 +189,13 @@ Newest first. One entry per checkpoint (about every 3 hours while unattended).
 - Clojars: request filed clojars/administration#349; TXT record live; awaiting membership.
 - Registry: deployment guide corrected for the DBCLS server (option b, nginx variant). Demo on sandbox 3300. Reagent #676: reply posted; awaiting Juho.
 - Next session (fresh, 75% RAM): start epic im-9n4 at T0.1/T0.2 (im-9n4.2/.3) on the ut stack; keep 5.1.1 stack untouched; first check Renovate output and the Clojars issue.
+
+## Checkpoint 23, 18 Nov 2026 ~02:45 UTC (epic im-9n4, milestone 1 under way)
+
+- Session restart 17 Nov 23:40 UTC: sandbox had been restarted (still 16 GB RAM, not 75%); 5.1.1 mine restarted (had started before Postgres), BlueGenes 5001/15001, registry 3300, forwarders, hourly loop started.
+- Closed and merged, every merge re-gated: T0.1 im-9n4.2 (--stock-sources, table of 18 sources), T0.2 im-9n4.3 (tools/subset_raw.py), T0.3 im-9n4.4 (resolver gate, release refusal, wiring), T0.4 im-9n4.5 (PAX6, 114-gene panel, new cache dir cached_raw_data.panel-2026-11-18, tarball prepared, NOT uploaded), T1.1 im-9n4.6 (stock Swiss-Prot + varsplic + keywords on ut: 114 canonical + 140 isoforms with sequence, 0 duplicates), T1.2 im-9n4.7 (patched tools = HumanMine's 19), T1.3 im-9n4.8 (aligner + nginx front on :15001, jar on :15011, compose project rdfc2im-ut-front; restart with trial/front/up.sh), T1.12 im-9n4.17 (mine-tests local-hybrid entry + comparison test).
+- Heads: rdfc2im maint/im-ore.1-intermine-src 5a293d4 (make test 307/25, test-live 25/25 on ut); mine-tests maint-2026 b8cc21c (CI green). rdfc2im has no test workflow: local gate only.
+- Milestone gate today (pytest tests/browser --mine local-hybrid): 5 pass / 5 fail / 1 skip. Known causes: tool panels collapsed without layout.report (T1.11 in progress); MSA viewer stops on TrEMBL proteins without sequence (new bead T1.1b); locations (T1.4 in progress), interactions (T1.8), expression (T1.9, converter fixes in progress).
+- Reagent: PR #690 measured clean with the patch off; reply posted on #676 (issuecomment-6965689626, Gos approved). Issues enabled on the eleven forks (Gos approved) for Renovate's dashboard. Clojars #349: no reply.
+- Worker hangs: one (T0.4, 15 min, read-only compound command with cd and command substitution); briefs now say one simple command per call. Servers started by a worker's run_in_background die when it finishes: use setsid nohup.
+- Waiting on Gos: upload of demo-data-2026-11-18 (24,477,923 B, sha256 007f82df...); adoption of the new asset is a separate gated task (BlueGenes nightly pins, MINE_TITLE, '113' mentions).

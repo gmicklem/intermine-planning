@@ -129,3 +129,23 @@ Added items get a date; checked items move to the bottom with the reviewer's ver
 - **Reviewer, please check:** whether any deployer tooling consumed the `<os>-schema.xml` file or the
   `schemafile` attribute; whether a model feature the 12 configurations do not exercise (e.g. a
   non-default `missingTables` or `noNotXml` combination) could produce different DDL.
+
+### 7. rdfc2im hybrid build: CrossReference key and stock uniprot load order (18 Nov 2026, im-9n4.6)
+
+- **What changed:** in the rdfc2im hybrid testbed (not in InterMine itself), the generated
+  `humanmine-items` keys now key `CrossReference` on `subject, identifier` instead of `identifier`
+  alone, and the stock `uniprot` source is loaded before every rdfc2im (RDF) source (`load_first: true`
+  in `rdfc2im/data/stock_sources.yaml`). rdfc2im commit 2526302, merged in 5a293d4.
+- **Why:** no stock keys file declares a CrossReference key, so the first real stock load died with
+  "Duplicate objects from the same data source"; and stock uniprot keys Protein on
+  `md5checksum, organism` only, so when it loaded after the RDF hgnc source it created a second
+  Protein per accession and 77 of 140 isoforms were left with a `canonicalProtein` pointing at a
+  deleted object.
+- **Verified:** ut build on the 114-gene panel: 0 duplicate Protein by accession, 0 duplicate Gene by
+  primaryIdentifier or by symbol within 9606, 0 dangling canonicalProtein; live tests 25/25.
+- **Side effect:** RDF-only builds also change: they used to fold every protein's copy of a
+  cross-reference id into one object.
+- **To revert:** `git revert 2526302` in rdfc2im (the stock uniprot load then fails as described).
+- **Reviewer, please check:** whether `uniprot_keys.properties` should gain a Protein key on
+  `primaryAccession` (it would remove the need for the load-order rule), and whether
+  `subject, identifier` is the right CrossReference key for a production HumanMine build.
