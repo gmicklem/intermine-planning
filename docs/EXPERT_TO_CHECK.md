@@ -149,3 +149,31 @@ Added items get a date; checked items move to the bottom with the reviewer's ver
 - **Reviewer, please check:** whether `uniprot_keys.properties` should gain a Protein key on
   `primaryAccession` (it would remove the need for the load-order rule), and whether
   `subject, identifier` is the right CrossReference key for a production HumanMine build.
+
+### 8. humanmine-bio-sources: four expression converters read the current upstream files (18 Nov 2026, im-9n4.14)
+
+All in gmicklem/humanmine-bio-sources `maint-2026`, merged in 47ef066; each fix has a fixture test cut
+from the upstream file of 18 Nov 2026 (README with URL, sha256 and licence beside each fixture).
+
+- **ProteinAtlasConverter (ca78f06):** accepts `normal_ihc_data.tsv` (HPA renamed `normal_tissue.tsv`
+  and added an "IHC tissue name" column) and finds Tissue, Cell type, Level and Reliability by header
+  name; the old 6-column positions remain the default. **To revert:** `git revert ca78f06`.
+  **Please check:** tissue is still taken from `Tissue`, not `IHC tissue name`; the level/reliability
+  remapping stays commented out, so the new values load verbatim (Not detected/Low/Medium/High;
+  Enhanced/Supported/Approved/Uncertain) and templates and tools must expect them.
+- **ProteinAtlasConverter (c9d1606):** a new `close()` stores Tissue items that no
+  `tissue_to_organ.tsv` names; before, without that file every ProteinAtlasExpression pointed at a
+  Tissue that was never stored. `tissue_to_organ.tsv` has no known source (the converter calls it
+  "homebrew"). **To revert:** `git revert c9d1606`. **Please check:** with a `tissue_to_organ.tsv`
+  whose names differ in case, duplicate Tissue items can arise (already so before).
+- **ProteinAtlasRNAConverter (a017552):** accepts `rna_tissue_consensus.tsv`. **To revert:**
+  `git revert a017552`. **Please check:** `expressionType` stays "TPM" although the values are nTPM.
+- **GtexConverter (7b83777):** the median-TPM header may start with `Name` (v8) as well as `gene_id`
+  (v7). **To revert:** `git revert 7b83777`. **Please check:** the eQTL (`signif`) parsing still
+  assumes the v7 12-column layout and was not touched.
+- **AtlasExpressConverter (d24c4e5):** maps columns g1..g16 to the tissue names of
+  `E-MTAB-513-configuration.xml` (hard-coded; the experiment is frozen), takes the median of the five
+  comma-separated values, and sets the type to "TPM value" when the file name contains "tpm"
+  (otherwise "FPKM value"). The source had no tests before. **To revert:** `git revert d24c4e5`.
+  **Please check:** whether HumanMine's old file was a tissue-named single-value table and whether
+  FPKM or TPM should be the loaded measure.
