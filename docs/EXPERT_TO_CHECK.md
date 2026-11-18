@@ -177,3 +177,29 @@ from the upstream file of 18 Nov 2026 (README with URL, sha256 and licence besid
   (otherwise "FPKM value"). The source had no tests before. **To revert:** `git revert d24c4e5`.
   **Please check:** whether HumanMine's old file was a tissue-named single-value table and whether
   FPKM or TPM should be the loaded measure.
+
+### 9. humanmine-bio-sources hpo-annotation: reads the current HPO files; Orphanet diseases now loaded (18 Nov 2026, im-9n4.15)
+
+gmicklem/humanmine-bio-sources `maint-2026`, commit 7623497 (merged in d67fc5d); fixtures cut from HPO
+release v2026-09-01 (README with URLs, sha256 and licence beside them). **To revert:** `git revert 7623497`
+(the converter then requires the retired `.tab` files again).
+
+- **phenotype.hpoa replaces `phenotype_annotation.tab` and `phenotype_annotation_negated.tab`** (HPO
+  retired them); the old files are still read when `phenotype.hpoa` is absent. `genes_to_phenotype.txt`
+  is read in its current 6-column form (disease in the last column).
+- **New behaviour: `ORPHA:n` rows are loaded as `Disease ORPHANET:n`.** Before, only OMIM diseases were
+  loaded. All 733 negated (`NOT`) annotations in the current file belong to Orphanet diseases, so this
+  is the only way any negated annotation appears. `DECIPHER:` rows are skipped. **Please check:** whether
+  Orphanet diseases should carry HPO annotations (Gene_Disease_HPO and Gene_HPOphenotype_2 show extra
+  rows; a mine without the orphanet source gets Diseases without names). To undo only this: drop the
+  `ORPHA` branch in `getDisease`.
+- **OMIM `mimTitles.txt` (`hpo.disease.file`) is now optional for the current files.** It was used only
+  to tell OMIM disease ids from gene ids in the retired files. **Please check:** without it, an `OMIM:`
+  id that is really a gene entry would become a Disease (not expected in the current files).
+- **`assignedBy` loses the `[date]` suffix and repeats are collapsed**
+  (`HPO:iea[2009-02-17];HPO:probinson[2021-03-23]` becomes `HPO:iea;HPO:probinson`), to match the old form.
+- **Stored verbatim / ignored:** `frequency` is stored as given (`8/10`, `HP:0040281`) in
+  `frequencyModifier`; `disease_name`, `onset`, `sex`, `modifier`, `aspect` are ignored.
+- **Not checked:** the converter was tested on fixtures and a column count of the full files, not run
+  over the full 21 MB and 36 MB files; the first mine build with it is that check.
+- **orphanet:** unchanged; a fixture test on the current `en_product1.xml` (JDBOR 1.3.42) passes.
