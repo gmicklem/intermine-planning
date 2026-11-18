@@ -1,16 +1,16 @@
-# STATUS 2026-11-17 23:41 UTC
+# STATUS 2026-11-18 00:00 UTC
 
-Generated 2026-11-17 23:41 UTC / 2026-11-17 23:41 GMT. Sprint dashboard for the InterMine and BlueGenes maintenance effort.
+Generated 2026-11-18 00:00 UTC / 2026-11-18 00:00 GMT. Sprint dashboard for the InterMine and BlueGenes maintenance effort.
 
 Times are UTC. Agent state: running = unfinished and written to in the last 10 min; stalled = unfinished and silent for 10 min or more; finished = last message ended its turn (no tool call pending).
 
-Subagents: 0 running, 2 stalled, 192 finished.
+Subagents: 3 running, 2 stalled, 195 finished.
 
 ## Agents
 
 | Agent | Model | State | Started | Last | In | Cache | Out |
 |---|---|---|---|---|---|---|---|
-| main session | fable-5-2 | running | 23:40 | 23:41 | 10 | 433.0k | 3.6k |
+| main session | fable-5-2 | running | 11-17 23:40 | 11-17 23:59 | 98 | 7.28M | 47.7k |
 | Read-only survey of the InterMine Java back… | opus-5-5 | finished | 11-15 00:18 | 11-15 00:20 | 42 | 1.05M | 9.0k |
 | Read-only survey of BlueGenes, the ClojureS… | opus-5-5 | finished | 11-15 00:18 | 11-15 00:20 | 22 | 347.5k | 8.3k |
 | Read-only survey of four repos under /Users… | opus-5-5 | finished | 11-15 00:18 | 11-15 00:21 | 26 | 863.6k | 7.5k |
@@ -88,7 +88,7 @@ Subagents: 0 running, 2 stalled, 192 finished.
 | You are a worker in the InterMine maintenan… | sonnet-5-5 | finished | 11-15 22:56 | 11-15 23:12 | 140 | 6.50M | 39.4k |
 | You are a worker in the InterMine maintenan… | sonnet-5-5 | finished | 11-15 23:14 | 11-15 23:23 | 38 | 964.4k | 12.3k |
 | You are a worker in the InterMine/BlueGenes… | sonnet-5-5 | finished | 11-15 23:17 | 11-16 04:23 | 94 | 3.66M | 19.3k |
-| You are a worker in the InterMine maintenan… | sonnet-5-5 | stalled 47.9h | 11-15 23:24 | 11-15 23:47 | 30 | 1.11M | 13.5k |
+| You are a worker in the InterMine maintenan… | sonnet-5-5 | stalled 2d | 11-15 23:24 | 11-15 23:47 | 30 | 1.11M | 13.5k |
 | You are a worker in the InterMine maintenan… | sonnet-5-5 | finished | 11-15 23:48 | 11-16 00:01 | 62 | 1.95M | 13.6k |
 | You are a worker in the InterMine/BlueGenes… | opus-5-5 | finished | 11-15 23:51 | 11-16 01:23 | 248 | 19.84M | 66.2k |
 | You are a worker in the InterMine maintenan… | sonnet-5-5 | finished | 11-16 00:03 | 11-16 00:14 | 88 | 3.14M | 23.5k |
@@ -98,15 +98,15 @@ Subagents: 0 running, 2 stalled, 192 finished.
 | You are a worker in the InterMine maintenan… | sonnet-5-5 | finished | 11-16 00:16 | 11-16 00:37 | 134 | 6.25M | 44.5k |
 | You are a worker in the InterMine maintenan… | sonnet-5-5 | finished | 11-16 00:19 | 11-16 00:47 | 212 | 14.30M | 67.7k |
 | You are a worker in the InterMine maintenan… | sonnet-5-5 | finished | 11-16 00:19 | 11-16 00:21 | 28 | 733.9k | 10.9k |
-| You are a worker in the InterMine/BlueGenes… | sonnet-5-5 | finished | 11-16 00:23 | 23:38 | 80 | 2.13M | 10.5k |
-| You are a worker in the InterMine maintenan… | sonnet-5-5 | finished | 11-16 00:40 | 23:38 | 110 | 6.02M | 42.2k |
+| You are a worker in the InterMine/BlueGenes… | sonnet-5-5 | finished | 11-16 00:23 | 11-17 23:38 | 80 | 2.13M | 10.5k |
+| You are a worker in the InterMine maintenan… | sonnet-5-5 | finished | 11-16 00:40 | 11-17 23:38 | 110 | 6.02M | 42.2k |
 | You are a worker in the InterMine maintenan… | sonnet-5-5 | finished | 11-16 00:50 | 11-16 00:58 | 74 | 2.11M | 15.0k |
 | You are a worker in the InterMine maintenan… | sonnet-5-5 | finished | 11-16 01:00 | 11-16 04:23 | 174 | 9.21M | 54.6k |
 | You are a worker in the InterMine/BlueGenes… | sonnet-5-5 | finished | 11-16 01:01 | 11-16 01:11 | 60 | 1.65M | 13.6k |
-| You are a worker in the InterMine/BlueGenes… | sonnet-5-5 | finished | 11-16 01:13 | 23:38 | 132 | 4.21M | 22.7k |
+| You are a worker in the InterMine/BlueGenes… | sonnet-5-5 | finished | 11-16 01:13 | 11-17 23:38 | 132 | 4.21M | 22.7k |
 | You are a worker in the InterMine maintenan… | sonnet-5-5 | finished | 11-16 01:14 | 11-16 04:23 | 132 | 5.29M | 25.9k |
 | You are a worker in the InterMine maintenan… | sonnet-5-5 | finished | 11-16 01:31 | 11-16 01:36 | 60 | 2.11M | 19.6k |
-| You are a worker in the InterMine maintenan… | sonnet-5-5 | finished | 11-16 01:37 | 23:38 | 36 | 714.3k | 4.4k |
+| You are a worker in the InterMine maintenan… | sonnet-5-5 | finished | 11-16 01:37 | 11-17 23:38 | 36 | 714.3k | 4.4k |
 | You are a worker in the InterMine maintenan… | opus-5-5 | finished | 11-16 01:46 | 11-16 03:17 | 316 | 37.57M | 139.5k |
 | You are a worker in the InterMine maintenan… | sonnet-5-5 | finished | 11-16 01:54 | 11-16 02:36 | 212 | 15.25M | 65.5k |
 | You are a worker in the InterMine/BlueGenes… | sonnet-5-5 | finished | 11-16 02:39 | 11-16 03:24 | 298 | 27.12M | 125.0k |
@@ -115,19 +115,19 @@ Subagents: 0 running, 2 stalled, 192 finished.
 | You are a worker in the InterMine maintenan… | sonnet-5-5 | finished | 11-16 03:57 | 11-16 04:09 | 208 | 16.03M | 69.8k |
 | You are a worker in the InterMine maintenan… | sonnet-5-5 | finished | 11-16 04:07 | 11-16 04:34 | 164 | 7.56M | 40.4k |
 | You are a worker in the InterMine maintenan… | sonnet-5-5 | finished | 11-16 04:11 | 11-16 04:14 | 50 | 1.83M | 17.6k |
-| You are a worker in the InterMine maintenan… | sonnet-5-5 | finished | 11-16 04:15 | 23:38 | 224 | 12.71M | 65.9k |
-| You are a worker in the InterMine maintenan… | sonnet-5-5 | finished | 11-16 04:35 | 23:38 | 60 | 1.44M | 8.8k |
+| You are a worker in the InterMine maintenan… | sonnet-5-5 | finished | 11-16 04:15 | 11-17 23:38 | 224 | 12.71M | 65.9k |
+| You are a worker in the InterMine maintenan… | sonnet-5-5 | finished | 11-16 04:35 | 11-17 23:38 | 60 | 1.44M | 8.8k |
 | You are a worker in the InterMine maintenan… | sonnet-5-5 | finished | 11-16 05:03 | 11-16 05:26 | 260 | 22.07M | 88.4k |
 | You are a worker in the InterMine/BlueGenes… | sonnet-5-5 | finished | 11-16 05:13 | 11-16 05:35 | 144 | 6.93M | 55.0k |
 | You are a worker in the InterMine/BlueGenes… | sonnet-5-5 | finished | 11-16 05:28 | 11-16 05:31 | 36 | 1.11M | 13.3k |
-| You are a worker in the InterMine maintenan… | sonnet-5-5 | finished | 11-16 05:32 | 23:38 | 196 | 10.24M | 54.1k |
+| You are a worker in the InterMine maintenan… | sonnet-5-5 | finished | 11-16 05:32 | 11-17 23:38 | 196 | 10.24M | 54.1k |
 | You are a worker in the InterMine/BlueGenes… | sonnet-5-5 | finished | 11-16 05:36 | 11-16 05:50 | 102 | 3.00M | 15.6k |
 | You are a worker in the InterMine/BlueGenes… | sonnet-5-5 | finished | 11-16 05:48 | 11-16 06:03 | 104 | 3.59M | 24.6k |
 | You are a worker in the InterMine maintenan… | sonnet-5-5 | finished | 11-16 06:05 | 11-16 06:22 | 106 | 3.79M | 28.8k |
 | You are a worker in the InterMine/BlueGenes… | sonnet-5-5 | finished | 11-16 06:10 | 11-16 06:18 | 82 | 2.48M | 16.8k |
-| You are a worker in the InterMine maintenan… | sonnet-5-5 | finished | 11-16 06:21 | 23:38 | 70 | 2.52M | 15.5k |
+| You are a worker in the InterMine maintenan… | sonnet-5-5 | finished | 11-16 06:21 | 11-17 23:38 | 70 | 2.52M | 15.5k |
 | You are a worker in the InterMine maintenan… | opus-5-5 | finished | 11-16 06:24 | 11-16 06:47 | 180 | 9.30M | 55.2k |
-| You are a worker in the InterMine maintenan… | sonnet-5-5 | finished | 11-16 06:46 | 23:38 | 26 | 523.7k | 3.4k |
+| You are a worker in the InterMine maintenan… | sonnet-5-5 | finished | 11-16 06:46 | 11-17 23:38 | 26 | 523.7k | 3.4k |
 | You are a worker in the InterMine maintenan… | sonnet-5-5 | finished | 11-16 06:49 | 11-16 06:56 | 32 | 682.7k | 4.6k |
 | You are a worker in the InterMine/BlueGenes… | sonnet-5-5 | finished | 11-16 06:58 | 11-16 07:30 | 224 | 13.16M | 56.1k |
 | You are a worker in the InterMine maintenan… | sonnet-5-5 | finished | 11-16 07:05 | 11-16 07:44 | 244 | 13.96M | 64.7k |
@@ -137,8 +137,8 @@ Subagents: 0 running, 2 stalled, 192 finished.
 | You are a worker in the InterMine maintenan… | sonnet-5-5 | finished | 11-16 07:44 | 11-16 07:58 | 84 | 2.85M | 22.1k |
 | You are a worker in the InterMine/BlueGenes… | sonnet-5-5 | finished | 11-16 07:45 | 11-16 08:05 | 36 | 885.1k | 7.1k |
 | You are a worker in the InterMine maintenan… | opus-5-5 | finished | 11-16 08:00 | 11-16 08:23 | 188 | 12.77M | 73.4k |
-| You are a worker in the InterMine maintenan… | sonnet-5-5 | finished | 11-16 08:12 | 23:38 | 94 | 3.56M | 23.9k |
-| You are a worker in the InterMine maintenan… | sonnet-5-5 | finished | 11-16 08:25 | 23:38 | 144 | 6.37M | 34.5k |
+| You are a worker in the InterMine maintenan… | sonnet-5-5 | finished | 11-16 08:12 | 11-17 23:38 | 94 | 3.56M | 23.9k |
+| You are a worker in the InterMine maintenan… | sonnet-5-5 | finished | 11-16 08:25 | 11-17 23:38 | 144 | 6.37M | 34.5k |
 | You are a worker in the InterMine maintenan… | sonnet-5-5 | finished | 11-16 08:54 | 11-16 09:16 | 100 | 4.00M | 23.8k |
 | You are a worker in the InterMine/BlueGenes… | sonnet-5-5 | finished | 11-16 09:01 | 11-16 09:04 | 48 | 1.49M | 20.1k |
 | You are a worker in the InterMine maintenan… | sonnet-5-5 | finished | 11-16 09:19 | 11-16 09:41 | 150 | 6.84M | 48.7k |
@@ -149,15 +149,15 @@ Subagents: 0 running, 2 stalled, 192 finished.
 | You are a worker in the InterMine maintenan… | opus-5-5 | finished | 11-16 11:40 | 11-16 12:50 | 340 | 32.47M | 108.8k |
 | You are a worker in the InterMine maintenan… | sonnet-5-5 | finished | 11-16 11:40 | 11-16 12:37 | 236 | 15.36M | 60.8k |
 | You are a worker in the InterMine maintenan… | sonnet-5-5 | finished | 11-16 11:59 | 11-16 12:15 | 58 | 1.44M | 9.2k |
-| You are a worker in the InterMine maintenan… | sonnet-5-5 | finished | 11-16 13:19 | 23:38 | 148 | 8.04M | 47.2k |
+| You are a worker in the InterMine maintenan… | sonnet-5-5 | finished | 11-16 13:19 | 11-17 23:38 | 148 | 8.04M | 47.2k |
 | You are a worker in the InterMine maintenan… | sonnet-5-5 | finished | 11-16 13:19 | 11-16 13:43 | 208 | 11.62M | 48.8k |
 | You are a worker in the InterMine maintenan… | sonnet-5-5 | finished | 11-16 13:20 | 11-16 13:24 | 90 | 2.99M | 19.9k |
 | You are a worker in the InterMine maintenan… | sonnet-5-5 | finished | 11-16 13:21 | 11-16 14:02 | 166 | 8.72M | 47.3k |
-| You are a worker in the InterMine maintenan… | sonnet-5-5 | finished | 11-16 13:45 | 23:38 | 150 | 4.93M | 16.6k |
+| You are a worker in the InterMine maintenan… | sonnet-5-5 | finished | 11-16 13:45 | 11-17 23:38 | 150 | 4.93M | 16.6k |
 | You are a worker in the InterMine maintenan… | opus-5-5 | finished | 11-16 15:02 | 11-16 16:19 | 300 | 24.66M | 88.5k |
 | You are a worker in the InterMine maintenan… | sonnet-5-5 | finished | 11-16 15:03 | 11-16 16:13 | 410 | 42.20M | 121.2k |
 | You are a worker in the InterMine maintenan… | sonnet-5-5 | finished | 11-16 15:03 | 11-16 16:18 | 390 | 51.48M | 155.0k |
-| You are a worker in the InterMine maintenan… | sonnet-5-5 | finished | 11-16 15:04 | 23:38 | 166 | 7.86M | 35.7k |
+| You are a worker in the InterMine maintenan… | sonnet-5-5 | finished | 11-16 15:04 | 11-17 23:38 | 166 | 7.86M | 35.7k |
 | You are a worker in the InterMine maintenan… | sonnet-5-5 | finished | 11-16 15:04 | 11-16 16:02 | 166 | 8.05M | 45.1k |
 | You are a worker in the InterMine maintenan… | sonnet-5-5 | finished | 11-16 15:33 | 11-16 16:14 | 158 | 8.37M | 50.6k |
 | You are a worker in the InterMine maintenan… | sonnet-5-5 | finished | 11-16 15:33 | 11-16 15:42 | 136 | 6.03M | 43.8k |
@@ -165,8 +165,8 @@ Subagents: 0 running, 2 stalled, 192 finished.
 | You are a worker in the InterMine maintenan… | sonnet-5-5 | finished | 11-16 16:31 | 11-16 17:33 | 200 | 13.22M | 58.8k |
 | You are a worker in the InterMine maintenan… | sonnet-5-5 | finished | 11-16 16:31 | 11-16 16:59 | 250 | 22.06M | 94.7k |
 | You are a worker in the InterMine maintenan… | sonnet-5-5 | finished | 11-16 16:32 | 11-16 17:10 | 348 | 35.22M | 128.4k |
-| You are a worker in the InterMine maintenan… | sonnet-5-5 | finished | 11-16 16:33 | 23:38 | 136 | 6.15M | 37.5k |
-| You are a worker in the InterMine maintenan… | sonnet-5-5 | finished | 11-16 17:35 | 23:38 | 158 | 7.78M | 36.8k |
+| You are a worker in the InterMine maintenan… | sonnet-5-5 | finished | 11-16 16:33 | 11-17 23:38 | 136 | 6.15M | 37.5k |
+| You are a worker in the InterMine maintenan… | sonnet-5-5 | finished | 11-16 17:35 | 11-17 23:38 | 158 | 7.78M | 36.8k |
 | You are a worker in the InterMine maintenan… | sonnet-5-5 | finished | 11-16 17:36 | 11-16 18:12 | 552 | 50.47M | 99.3k |
 | You are a worker in the InterMine maintenan… | sonnet-5-5 | finished | 11-16 17:41 | 11-16 18:00 | 104 | 4.82M | 31.4k |
 | You are a worker in the InterMine maintenan… | sonnet-5-5 | finished | 11-16 18:01 | 11-16 18:21 | 114 | 4.97M | 27.6k |
@@ -175,60 +175,66 @@ Subagents: 0 running, 2 stalled, 192 finished.
 | You are a worker in the InterMine maintenan… | sonnet-5-5 | finished | 11-16 18:14 | 11-16 18:56 | 104 | 4.41M | 28.9k |
 | You are a worker in the InterMine maintenan… | sonnet-5-5 | finished | 11-16 18:22 | 11-16 18:38 | 64 | 2.12M | 16.4k |
 | You are a worker in the InterMine maintenan… | sonnet-5-5 | finished | 11-16 18:24 | 11-16 18:33 | 76 | 2.51M | 10.4k |
-| You are a worker in the InterMine maintenan… | sonnet-5-5 | finished | 11-16 18:34 | 23:38 | 62 | 1.79M | 12.8k |
+| You are a worker in the InterMine maintenan… | sonnet-5-5 | finished | 11-16 18:34 | 11-17 23:38 | 62 | 1.79M | 12.8k |
 | You are a worker in the InterMine maintenan… | sonnet-5-5 | finished | 11-16 18:36 | 11-16 18:40 | 60 | 2.94M | 25.7k |
 | You are a worker in the InterMine maintenan… | sonnet-5-5 | finished | 11-16 18:53 | 11-16 18:54 | 24 | 709.0k | 11.2k |
 | You are a worker in the InterMine maintenan… | sonnet-5-5 | finished | 11-16 18:58 | 11-16 19:12 | 244 | 23.07M | 73.8k |
 | You are a worker in the InterMine maintenan… | sonnet-5-5 | finished | 11-16 19:14 | 11-16 19:24 | 110 | 4.67M | 33.2k |
 | You are a worker in the InterMine maintenan… | sonnet-5-5 | finished | 11-16 20:16 | 11-16 20:18 | 44 | 1.20M | 9.9k |
 | You are a worker in the InterMine maintenan… | sonnet-5-5 | finished | 11-16 20:28 | 11-16 21:11 | 162 | 8.73M | 40.4k |
-| You are a worker in the InterMine maintenan… | sonnet-5-5 | finished | 11-16 23:40 | 00:01 | 56 | 1.59M | 11.0k |
-| concerning the homebrew installations for h… | fable-5-1 | finished | 01:28 | 01:28 | 4 | 716.4k | 428 |
-| You are a worker in the InterMine maintenan… | opus-5-5 | finished | 02:18 | 02:36 | 152 | 10.94M | 94.9k |
-| You are a worker on the new InterMine Regis… | sonnet-5-5 | finished | 02:44 | 02:49 | 58 | 2.61M | 37.1k |
-| You are a worker on the new InterMine Regis… | sonnet-5-5 | finished | 02:51 | 02:59 | 84 | 5.04M | 58.7k |
-| You are a worker on the InterMine Registry … | opus-5-5 | finished | 09:06 | 09:18 | 114 | 7.70M | 46.3k |
-| You are a worker on the InterMine Registry … | opus-5-5 | finished | 09:43 | 09:50 | 80 | 4.30M | 31.2k |
-| You are a worker on the InterMine Registry … | opus-5-5 | finished | 10:29 | 10:40 | 108 | 6.50M | 53.7k |
-| You are a worker on the InterMine Registry … | sonnet-5-5 | finished | 11:43 | 11:47 | 42 | 1.46M | 14.9k |
-| You are a worker on the BlueGenes (ClojureS… | opus-5-5 | finished | 11:59 | 13:56 | 118 | 4.43M | 27.2k |
-| You are a worker on the BlueGenes (ClojureS… | opus-5-5 | finished | 14:44 | 15:03 | 128 | 6.00M | 35.9k |
-| You are a worker on the InterMine Registry … | sonnet-5-5 | finished | 14:46 | 14:47 | 16 | 355.7k | 5.5k |
-| You are a technical writer-engineer on the … | opus-5-5 | finished | 14:47 | 14:58 | 54 | 2.50M | 66.8k |
-| You are a worker on the InterMine/BlueGenes… | sonnet-5-5 | finished | 17:03 | 17:11 | 42 | 930.9k | 8.4k |
-| You are a worker on the InterMine (Java/Gra… | sonnet-5-5 | finished | 18:38 | 18:41 | 32 | 861.2k | 15.3k |
-| You are a worker on the BlueGenes (ClojureS… | sonnet-5-5 | finished | 18:38 | 18:48 | 80 | 3.67M | 32.2k |
-| You are a worker on the InterMine maintenan… | sonnet-5-5 | finished | 18:39 | 18:48 | 108 | 5.38M | 35.9k |
-| You are a planning analyst on the InterMine… | opus-5-5 | finished | 20:58 | 22:03 | 242 | 22.15M | 115.1k |
-| READ-ONLY task. Do not modify any file, do … | opus-5-5 | finished | 21:04 | 21:06 | 28 | 846.7k | 13.0k |
-| READ-ONLY task. Do not modify any file, do … | opus-5-5 | finished | 21:04 | 21:11 | 126 | 4.59M | 31.6k |
-| READ-ONLY task. Do not modify any file. `bd… | opus-5-5 | finished | 21:04 | 21:06 | 20 | 381.0k | 10.7k |
-| You are a worker on the InterMine maintenan… | sonnet-5-5 | finished | 22:02 | 22:07 | 16 | 309.7k | 7.5k |
-| You are a technical writer on the InterMine… | sonnet-5-5 | finished | 22:02 | 22:05 | 12 | 493.2k | 24.8k |
+| You are a worker in the InterMine maintenan… | sonnet-5-5 | finished | 11-16 23:40 | 11-17 00:01 | 56 | 1.59M | 11.0k |
+| concerning the homebrew installations for h… | fable-5-1 | finished | 11-17 01:28 | 11-17 01:28 | 4 | 716.4k | 428 |
+| You are a worker in the InterMine maintenan… | opus-5-5 | finished | 11-17 02:18 | 11-17 02:36 | 152 | 10.94M | 94.9k |
+| You are a worker on the new InterMine Regis… | sonnet-5-5 | finished | 11-17 02:44 | 11-17 02:49 | 58 | 2.61M | 37.1k |
+| You are a worker on the new InterMine Regis… | sonnet-5-5 | finished | 11-17 02:51 | 11-17 02:59 | 84 | 5.04M | 58.7k |
+| You are a worker on the InterMine Registry … | opus-5-5 | finished | 11-17 09:06 | 11-17 09:18 | 114 | 7.70M | 46.3k |
+| You are a worker on the InterMine Registry … | opus-5-5 | finished | 11-17 09:43 | 11-17 09:50 | 80 | 4.30M | 31.2k |
+| You are a worker on the InterMine Registry … | opus-5-5 | finished | 11-17 10:29 | 11-17 10:40 | 108 | 6.50M | 53.7k |
+| You are a worker on the InterMine Registry … | sonnet-5-5 | finished | 11-17 11:43 | 11-17 11:47 | 42 | 1.46M | 14.9k |
+| You are a worker on the BlueGenes (ClojureS… | opus-5-5 | finished | 11-17 11:59 | 11-17 13:56 | 118 | 4.43M | 27.2k |
+| You are a worker on the BlueGenes (ClojureS… | opus-5-5 | finished | 11-17 14:44 | 11-17 15:03 | 128 | 6.00M | 35.9k |
+| You are a worker on the InterMine Registry … | sonnet-5-5 | finished | 11-17 14:46 | 11-17 14:47 | 16 | 355.7k | 5.5k |
+| You are a technical writer-engineer on the … | opus-5-5 | finished | 11-17 14:47 | 11-17 14:58 | 54 | 2.50M | 66.8k |
+| You are a worker on the InterMine/BlueGenes… | sonnet-5-5 | finished | 11-17 17:03 | 11-17 17:11 | 42 | 930.9k | 8.4k |
+| You are a worker on the InterMine (Java/Gra… | sonnet-5-5 | finished | 11-17 18:38 | 11-17 18:41 | 32 | 861.2k | 15.3k |
+| You are a worker on the BlueGenes (ClojureS… | sonnet-5-5 | finished | 11-17 18:38 | 11-17 18:48 | 80 | 3.67M | 32.2k |
+| You are a worker on the InterMine maintenan… | sonnet-5-5 | finished | 11-17 18:39 | 11-17 18:48 | 108 | 5.38M | 35.9k |
+| You are a planning analyst on the InterMine… | opus-5-5 | finished | 11-17 20:58 | 11-17 22:03 | 242 | 22.15M | 115.1k |
+| READ-ONLY task. Do not modify any file, do … | opus-5-5 | finished | 11-17 21:04 | 11-17 21:06 | 28 | 846.7k | 13.0k |
+| READ-ONLY task. Do not modify any file, do … | opus-5-5 | finished | 11-17 21:04 | 11-17 21:11 | 126 | 4.59M | 31.6k |
+| READ-ONLY task. Do not modify any file. `bd… | opus-5-5 | finished | 11-17 21:04 | 11-17 21:06 | 20 | 381.0k | 10.7k |
+| You are a worker on the InterMine maintenan… | sonnet-5-5 | finished | 11-17 22:02 | 11-17 22:07 | 16 | 309.7k | 7.5k |
+| You are a technical writer on the InterMine… | sonnet-5-5 | finished | 11-17 22:02 | 11-17 22:05 | 12 | 493.2k | 24.8k |
+| T0.2 subset_raw.py (im-9n4.3) | sonnet-5-5 | finished | 11-17 23:46 | 11-17 23:51 | 46 | 1.73M | 39.8k |
+| T0.1 stock-source support (im-9n4.2) | opus-5-5 | running | 11-17 23:46 | 11-17 23:59 | 90 | 7.73M | 65.4k |
+| Reagent PR 690 measurement (im-7os.62) | sonnet-5-5 | running | 11-17 23:47 | 11-17 23:58 | 62 | 2.22M | 9.4k |
+| T1.2 testbed tools (im-9n4.7) | sonnet-5-5 | finished | 11-17 23:48 | 11-17 23:59 | 82 | 3.47M | 33.6k |
+| Read-only research, medium thoroughness. Fo… | opus-5-5 | finished | 11-17 23:50 | 11-17 23:55 | 64 | 1.67M | 20.2k |
+| T1.3 aligner and front proxy (im-9n4.8) | sonnet-5-5 | running | 11-17 23:57 | 11-17 23:59 | 32 | 829.6k | 7.5k |
 
-Note: 968 non-agent .output file(s) skipped (empty or plain-text task output)
+Note: 983 non-agent .output file(s) skipped (empty or plain-text task output)
 
 ## Totals by model
 
 | Scope | Model | Msgs | In | Cache rd | Cache wr | Out |
 |---|---|---|---|---|---|---|
-| main | fable-5-2 | 5 | 10 | 348.6k | 84.4k | 3.6k |
+| main | fable-5-2 | 45 | 98 | 7.10M | 179.9k | 47.7k |
 | subagents | fable-5-1 | 1 | 4 | 712.4k | 3.9k | 428 |
 | subagents | haiku-5-5 | 1 | 2 | 0 | 9.4k | 112 |
-| subagents | opus-5-5 | 3729 | 7.5k | 608.13M | 27.14M | 2.94M |
-| subagents | sonnet-5-5 | 9351 | 18.8k | 1.10B | 44.09M | 6.05M |
+| subagents | opus-5-5 | 3805 | 7.7k | 617.20M | 27.48M | 3.03M |
+| subagents | sonnet-5-5 | 9461 | 19.0k | 1.11B | 44.39M | 6.14M |
 
 Tokens are de-duplicated per API message (streamed records share one message id).
 
 ## Beads summary
 
-bd status: total 353, open 62, in progress 2, blocked 0, ready 62, deferred 0, closed 289.
+bd status: total 353, open 57, in progress 5, blocked 0, ready 57, deferred 0, closed 291.
 
 | Status | Count |
 |---|---|
-| closed | 289 |
-| in_progress | 2 |
-| open | 62 |
+| closed | 291 |
+| in_progress | 5 |
+| open | 57 |
 
 ### By priority (tasks and bugs; epics counted apart)
 
@@ -236,9 +242,9 @@ bd status: total 353, open 62, in progress 2, blocked 0, ready 62, deferred 0, c
 |---|---|---|---|---|---|---|---|---|
 | P0 | 0 | 1 | 0 | 0 | 14 | 15 | 93% | 2 |
 | P1 | 2 | 0 | 0 | 0 | 59 | 61 | 97% | 5 |
-| P2 | 24 | 1 | 0 | 0 | 127 | 152 | 84% | 3 |
+| P2 | 19 | 4 | 0 | 0 | 129 | 152 | 85% | 3 |
 | P3 | 26 | 0 | 0 | 0 | 89 | 115 | 77% | 0 |
-| all | 52 | 2 | 0 | 0 | 289 | 343 | 84% | 10 |
+| all | 47 | 5 | 0 | 0 | 291 | 343 | 85% | 10 |
 
 ### im-28e Epic F: BlueGenes tests and CI [open, 13/13 closed]
 
@@ -249,7 +255,7 @@ No open child issues.
 | ID | Title | Status | P | Labels |
 |---|---|---|---|---|
 | im-7os.33 | HUMAN (Gos): release imcljs 1.7.0, im-tables 0.16… | open | 1 | epic |
-| im-7os.62 | bluegenes: reagent upstream fixed the keystroke l… | open | 2 | epic |
+| im-7os.62 | bluegenes: reagent upstream fixed the keystroke l… | in_progress | 2 | epic |
 | im-7os.16 | bluegenes dev advisories needing majors: Cypress … | open | 3 | bluegenes,epic,security |
 | im-7os.29 | bluegenes: imjs 4.0.0 unmaintained since 2020 (no… | open | 3 | epic |
 
@@ -265,7 +271,7 @@ No open child issues.
 |---|---|---|---|---|
 | im-8dd.2 | I2 Dashboard generator (STATUS.md, index.html) an… | in_progress | 0 | epic |
 
-### im-9n4 EPIC: hybrid HumanMine testbed: rdfc2im (RDF-port… [open, 1/31 closed]
+### im-9n4 EPIC: hybrid HumanMine testbed: rdfc2im (RDF-port… [open, 3/31 closed]
 
 | ID | Title | Status | P | Labels |
 |---|---|---|---|---|
@@ -279,13 +285,11 @@ No open child issues.
 | im-9n4.17 | T1.12 mine-tests: [mines.local] tools enabled, pl… | open | 2 |  |
 | im-9n4.18 | T1.14 Reinstate repos/sequence-alignment-service … | open | 2 |  |
 | im-9n4.19 | T1.13 Full ut demo rebuild with all milestone 1 s… | open | 2 |  |
-| im-9n4.2 | T0.1 rdfc2im full-build.sh: generic stock-source … | open | 2 |  |
-| im-9n4.3 | T0.2 rdfc2im tools/subset_raw.py: derive the pane… | open | 2 |  |
+| im-9n4.2 | T0.1 rdfc2im full-build.sh: generic stock-source … | in_progress | 2 |  |
 | im-9n4.4 | T0.3 rdfc2im: ID-resolver gate (filtered entrez g… | open | 2 |  |
 | im-9n4.5 | T0.4 Demo panel: add PAX6 (+ mine-tests fixture g… | open | 2 |  |
 | im-9n4.6 | T1.1 Hybrid: load the stock uniprot (Swiss-Prot h… | open | 2 |  |
-| im-9n4.7 | T1.2 Testbed tools: install bluegenes-jbrowse2-to… | open | 2 |  |
-| im-9n4.8 | T1.3 Testbed aligner: run sequence-alignment-serv… | open | 2 |  |
+| im-9n4.8 | T1.3 Testbed aligner: run sequence-alignment-serv… | in_progress | 2 |  |
 | im-9n4.9 | T1.4 Hybrid: load ncbi-gff (filtered to the panel… | open | 2 |  |
 | im-9n4.20 | T2.1 Archive the current 184 HumanMine public lis… | open | 3 |  |
 | im-9n4.21 | T2.2 rdfc2im tools/panelapp_lists.py: fetch all c… | open | 3 |  |
@@ -351,7 +355,7 @@ No open child issues.
 
 | Repo | WT | Branch | Last commit | vs dev \| subject |
 |---|---|---|---|---|
-| intermine | 4 (im-89g.12-511-tes…, im-ore.14-testbed…, merge-maint-2026) | maint-2026 | 18:41 (5.0h) | ahead 297 vs dev \| Merge maint/im-8dd.10-ci-pr: CI on pull… |
+| intermine | 4 (im-89g.12-511-tes…, im-ore.14-testbed…, merge-maint-2026) | maint-2026 | 11-17 18:41 (5.3h) | ahead 297 vs dev \| Merge maint/im-8dd.10-ci-pr: CI on pull… |
 | intermine | 4 (im-89g.12-511-tes…, im-ore.14-testbed…, merge-maint-2026) | maint/im-89g.1-ci-actions | 11-15 04:45 (2d) | - \| docs: update README badges, PR template… |
 | intermine | 4 (im-89g.12-511-tes…, im-ore.14-testbed…, merge-maint-2026) | maint/im-89g.1-ci-fix | 11-15 06:28 (2d) | - \| ci: stop using sudo -E -u postgres; con… |
 | intermine | 4 (im-89g.12-511-tes…, im-ore.14-testbed…, merge-maint-2026) | maint/im-89g.1-ci-fix2 | 11-15 06:54 (2d) | - \| ci: fix PostgreSQL 15+ public schema pr… |
@@ -371,22 +375,23 @@ No open child issues.
 | intermine | 4 (im-89g.12-511-tes…, im-ore.14-testbed…, merge-maint-2026) | maint/im-jqz.7-weak-deps | 11-15 05:51 (2d) | - \| deps: remove orphan vendored bobo-brows… |
 | intermine | 4 (im-89g.12-511-tes…, im-ore.14-testbed…, merge-maint-2026) | maint/im-jqz.8-flaky-tests | 11-15 07:24 (2d) | - \| integrate: make DataTracker.clear() saf… |
 | intermine | 4 (im-89g.12-511-tes…, im-ore.14-testbed…, merge-maint-2026) | maint/im-rkn.3-baseline | 06-12 11:01 (158d) | - \| Merge pull request #2460 from intermine… |
-| bluegenes | 2 (im-7os.63-reagent…) | maint-2026 | 18:15 (5.4h) | ahead 151 vs dev \| renovate: use the shared gmicklem prese… |
-| bluegenes | 2 (im-7os.63-reagent…) | maint/im-28e.2-cypress-13 | 11-15 11:09 (2d) | - \| docs, cypress: how to run the suite; ta… |
-| bluegenes | 2 (im-7os.63-reagent…) | maint/im-28e.3-gh-actions | 11-15 05:31 (2d) | - \| docs: CI badge and Continuous integrati… |
-| bluegenes | 2 (im-7os.63-reagent…) | maint/im-7os.1-shadow-cljs | 11-15 05:17 (2d) | - \| comments: drop stale lein/figwheel refe… |
-| bluegenes | 2 (im-7os.63-reagent…) | maint/im-7os.10-npm-advisories | 11-15 11:58 (2d) | - \| deps: override qs to 6.17.1 (same major… |
-| bluegenes | 2 (im-7os.63-reagent…) | maint/im-7os.18-sibling-deps | 11-15 12:49 (2d) | - \| docs: how the sibling libraries are pin… |
-| bluegenes | 2 (im-7os.63-reagent…) | maint/im-7os.4-cdn-sri | 11-15 11:48 (2d) | - \| script: cdn-sri.sh prints SRI hashes fo… |
-| bluegenes | 2 (im-7os.63-reagent…) | maint/im-7os.5-removals | 11-15 02:59 (2d) | - \| npm: remove unused clipboardy [im-7os.5] |
-| bluegenes | 2 (im-7os.63-reagent…) | maint/im-7os.63-reagent-snap2 | 11-16 18:40 (29.0h) | - \| Merge maint/im-89g.30-changelog: CHANGE… |
-| bluegenes | 2 (im-7os.63-reagent…) | maint/im-89g.5-ci-actions | 11-15 09:55 (2d) | - \| ci: bump GitHub Actions to current majo… |
-| bluegenes | 2 (im-7os.63-reagent…) | maint/im-rkn.4-baseline | 01-26 21:58 (660d) | - \| dynamic favicon slows down dx |
-| imcljs | 1 | maint-2026 | 18:48 (4.9h) | ahead 15 vs dev \| Merge maint/im-8dd.11-ci: GitHub Action… |
+| bluegenes | 3 (im-7os.62-reagent…, im-7os.63-reagent…) | maint-2026 | 11-17 18:15 (5.7h) | ahead 151 vs dev \| renovate: use the shared gmicklem prese… |
+| bluegenes | 3 (im-7os.62-reagent…, im-7os.63-reagent…) | maint/im-28e.2-cypress-13 | 11-15 11:09 (2d) | - \| docs, cypress: how to run the suite; ta… |
+| bluegenes | 3 (im-7os.62-reagent…, im-7os.63-reagent…) | maint/im-28e.3-gh-actions | 11-15 05:31 (2d) | - \| docs: CI badge and Continuous integrati… |
+| bluegenes | 3 (im-7os.62-reagent…, im-7os.63-reagent…) | maint/im-7os.1-shadow-cljs | 11-15 05:17 (2d) | - \| comments: drop stale lein/figwheel refe… |
+| bluegenes | 3 (im-7os.62-reagent…, im-7os.63-reagent…) | maint/im-7os.10-npm-advisories | 11-15 11:58 (2d) | - \| deps: override qs to 6.17.1 (same major… |
+| bluegenes | 3 (im-7os.62-reagent…, im-7os.63-reagent…) | maint/im-7os.18-sibling-deps | 11-15 12:49 (2d) | - \| docs: how the sibling libraries are pin… |
+| bluegenes | 3 (im-7os.62-reagent…, im-7os.63-reagent…) | maint/im-7os.4-cdn-sri | 11-15 11:48 (2d) | - \| script: cdn-sri.sh prints SRI hashes fo… |
+| bluegenes | 3 (im-7os.62-reagent…, im-7os.63-reagent…) | maint/im-7os.5-removals | 11-15 02:59 (2d) | - \| npm: remove unused clipboardy [im-7os.5] |
+| bluegenes | 3 (im-7os.62-reagent…, im-7os.63-reagent…) | maint/im-7os.62-reagent-pr690 | 11-17 18:15 (5.7h) | - \| renovate: use the shared gmicklem prese… |
+| bluegenes | 3 (im-7os.62-reagent…, im-7os.63-reagent…) | maint/im-7os.63-reagent-snap2 | 11-16 18:40 (29.3h) | - \| Merge maint/im-89g.30-changelog: CHANGE… |
+| bluegenes | 3 (im-7os.62-reagent…, im-7os.63-reagent…) | maint/im-89g.5-ci-actions | 11-15 09:55 (2d) | - \| ci: bump GitHub Actions to current majo… |
+| bluegenes | 3 (im-7os.62-reagent…, im-7os.63-reagent…) | maint/im-rkn.4-baseline | 01-26 21:58 (660d) | - \| dynamic favicon slows down dx |
+| imcljs | 1 | maint-2026 | 11-17 18:48 (5.2h) | ahead 15 vs dev \| Merge maint/im-8dd.11-ci: GitHub Action… |
 | imcljs | 1 | maint/im-7os.3-imcljs-deps-edn | 11-15 02:46 (2d) | - \| deps: bump clj-http 3.10.0 to 3.13.0 [i… |
-| im-tables-3 | 1 | maint-2026 | 18:48 (4.9h) | ahead 47 vs dev \| Merge maint/im-8dd.11-ci: GitHub Action… |
+| im-tables-3 | 1 | maint-2026 | 11-17 18:48 (5.2h) | ahead 47 vs dev \| Merge maint/im-8dd.11-ci: GitHub Action… |
 | im-tables-3 | 1 | maint/im-7os.3-im-tables-deps-edn | 11-15 12:05 (2d) | - \| test: lein kaocha honours IM_TABLES_SER… |
-| bluegenes-tool-store | 1 | maint-2026 | 18:48 (4.9h) | ahead 22 vs master \| Merge maint/im-8dd.11-ci: GitHub Action… |
+| bluegenes-tool-store | 1 | maint-2026 | 11-17 18:48 (5.2h) | ahead 22 vs master \| Merge maint/im-8dd.11-ci: GitHub Action… |
 | bluegenes-tool-store | 1 | maint/im-7os.3-tool-store-deps-edn | 11-15 02:33 (2d) | - \| deps: remove unused ring/ring-defaults … |
 | bluegenes-tool-store | 1 | maint/im-7os.6-tool-store-fixes | 11-15 09:48 (2d) | - \| deps: bump commons-compress 1.19 -> 1.2… |
 
@@ -396,25 +401,25 @@ WT = number of git worktrees (extra ones named). Branches shown: maint-2026 and 
 
 | Start | Bead | Agent | Model | In | Cache | Out | Outcome | Notes |
 |---|---|---|---|---|---|---|---|---|
-| 22:08 | im-9n4.1 | archive HumanMine public li… | sonnet | 45.0k | 0 | 0 | success | [tokens: 45011 total from the task noti… |
-| 22:05 | im-bdy.13 | hosting docs corrected (DBC… | sonnet | 101.8k | 0 | 0 | success | [tokens: 101818 total from the task not… |
-| 21:23 | im-9n4 | hybrid HumanMine testbed pl… | opus | 315.1k | 0 | 0 | success | [tokens: 315128 total from the task not… |
-| 18:49 | im-8dd.12 | CI for humanmine, flymine, … | sonnet | 140.1k | 0 | 0 | success | [tokens: 140127 total from the task not… |
-| 18:48 | im-8dd.11 | ci.yml for imcljs, im-table… | sonnet | 123.7k | 0 | 0 | success | [tokens: 123726 total from the task not… |
-| 18:42 | im-8dd.10 | intermine CI on pull_reques… | sonnet | 68.4k | 0 | 0 | success | [tokens: 68400 total from the task noti… |
-| 17:11 | im-pqx | Dependabot: three npm dev a… | sonnet | 55.7k | 0 | 0 | success | [tokens: 55709 total from the task noti… |
-| 15:04 | im-7os.64 | reagent variant fix measured | opus | 133.9k | 0 | 0 | success | [tokens: 133859 total from the task not… |
-| 14:58 | im-bdy.13 | registry deployment guide d… | opus | 159.7k | 0 | 0 | success | [tokens: 159721 total from the task not… |
-| 14:49 | im-bdy.22 | registry: test mines wordin… | sonnet | 54.8k | 0 | 0 | success | [tokens: 54754 total from the task noti… |
-| 13:57 | im-7os.63 | reagent snapshot build 2 re… | opus | 110.4k | 0 | 0 | success | [tokens: 110415 total from the task not… |
-| 11:49 | im-bdy.21 | registry: add TargetMine en… | sonnet | 88.1k | 0 | 0 | success | [tokens: 88109 total from the task noti… |
-| 10:41 | im-5mt | registry world map page | opus | 163.5k | 0 | 0 | success | [tokens: 163517 total from the task not… |
-| 09:51 | im-bdy.20 | registry per-mine logo over… | opus | 147.2k | 0 | 0 | success | [tokens: 147211 total from the task not… |
-| 09:20 | im-bdy.18 | registry logo tiles + theme… | opus | 183.8k | 0 | 0 | success | [tokens: 183843 total from the task not… |
-| 02:51 | im-bdy.16 | registry: cached logos on w… | sonnet | 84 | 5.04M | 58.7k | success | 34fc314 + fc8db36 merged as 3bfac6d (pu… |
-| 02:44 | im-bdy.15 | registry: unreachable mines… | sonnet | 58 | 2.61M | 37.1k | success | 42b4615 + 4293692 merged as d30f812 (pu… |
-| 02:18 | im-bdy.13 | InterMine Registry rewrite … | opus | 152 | 10.94M | 94.9k | success | 3 commits merged as gmicklem/intermine-… |
-| 11-16 23:40 | im-7os.62 | reagent 2.1.0-SNAPSHOT meas… | sonnet | 56 | 1.59M | 11.0k | success | snapshot 20261116.204953-1 (f655d00f): … |
-| 11-16 20:28 | im-7os.62 | reagent master (PR 680) key… | sonnet | 162 | 8.73M | 40.4k | success | keystroke spec 0/1600 lost in all confi… |
+| 11-17 23:57 | im-9n4.7 | T1.2 testbed tools | sonnet | 0 | 0 | 0 | success | [tokens: 114157 total from the task not… |
+| 11-17 23:52 | im-9n4.3 | T0.2 subset_raw.py | sonnet | 0 | 0 | 0 | success | [tokens: 101630 total from the task not… |
+| 11-17 22:08 | im-9n4.1 | archive HumanMine public li… | sonnet | 45.0k | 0 | 0 | success | [tokens: 45011 total from the task noti… |
+| 11-17 22:05 | im-bdy.13 | hosting docs corrected (DBC… | sonnet | 101.8k | 0 | 0 | success | [tokens: 101818 total from the task not… |
+| 11-17 21:23 | im-9n4 | hybrid HumanMine testbed pl… | opus | 315.1k | 0 | 0 | success | [tokens: 315128 total from the task not… |
+| 11-17 18:49 | im-8dd.12 | CI for humanmine, flymine, … | sonnet | 140.1k | 0 | 0 | success | [tokens: 140127 total from the task not… |
+| 11-17 18:48 | im-8dd.11 | ci.yml for imcljs, im-table… | sonnet | 123.7k | 0 | 0 | success | [tokens: 123726 total from the task not… |
+| 11-17 18:42 | im-8dd.10 | intermine CI on pull_reques… | sonnet | 68.4k | 0 | 0 | success | [tokens: 68400 total from the task noti… |
+| 11-17 17:11 | im-pqx | Dependabot: three npm dev a… | sonnet | 55.7k | 0 | 0 | success | [tokens: 55709 total from the task noti… |
+| 11-17 15:04 | im-7os.64 | reagent variant fix measured | opus | 133.9k | 0 | 0 | success | [tokens: 133859 total from the task not… |
+| 11-17 14:58 | im-bdy.13 | registry deployment guide d… | opus | 159.7k | 0 | 0 | success | [tokens: 159721 total from the task not… |
+| 11-17 14:49 | im-bdy.22 | registry: test mines wordin… | sonnet | 54.8k | 0 | 0 | success | [tokens: 54754 total from the task noti… |
+| 11-17 13:57 | im-7os.63 | reagent snapshot build 2 re… | opus | 110.4k | 0 | 0 | success | [tokens: 110415 total from the task not… |
+| 11-17 11:49 | im-bdy.21 | registry: add TargetMine en… | sonnet | 88.1k | 0 | 0 | success | [tokens: 88109 total from the task noti… |
+| 11-17 10:41 | im-5mt | registry world map page | opus | 163.5k | 0 | 0 | success | [tokens: 163517 total from the task not… |
+| 11-17 09:51 | im-bdy.20 | registry per-mine logo over… | opus | 147.2k | 0 | 0 | success | [tokens: 147211 total from the task not… |
+| 11-17 09:20 | im-bdy.18 | registry logo tiles + theme… | opus | 183.8k | 0 | 0 | success | [tokens: 183843 total from the task not… |
+| 11-17 02:51 | im-bdy.16 | registry: cached logos on w… | sonnet | 84 | 5.04M | 58.7k | success | 34fc314 + fc8db36 merged as 3bfac6d (pu… |
+| 11-17 02:44 | im-bdy.15 | registry: unreachable mines… | sonnet | 58 | 2.61M | 37.1k | success | 42b4615 + 4293692 merged as d30f812 (pu… |
+| 11-17 02:18 | im-bdy.13 | InterMine Registry rewrite … | opus | 152 | 10.94M | 94.9k | success | 3 commits merged as gmicklem/intermine-… |
 
-Showing the 20 most recent of 192 runs.
+Showing the 20 most recent of 194 runs.
