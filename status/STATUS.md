@@ -1,10 +1,10 @@
-# STATUS 2026-11-18 23:00 UTC
+# STATUS 2026-11-19 00:00 UTC
 
-Generated 2026-11-18 23:00 UTC / 2026-11-18 23:00 GMT. Sprint dashboard for the InterMine and BlueGenes maintenance effort.
+Generated 2026-11-19 00:00 UTC / 2026-11-19 00:00 GMT. Sprint dashboard for the InterMine and BlueGenes maintenance effort.
 
 Times are UTC. Agent state: running = unfinished and written to in the last 10 min; stalled = unfinished and silent for 10 min or more; finished = last message ended its turn (no tool call pending).
 
-Subagents: 1 running, 2 stalled, 228 finished.
+Subagents: 0 running, 2 stalled, 229 finished.
 
 ## Beads summary
 
@@ -121,7 +121,7 @@ No open child issues.
 
 | Agent | Model | State | Started | Last | In | Cache | Out |
 |---|---|---|---|---|---|---|---|
-| main session | fable-5-2 | running | 11-17 23:40 | 22:59 | 1.3k | 214.72M | 404.1k |
+| main session | fable-5-2 | idle | 11-17 23:40 | 11-18 23:46 | 1.3k | 231.91M | 416.1k |
 | Read-only survey of the InterMine Java back… | opus-5-5 | finished | 11-15 00:18 | 11-15 00:20 | 42 | 1.05M | 9.0k |
 | Read-only survey of BlueGenes, the ClojureS… | opus-5-5 | finished | 11-15 00:18 | 11-15 00:20 | 22 | 347.5k | 8.3k |
 | Read-only survey of four repos under /Users… | opus-5-5 | finished | 11-15 00:18 | 11-15 00:21 | 26 | 863.6k | 7.5k |
@@ -199,7 +199,7 @@ No open child issues.
 | You are a worker in the InterMine maintenan… | sonnet-5-5 | finished | 11-15 22:56 | 11-15 23:12 | 140 | 6.50M | 39.4k |
 | You are a worker in the InterMine maintenan… | sonnet-5-5 | finished | 11-15 23:14 | 11-15 23:23 | 38 | 964.4k | 12.3k |
 | You are a worker in the InterMine/BlueGenes… | sonnet-5-5 | finished | 11-15 23:17 | 11-16 04:23 | 94 | 3.66M | 19.3k |
-| You are a worker in the InterMine maintenan… | sonnet-5-5 | stalled 2d | 11-15 23:24 | 11-15 23:47 | 30 | 1.11M | 13.5k |
+| You are a worker in the InterMine maintenan… | sonnet-5-5 | stalled 3d | 11-15 23:24 | 11-15 23:47 | 30 | 1.11M | 13.5k |
 | You are a worker in the InterMine maintenan… | sonnet-5-5 | finished | 11-15 23:48 | 11-16 00:01 | 62 | 1.95M | 13.6k |
 | You are a worker in the InterMine/BlueGenes… | opus-5-5 | finished | 11-15 23:51 | 11-16 01:23 | 248 | 19.84M | 66.2k |
 | You are a worker in the InterMine maintenan… | sonnet-5-5 | finished | 11-16 00:03 | 11-16 00:14 | 88 | 3.14M | 23.5k |
@@ -317,42 +317,42 @@ No open child issues.
 | You are a worker on the InterMine maintenan… | sonnet-5-5 | finished | 11-17 22:02 | 11-17 22:07 | 16 | 309.7k | 7.5k |
 | You are a technical writer on the InterMine… | sonnet-5-5 | finished | 11-17 22:02 | 11-17 22:05 | 12 | 493.2k | 24.8k |
 | T0.2 subset_raw.py (im-9n4.3) | sonnet-5-5 | finished | 11-17 23:46 | 11-17 23:51 | 46 | 1.73M | 39.8k |
-| T0.1 stock-source support (im-9n4.2) | opus-5-5 | finished | 11-17 23:46 | 00:23 | 282 | 34.60M | 135.3k |
-| Reagent PR 690 measurement (im-7os.62) | sonnet-5-5 | finished | 11-17 23:47 | 00:05 | 90 | 3.50M | 17.8k |
+| T0.1 stock-source support (im-9n4.2) | opus-5-5 | finished | 11-17 23:46 | 11-18 00:23 | 282 | 34.60M | 135.3k |
+| Reagent PR 690 measurement (im-7os.62) | sonnet-5-5 | finished | 11-17 23:47 | 11-18 00:05 | 90 | 3.50M | 17.8k |
 | T1.2 testbed tools (im-9n4.7) | sonnet-5-5 | finished | 11-17 23:48 | 11-17 23:59 | 82 | 3.47M | 33.6k |
 | Read-only research, medium thoroughness. Fo… | opus-5-5 | finished | 11-17 23:50 | 11-17 23:55 | 64 | 1.67M | 20.2k |
-| T1.3 aligner and front proxy (im-9n4.8) | sonnet-5-5 | finished | 11-17 23:57 | 00:01 | 52 | 1.52M | 14.7k |
-| T0.3 resolver gate (im-9n4.4) | sonnet-5-5 | finished | 00:24 | 00:32 | 92 | 5.22M | 42.1k |
-| T0.4 panel fixtures and refetch (im-9n4.5) | sonnet-5-5 | finished | 00:25 | 01:26 | 248 | 9.41M | 25.5k |
-| T1.1 stock UniProt load (im-9n4.6) | opus-5-5 | finished | 00:34 | 02:08 | 450 | 48.74M | 103.3k |
-| T1.12 mine-tests local tools (im-9n4.17) | sonnet-5-5 | finished | 01:27 | 01:34 | 48 | 1.81M | 21.4k |
-| T1.4 ncbi-gff locations (im-9n4.9) | opus-5-5 | finished | 02:10 | 03:11 | 404 | 61.11M | 134.2k |
-| T1.11 report layout (im-9n4.16) | sonnet-5-5 | finished | 02:11 | 02:27 | 138 | 8.02M | 50.8k |
-| T1.9 expression converter fixes (im-9n4.14) | sonnet-5-5 | finished | 02:11 | 02:21 | 180 | 11.96M | 54.2k |
-| T1.10 hpo-annotation converter fix (im-9n4.… | sonnet-5-5 | finished | 02:23 | 02:29 | 132 | 7.25M | 44.7k |
-| T1.6+T1.7 GO and panther (im-9n4.11/.12) | sonnet-5-5 | finished | 03:13 | 04:07 | 368 | 36.67M | 109.1k |
-| T1.5 JBrowse 1 and 2 (im-9n4.10) | sonnet-5-5 | finished | 03:14 | 03:33 | 244 | 19.73M | 61.7k |
-| T1.8 interactions (im-9n4.13) | opus-5-5 | finished | 04:09 | 04:59 | 434 | 63.66M | 136.8k |
-| T1.1b MSA viewer skip patch (im-9n4.32) | sonnet-5-5 | finished | 04:10 | 04:17 | 98 | 3.88M | 28.8k |
-| T1.9+T1.10 expression and disease loads | sonnet-5-5 | finished | 05:02 | 06:23 | 576 | 70.58M | 110.8k |
-| T1.15 all human genes + RDF hpo fix | opus-5-5 | finished | 06:27 | 09:27 | 864 | 178.36M | 238.6k |
-| T1.13 final milestone rebuild (im-9n4.19) | sonnet-5-5 | finished | 09:30 | 10:30 | 304 | 17.31M | 61.5k |
-| T2.2 PanelApp lists tool (im-9n4.21) | sonnet-5-5 | finished | 09:31 | 10:01 | 308 | 26.73M | 120.6k |
-| T2.3 apply public lists (im-9n4.22) | sonnet-5-5 | finished | 10:32 | 10:54 | 132 | 10.86M | 86.1k |
-| T1.7b RGD symbols + PanelApp terms | sonnet-5-5 | finished | 11:31 | 12:10 | 178 | 8.65M | 33.4k |
-| Can you find the url of the github issue th… | fable-5-2 | finished | 11:55 | 11:55 | 6 | 1.33M | 313 |
-| Data-source status pages (im-9n4.42) | opus-5-5 | finished | 11:59 | 12:56 | 366 | 55.37M | 167.5k |
-| You are helping with task im-9n4.42 (InterM… | opus-5-5 | finished | 12:06 | 12:35 | 180 | 18.22M | 69.8k |
-| You are helping with task im-9n4.42 (InterM… | opus-5-5 | finished | 12:06 | 12:13 | 66 | 3.71M | 42.5k |
-| You are helping with task im-9n4.42 (InterM… | opus-5-5 | finished | 12:07 | 12:33 | 108 | 10.28M | 68.7k |
-| PanelApp list attribution wording (im-9n4.4… | sonnet-5-5 | finished | 12:50 | 12:56 | 60 | 2.06M | 13.2k |
-| I guess you must have updated/created new C… | fable-5-2 | finished | 19:13 | 19:14 | 6 | 1.45M | 1.0k |
-| Adopt new demo data in nightly Cypress (im-… | sonnet-5-5 | finished | 19:17 | 19:26 | 172 | 11.63M | 52.9k |
-| intermine converter fixes (im-9n4.46) | opus-5-5 | finished | 21:17 | 21:45 | 238 | 18.85M | 72.5k |
-| Source licences as stated today (im-9n4.45) | sonnet-5-5 | finished | 21:18 | 21:38 | 230 | 21.70M | 116.1k |
-| Research: current expression data (im-9n4.4… | opus-5-5 | finished | 21:37 | 21:53 | 206 | 14.16M | 50.3k |
-| T1.1b TrEMBL sequences from RDF (im-9n4.32) | opus-5-5 | running | 21:43 | 23:00 | 460 | 72.10M | 152.6k |
-| Licences, second pass (im-9n4.45) | sonnet-5-5 | finished | 21:54 | 22:12 | 210 | 13.16M | 76.1k |
+| T1.3 aligner and front proxy (im-9n4.8) | sonnet-5-5 | finished | 11-17 23:57 | 11-18 00:01 | 52 | 1.52M | 14.7k |
+| T0.3 resolver gate (im-9n4.4) | sonnet-5-5 | finished | 11-18 00:24 | 11-18 00:32 | 92 | 5.22M | 42.1k |
+| T0.4 panel fixtures and refetch (im-9n4.5) | sonnet-5-5 | finished | 11-18 00:25 | 11-18 01:26 | 248 | 9.41M | 25.5k |
+| T1.1 stock UniProt load (im-9n4.6) | opus-5-5 | finished | 11-18 00:34 | 11-18 02:08 | 450 | 48.74M | 103.3k |
+| T1.12 mine-tests local tools (im-9n4.17) | sonnet-5-5 | finished | 11-18 01:27 | 11-18 01:34 | 48 | 1.81M | 21.4k |
+| T1.4 ncbi-gff locations (im-9n4.9) | opus-5-5 | finished | 11-18 02:10 | 11-18 03:11 | 404 | 61.11M | 134.2k |
+| T1.11 report layout (im-9n4.16) | sonnet-5-5 | finished | 11-18 02:11 | 11-18 02:27 | 138 | 8.02M | 50.8k |
+| T1.9 expression converter fixes (im-9n4.14) | sonnet-5-5 | finished | 11-18 02:11 | 11-18 02:21 | 180 | 11.96M | 54.2k |
+| T1.10 hpo-annotation converter fix (im-9n4.… | sonnet-5-5 | finished | 11-18 02:23 | 11-18 02:29 | 132 | 7.25M | 44.7k |
+| T1.6+T1.7 GO and panther (im-9n4.11/.12) | sonnet-5-5 | finished | 11-18 03:13 | 11-18 04:07 | 368 | 36.67M | 109.1k |
+| T1.5 JBrowse 1 and 2 (im-9n4.10) | sonnet-5-5 | finished | 11-18 03:14 | 11-18 03:33 | 244 | 19.73M | 61.7k |
+| T1.8 interactions (im-9n4.13) | opus-5-5 | finished | 11-18 04:09 | 11-18 04:59 | 434 | 63.66M | 136.8k |
+| T1.1b MSA viewer skip patch (im-9n4.32) | sonnet-5-5 | finished | 11-18 04:10 | 11-18 04:17 | 98 | 3.88M | 28.8k |
+| T1.9+T1.10 expression and disease loads | sonnet-5-5 | finished | 11-18 05:02 | 11-18 06:23 | 576 | 70.58M | 110.8k |
+| T1.15 all human genes + RDF hpo fix | opus-5-5 | finished | 11-18 06:27 | 11-18 09:27 | 864 | 178.36M | 238.6k |
+| T1.13 final milestone rebuild (im-9n4.19) | sonnet-5-5 | finished | 11-18 09:30 | 11-18 10:30 | 304 | 17.31M | 61.5k |
+| T2.2 PanelApp lists tool (im-9n4.21) | sonnet-5-5 | finished | 11-18 09:31 | 11-18 10:01 | 308 | 26.73M | 120.6k |
+| T2.3 apply public lists (im-9n4.22) | sonnet-5-5 | finished | 11-18 10:32 | 11-18 10:54 | 132 | 10.86M | 86.1k |
+| T1.7b RGD symbols + PanelApp terms | sonnet-5-5 | finished | 11-18 11:31 | 11-18 12:10 | 178 | 8.65M | 33.4k |
+| Can you find the url of the github issue th… | fable-5-2 | finished | 11-18 11:55 | 11-18 11:55 | 6 | 1.33M | 313 |
+| Data-source status pages (im-9n4.42) | opus-5-5 | finished | 11-18 11:59 | 11-18 12:56 | 366 | 55.37M | 167.5k |
+| You are helping with task im-9n4.42 (InterM… | opus-5-5 | finished | 11-18 12:06 | 11-18 12:35 | 180 | 18.22M | 69.8k |
+| You are helping with task im-9n4.42 (InterM… | opus-5-5 | finished | 11-18 12:06 | 11-18 12:13 | 66 | 3.71M | 42.5k |
+| You are helping with task im-9n4.42 (InterM… | opus-5-5 | finished | 11-18 12:07 | 11-18 12:33 | 108 | 10.28M | 68.7k |
+| PanelApp list attribution wording (im-9n4.4… | sonnet-5-5 | finished | 11-18 12:50 | 11-18 12:56 | 60 | 2.06M | 13.2k |
+| I guess you must have updated/created new C… | fable-5-2 | finished | 11-18 19:13 | 11-18 19:14 | 6 | 1.45M | 1.0k |
+| Adopt new demo data in nightly Cypress (im-… | sonnet-5-5 | finished | 11-18 19:17 | 11-18 19:26 | 172 | 11.63M | 52.9k |
+| intermine converter fixes (im-9n4.46) | opus-5-5 | finished | 11-18 21:17 | 11-18 21:45 | 238 | 18.85M | 72.5k |
+| Source licences as stated today (im-9n4.45) | sonnet-5-5 | finished | 11-18 21:18 | 11-18 21:38 | 230 | 21.70M | 116.1k |
+| Research: current expression data (im-9n4.4… | opus-5-5 | finished | 11-18 21:37 | 11-18 21:53 | 206 | 14.16M | 50.3k |
+| T1.1b TrEMBL sequences from RDF (im-9n4.32) | opus-5-5 | finished | 11-18 21:43 | 11-18 23:03 | 494 | 80.75M | 169.4k |
+| Licences, second pass (im-9n4.45) | sonnet-5-5 | finished | 11-18 21:54 | 11-18 22:12 | 210 | 13.16M | 76.1k |
 
 Note: 1189 non-agent .output file(s) skipped (empty or plain-text task output)
 
@@ -360,11 +360,11 @@ Note: 1189 non-agent .output file(s) skipped (empty or plain-text task output)
 
 | Scope | Model | Msgs | In | Cache rd | Cache wr | Out |
 |---|---|---|---|---|---|---|
-| main | fable-5-2 | 449 | 1.3k | 210.21M | 4.51M | 404.1k |
+| main | fable-5-2 | 468 | 1.3k | 226.51M | 5.40M | 416.1k |
 | subagents | fable-5-1 | 1 | 4 | 712.4k | 3.9k | 428 |
 | subagents | fable-5-2 | 4 | 12 | 2.09M | 699.9k | 1.3k |
 | subagents | haiku-5-5 | 1 | 2 | 0 | 9.4k | 112 |
-| subagents | opus-5-5 | 5744 | 11.6k | 1.18B | 34.01M | 4.34M |
+| subagents | opus-5-5 | 5761 | 11.7k | 1.19B | 34.03M | 4.35M |
 | subagents | sonnet-5-5 | 11242 | 22.7k | 1.39B | 49.38M | 7.26M |
 
 Tokens are de-duplicated per API message (streamed records share one message id).
@@ -373,13 +373,13 @@ Tokens are de-duplicated per API message (streamed records share one message id)
 
 | Repo | WT | Branch | Last commit | vs dev \| subject |
 |---|---|---|---|---|
-| intermine | 4 (im-89g.12-511-tes…, im-ore.14-testbed…, merge-maint-2026) | maint-2026 | 21:45 (74m) | ahead 304 vs dev \| Merge maint/im-9n4.46-converter-fixes: … |
+| intermine | 4 (im-89g.12-511-tes…, im-ore.14-testbed…, merge-maint-2026) | maint-2026 | 11-18 21:45 (2.2h) | ahead 304 vs dev \| Merge maint/im-9n4.46-converter-fixes: … |
 | intermine | 4 (im-89g.12-511-tes…, im-ore.14-testbed…, merge-maint-2026) | maint/im-89g.1-ci-actions | 11-15 04:45 (3d) | - \| docs: update README badges, PR template… |
 | intermine | 4 (im-89g.12-511-tes…, im-ore.14-testbed…, merge-maint-2026) | maint/im-89g.1-ci-fix | 11-15 06:28 (3d) | - \| ci: stop using sudo -E -u postgres; con… |
 | intermine | 4 (im-89g.12-511-tes…, im-ore.14-testbed…, merge-maint-2026) | maint/im-89g.1-ci-fix2 | 11-15 06:54 (3d) | - \| ci: fix PostgreSQL 15+ public schema pr… |
 | intermine | 4 (im-89g.12-511-tes…, im-ore.14-testbed…, merge-maint-2026) | maint/im-89g.3-maven-publish | 11-15 09:40 (3d) | - \| docs: add RELEASING.md (version bump, b… |
 | intermine | 4 (im-89g.12-511-tes…, im-ore.14-testbed…, merge-maint-2026) | maint/im-89g.5-ci-actions | 11-15 09:55 (3d) | - \| ci: bump GitHub Actions to current majo… |
-| intermine | 4 (im-89g.12-511-tes…, im-ore.14-testbed…, merge-maint-2026) | maint/im-9n4.46-converter-fixes | 21:43 (76m) | - \| [im-9n4.46] psi: IntAct DataSet licence… |
+| intermine | 4 (im-89g.12-511-tes…, im-ore.14-testbed…, merge-maint-2026) | maint/im-9n4.46-converter-fixes | 11-18 21:43 (2.3h) | - \| [im-9n4.46] psi: IntAct DataSet licence… |
 | intermine | 4 (im-89g.12-511-tes…, im-ore.14-testbed…, merge-maint-2026) | maint/im-ee7.1-gradle-6 | 11-15 03:57 (3d) | - \| build: default to Gradle 6.9.4 and veri… |
 | intermine | 4 (im-89g.12-511-tes…, im-ore.14-testbed…, merge-maint-2026) | maint/im-ee7.2-batch-bio | 11-15 09:32 (3d) | - \| build(bio): fold copyMineProperties int… |
 | intermine | 4 (im-89g.12-511-tes…, im-ore.14-testbed…, merge-maint-2026) | maint/im-ee7.2-batch-intermine | 11-15 06:21 (3d) | - \| intermine: convert all build files to G… |
@@ -394,7 +394,7 @@ Tokens are de-duplicated per API message (streamed records share one message id)
 | intermine | 4 (im-89g.12-511-tes…, im-ore.14-testbed…, merge-maint-2026) | maint/im-jqz.7-weak-deps | 11-15 05:51 (3d) | - \| deps: remove orphan vendored bobo-brows… |
 | intermine | 4 (im-89g.12-511-tes…, im-ore.14-testbed…, merge-maint-2026) | maint/im-jqz.8-flaky-tests | 11-15 07:24 (3d) | - \| integrate: make DataTracker.clear() saf… |
 | intermine | 4 (im-89g.12-511-tes…, im-ore.14-testbed…, merge-maint-2026) | maint/im-rkn.3-baseline | 06-12 11:01 (159d) | - \| Merge pull request #2460 from intermine… |
-| bluegenes | 3 (im-7os.62-reagent…, im-7os.63-reagent…) | maint-2026 | 19:42 (3.3h) | ahead 154 vs dev \| Merge maint/im-9n4.44-demo-data: nightl… |
+| bluegenes | 3 (im-7os.62-reagent…, im-7os.63-reagent…) | maint-2026 | 11-18 19:42 (4.3h) | ahead 154 vs dev \| Merge maint/im-9n4.44-demo-data: nightl… |
 | bluegenes | 3 (im-7os.62-reagent…, im-7os.63-reagent…) | maint/im-28e.2-cypress-13 | 11-15 11:09 (3d) | - \| docs, cypress: how to run the suite; ta… |
 | bluegenes | 3 (im-7os.62-reagent…, im-7os.63-reagent…) | maint/im-28e.3-gh-actions | 11-15 05:31 (3d) | - \| docs: CI badge and Continuous integrati… |
 | bluegenes | 3 (im-7os.62-reagent…, im-7os.63-reagent…) | maint/im-7os.1-shadow-cljs | 11-15 05:17 (3d) | - \| comments: drop stale lein/figwheel refe… |
@@ -402,16 +402,16 @@ Tokens are de-duplicated per API message (streamed records share one message id)
 | bluegenes | 3 (im-7os.62-reagent…, im-7os.63-reagent…) | maint/im-7os.18-sibling-deps | 11-15 12:49 (3d) | - \| docs: how the sibling libraries are pin… |
 | bluegenes | 3 (im-7os.62-reagent…, im-7os.63-reagent…) | maint/im-7os.4-cdn-sri | 11-15 11:48 (3d) | - \| script: cdn-sri.sh prints SRI hashes fo… |
 | bluegenes | 3 (im-7os.62-reagent…, im-7os.63-reagent…) | maint/im-7os.5-removals | 11-15 02:59 (3d) | - \| npm: remove unused clipboardy [im-7os.5] |
-| bluegenes | 3 (im-7os.62-reagent…, im-7os.63-reagent…) | maint/im-7os.62-reagent-pr690 | 11-17 18:15 (28.7h) | - \| renovate: use the shared gmicklem prese… |
+| bluegenes | 3 (im-7os.62-reagent…, im-7os.63-reagent…) | maint/im-7os.62-reagent-pr690 | 11-17 18:15 (29.7h) | - \| renovate: use the shared gmicklem prese… |
 | bluegenes | 3 (im-7os.62-reagent…, im-7os.63-reagent…) | maint/im-7os.63-reagent-snap2 | 11-16 18:40 (2d) | - \| Merge maint/im-89g.30-changelog: CHANGE… |
 | bluegenes | 3 (im-7os.62-reagent…, im-7os.63-reagent…) | maint/im-89g.5-ci-actions | 11-15 09:55 (3d) | - \| ci: bump GitHub Actions to current majo… |
-| bluegenes | 3 (im-7os.62-reagent…, im-7os.63-reagent…) | maint/im-9n4.44-demo-data | 19:27 (3.5h) | - \| [im-9n4.44] nightly: pin rdfc2im to be8… |
+| bluegenes | 3 (im-7os.62-reagent…, im-7os.63-reagent…) | maint/im-9n4.44-demo-data | 11-18 19:27 (4.5h) | - \| [im-9n4.44] nightly: pin rdfc2im to be8… |
 | bluegenes | 3 (im-7os.62-reagent…, im-7os.63-reagent…) | maint/im-rkn.4-baseline | 01-26 21:58 (661d) | - \| dynamic favicon slows down dx |
-| imcljs | 1 | maint-2026 | 11-17 18:48 (28.2h) | ahead 15 vs dev \| Merge maint/im-8dd.11-ci: GitHub Action… |
+| imcljs | 1 | maint-2026 | 11-17 18:48 (29.2h) | ahead 15 vs dev \| Merge maint/im-8dd.11-ci: GitHub Action… |
 | imcljs | 1 | maint/im-7os.3-imcljs-deps-edn | 11-15 02:46 (3d) | - \| deps: bump clj-http 3.10.0 to 3.13.0 [i… |
-| im-tables-3 | 1 | maint-2026 | 11-17 18:48 (28.2h) | ahead 47 vs dev \| Merge maint/im-8dd.11-ci: GitHub Action… |
+| im-tables-3 | 1 | maint-2026 | 11-17 18:48 (29.2h) | ahead 47 vs dev \| Merge maint/im-8dd.11-ci: GitHub Action… |
 | im-tables-3 | 1 | maint/im-7os.3-im-tables-deps-edn | 11-15 12:05 (3d) | - \| test: lein kaocha honours IM_TABLES_SER… |
-| bluegenes-tool-store | 1 | maint-2026 | 11-17 18:48 (28.2h) | ahead 22 vs master \| Merge maint/im-8dd.11-ci: GitHub Action… |
+| bluegenes-tool-store | 1 | maint-2026 | 11-17 18:48 (29.2h) | ahead 22 vs master \| Merge maint/im-8dd.11-ci: GitHub Action… |
 | bluegenes-tool-store | 1 | maint/im-7os.3-tool-store-deps-edn | 11-15 02:33 (3d) | - \| deps: remove unused ring/ring-defaults … |
 | bluegenes-tool-store | 1 | maint/im-7os.6-tool-store-fixes | 11-15 09:48 (3d) | - \| deps: bump commons-compress 1.19 -> 1.2… |
 
@@ -421,25 +421,25 @@ WT = number of git worktrees (extra ones named). Branches shown: maint-2026 and 
 
 | Start | Bead | Agent | Model | In | Cache | Out | Outcome | Notes |
 |---|---|---|---|---|---|---|---|---|
-| 22:13 | im-9n4.45 | Licences, second pass | sonnet | 0 | 0 | 0 | success | [tokens: 217855 total from the task not… |
-| 21:53 | im-9n4.47 | Research: current expressio… | opus | 0 | 0 | 0 | success | [tokens: 243259 total from the task not… |
-| 21:53 | im-9n4.46 | intermine converter fixes | opus | 0 | 0 | 0 | success | [tokens: 258174 total from the task not… |
-| 21:40 | im-9n4.45 | Source licences as stated t… | sonnet | 0 | 0 | 0 | success | [tokens: 324989 total from the task not… |
-| 19:27 | im-9n4.44 | Adopt demo-data-2026-11-18 … | sonnet | 0 | 0 | 0 | success | [tokens: 216536 total from the task not… |
-| 12:59 | im-9n4.42 | Data-source status pages | opus | 0 | 0 | 0 | success | [tokens: 474274 total from the task not… |
-| 12:57 | im-9n4.43 | PanelApp list attribution w… | sonnet | 0 | 0 | 0 | success | [tokens: 85162 total from the task noti… |
-| 12:11 | im-9n4.35 | T1.7b RGD symbols + PanelAp… | sonnet | 0 | 0 | 0 | success | [tokens: 147762 total from the task not… |
-| 10:56 | im-9n4.22 | T2.3 apply public lists | sonnet | 0 | 0 | 0 | success | [tokens: 240154 total from the task not… |
-| 10:31 | im-9n4.19 | T1.13 clean milestone 1 reb… | sonnet | 0 | 0 | 0 | success | [tokens: 214303 total from the task not… |
-| 10:02 | im-9n4.21 | T2.2 PanelApp lists tool | sonnet | 0 | 0 | 0 | success | [tokens: 292241 total from the task not… |
-| 09:28 | im-9n4.40 | T1.15 all human genes + RDF… | opus | 0 | 0 | 0 | success | [tokens: 651565 total from the task not… |
-| 06:25 | im-9n4.14 | T1.9+T1.10 expression and d… | sonnet | 0 | 0 | 0 | success | [tokens: 394411 total from the task not… |
-| 05:00 | im-9n4.13 | T1.8 interactions | opus | 0 | 0 | 0 | success | [tokens: 441671 total from the task not… |
-| 04:18 | im-9n4.32 | T1.1b MSA viewer skip patch… | sonnet | 0 | 0 | 0 | success | [tokens: 111462 total from the task not… |
-| 04:08 | im-9n4.11 | T1.6 GO + T1.7 panther + la… | sonnet | 0 | 0 | 0 | success | [tokens: 332432 total from the task not… |
-| 03:35 | im-9n4.10 | T1.5 JBrowse 2 on the BlueG… | sonnet | 0 | 0 | 0 | success | [tokens: 255398 total from the task not… |
-| 03:12 | im-9n4.9 | T1.4 ncbi-gff locations | opus | 0 | 0 | 0 | success | [tokens: 465057 total from the task not… |
-| 02:29 | im-9n4.15 | T1.10 hpo-annotation conver… | sonnet | 0 | 0 | 0 | success | [tokens: 149058 total from the task not… |
-| 02:27 | im-9n4.16 | T1.11 report layout and tem… | sonnet | 0 | 0 | 0 | success | [tokens: 170176 total from the task not… |
+| 11-18 23:05 | im-9n4.32 | T1.1b TrEMBL sequences from… | opus | 0 | 0 | 0 | success | [tokens: 527902 total from the task not… |
+| 11-18 22:13 | im-9n4.45 | Licences, second pass | sonnet | 0 | 0 | 0 | success | [tokens: 217855 total from the task not… |
+| 11-18 21:53 | im-9n4.47 | Research: current expressio… | opus | 0 | 0 | 0 | success | [tokens: 243259 total from the task not… |
+| 11-18 21:53 | im-9n4.46 | intermine converter fixes | opus | 0 | 0 | 0 | success | [tokens: 258174 total from the task not… |
+| 11-18 21:40 | im-9n4.45 | Source licences as stated t… | sonnet | 0 | 0 | 0 | success | [tokens: 324989 total from the task not… |
+| 11-18 19:27 | im-9n4.44 | Adopt demo-data-2026-11-18 … | sonnet | 0 | 0 | 0 | success | [tokens: 216536 total from the task not… |
+| 11-18 12:59 | im-9n4.42 | Data-source status pages | opus | 0 | 0 | 0 | success | [tokens: 474274 total from the task not… |
+| 11-18 12:57 | im-9n4.43 | PanelApp list attribution w… | sonnet | 0 | 0 | 0 | success | [tokens: 85162 total from the task noti… |
+| 11-18 12:11 | im-9n4.35 | T1.7b RGD symbols + PanelAp… | sonnet | 0 | 0 | 0 | success | [tokens: 147762 total from the task not… |
+| 11-18 10:56 | im-9n4.22 | T2.3 apply public lists | sonnet | 0 | 0 | 0 | success | [tokens: 240154 total from the task not… |
+| 11-18 10:31 | im-9n4.19 | T1.13 clean milestone 1 reb… | sonnet | 0 | 0 | 0 | success | [tokens: 214303 total from the task not… |
+| 11-18 10:02 | im-9n4.21 | T2.2 PanelApp lists tool | sonnet | 0 | 0 | 0 | success | [tokens: 292241 total from the task not… |
+| 11-18 09:28 | im-9n4.40 | T1.15 all human genes + RDF… | opus | 0 | 0 | 0 | success | [tokens: 651565 total from the task not… |
+| 11-18 06:25 | im-9n4.14 | T1.9+T1.10 expression and d… | sonnet | 0 | 0 | 0 | success | [tokens: 394411 total from the task not… |
+| 11-18 05:00 | im-9n4.13 | T1.8 interactions | opus | 0 | 0 | 0 | success | [tokens: 441671 total from the task not… |
+| 11-18 04:18 | im-9n4.32 | T1.1b MSA viewer skip patch… | sonnet | 0 | 0 | 0 | success | [tokens: 111462 total from the task not… |
+| 11-18 04:08 | im-9n4.11 | T1.6 GO + T1.7 panther + la… | sonnet | 0 | 0 | 0 | success | [tokens: 332432 total from the task not… |
+| 11-18 03:35 | im-9n4.10 | T1.5 JBrowse 2 on the BlueG… | sonnet | 0 | 0 | 0 | success | [tokens: 255398 total from the task not… |
+| 11-18 03:12 | im-9n4.9 | T1.4 ncbi-gff locations | opus | 0 | 0 | 0 | success | [tokens: 465057 total from the task not… |
+| 11-18 02:29 | im-9n4.15 | T1.10 hpo-annotation conver… | sonnet | 0 | 0 | 0 | success | [tokens: 149058 total from the task not… |
 
-Showing the 20 most recent of 222 runs.
+Showing the 20 most recent of 223 runs.
