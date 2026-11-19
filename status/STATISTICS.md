@@ -1,4 +1,4 @@
-# STATISTICS 2026-11-19 08:40 UTC
+# STATISTICS 2026-11-19 09:00 UTC
 
 Jobs are worker runs recorded in `status/agent-runs.csv`, counted in the hour they started, by model. The orchestrator is one long Fable session and is not a job, so the Fable column counts only runs recorded with that model; the orchestrator's work shows in the Merges column. Commits are non-merge commits on the integration branches of the eleven code repositories and rdfc2im, by author time; the planning repository is left out. Hours with nothing in them are not shown. Written by `scripts/statistics.py` (hourly, with STATUS.md); since 2026-11-14 22:00 UTC.
 
