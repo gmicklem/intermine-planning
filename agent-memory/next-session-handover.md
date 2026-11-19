@@ -36,3 +36,31 @@ worktree copies in/ and out/ (about 600 MB); remove worktrees after merging.
 **Why:** hand-over point for the next orchestrator session. **How to apply:** read LOG.md checkpoints
 23 to 26 and docs/EXPERT_TO_CHECK.md entries 7 to 11 first; do not start milestone 3 without Gos.
 Related: [[intermine-maintenance-sprint]], [[worker-permission-prompt-hang]], [[gos-working-preferences]].
+
+**EMBARGOED ITEM (bead im-ct0), until Monday 7 December 2026.** These notes are copied hourly to a PUBLIC
+repository: write NOTHING about the item here, in beads, LOG.md, STATUS or in commit messages on pushed
+branches. Everything is in `repos/.sandbox-disk/embargo/im-ct0/`, a checkout of a private repository:
+read `RESTART-PROMPT.md`, `ORCHESTRATOR-NOTES.md` and `RUNBOOK-for-Gos.md` there first. Gos has given one
+narrow permission connected with it, recorded in those files; the general rule (never push to intermine/*
+or intermineorg/*) is otherwise unchanged. Never send unusual requests to a hosted mine. Several local
+branches in repos/intermine must never be pushed: the private notes list them.
+(20 Nov 2026: an earlier version of this note said more than it should have and was public for about 14
+hours; it was reduced to this text. Do not restore the old wording.)
+Gos (20 Nov 2026): no sandbox recreation for now (keeps 16 GB; dedicated hardware planned later). A fresh
+conversation in the SAME sandbox is fine at any time to cut token use: a restart prompt is kept at
+`repos/.sandbox-disk/embargo/im-ct0/RESTART-PROMPT.md` (update it before he uses it); sandbox commands
+are in docs/SANDBOX-PORTS.md and docs/SANDBOX-NETWORK.md; access record in docs/PROJECT-ACCESS.md.
+ut demo state, 20 Nov 2026 05:30 UTC: rebuilt with six new stock sources (protein2ipr, interpro, mgi-alleles,
+pubmed-gene, humanmine-static, update-data-sources), the corrected cited-PMID set and the Protein.organism
+priority fix; 1,222,869 objects; test-live 69 passed 2 skipped; mine-tests as baseline. Driver pair to use
+now: `.sandbox-disk/rdfc2im/drive-ut-9n427.sh` + `fb-env-ut-9n427.sh`; cache
+`repos/rdfc2im/cached_raw_data.remaining-2026-11-20`; rdfc2im integration tip 9f50411868 (pushed).
+update-publications and entrez-organism wait on `sbx policy allow network eutils.ncbi.nlm.nih.gov`.
+After a laptop sleep the ut mine's database connections go stale: `docker restart rdfc2im-ut-mine`.
+20 Nov 2026 07:00 UTC, LOG checkpoint 28 written. ut demo rebuilt again on the fixed converters: driver pair
+is now `drive-ut-9n450.sh` + `fb-env-ut-9n450.sh`; its InterMine source is a LOCAL-ONLY worktree,
+`worktrees/intermine/local-ut-build-src` (NEVER push it; see the private notes for what it is and how to
+refresh it).
+rdfc2im integration tip cc1d6405c6; intermine maint-2026 b81dbfd8e5; humanmine-bio-sources 1d36e19; humanmine
+d877a36. Trap: `trial_home_ut/humanmine-bio-sources` is a persistent copy the driver does not refresh.
+Open with Gos: eutils host; DepMap terms; im-9n4.52; Pfam/PFAM case; Ensembl at full scope.
