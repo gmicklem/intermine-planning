@@ -1,19 +1,19 @@
-# STATUS 2026-11-20 14:23 UTC
+# STATUS 2026-11-20 15:00 UTC
 
-Generated 2026-11-20 14:23 UTC / 2026-11-20 14:23 GMT. Sprint dashboard for the InterMine and BlueGenes maintenance effort.
+Generated 2026-11-20 15:00 UTC / 2026-11-20 15:00 GMT. Sprint dashboard for the InterMine and BlueGenes maintenance effort.
 
 Times are UTC. Agent state: running = unfinished and written to in the last 10 min; stalled = unfinished and silent for 10 min or more; finished = last message ended its turn (no tool call pending).
 
-Subagents: 0 running, 2 stalled, 253 finished.
+Subagents: 1 running, 2 stalled, 253 finished.
 
 ## Beads summary
 
-bd status: total 382, open 47, in progress 9, blocked 0, ready 47, deferred 0, closed 326.
+bd status: total 383, open 47, in progress 8, blocked 0, ready 47, deferred 0, closed 328.
 
 | Status | Count |
 |---|---|
-| closed | 326 |
-| in_progress | 9 |
+| closed | 328 |
+| in_progress | 8 |
 | open | 47 |
 
 ### By priority (tasks and bugs; epics counted apart)
@@ -21,10 +21,10 @@ bd status: total 382, open 47, in progress 9, blocked 0, ready 47, deferred 0, c
 | Priority | open | in progress | blocked | deferred | closed | total | closed % | epics |
 |---|---|---|---|---|---|---|---|---|
 | P0 | 0 | 2 | 0 | 0 | 14 | 16 | 88% | 2 |
-| P1 | 2 | 1 | 0 | 0 | 59 | 62 | 95% | 5 |
-| P2 | 11 | 5 | 0 | 0 | 154 | 170 | 91% | 3 |
+| P1 | 3 | 0 | 0 | 0 | 60 | 63 | 95% | 5 |
+| P2 | 10 | 5 | 0 | 0 | 155 | 170 | 91% | 3 |
 | P3 | 24 | 1 | 0 | 0 | 99 | 124 | 80% | 0 |
-| all | 37 | 9 | 0 | 0 | 326 | 372 | 88% | 10 |
+| all | 37 | 8 | 0 | 0 | 328 | 373 | 88% | 10 |
 
 ### im-28e Epic F: BlueGenes tests and CI [open, 13/13 closed]
 
@@ -51,16 +51,15 @@ No open child issues.
 |---|---|---|---|---|
 | im-8dd.2 | I2 Dashboard generator (STATUS.md, index.html) an… | in_progress | 0 | epic |
 
-### im-9n4 EPIC: hybrid HumanMine testbed: rdfc2im (RDF-port… [open, 37/55 closed]
+### im-9n4 EPIC: hybrid HumanMine testbed: rdfc2im (RDF-port… [open, 39/56 closed]
 
 | ID | Title | Status | P | Labels |
 |---|---|---|---|---|
-| im-9n4.56 | Full rebuild with E-utilities sources and build-d… | in_progress | 1 |  |
+| im-9n4.59 | Ensembl follow-up: panel build picks its Ensembl … | open | 1 |  |
 | im-9n4.18 | T1.14 Reinstate repos/sequence-alignment-service … | open | 2 |  |
 | im-9n4.32 | T1.1b Hybrid: MSA viewer works for panel genes: m… | in_progress | 2 |  |
 | im-9n4.42 | Data-source status pages: per-build manifest (URL… | in_progress | 2 |  |
 | im-9n4.45 | Licences: record the licence each data source sta… | in_progress | 2 |  |
-| im-9n4.54 | Member-database name: use 'Pfam' everywhere (Gos,… | open | 2 |  |
 | im-9n4.55 | Ensembl at full scope: join Ensembl genes to NCBI… | in_progress | 2 |  |
 | im-9n4.24 | T2.5 Ask Genomics England whether they would publ… | open | 3 |  |
 | im-9n4.25 | T3.1 Prepare the DBCLS server (about 256 GB RAM) … | open | 3 |  |
@@ -129,7 +128,7 @@ No open child issues.
 
 | Agent | Model | State | Started | Last | In | Cache | Out |
 |---|---|---|---|---|---|---|---|
-| main session | fable-5-2 | idle | 11-17 23:40 | 13:35 | 2.7k | 399.98M | 792.8k |
+| main session | fable-5-2 | running | 11-17 23:40 | 14:59 | 2.7k | 405.42M | 804.2k |
 | Read-only survey of the InterMine Java back… | opus-5-5 | finished | 11-15 00:18 | 11-15 00:20 | 42 | 1.05M | 9.0k |
 | Read-only survey of BlueGenes, the ClojureS… | opus-5-5 | finished | 11-15 00:18 | 11-15 00:20 | 22 | 347.5k | 8.3k |
 | Read-only survey of four repos under /Users… | opus-5-5 | finished | 11-15 00:18 | 11-15 00:21 | 26 | 863.6k | 7.5k |
@@ -385,18 +384,19 @@ No open child issues.
 | You are finding, for several biological dat… | opus-5-5 | finished | 10:37 | 10:42 | 106 | 3.27M | 13.9k |
 | You are finding, for several biological dat… | opus-5-5 | finished | 10:38 | 10:47 | 142 | 7.34M | 33.1k |
 | Ensembl join by cross-reference | opus-5-5 | finished | 12:55 | 13:10 | 202 | 16.95M | 82.0k |
+| Ensembl panel, notes, rebuild | opus-5-5 | running | 14:25 | 14:57 | 352 | 47.68M | 132.8k |
 
-Note: 1385 non-agent .output file(s) skipped (empty or plain-text task output)
+Note: 1399 non-agent .output file(s) skipped (empty or plain-text task output)
 
 ## Totals by model
 
 | Scope | Model | Msgs | In | Cache rd | Cache wr | Out |
 |---|---|---|---|---|---|---|
-| main | fable-5-2 | 952 | 2.7k | 391.84M | 8.14M | 792.8k |
+| main | fable-5-2 | 971 | 2.7k | 397.02M | 8.41M | 804.2k |
 | subagents | fable-5-1 | 1 | 4 | 712.4k | 3.9k | 428 |
 | subagents | fable-5-2 | 4 | 12 | 2.09M | 699.9k | 1.3k |
 | subagents | haiku-5-5 | 3 | 6 | 3.5k | 19.0k | 1.6k |
-| subagents | opus-5-5 | 8115 | 16.5k | 1.71B | 40.73M | 5.94M |
+| subagents | opus-5-5 | 8289 | 16.9k | 1.76B | 41.14M | 6.08M |
 | subagents | sonnet-5-5 | 12026 | 24.4k | 1.56B | 52.96M | 7.73M |
 
 Tokens are de-duplicated per API message (streamed records share one message id).
@@ -405,17 +405,17 @@ Tokens are de-duplicated per API message (streamed records share one message id)
 
 | Repo | WT | Branch | Last commit | vs dev \| subject |
 |---|---|---|---|---|
-| intermine | 18 (im-89g.12-511-tes…, im-9n4.56-rebuild…, (withheld)...) | maint-2026 | 05:31 (8.9h) | ahead 314 vs dev \| Merge maint/im-9n4.45-converter-licence… |
+| intermine | 18 (im-89g.12-511-tes…, im-9n4.56-rebuild…, (withheld)...) | maint-2026 | 14:32 (27m) | ahead 319 vs dev \| Merge maint/im-9n4.56-rebuild-fixes: up… |
 | intermine | 18 (im-89g.12-511-tes…, im-9n4.56-rebuild…, (withheld)...) | maint/im-89g.1-ci-actions | 11-15 04:45 (5d) | - \| docs: update README badges, PR template… |
 | intermine | 18 (im-89g.12-511-tes…, im-9n4.56-rebuild…, (withheld)...) | maint/im-89g.1-ci-fix | 11-15 06:28 (5d) | - \| ci: stop using sudo -E -u postgres; con… |
 | intermine | 18 (im-89g.12-511-tes…, im-9n4.56-rebuild…, (withheld)...) | maint/im-89g.1-ci-fix2 | 11-15 06:54 (5d) | - \| ci: fix PostgreSQL 15+ public schema pr… |
 | intermine | 18 (im-89g.12-511-tes…, im-9n4.56-rebuild…, (withheld)...) | maint/im-89g.3-maven-publish | 11-15 09:40 (5d) | - \| docs: add RELEASING.md (version bump, b… |
 | intermine | 18 (im-89g.12-511-tes…, im-9n4.56-rebuild…, (withheld)...) | maint/im-89g.5-ci-actions | 11-15 09:55 (5d) | - \| ci: bump GitHub Actions to current majo… |
-| intermine | 18 (im-89g.12-511-tes…, im-9n4.56-rebuild…, (withheld)...) | maint/im-9n4.28-protein2ipr-ncbifam | 05:15 (9.1h) | - \| [im-9n4.28] protein2ipr: cover NCBIfam … |
-| intermine | 18 (im-89g.12-511-tes…, im-9n4.56-rebuild…, (withheld)...) | maint/im-9n4.28-update-data-sources-keys | 05:21 (9.0h) | - \| [im-9n4.28] update-data-sources: add th… |
-| intermine | 18 (im-89g.12-511-tes…, im-9n4.56-rebuild…, (withheld)...) | maint/im-9n4.45-converter-licence-stamps | 05:26 (9.0h) | - \| [im-9n4.45] interpro-go: DataSet licenc… |
-| intermine | 18 (im-89g.12-511-tes…, im-9n4.56-rebuild…, (withheld)...) | maint/im-9n4.46-converter-fixes | 11-18 21:43 (40.7h) | - \| [im-9n4.46] psi: IntAct DataSet licence… |
-| intermine | 18 (im-89g.12-511-tes…, im-9n4.56-rebuild…, (withheld)...) | maint/im-9n4.56-rebuild-fixes | 10:04 (4.3h) | - \| [im-9n4.54] interpro and go-annotation … |
+| intermine | 18 (im-89g.12-511-tes…, im-9n4.56-rebuild…, (withheld)...) | maint/im-9n4.28-protein2ipr-ncbifam | 05:15 (9.7h) | - \| [im-9n4.28] protein2ipr: cover NCBIfam … |
+| intermine | 18 (im-89g.12-511-tes…, im-9n4.56-rebuild…, (withheld)...) | maint/im-9n4.28-update-data-sources-keys | 05:21 (9.6h) | - \| [im-9n4.28] update-data-sources: add th… |
+| intermine | 18 (im-89g.12-511-tes…, im-9n4.56-rebuild…, (withheld)...) | maint/im-9n4.45-converter-licence-stamps | 05:26 (9.6h) | - \| [im-9n4.45] interpro-go: DataSet licenc… |
+| intermine | 18 (im-89g.12-511-tes…, im-9n4.56-rebuild…, (withheld)...) | maint/im-9n4.46-converter-fixes | 11-18 21:43 (41.3h) | - \| [im-9n4.46] psi: IntAct DataSet licence… |
+| intermine | 18 (im-89g.12-511-tes…, im-9n4.56-rebuild…, (withheld)...) | maint/im-9n4.56-rebuild-fixes | 10:04 (4.9h) | - \| [im-9n4.54] interpro and go-annotation … |
 | intermine | 18 (im-89g.12-511-tes…, im-9n4.56-rebuild…, (withheld)...) | maint/im-ee7.1-gradle-6 | 11-15 03:57 (5d) | - \| build: default to Gradle 6.9.4 and veri… |
 | intermine | 18 (im-89g.12-511-tes…, im-9n4.56-rebuild…, (withheld)...) | maint/im-ee7.2-batch-bio | 11-15 09:32 (5d) | - \| build(bio): fold copyMineProperties int… |
 | intermine | 18 (im-89g.12-511-tes…, im-9n4.56-rebuild…, (withheld)...) | maint/im-ee7.2-batch-intermine | 11-15 06:21 (5d) | - \| intermine: convert all build files to G… |
@@ -430,7 +430,7 @@ Tokens are de-duplicated per API message (streamed records share one message id)
 | intermine | 18 (im-89g.12-511-tes…, im-9n4.56-rebuild…, (withheld)...) | maint/im-jqz.7-weak-deps | 11-15 05:51 (5d) | - \| deps: remove orphan vendored bobo-brows… |
 | intermine | 18 (im-89g.12-511-tes…, im-9n4.56-rebuild…, (withheld)...) | maint/im-jqz.8-flaky-tests | 11-15 07:24 (5d) | - \| integrate: make DataTracker.clear() saf… |
 | intermine | 18 (im-89g.12-511-tes…, im-9n4.56-rebuild…, (withheld)...) | maint/im-rkn.3-baseline | 06-12 11:01 (161d) | - \| Merge pull request #2460 from intermine… |
-| bluegenes | 3 (im-7os.62-reagent…, im-7os.63-reagent…) | maint-2026 | 11-18 19:42 (42.7h) | ahead 154 vs dev \| Merge maint/im-9n4.44-demo-data: nightl… |
+| bluegenes | 3 (im-7os.62-reagent…, im-7os.63-reagent…) | maint-2026 | 11-18 19:42 (43.3h) | ahead 154 vs dev \| Merge maint/im-9n4.44-demo-data: nightl… |
 | bluegenes | 3 (im-7os.62-reagent…, im-7os.63-reagent…) | maint/im-28e.2-cypress-13 | 11-15 11:09 (5d) | - \| docs, cypress: how to run the suite; ta… |
 | bluegenes | 3 (im-7os.62-reagent…, im-7os.63-reagent…) | maint/im-28e.3-gh-actions | 11-15 05:31 (5d) | - \| docs: CI badge and Continuous integrati… |
 | bluegenes | 3 (im-7os.62-reagent…, im-7os.63-reagent…) | maint/im-7os.1-shadow-cljs | 11-15 05:17 (5d) | - \| comments: drop stale lein/figwheel refe… |
@@ -441,7 +441,7 @@ Tokens are de-duplicated per API message (streamed records share one message id)
 | bluegenes | 3 (im-7os.62-reagent…, im-7os.63-reagent…) | maint/im-7os.62-reagent-pr690 | 11-17 18:15 (2d) | - \| renovate: use the shared gmicklem prese… |
 | bluegenes | 3 (im-7os.62-reagent…, im-7os.63-reagent…) | maint/im-7os.63-reagent-snap2 | 11-16 18:40 (3d) | - \| Merge maint/im-89g.30-changelog: CHANGE… |
 | bluegenes | 3 (im-7os.62-reagent…, im-7os.63-reagent…) | maint/im-89g.5-ci-actions | 11-15 09:55 (5d) | - \| ci: bump GitHub Actions to current majo… |
-| bluegenes | 3 (im-7os.62-reagent…, im-7os.63-reagent…) | maint/im-9n4.44-demo-data | 11-18 19:27 (42.9h) | - \| [im-9n4.44] nightly: pin rdfc2im to be8… |
+| bluegenes | 3 (im-7os.62-reagent…, im-7os.63-reagent…) | maint/im-9n4.44-demo-data | 11-18 19:27 (43.5h) | - \| [im-9n4.44] nightly: pin rdfc2im to be8… |
 | bluegenes | 3 (im-7os.62-reagent…, im-7os.63-reagent…) | maint/im-rkn.4-baseline | 01-26 21:58 (662d) | - \| dynamic favicon slows down dx |
 | imcljs | 1 | maint-2026 | 11-17 18:48 (2d) | ahead 15 vs dev \| Merge maint/im-8dd.11-ci: GitHub Action… |
 | imcljs | 1 | maint/im-7os.3-imcljs-deps-edn | 11-15 02:46 (5d) | - \| deps: bump clj-http 3.10.0 to 3.13.0 [i… |
