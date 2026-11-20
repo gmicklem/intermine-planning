@@ -124,6 +124,10 @@ sbx policy allow network gtexportal.org,www.bgee.org,jun2026.archive.ensembl.org
 
 ## Requested, not yet allowed
 
+- `archive.apache.org,dlcdn.apache.org` (20 Nov 2026): Apache download sites (Ant, Tomcat). Needed to
+  build and test the old 1.8 line; worked around through Maven Central, so optional.
+  `sbx policy allow network archive.apache.org,dlcdn.apache.org`
+
 - (allowed 20 Nov 2026; add on a new machine too) `depmap.org`: to read the DepMap licence and file list at source, so the three depmap
   data sources can be considered for the HumanMine build. `sbx policy allow network depmap.org`
   (Earlier notes in this file call depmap.org "deliberately not allowed (decision D-7)". That was the
