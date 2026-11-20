@@ -64,3 +64,11 @@ refresh it).
 rdfc2im integration tip cc1d6405c6; intermine maint-2026 b81dbfd8e5; humanmine-bio-sources 1d36e19; humanmine
 d877a36. Trap: `trial_home_ut/humanmine-bio-sources` is a persistent copy the driver does not refresh.
 Open with Gos: eutils host; DepMap terms; im-9n4.52; Pfam/PFAM case; Ensembl at full scope.
+
+**20 Nov day session (LOG checkpoint 29 has the detail).** The ut demo is rebuilt with the driver pair
+`repos/.sandbox-disk/rdfc2im/drive-ut-9n456.sh` + `fb-env-ut-9n456.sh` (normal build now includes the two
+E-utilities sources, build-derived DataSet versions, data-set citations, "Pfam"). Still to do first: run the
+InterMine gate on `maint/im-9n4.56-rebuild-fixes` (4 converter commits), merge to maint-2026, push, CI, close
+im-9n4.54 and im-9n4.56; merge the im-9n4.55 worker's branch (Ensembl joined by cross-reference, code only) when
+it reports. Public status pages are generated through a private redaction list: see the private restart prompt
+before changing `scripts/dashboard.py` or naming agents, branches or runs for the embargoed item.
