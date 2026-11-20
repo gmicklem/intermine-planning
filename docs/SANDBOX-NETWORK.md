@@ -124,7 +124,7 @@ sbx policy allow network gtexportal.org,www.bgee.org,jun2026.archive.ensembl.org
 
 ## Requested, not yet allowed
 
-- `depmap.org` (20 Nov 2026): to read the DepMap licence and file list at source, so the three depmap
+- (allowed 20 Nov 2026; add on a new machine too) `depmap.org`: to read the DepMap licence and file list at source, so the three depmap
   data sources can be considered for the HumanMine build. `sbx policy allow network depmap.org`
   (Earlier notes in this file call depmap.org "deliberately not allowed (decision D-7)". That was the
   orchestrator's mistake: D-7 covers OMIM, DisGeNET and KEGG only. Gos never refused DepMap.)
