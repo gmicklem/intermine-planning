@@ -233,3 +233,6 @@ started_utc,ended_utc,beads_id,agent_label,model,input_tokens,cache_read_tokens,
 2026-11-20T00:12:46+00:00,2026-11-20T00:12:46+00:00,im-ct0,embargoed item,opus,0,0,0,0,success,
 2026-11-20T02:25:16+00:00,2026-11-20T02:25:16+00:00,im-ct0,embargoed item,opus,0,0,0,0,success,
 2026-11-20T02:50:15+00:00,2026-11-20T02:50:15+00:00,im-ct0,embargoed item,opus,0,0,0,0,success,
+2026-11-20T03:05:15+00:00,2026-11-20T03:05:15+00:00,im-9n4.48,"cited-PMID set, scope full, GO stub analysis",opus,0,0,0,0,success,[tokens: 462989 total from the task notification] merged; rdfc2im make test 537 passed
+2026-11-20T03:08:21+00:00,2026-11-20T03:08:21+00:00,im-ct0,embargoed item,opus,0,0,0,0,success,
+2026-11-20T03:16:04+00:00,2026-11-20T03:16:04+00:00,im-9n4.45,"licences: Ensembl, DepMap, ClinVar retry",sonnet,0,0,0,0,success,[tokens: 120359 total from the task notification] merged; make test 539 passed
