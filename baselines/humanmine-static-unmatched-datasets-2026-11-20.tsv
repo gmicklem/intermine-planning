@@ -1,0 +1,41 @@
+name	version in file	loaded as DataSet	objects referencing it
+ncbi-fasta	GRCh38.p13	yes (version in mine: GRCh38.p13)	0
+ncbi-gff	109.20210514; September 2021	yes (version in mine: 109.20210514; September 2021)	24565
+ncbi-gene	109.20210514; September 2021	yes (version in mine: 109.20210514; September 2021)	0
+ncbi-summaries	109.20210514; September 2021	yes (version in mine: 109.20210514; September 2021)	0
+panther	16.0; December 2020	yes (version in mine: 16.0; December 2020)	0
+interpro	87.0; November 2021	yes (version in mine: 87.0; November 2021)	0
+protein2ipr	87.0; November 2021	yes (version in mine: 87.0; November 2021)	0
+psi-intact	February 2022	yes (version in mine: February 2022)	0
+psi-complexes	September 2021	yes (version in mine: September 2021)	0
+omim	February 2022	yes (version in mine: February 2022)	0
+uniprot	2021_04	yes (version in mine: 2021_04)	0
+uniprot-keywords	2021_04	yes (version in mine: 2021_04)	0
+uniprot-fasta	2021_04	yes (version in mine: 2021_04)	140
+arrayexpress-atlas	June 2011	yes (version in mine: June 2011)	0
+atlas-express	July 2014	yes (version in mine: July 2014)	1939
+reactome	79; December 2021	yes (version in mine: 79; December 2021)	0
+biogrid	4.4.206; February 2022	yes (version in mine: 4.4.206; February 2022)	0
+pubmed-gene	February 2022	yes (version in mine: February 2022)	0
+interpro-go	87.0; November 2021	yes (version in mine: 87.0; November 2021)	0
+huge-gwas	February 2022	yes (version in mine: February 2022)	0
+protein-atlas	21.0; November 2021	yes (version in mine: 21.0; November 2021)	0
+protein-atlas-rna	21.0; November 2021	yes (version in mine: 21.0; November 2021)	0
+gtex	8; July 2019	yes (version in mine: 8; July 2019)	0
+GTEx RNA-Seq Data	8; July 2019	yes (version in mine: 8; July 2019)	0
+hpo	February 2022	yes (version in mine: February 2022)	0
+hpo-annotation	February 2022	yes (version in mine: February 2022)	5423
+clinvar	February 2022	yes (version in mine: February 2022)	0
+hgnc	February 2022	yes (version in mine: February 2022)	0
+mgi-identifiers	6.17; February 2022	yes (version in mine: 6.17; February 2022)	0
+mgi-alleles	6.17; February 2022	yes (version in mine: 6.17; February 2022)	4452
+so	February 2022	yes (version in mine: February 2022)	0
+psi-mi-ontology	February 2022	yes (version in mine: February 2022)	0
+rgd-identifiers	February 2022	yes (version in mine: February 2022)	0
+mammalian-phenotype-ontology	February 2022	yes (version in mine: February 2022)	0
+go	February 2022	yes (version in mine: February 2022)	0
+go-annotation	February 2022	yes (version in mine: February 2022)	0
+orphanet	February 2022	yes (version in mine: February 2022)	11645
+disgenet-disease-associations	Version 7; May 2021	yes (version in mine: Version 7; May 2021)	0
+depmap-expression	May 2021	yes (version in mine: May 2021)	0
+depmap-sample-info	May 2021	yes (version in mine: May 2021)	0
