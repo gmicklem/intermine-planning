@@ -124,7 +124,7 @@ sbx policy allow network gtexportal.org,www.bgee.org,jun2026.archive.ensembl.org
 
 ## Requested, not yet allowed
 
-- `eutils.ncbi.nlm.nih.gov` (20 Nov 2026): NCBI E-utilities. NEEDED: the stock sources update-publications
+- `eutils.ncbi.nlm.nih.gov` (ALLOWED 20 Nov 2026, checked: HTTP 200; add on a new machine too): NCBI E-utilities. Needed: the stock sources update-publications
   (titles, authors and journals of publications) and entrez-organism (organism names) call it during a
   mine build; they are wired but cannot run until it is allowed.
   `sbx policy allow network eutils.ncbi.nlm.nih.gov`

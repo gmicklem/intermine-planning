@@ -80,6 +80,25 @@ Status words: **open** (nobody is on it), **in progress** (bead named), **answer
   load and show the data, and, if not, what replaces it for the disease tool (Orphanet and HPO are
   already loaded).
 
+### 9. DepMap: can its data go into the HumanMine build? (20 Nov 2026)
+
+**Why it matters.** HumanMine has three DepMap sources; the portal's terms page blocks automated readers.
+
+**What is known.** Gos read https://depmap.org/portal/terms/ in a browser on 20 Nov 2026. In short:
+- Research use is free. Commercial use is not permitted (sale, incorporation into a product, training AI
+  models other than for internal research).
+- Attribution: acknowledge the Broad Institute with the wording DepMap gives for each data set.
+- **Rehosting is allowed on conditions:** whoever rehosts must keep to the terms, require their users to
+  keep to them, and repost the terms in full.
+- No attempt to identify data subjects.
+- The terms can change; the page carries the date of the last revision.
+
+**What a good answer contains.** A decision from Gos: is a mine that shows DepMap data "rehosting", and
+if so, is a data-source page carrying the full terms, plus a non-commercial notice on the DataSet
+licence, acceptable for HumanMine (whose other data are mostly open)? Also the per-file licence on the
+release's figshare record, which may differ from the portal terms. The two converters need rework for
+DepMap's renamed files in any case.
+
 ## Answered
 
 ### 1. Is there more recent expression data that should replace E-MTAB-62 and E-MTAB-513? (Gos, 18 Nov 2026)
