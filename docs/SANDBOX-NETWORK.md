@@ -124,6 +124,11 @@ sbx policy allow network gtexportal.org,www.bgee.org,jun2026.archive.ensembl.org
 
 ## Requested, not yet allowed
 
+- `forum.depmap.org,api.figshare.com,figshare.com` (20 Nov 2026): the DepMap release announcement and the
+  release archive on figshare, which states a licence per item. Optional; the DepMap portal pages
+  themselves sit behind a bot check and need a person with a browser.
+  `sbx policy allow network forum.depmap.org,api.figshare.com,figshare.com`
+
 - (allowed 20 Nov 2026; add on a new machine too) `archive.apache.org,dlcdn.apache.org`: Apache download sites (Ant, Tomcat). Needed to
   build and test the old 1.8 line; worked around through Maven Central, so optional.
   `sbx policy allow network archive.apache.org,dlcdn.apache.org`
