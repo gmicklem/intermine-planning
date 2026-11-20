@@ -32,6 +32,7 @@ import glob
 import html
 import json
 import os
+import re
 import subprocess
 import sys
 from datetime import datetime, timezone, timedelta
@@ -439,6 +440,46 @@ def collect_runs(planning):
         return rows, None
     except Exception as e:
         return None, "agent-runs.csv unreadable: %s" % e
+
+
+# ------------------------------------------------------- private redaction
+# Some work must not be named in this (public) repository. A private file, kept outside it, lists
+# what to hide: {"label": "...", "agent_regex": "...", "ref_regex": "...", "beads": ["..."]}.
+# agent_regex is matched (ignoring case) against an agent's description and the start of its brief;
+# ref_regex against branch and worktree names. If the private directory exists but the file cannot
+# be read, nothing is written (fail closed).
+REDACT_DIR = os.path.join(os.path.dirname(DEFAULT_PLANNING), ".sandbox-disk", "embargo")
+REDACT_FILE = os.environ.get("DASHBOARD_REDACT_FILE", os.path.join(REDACT_DIR, "im-ct0", "dashboard-redact.json"))
+
+
+def load_redact():
+    if not os.path.isfile(REDACT_FILE):
+        if os.path.isdir(REDACT_DIR):
+            raise RuntimeError("private redaction list missing")
+        return None
+    with open(REDACT_FILE, encoding="utf-8") as fh:
+        cfg = json.load(fh)
+    return {"label": cfg.get("label") or "Embargoed item",
+            "agent": re.compile(cfg["agent_regex"], re.I), "ref": re.compile(cfg["ref_regex"], re.I),
+            "beads": set(cfg.get("beads") or [])}
+
+
+def apply_redact(red, agents, repos, runs):
+    if not red:
+        return
+    for a in agents.get("subs") or []:
+        hay = " ".join([str(a.get("label") or ""), str(a.get("desc") or ""), str(a.get("first_user") or "")[:4000]])
+        if red["agent"].search(hay):
+            a["label"] = red["label"]
+    for r in repos or []:
+        r["branches"] = [b for b in r["branches"] if not red["ref"].search(b["name"])]
+        r["worktrees"] = r["worktrees"][:1] + [
+            w if not red["ref"].search(os.path.basename(w.get("worktree", ""))) else dict(w, worktree="(withheld)")
+            for w in r["worktrees"][1:]]
+    for row in runs or []:
+        if (row.get("beads_id") or "").strip() in red["beads"] or red["agent"].search(row.get("agent_label") or ""):
+            row["agent_label"] = red["label"]
+            row["notes"] = ""
 
 
 # ------------------------------------------------------ document model
@@ -858,6 +899,11 @@ def main(argv=None):
                                                     "errors": ["beads collection failed"]}, "beads")
     repos = safe(lambda: collect_repos(repos_dir), [], "repos")
     runs, runs_err = safe(lambda: collect_runs(planning), (None, "runs collection failed"), "runs")
+    try:
+        apply_redact(load_redact(), agents, repos, runs)
+    except Exception as e:
+        print("dashboard: NOT WRITTEN, redaction failed: %s" % e)
+        return 0
     doc = build_doc(agents, beads, repos, runs, runs_err, planning, args.stall_minutes)
     md, page = render_md(doc), render_html(doc)
     outdir = os.path.join(planning, "status")
