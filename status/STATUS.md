@@ -1,6 +1,6 @@
-# STATUS 2026-11-20 08:48 UTC
+# STATUS 2026-11-20 08:50 UTC
 
-Generated 2026-11-20 08:48 UTC / 2026-11-20 08:48 GMT. Sprint dashboard for the InterMine and BlueGenes maintenance effort.
+Generated 2026-11-20 08:50 UTC / 2026-11-20 08:50 GMT. Sprint dashboard for the InterMine and BlueGenes maintenance effort.
 
 Times are UTC. Agent state: running = unfinished and written to in the last 10 min; stalled = unfinished and silent for 10 min or more; finished = last message ended its turn (no tool call pending).
 
@@ -126,7 +126,7 @@ No open child issues.
 
 | Agent | Model | State | Started | Last | In | Cache | Out |
 |---|---|---|---|---|---|---|---|
-| main session | fable-5-2 | running | 11-17 23:40 | 08:48 | 2.5k | 380.96M | 724.5k |
+| main session | fable-5-2 | running | 11-17 23:40 | 08:50 | 2.5k | 382.42M | 732.3k |
 | Read-only survey of the InterMine Java back… | opus-5-5 | finished | 11-15 00:18 | 11-15 00:20 | 42 | 1.05M | 9.0k |
 | Read-only survey of BlueGenes, the ClojureS… | opus-5-5 | finished | 11-15 00:18 | 11-15 00:20 | 22 | 347.5k | 8.3k |
 | Read-only survey of four repos under /Users… | opus-5-5 | finished | 11-15 00:18 | 11-15 00:21 | 26 | 863.6k | 7.5k |
@@ -381,7 +381,7 @@ Note: 1332 non-agent .output file(s) skipped (empty or plain-text task output)
 
 | Scope | Model | Msgs | In | Cache rd | Cache wr | Out |
 |---|---|---|---|---|---|---|
-| main | fable-5-2 | 861 | 2.5k | 372.96M | 8.01M | 724.5k |
+| main | fable-5-2 | 871 | 2.5k | 374.40M | 8.02M | 732.3k |
 | subagents | fable-5-1 | 1 | 4 | 712.4k | 3.9k | 428 |
 | subagents | fable-5-2 | 4 | 12 | 2.09M | 699.9k | 1.3k |
 | subagents | haiku-5-5 | 1 | 2 | 0 | 9.4k | 112 |
@@ -400,7 +400,7 @@ Tokens are de-duplicated per API message (streamed records share one message id)
 | intermine | 17 (im-89g.12-511-tes…, (withheld), (withheld)...) | maint/im-89g.1-ci-fix2 | 11-15 06:54 (5d) | - \| ci: fix PostgreSQL 15+ public schema pr… |
 | intermine | 17 (im-89g.12-511-tes…, (withheld), (withheld)...) | maint/im-89g.3-maven-publish | 11-15 09:40 (4d) | - \| docs: add RELEASING.md (version bump, b… |
 | intermine | 17 (im-89g.12-511-tes…, (withheld), (withheld)...) | maint/im-89g.5-ci-actions | 11-15 09:55 (4d) | - \| ci: bump GitHub Actions to current majo… |
-| intermine | 17 (im-89g.12-511-tes…, (withheld), (withheld)...) | maint/im-9n4.28-protein2ipr-ncbifam | 05:15 (3.5h) | - \| [im-9n4.28] protein2ipr: cover NCBIfam … |
+| intermine | 17 (im-89g.12-511-tes…, (withheld), (withheld)...) | maint/im-9n4.28-protein2ipr-ncbifam | 05:15 (3.6h) | - \| [im-9n4.28] protein2ipr: cover NCBIfam … |
 | intermine | 17 (im-89g.12-511-tes…, (withheld), (withheld)...) | maint/im-9n4.28-update-data-sources-keys | 05:21 (3.5h) | - \| [im-9n4.28] update-data-sources: add th… |
 | intermine | 17 (im-89g.12-511-tes…, (withheld), (withheld)...) | maint/im-9n4.45-converter-licence-stamps | 05:26 (3.4h) | - \| [im-9n4.45] interpro-go: DataSet licenc… |
 | intermine | 17 (im-89g.12-511-tes…, (withheld), (withheld)...) | maint/im-9n4.46-converter-fixes | 11-18 21:43 (35.1h) | - \| [im-9n4.46] psi: IntAct DataSet licence… |
@@ -449,18 +449,18 @@ WT = number of git worktrees (extra ones named). Branches shown: maint-2026 and 
 | 05:32 | im-9n4.28 | T3.4 converter fixes + lice… | sonnet | 0 | 0 | 0 | success | [tokens: 217072 total from the task not… |
 | 05:08 | im-9n4.27 | T3.3 remaining sources + im… | sonnet | 0 | 0 | 0 | success | [tokens: 521111 total from the task not… |
 | 03:16 | im-9n4.45 | licences: Ensembl, DepMap, … | sonnet | 0 | 0 | 0 | success | [tokens: 120359 total from the task not… |
-| 03:08 | im-ct0 | Embargoed item | opus | 0 | 0 | 0 | success | |
+| 03:08 | im-ct0 | Embargoed item | opus | 0 | 0 | 0 | success |  |
 | 03:05 | im-9n4.48 | cited-PMID set, scope full,… | opus | 0 | 0 | 0 | success | [tokens: 462989 total from the task not… |
-| 02:50 | im-ct0 | Embargoed item | opus | 0 | 0 | 0 | success | |
-| 02:25 | im-ct0 | Embargoed item | opus | 0 | 0 | 0 | success | |
-| 00:12 | im-ct0 | Embargoed item | opus | 0 | 0 | 0 | success | |
-| 00:06 | im-ct0 | Embargoed item | opus | 0 | 0 | 0 | success | |
+| 02:50 | im-ct0 | Embargoed item | opus | 0 | 0 | 0 | success |  |
+| 02:25 | im-ct0 | Embargoed item | opus | 0 | 0 | 0 | success |  |
+| 00:12 | im-ct0 | Embargoed item | opus | 0 | 0 | 0 | success |  |
+| 00:06 | im-ct0 | Embargoed item | opus | 0 | 0 | 0 | success |  |
 | 11-19 23:46 | im-z8j | remove PhytoMine from regis… | sonnet | 0 | 0 | 0 | success | [tokens: 71213 total from the task noti… |
-| 11-19 23:32 | im-ct0 | Embargoed item | opus | 0 | 0 | 0 | success | |
-| 11-19 21:54 | im-ct0 | Embargoed item | sonnet | 0 | 0 | 0 | success | |
-| 11-19 20:12 | im-ct0 | Embargoed item | opus | 0 | 0 | 0 | success | |
-| 11-19 18:54 | im-ct0 | Embargoed item | opus | 0 | 0 | 0 | success | |
-| 11-19 17:35 | im-ct0 | Embargoed item | opus | 0 | 0 | 0 | success | |
+| 11-19 23:32 | im-ct0 | Embargoed item | opus | 0 | 0 | 0 | success |  |
+| 11-19 21:54 | im-ct0 | Embargoed item | sonnet | 0 | 0 | 0 | success |  |
+| 11-19 20:12 | im-ct0 | Embargoed item | opus | 0 | 0 | 0 | success |  |
+| 11-19 18:54 | im-ct0 | Embargoed item | opus | 0 | 0 | 0 | success |  |
+| 11-19 17:35 | im-ct0 | Embargoed item | opus | 0 | 0 | 0 | success |  |
 | 11-18 23:05 | im-9n4.32 | T1.1b TrEMBL sequences from… | opus | 0 | 0 | 0 | success | [tokens: 527902 total from the task not… |
 | 11-18 22:13 | im-9n4.45 | Licences, second pass | sonnet | 0 | 0 | 0 | success | [tokens: 217855 total from the task not… |
 | 11-18 21:53 | im-9n4.47 | Research: current expressio… | opus | 0 | 0 | 0 | success | [tokens: 243259 total from the task not… |
