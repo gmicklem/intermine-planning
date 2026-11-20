@@ -124,4 +124,10 @@ sbx policy allow network gtexportal.org,www.bgee.org,jun2026.archive.ensembl.org
 
 ## Requested, not yet allowed
 
-(none on 18 Nov 2026, 23:10 UTC)
+- `keyserver.ubuntu.com,keys.openpgp.org` (20 Nov 2026): public key servers; Maven Central checks release
+  signatures against a key published there. `sbx policy allow network keyserver.ubuntu.com,keys.openpgp.org`
+
+(Allowed on 19 Nov 2026, to add on a new machine too:
+`sbx policy allow network central.sonatype.org,dns.google,tomcat.apache.org,httpd.apache.org`
+and, for publishing InterMine releases to Maven Central (20 Nov 2026),
+`sbx policy allow network ossrh-staging-api.central.sonatype.com,central.sonatype.com`)
