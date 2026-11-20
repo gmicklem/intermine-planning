@@ -231,3 +231,5 @@ started_utc,ended_utc,beads_id,agent_label,model,input_tokens,cache_read_tokens,
 2026-11-19T23:46:33+00:00,2026-11-19T23:46:33+00:00,im-z8j,remove PhytoMine from registry,sonnet,0,0,0,0,success,[tokens: 71213 total from the task notification] merged af0a28f; CI run 44640332866
 2026-11-20T00:06:24+00:00,2026-11-20T00:06:24+00:00,im-ct0,embargoed item,opus,0,0,0,0,success,
 2026-11-20T00:12:46+00:00,2026-11-20T00:12:46+00:00,im-ct0,embargoed item,opus,0,0,0,0,success,
+2026-11-20T02:25:16+00:00,2026-11-20T02:25:16+00:00,im-ct0,embargoed item,opus,0,0,0,0,success,
+2026-11-20T02:50:15+00:00,2026-11-20T02:50:15+00:00,im-ct0,embargoed item,opus,0,0,0,0,success,
