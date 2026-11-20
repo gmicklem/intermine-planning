@@ -72,3 +72,11 @@ InterMine gate on `maint/im-9n4.56-rebuild-fixes` (4 converter commits), merge t
 im-9n4.54 and im-9n4.56; merge the im-9n4.55 worker's branch (Ensembl joined by cross-reference, code only) when
 it reports. Public status pages are generated through a private redaction list: see the private restart prompt
 before changing `scripts/dashboard.py` or naming agents, branches or runs for the embargoed item.
+
+**20 Nov evening (LOG checkpoint 30).** The paragraph above is done: all merged. The ut demo is now rebuilt with
+`repos/.sandbox-disk/rdfc2im/drive-ut-main.sh` + `fb-env-ut-main.sh` (WORKTREE = the rdfc2im integration worktree).
+Gene flanking regions are dropped from the build (Gos); the public template `All_data_sources` (category Metadata,
+linked from the home page) shows year, title, PubMed id and sorts by data source. The demo BlueGenes on 15001 is a
+jar on the sandbox (port 15011, `/home/agent/taskhomes/im-bg-serve/start-15011.sh`), not a container. Open:
+im-9n4.61 BlueGenes pin bump (branch `maint/im-9n4.61-pubmed-link-pin`) if not merged; queue im-9n4.53, .51, .58.
+`worktrees` is a link into `repos/.sandbox-disk/worktrees` (planning CLAUDE.md says how to re-create it).
