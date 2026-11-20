@@ -39,3 +39,9 @@ metadata:
   with more memory, which wipes the sandbox home and these notes; it was caught just in time. The
   hourly status loop now saves them too. Large scratch goes under `repos/.sandbox-disk/scratch/<task>/`
   (his instruction: scratch inside the repos directory, cleaned up at the end of the session).
+
+**Full paths (Gos, 19 Nov 2026):** "Please always give full paths": when naming a file for him, write the
+complete absolute path (/Users/gos/claude_projects/update_intermine_planning/...), never a path relative
+to a folder mentioned earlier. **Why:** he could not find a file given as a relative path under the hidden
+`.sandbox-disk` folder. **How to apply:** every file reference in messages to him; note that folders starting
+with a dot are hidden in Finder (Cmd+Shift+. shows them).
