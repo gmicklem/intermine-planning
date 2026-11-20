@@ -69,6 +69,17 @@ Status words: **open** (nobody is on it), **in progress** (bead named), **answer
   repository. Gos reviewed and accepted the replacement grouping on 18 Nov 2026 (Retina under Brain).
   `pubmed_cited`, which the OMIM loader requires, is not an OMIM product.
 
+### 8. What do DisGeNET's current terms allow? (Gos, 20 Nov 2026)
+
+- **Status:** open.
+- **Known:** the plan records "licensing changed (*unverified*)"; decision D-7 treats OMIM, DisGeNET and
+  KEGG as restricted (loaded only from copies Gos supplies, never in a published data asset, skipped on
+  CI). In the demo the DisGeNET source is an empty stub. Nobody in the project has read the current
+  terms at source; www.disgenet.org is not on the sandbox allow list.
+- **A good answer:** the current licence and tiers read at source, whether a public academic mine may
+  load and show the data, and, if not, what replaces it for the disease tool (Orphanet and HPO are
+  already loaded).
+
 ## Answered
 
 ### 1. Is there more recent expression data that should replace E-MTAB-62 and E-MTAB-513? (Gos, 18 Nov 2026)
