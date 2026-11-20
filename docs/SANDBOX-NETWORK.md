@@ -150,3 +150,6 @@ sbx policy allow network gtexportal.org,www.bgee.org,jun2026.archive.ensembl.org
 `sbx policy allow network central.sonatype.org,dns.google,tomcat.apache.org,httpd.apache.org`
 and, for publishing InterMine releases to Maven Central (20 Nov 2026),
 `sbx policy allow network ossrh-staging-api.central.sonatype.com,central.sonatype.com`)
+- (allowed 20 Nov 2026; add on a new machine too) `www.psidev.info`, `pubmed.ncbi.nlm.nih.gov`: to read the citation each
+  source asks for (data-set citation links). `sbx policy allow network www.psidev.info,pubmed.ncbi.nlm.nih.gov`
+  pantherdb.org refuses the sandbox at its own end (Cloudflare): a person reads it in a browser.
