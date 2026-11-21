@@ -1,6 +1,6 @@
-# STATUS 2026-11-20 23:00 UTC
+# STATUS 2026-11-21 00:00 UTC
 
-Generated 2026-11-20 23:00 UTC / 2026-11-20 23:00 GMT. Sprint dashboard for the InterMine and BlueGenes maintenance effort.
+Generated 2026-11-21 00:00 UTC / 2026-11-21 00:00 GMT. Sprint dashboard for the InterMine and BlueGenes maintenance effort.
 
 Times are UTC. Agent state: running = unfinished and written to in the last 10 min; stalled = unfinished and silent for 10 min or more; finished = last message ended its turn (no tool call pending).
 
@@ -125,7 +125,7 @@ No open child issues.
 
 | Agent | Model | State | Started | Last | In | Cache | Out |
 |---|---|---|---|---|---|---|---|
-| main session | fable-5-2 | running | 11-17 23:40 | 22:59 | 2.9k | 420.91M | 847.5k |
+| main session | fable-5-2 | running | 11-17 23:40 | 11-20 23:59 | 2.9k | 420.91M | 847.5k |
 | Read-only survey of the InterMine Java back… | opus-5-5 | finished | 11-15 00:18 | 11-15 00:20 | 42 | 1.05M | 9.0k |
 | Read-only survey of BlueGenes, the ClojureS… | opus-5-5 | finished | 11-15 00:18 | 11-15 00:20 | 22 | 347.5k | 8.3k |
 | Read-only survey of four repos under /Users… | opus-5-5 | finished | 11-15 00:18 | 11-15 00:21 | 26 | 863.6k | 7.5k |
@@ -203,7 +203,7 @@ No open child issues.
 | You are a worker in the InterMine maintenan… | sonnet-5-5 | finished | 11-15 22:56 | 11-15 23:12 | 140 | 6.50M | 39.4k |
 | You are a worker in the InterMine maintenan… | sonnet-5-5 | finished | 11-15 23:14 | 11-15 23:23 | 38 | 964.4k | 12.3k |
 | You are a worker in the InterMine/BlueGenes… | sonnet-5-5 | finished | 11-15 23:17 | 11-16 04:23 | 94 | 3.66M | 19.3k |
-| You are a worker in the InterMine maintenan… | sonnet-5-5 | stalled 4d | 11-15 23:24 | 11-15 23:47 | 30 | 1.11M | 13.5k |
+| You are a worker in the InterMine maintenan… | sonnet-5-5 | stalled 5d | 11-15 23:24 | 11-15 23:47 | 30 | 1.11M | 13.5k |
 | You are a worker in the InterMine maintenan… | sonnet-5-5 | finished | 11-15 23:48 | 11-16 00:01 | 62 | 1.95M | 13.6k |
 | You are a worker in the InterMine/BlueGenes… | opus-5-5 | finished | 11-15 23:51 | 11-16 01:23 | 248 | 19.84M | 66.2k |
 | You are a worker in the InterMine maintenan… | sonnet-5-5 | finished | 11-16 00:03 | 11-16 00:14 | 88 | 3.14M | 23.5k |
@@ -363,27 +363,27 @@ No open child issues.
 | Embargoed item | opus-5-5 | finished | 11-19 18:54 | 11-19 19:56 | 340 | 32.96M | 90.9k |
 | Embargoed item | sonnet-5-5 | finished | 11-19 21:46 | 11-19 21:54 | 44 | 1.12M | 6.3k |
 | Embargoed item | opus-5-5 | finished | 11-19 23:01 | 11-19 23:32 | 228 | 25.64M | 142.8k |
-| Embargoed item | opus-5-5 | finished | 11-19 23:44 | 00:12 | 160 | 9.82M | 37.2k |
+| Embargoed item | opus-5-5 | finished | 11-19 23:44 | 11-20 00:12 | 160 | 9.82M | 37.2k |
 | Embargoed item | sonnet-5-5 | finished | 11-19 23:44 | 11-19 23:45 | 28 | 781.2k | 7.0k |
-| Embargoed item | opus-5-5 | finished | 11-19 23:45 | 00:05 | 192 | 18.43M | 119.1k |
-| Embargoed item | opus-5-5 | finished | 00:34 | 02:24 | 320 | 16.45M | 51.2k |
-| Embargoed item | opus-5-5 | finished | 02:22 | 03:07 | 610 | 80.05M | 168.3k |
-| rdfc2im: PMID scope bug, full mode, live te… | opus-5-5 | finished | 02:30 | 03:02 | 400 | 55.65M | 152.4k |
-| Read Ensembl and DepMap licences at source | sonnet-5-5 | finished | 03:06 | 03:14 | 106 | 4.59M | 27.1k |
-| T3.3: wire remaining HumanMine sources | sonnet-5-5 | finished | 03:09 | 05:06 | 574 | 87.51M | 194.0k |
-| Embargoed item | sonnet-5-5 | finished | 05:09 | 05:30 | 270 | 18.60M | 72.3k |
-| rdfc2im: drop workarounds, licences, rebuil… | sonnet-5-5 | finished | 05:33 | 06:50 | 412 | 43.55M | 112.7k |
-| Add E-utilities sources to mine | sonnet-5-5 | finished | 09:00 | 09:46 | 234 | 14.47M | 46.1k |
-| Data sets from what build loads | opus-5-5 | finished | 09:01 | 09:23 | 306 | 36.86M | 114.2k |
-| Find GitHub purge request route | haiku-5-5 | finished | 09:06 | 09:06 | 4 | 13.1k | 1.5k |
-| Fix blockers and full rebuild | opus-5-5 | finished | 09:50 | 12:19 | 580 | 81.40M | 171.3k |
-| You are finding, for several biological dat… | opus-5-5 | finished | 10:37 | 10:42 | 92 | 3.77M | 11.9k |
-| You are finding, for several biological dat… | opus-5-5 | finished | 10:37 | 10:42 | 106 | 3.27M | 13.9k |
-| You are finding, for several biological dat… | opus-5-5 | finished | 10:38 | 10:47 | 142 | 7.34M | 33.1k |
-| Ensembl join by cross-reference | opus-5-5 | finished | 12:55 | 13:10 | 202 | 16.95M | 82.0k |
-| Ensembl panel, notes, rebuild | opus-5-5 | finished | 14:25 | 15:46 | 440 | 65.41M | 149.8k |
-| All data sources template | opus-5-5 | finished | 15:11 | 15:59 | 288 | 23.87M | 73.1k |
-| PubMed id cell link (im-9n4.61) | opus-5-5 | finished | 17:46 | 18:20 | 194 | 10.27M | 35.7k |
+| Embargoed item | opus-5-5 | finished | 11-19 23:45 | 11-20 00:05 | 192 | 18.43M | 119.1k |
+| Embargoed item | opus-5-5 | finished | 11-20 00:34 | 11-20 02:24 | 320 | 16.45M | 51.2k |
+| Embargoed item | opus-5-5 | finished | 11-20 02:22 | 11-20 03:07 | 610 | 80.05M | 168.3k |
+| rdfc2im: PMID scope bug, full mode, live te… | opus-5-5 | finished | 11-20 02:30 | 11-20 03:02 | 400 | 55.65M | 152.4k |
+| Read Ensembl and DepMap licences at source | sonnet-5-5 | finished | 11-20 03:06 | 11-20 03:14 | 106 | 4.59M | 27.1k |
+| T3.3: wire remaining HumanMine sources | sonnet-5-5 | finished | 11-20 03:09 | 11-20 05:06 | 574 | 87.51M | 194.0k |
+| Embargoed item | sonnet-5-5 | finished | 11-20 05:09 | 11-20 05:30 | 270 | 18.60M | 72.3k |
+| rdfc2im: drop workarounds, licences, rebuil… | sonnet-5-5 | finished | 11-20 05:33 | 11-20 06:50 | 412 | 43.55M | 112.7k |
+| Add E-utilities sources to mine | sonnet-5-5 | finished | 11-20 09:00 | 11-20 09:46 | 234 | 14.47M | 46.1k |
+| Data sets from what build loads | opus-5-5 | finished | 11-20 09:01 | 11-20 09:23 | 306 | 36.86M | 114.2k |
+| Find GitHub purge request route | haiku-5-5 | finished | 11-20 09:06 | 11-20 09:06 | 4 | 13.1k | 1.5k |
+| Fix blockers and full rebuild | opus-5-5 | finished | 11-20 09:50 | 11-20 12:19 | 580 | 81.40M | 171.3k |
+| You are finding, for several biological dat… | opus-5-5 | finished | 11-20 10:37 | 11-20 10:42 | 92 | 3.77M | 11.9k |
+| You are finding, for several biological dat… | opus-5-5 | finished | 11-20 10:37 | 11-20 10:42 | 106 | 3.27M | 13.9k |
+| You are finding, for several biological dat… | opus-5-5 | finished | 11-20 10:38 | 11-20 10:47 | 142 | 7.34M | 33.1k |
+| Ensembl join by cross-reference | opus-5-5 | finished | 11-20 12:55 | 11-20 13:10 | 202 | 16.95M | 82.0k |
+| Ensembl panel, notes, rebuild | opus-5-5 | finished | 11-20 14:25 | 11-20 15:46 | 440 | 65.41M | 149.8k |
+| All data sources template | opus-5-5 | finished | 11-20 15:11 | 11-20 15:59 | 288 | 23.87M | 73.1k |
+| PubMed id cell link (im-9n4.61) | opus-5-5 | finished | 11-20 17:46 | 11-20 18:20 | 194 | 10.27M | 35.7k |
 
 Note: 1422 non-agent .output file(s) skipped (empty or plain-text task output)
 
@@ -404,17 +404,17 @@ Tokens are de-duplicated per API message (streamed records share one message id)
 
 | Repo | WT | Branch | Last commit | vs dev \| subject |
 |---|---|---|---|---|
-| intermine | 18 (im-89g.12-511-tes…, im-9n4.56-rebuild…, (withheld)...) | maint-2026 | 14:32 (8.5h) | ahead 319 vs dev \| Merge maint/im-9n4.56-rebuild-fixes: up… |
+| intermine | 18 (im-89g.12-511-tes…, im-9n4.56-rebuild…, (withheld)...) | maint-2026 | 11-20 14:32 (9.5h) | ahead 319 vs dev \| Merge maint/im-9n4.56-rebuild-fixes: up… |
 | intermine | 18 (im-89g.12-511-tes…, im-9n4.56-rebuild…, (withheld)...) | maint/im-89g.1-ci-actions | 11-15 04:45 (5d) | - \| docs: update README badges, PR template… |
 | intermine | 18 (im-89g.12-511-tes…, im-9n4.56-rebuild…, (withheld)...) | maint/im-89g.1-ci-fix | 11-15 06:28 (5d) | - \| ci: stop using sudo -E -u postgres; con… |
 | intermine | 18 (im-89g.12-511-tes…, im-9n4.56-rebuild…, (withheld)...) | maint/im-89g.1-ci-fix2 | 11-15 06:54 (5d) | - \| ci: fix PostgreSQL 15+ public schema pr… |
 | intermine | 18 (im-89g.12-511-tes…, im-9n4.56-rebuild…, (withheld)...) | maint/im-89g.3-maven-publish | 11-15 09:40 (5d) | - \| docs: add RELEASING.md (version bump, b… |
 | intermine | 18 (im-89g.12-511-tes…, im-9n4.56-rebuild…, (withheld)...) | maint/im-89g.5-ci-actions | 11-15 09:55 (5d) | - \| ci: bump GitHub Actions to current majo… |
-| intermine | 18 (im-89g.12-511-tes…, im-9n4.56-rebuild…, (withheld)...) | maint/im-9n4.28-protein2ipr-ncbifam | 05:15 (17.7h) | - \| [im-9n4.28] protein2ipr: cover NCBIfam … |
-| intermine | 18 (im-89g.12-511-tes…, im-9n4.56-rebuild…, (withheld)...) | maint/im-9n4.28-update-data-sources-keys | 05:21 (17.6h) | - \| [im-9n4.28] update-data-sources: add th… |
-| intermine | 18 (im-89g.12-511-tes…, im-9n4.56-rebuild…, (withheld)...) | maint/im-9n4.45-converter-licence-stamps | 05:26 (17.6h) | - \| [im-9n4.45] interpro-go: DataSet licenc… |
+| intermine | 18 (im-89g.12-511-tes…, im-9n4.56-rebuild…, (withheld)...) | maint/im-9n4.28-protein2ipr-ncbifam | 11-20 05:15 (18.7h) | - \| [im-9n4.28] protein2ipr: cover NCBIfam … |
+| intermine | 18 (im-89g.12-511-tes…, im-9n4.56-rebuild…, (withheld)...) | maint/im-9n4.28-update-data-sources-keys | 11-20 05:21 (18.6h) | - \| [im-9n4.28] update-data-sources: add th… |
+| intermine | 18 (im-89g.12-511-tes…, im-9n4.56-rebuild…, (withheld)...) | maint/im-9n4.45-converter-licence-stamps | 11-20 05:26 (18.6h) | - \| [im-9n4.45] interpro-go: DataSet licenc… |
 | intermine | 18 (im-89g.12-511-tes…, im-9n4.56-rebuild…, (withheld)...) | maint/im-9n4.46-converter-fixes | 11-18 21:43 (2d) | - \| [im-9n4.46] psi: IntAct DataSet licence… |
-| intermine | 18 (im-89g.12-511-tes…, im-9n4.56-rebuild…, (withheld)...) | maint/im-9n4.56-rebuild-fixes | 10:04 (12.9h) | - \| [im-9n4.54] interpro and go-annotation … |
+| intermine | 18 (im-89g.12-511-tes…, im-9n4.56-rebuild…, (withheld)...) | maint/im-9n4.56-rebuild-fixes | 11-20 10:04 (13.9h) | - \| [im-9n4.54] interpro and go-annotation … |
 | intermine | 18 (im-89g.12-511-tes…, im-9n4.56-rebuild…, (withheld)...) | maint/im-ee7.1-gradle-6 | 11-15 03:57 (5d) | - \| build: default to Gradle 6.9.4 and veri… |
 | intermine | 18 (im-89g.12-511-tes…, im-9n4.56-rebuild…, (withheld)...) | maint/im-ee7.2-batch-bio | 11-15 09:32 (5d) | - \| build(bio): fold copyMineProperties int… |
 | intermine | 18 (im-89g.12-511-tes…, im-9n4.56-rebuild…, (withheld)...) | maint/im-ee7.2-batch-intermine | 11-15 06:21 (5d) | - \| intermine: convert all build files to G… |
@@ -429,7 +429,7 @@ Tokens are de-duplicated per API message (streamed records share one message id)
 | intermine | 18 (im-89g.12-511-tes…, im-9n4.56-rebuild…, (withheld)...) | maint/im-jqz.7-weak-deps | 11-15 05:51 (5d) | - \| deps: remove orphan vendored bobo-brows… |
 | intermine | 18 (im-89g.12-511-tes…, im-9n4.56-rebuild…, (withheld)...) | maint/im-jqz.8-flaky-tests | 11-15 07:24 (5d) | - \| integrate: make DataTracker.clear() saf… |
 | intermine | 18 (im-89g.12-511-tes…, im-9n4.56-rebuild…, (withheld)...) | maint/im-rkn.3-baseline | 06-12 11:01 (161d) | - \| Merge pull request #2460 from intermine… |
-| bluegenes | 4 (im-9n4.61-pubmed-…, im-7os.62-reagent…, im-7os.63-reagent…) | maint-2026 | 18:56 (4.1h) | ahead 156 vs dev \| Merge maint/im-9n4.61-pubmed-link-pin: … |
+| bluegenes | 4 (im-9n4.61-pubmed-…, im-7os.62-reagent…, im-7os.63-reagent…) | maint-2026 | 11-20 18:56 (5.1h) | ahead 156 vs dev \| Merge maint/im-9n4.61-pubmed-link-pin: … |
 | bluegenes | 4 (im-9n4.61-pubmed-…, im-7os.62-reagent…, im-7os.63-reagent…) | maint/im-28e.2-cypress-13 | 11-15 11:09 (5d) | - \| docs, cypress: how to run the suite; ta… |
 | bluegenes | 4 (im-9n4.61-pubmed-…, im-7os.62-reagent…, im-7os.63-reagent…) | maint/im-28e.3-gh-actions | 11-15 05:31 (5d) | - \| docs: CI badge and Continuous integrati… |
 | bluegenes | 4 (im-9n4.61-pubmed-…, im-7os.62-reagent…, im-7os.63-reagent…) | maint/im-7os.1-shadow-cljs | 11-15 05:17 (5d) | - \| comments: drop stale lein/figwheel refe… |
@@ -441,13 +441,13 @@ Tokens are de-duplicated per API message (streamed records share one message id)
 | bluegenes | 4 (im-9n4.61-pubmed-…, im-7os.62-reagent…, im-7os.63-reagent…) | maint/im-7os.63-reagent-snap2 | 11-16 18:40 (4d) | - \| Merge maint/im-89g.30-changelog: CHANGE… |
 | bluegenes | 4 (im-9n4.61-pubmed-…, im-7os.62-reagent…, im-7os.63-reagent…) | maint/im-89g.5-ci-actions | 11-15 09:55 (5d) | - \| ci: bump GitHub Actions to current majo… |
 | bluegenes | 4 (im-9n4.61-pubmed-…, im-7os.62-reagent…, im-7os.63-reagent…) | maint/im-9n4.44-demo-data | 11-18 19:27 (2d) | - \| [im-9n4.44] nightly: pin rdfc2im to be8… |
-| bluegenes | 4 (im-9n4.61-pubmed-…, im-7os.62-reagent…, im-7os.63-reagent…) | maint/im-9n4.61-pubmed-link-pin | 18:04 (4.9h) | - \| [im-9n4.61] im-tables b70e43c: a PubMed… |
+| bluegenes | 4 (im-9n4.61-pubmed-…, im-7os.62-reagent…, im-7os.63-reagent…) | maint/im-9n4.61-pubmed-link-pin | 11-20 18:04 (5.9h) | - \| [im-9n4.61] im-tables b70e43c: a PubMed… |
 | bluegenes | 4 (im-9n4.61-pubmed-…, im-7os.62-reagent…, im-7os.63-reagent…) | maint/im-rkn.4-baseline | 01-26 21:58 (663d) | - \| dynamic favicon slows down dx |
 | imcljs | 1 | maint-2026 | 11-17 18:48 (3d) | ahead 15 vs dev \| Merge maint/im-8dd.11-ci: GitHub Action… |
 | imcljs | 1 | maint/im-7os.3-imcljs-deps-edn | 11-15 02:46 (5d) | - \| deps: bump clj-http 3.10.0 to 3.13.0 [i… |
-| im-tables-3 | 2 (im-9n4.61-pubmed-…) | maint-2026 | 18:04 (4.9h) | ahead 49 vs dev \| Merge maint/im-9n4.61-pubmed-link: a Pu… |
+| im-tables-3 | 2 (im-9n4.61-pubmed-…) | maint-2026 | 11-20 18:04 (5.9h) | ahead 49 vs dev \| Merge maint/im-9n4.61-pubmed-link: a Pu… |
 | im-tables-3 | 2 (im-9n4.61-pubmed-…) | maint/im-7os.3-im-tables-deps-edn | 11-15 12:05 (5d) | - \| test: lein kaocha honours IM_TABLES_SER… |
-| im-tables-3 | 2 (im-9n4.61-pubmed-…) | maint/im-9n4.61-pubmed-link | 17:53 (5.1h) | - \| [im-9n4.61] A Publication.pubMedId cell… |
+| im-tables-3 | 2 (im-9n4.61-pubmed-…) | maint/im-9n4.61-pubmed-link | 11-20 17:53 (6.1h) | - \| [im-9n4.61] A Publication.pubMedId cell… |
 | bluegenes-tool-store | 1 | maint-2026 | 11-17 18:48 (3d) | ahead 22 vs master \| Merge maint/im-8dd.11-ci: GitHub Action… |
 | bluegenes-tool-store | 1 | maint/im-7os.3-tool-store-deps-edn | 11-15 02:33 (5d) | - \| deps: remove unused ring/ring-defaults … |
 | bluegenes-tool-store | 1 | maint/im-7os.6-tool-store-fixes | 11-15 09:48 (5d) | - \| deps: bump commons-compress 1.19 -> 1.2… |
@@ -458,24 +458,24 @@ WT = number of git worktrees (extra ones named). Branches shown: maint-2026 and 
 
 | Start | Bead | Agent | Model | In | Cache | Out | Outcome | Notes |
 |---|---|---|---|---|---|---|---|---|
-| 18:06 | im-9n4.61 | PubMed id cell links to Pub… | opus | 0 | 0 | 0 | success | [tokens: 166763 total from the task not… |
-| 15:46 | im-9n4.59 | Ensembl and GWAS panel by c… | opus | 0 | 0 | 0 | success | [tokens: 451420 total from the task not… |
-| 15:24 | im-9n4.60 | All data sources template, … | opus | 0 | 0 | 0 | success | [tokens: 216923 total from the task not… |
-| 13:10 | im-9n4.55 | Ensembl joined by cross-ref… | opus | 0 | 0 | 0 | success | [tokens: 252852 total from the task not… |
-| 12:19 | im-9n4.56 | citation run | opus | 0 | 0 | 0 | success | [tokens: 465547 cumulative] run 2,126 s… |
-| 10:56 | im-9n4.56 | blockers fixed, Pfam, citat… | opus | 0 | 0 | 0 | success | [tokens: 428339 total from the task not… |
-| 09:46 | im-9n4.27 | E-utilities sources added t… | sonnet | 0 | 0 | 0 | success | [tokens: 183337 total from the task not… |
-| 09:23 | im-9n4.52 | data-set versions from the … | opus | 0 | 0 | 0 | success | [tokens: 363593 total from the task not… |
-| 06:53 | im-9n4.50 | drop workarounds, licence p… | sonnet | 0 | 0 | 0 | success | [tokens: 359214 total from the task not… |
-| 05:32 | im-9n4.28 | T3.4 converter fixes + lice… | sonnet | 0 | 0 | 0 | success | [tokens: 217072 total from the task not… |
-| 05:08 | im-9n4.27 | T3.3 remaining sources + im… | sonnet | 0 | 0 | 0 | success | [tokens: 521111 total from the task not… |
-| 03:16 | im-9n4.45 | licences: Ensembl, DepMap, … | sonnet | 0 | 0 | 0 | success | [tokens: 120359 total from the task not… |
-| 03:08 | im-ct0 | Embargoed item | opus | 0 | 0 | 0 | success |  |
-| 03:05 | im-9n4.48 | cited-PMID set, scope full,… | opus | 0 | 0 | 0 | success | [tokens: 462989 total from the task not… |
-| 02:50 | im-ct0 | Embargoed item | opus | 0 | 0 | 0 | success |  |
-| 02:25 | im-ct0 | Embargoed item | opus | 0 | 0 | 0 | success |  |
-| 00:12 | im-ct0 | Embargoed item | opus | 0 | 0 | 0 | success |  |
-| 00:06 | im-ct0 | Embargoed item | opus | 0 | 0 | 0 | success |  |
+| 11-20 18:06 | im-9n4.61 | PubMed id cell links to Pub… | opus | 0 | 0 | 0 | success | [tokens: 166763 total from the task not… |
+| 11-20 15:46 | im-9n4.59 | Ensembl and GWAS panel by c… | opus | 0 | 0 | 0 | success | [tokens: 451420 total from the task not… |
+| 11-20 15:24 | im-9n4.60 | All data sources template, … | opus | 0 | 0 | 0 | success | [tokens: 216923 total from the task not… |
+| 11-20 13:10 | im-9n4.55 | Ensembl joined by cross-ref… | opus | 0 | 0 | 0 | success | [tokens: 252852 total from the task not… |
+| 11-20 12:19 | im-9n4.56 | citation run | opus | 0 | 0 | 0 | success | [tokens: 465547 cumulative] run 2,126 s… |
+| 11-20 10:56 | im-9n4.56 | blockers fixed, Pfam, citat… | opus | 0 | 0 | 0 | success | [tokens: 428339 total from the task not… |
+| 11-20 09:46 | im-9n4.27 | E-utilities sources added t… | sonnet | 0 | 0 | 0 | success | [tokens: 183337 total from the task not… |
+| 11-20 09:23 | im-9n4.52 | data-set versions from the … | opus | 0 | 0 | 0 | success | [tokens: 363593 total from the task not… |
+| 11-20 06:53 | im-9n4.50 | drop workarounds, licence p… | sonnet | 0 | 0 | 0 | success | [tokens: 359214 total from the task not… |
+| 11-20 05:32 | im-9n4.28 | T3.4 converter fixes + lice… | sonnet | 0 | 0 | 0 | success | [tokens: 217072 total from the task not… |
+| 11-20 05:08 | im-9n4.27 | T3.3 remaining sources + im… | sonnet | 0 | 0 | 0 | success | [tokens: 521111 total from the task not… |
+| 11-20 03:16 | im-9n4.45 | licences: Ensembl, DepMap, … | sonnet | 0 | 0 | 0 | success | [tokens: 120359 total from the task not… |
+| 11-20 03:08 | im-ct0 | Embargoed item | opus | 0 | 0 | 0 | success |  |
+| 11-20 03:05 | im-9n4.48 | cited-PMID set, scope full,… | opus | 0 | 0 | 0 | success | [tokens: 462989 total from the task not… |
+| 11-20 02:50 | im-ct0 | Embargoed item | opus | 0 | 0 | 0 | success |  |
+| 11-20 02:25 | im-ct0 | Embargoed item | opus | 0 | 0 | 0 | success |  |
+| 11-20 00:12 | im-ct0 | Embargoed item | opus | 0 | 0 | 0 | success |  |
+| 11-20 00:06 | im-ct0 | Embargoed item | opus | 0 | 0 | 0 | success |  |
 | 11-19 23:46 | im-z8j | remove PhytoMine from regis… | sonnet | 0 | 0 | 0 | success | [tokens: 71213 total from the task noti… |
 | 11-19 23:32 | im-ct0 | Embargoed item | opus | 0 | 0 | 0 | success |  |
 
