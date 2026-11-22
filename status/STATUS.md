@@ -1,6 +1,6 @@
-# STATUS 2026-11-22 09:59 UTC
+# STATUS 2026-11-22 10:00 UTC
 
-Generated 2026-11-22 09:59 UTC / 2026-11-22 09:59 GMT. Sprint dashboard for the InterMine and BlueGenes maintenance effort.
+Generated 2026-11-22 10:00 UTC / 2026-11-22 10:00 GMT. Sprint dashboard for the InterMine and BlueGenes maintenance effort.
 
 Times are UTC. Agent state: running = unfinished and written to in the last 10 min; stalled = unfinished and silent for 10 min or more; finished = last message ended its turn (no tool call pending).
 
@@ -404,7 +404,7 @@ Tokens are de-duplicated per API message (streamed records share one message id)
 
 | Repo | WT | Branch | Last commit | vs dev \| subject |
 |---|---|---|---|---|
-| intermine | 18 (im-89g.12-511-tes…, im-9n4.56-rebuild…, (withheld)...) | maint-2026 | 11-20 14:32 (43.4h) | ahead 319 vs dev \| Merge maint/im-9n4.56-rebuild-fixes: up… |
+| intermine | 18 (im-89g.12-511-tes…, im-9n4.56-rebuild…, (withheld)...) | maint-2026 | 11-20 14:32 (43.5h) | ahead 319 vs dev \| Merge maint/im-9n4.56-rebuild-fixes: up… |
 | intermine | 18 (im-89g.12-511-tes…, im-9n4.56-rebuild…, (withheld)...) | maint/im-89g.1-ci-actions | 11-15 04:45 (7d) | - \| docs: update README badges, PR template… |
 | intermine | 18 (im-89g.12-511-tes…, im-9n4.56-rebuild…, (withheld)...) | maint/im-89g.1-ci-fix | 11-15 06:28 (7d) | - \| ci: stop using sudo -E -u postgres; con… |
 | intermine | 18 (im-89g.12-511-tes…, im-9n4.56-rebuild…, (withheld)...) | maint/im-89g.1-ci-fix2 | 11-15 06:54 (7d) | - \| ci: fix PostgreSQL 15+ public schema pr… |
