@@ -1,6 +1,6 @@
-# STATUS 2026-11-22 21:00 UTC
+# STATUS 2026-11-22 22:00 UTC
 
-Generated 2026-11-22 21:00 UTC / 2026-11-22 21:00 GMT. Sprint dashboard for the InterMine and BlueGenes maintenance effort.
+Generated 2026-11-22 22:00 UTC / 2026-11-22 22:00 GMT. Sprint dashboard for the InterMine and BlueGenes maintenance effort.
 
 Times are UTC. Agent state: running = unfinished and written to in the last 10 min; stalled = unfinished and silent for 10 min or more; finished = last message ended its turn (no tool call pending).
 
@@ -125,7 +125,7 @@ No open child issues.
 
 | Agent | Model | State | Started | Last | In | Cache | Out |
 |---|---|---|---|---|---|---|---|
-| main session | fable-5-2 | idle | 11-17 23:40 | 20:37 | 2.9k | 420.91M | 847.5k |
+| main session | fable-5-2 | idle | 11-17 23:40 | 21:37 | 2.9k | 420.91M | 847.5k |
 | Read-only survey of the InterMine Java back… | opus-5-5 | finished | 11-15 00:18 | 11-15 00:20 | 42 | 1.05M | 9.0k |
 | Read-only survey of BlueGenes, the ClojureS… | opus-5-5 | finished | 11-15 00:18 | 11-15 00:20 | 22 | 347.5k | 8.3k |
 | Read-only survey of four repos under /Users… | opus-5-5 | finished | 11-15 00:18 | 11-15 00:21 | 26 | 863.6k | 7.5k |
@@ -413,7 +413,7 @@ Tokens are de-duplicated per API message (streamed records share one message id)
 | intermine | 18 (im-89g.12-511-tes…, im-9n4.56-rebuild…, (withheld)...) | maint/im-9n4.28-protein2ipr-ncbifam | 11-20 05:15 (2d) | - \| [im-9n4.28] protein2ipr: cover NCBIfam … |
 | intermine | 18 (im-89g.12-511-tes…, im-9n4.56-rebuild…, (withheld)...) | maint/im-9n4.28-update-data-sources-keys | 11-20 05:21 (2d) | - \| [im-9n4.28] update-data-sources: add th… |
 | intermine | 18 (im-89g.12-511-tes…, im-9n4.56-rebuild…, (withheld)...) | maint/im-9n4.45-converter-licence-stamps | 11-20 05:26 (2d) | - \| [im-9n4.45] interpro-go: DataSet licenc… |
-| intermine | 18 (im-89g.12-511-tes…, im-9n4.56-rebuild…, (withheld)...) | maint/im-9n4.46-converter-fixes | 11-18 21:43 (3d) | - \| [im-9n4.46] psi: IntAct DataSet licence… |
+| intermine | 18 (im-89g.12-511-tes…, im-9n4.56-rebuild…, (withheld)...) | maint/im-9n4.46-converter-fixes | 11-18 21:43 (4d) | - \| [im-9n4.46] psi: IntAct DataSet licence… |
 | intermine | 18 (im-89g.12-511-tes…, im-9n4.56-rebuild…, (withheld)...) | maint/im-9n4.56-rebuild-fixes | 11-20 10:04 (2d) | - \| [im-9n4.54] interpro and go-annotation … |
 | intermine | 18 (im-89g.12-511-tes…, im-9n4.56-rebuild…, (withheld)...) | maint/im-ee7.1-gradle-6 | 11-15 03:57 (7d) | - \| build: default to Gradle 6.9.4 and veri… |
 | intermine | 18 (im-89g.12-511-tes…, im-9n4.56-rebuild…, (withheld)...) | maint/im-ee7.2-batch-bio | 11-15 09:32 (7d) | - \| build(bio): fold copyMineProperties int… |
@@ -442,7 +442,7 @@ Tokens are de-duplicated per API message (streamed records share one message id)
 | bluegenes | 4 (im-9n4.61-pubmed-…, im-7os.62-reagent…, im-7os.63-reagent…) | maint/im-89g.5-ci-actions | 11-15 09:55 (7d) | - \| ci: bump GitHub Actions to current majo… |
 | bluegenes | 4 (im-9n4.61-pubmed-…, im-7os.62-reagent…, im-7os.63-reagent…) | maint/im-9n4.44-demo-data | 11-18 19:27 (4d) | - \| [im-9n4.44] nightly: pin rdfc2im to be8… |
 | bluegenes | 4 (im-9n4.61-pubmed-…, im-7os.62-reagent…, im-7os.63-reagent…) | maint/im-9n4.61-pubmed-link-pin | 11-20 18:04 (2d) | - \| [im-9n4.61] im-tables b70e43c: a PubMed… |
-| bluegenes | 4 (im-9n4.61-pubmed-…, im-7os.62-reagent…, im-7os.63-reagent…) | maint/im-rkn.4-baseline | 01-26 21:58 (664d) | - \| dynamic favicon slows down dx |
+| bluegenes | 4 (im-9n4.61-pubmed-…, im-7os.62-reagent…, im-7os.63-reagent…) | maint/im-rkn.4-baseline | 01-26 21:58 (665d) | - \| dynamic favicon slows down dx |
 | imcljs | 1 | maint-2026 | 11-17 18:48 (5d) | ahead 15 vs dev \| Merge maint/im-8dd.11-ci: GitHub Action… |
 | imcljs | 1 | maint/im-7os.3-imcljs-deps-edn | 11-15 02:46 (7d) | - \| deps: bump clj-http 3.10.0 to 3.13.0 [i… |
 | im-tables-3 | 2 (im-9n4.61-pubmed-…) | maint-2026 | 11-20 18:04 (2d) | ahead 49 vs dev \| Merge maint/im-9n4.61-pubmed-link: a Pu… |
