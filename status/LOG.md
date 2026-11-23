@@ -269,3 +269,17 @@ Newest first. One entry per checkpoint (about every 3 hours while unattended).
 - Worktrees moved (Gos asked): `worktrees` in the project directory is a link to `repos/.sandbox-disk/worktrees` on the host mount (CLAUDE.md, sandbox layout). rdfc2im tests now pass through the link (9982f5f).
 - Seen, not fixed: in im-tables a URL-valued cell puts a link inside the cell's own link.
 - Waiting on Gos: citations for PANTHER, NCBI Gene, ClinVar, gene-to-PubMed (browser); DepMap decision; contact addresses for Monday's notices; GitHub Support's answer.
+
+### 23 Nov 2026 ~22:45 UTC: esyN removed (im-jqz.69)
+Gos: esyn.org now serves unrelated (gambling) content; remove every trace. The live BlueGenes tool lists of FlyMine,
+HumanMine and the demo had no esyN tool; bluegenes-tool-store never had it. Removed: the two classic displayer
+classes and JSPs in intermine bio/webapp (maint-2026 930fde0abd; gate passed, CI 45274632955 green after a re-run of
+one job whose JDK download failed its checksum, Checkstyle 45274555249), the struts/tiles/commented webconfig
+entries in flymine (00cbfe26, CI 45276365711) and humanmine (a6fc0e9, CI 45276368717), the unused sample query in
+im-tables-3 (54b540b, CI 45275084779; BlueGenes pin not moved, the change is dead code). The repository
+intermine/bluegenes-esyn-viewer has a deprecation notice and is archived (Gos gave permission for that one
+repository). Local tool copies (port 5001 test server, seven old task homes) deleted. Left: the 2015 RELEASE_NOTES
+line; rdfc2im's SKIP_TOOLS guard. Open for Gos: `npm deprecate @intermine/bluegenes-esyn-viewer` (needs an owner of
+the @intermine npm organisation); FlyMine's public list "esyN demo list" (superuser); AllianceMine's BlueGenes still
+lists the tool (its maintainer knows). The 5.1.1 and 5.0.9 lines still contain the displayer code, switched off by
+default (a mine has to configure it).
