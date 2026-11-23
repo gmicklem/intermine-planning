@@ -1,6 +1,6 @@
-# STATUS 2026-11-23 17:00 UTC
+# STATUS 2026-11-23 18:00 UTC
 
-Generated 2026-11-23 17:00 UTC / 2026-11-23 17:00 GMT. Sprint dashboard for the InterMine and BlueGenes maintenance effort.
+Generated 2026-11-23 18:00 UTC / 2026-11-23 18:00 GMT. Sprint dashboard for the InterMine and BlueGenes maintenance effort.
 
 Times are UTC. Agent state: running = unfinished and written to in the last 10 min; stalled = unfinished and silent for 10 min or more; finished = last message ended its turn (no tool call pending).
 
@@ -125,7 +125,7 @@ No open child issues.
 
 | Agent | Model | State | Started | Last | In | Cache | Out |
 |---|---|---|---|---|---|---|---|
-| main session | fable-5-2 | running | 11-17 23:40 | 16:59 | 3.0k | 423.98M | 863.5k |
+| main session | fable-5-2 | running | 11-17 23:40 | 17:59 | 3.0k | 428.94M | 881.3k |
 | Read-only survey of the InterMine Java back… | opus-5-5 | finished | 11-15 00:18 | 11-15 00:20 | 42 | 1.05M | 9.0k |
 | Read-only survey of BlueGenes, the ClojureS… | opus-5-5 | finished | 11-15 00:18 | 11-15 00:20 | 22 | 347.5k | 8.3k |
 | Read-only survey of four repos under /Users… | opus-5-5 | finished | 11-15 00:18 | 11-15 00:21 | 26 | 863.6k | 7.5k |
@@ -391,7 +391,7 @@ Note: 1422 non-agent .output file(s) skipped (empty or plain-text task output)
 
 | Scope | Model | Msgs | In | Cache rd | Cache wr | Out |
 |---|---|---|---|---|---|---|
-| main | fable-5-2 | 1068 | 3.0k | 414.99M | 9.00M | 863.5k |
+| main | fable-5-2 | 1092 | 3.0k | 419.91M | 9.03M | 881.3k |
 | subagents | fable-5-1 | 1 | 4 | 712.4k | 3.9k | 428 |
 | subagents | fable-5-2 | 4 | 12 | 2.09M | 699.9k | 1.3k |
 | subagents | haiku-5-5 | 3 | 6 | 3.5k | 19.0k | 1.6k |
@@ -447,7 +447,7 @@ Tokens are de-duplicated per API message (streamed records share one message id)
 | imcljs | 1 | maint/im-7os.3-imcljs-deps-edn | 11-15 02:46 (8d) | - \| deps: bump clj-http 3.10.0 to 3.13.0 [i… |
 | im-tables-3 | 2 (im-9n4.61-pubmed-…) | maint-2026 | 11-20 18:04 (2d) | ahead 49 vs dev \| Merge maint/im-9n4.61-pubmed-link: a Pu… |
 | im-tables-3 | 2 (im-9n4.61-pubmed-…) | maint/im-7os.3-im-tables-deps-edn | 11-15 12:05 (8d) | - \| test: lein kaocha honours IM_TABLES_SER… |
-| im-tables-3 | 2 (im-9n4.61-pubmed-…) | maint/im-9n4.61-pubmed-link | 11-20 17:53 (2d) | - \| [im-9n4.61] A Publication.pubMedId cell… |
+| im-tables-3 | 2 (im-9n4.61-pubmed-…) | maint/im-9n4.61-pubmed-link | 11-20 17:53 (3d) | - \| [im-9n4.61] A Publication.pubMedId cell… |
 | bluegenes-tool-store | 1 | maint-2026 | 11-17 18:48 (5d) | ahead 22 vs master \| Merge maint/im-8dd.11-ci: GitHub Action… |
 | bluegenes-tool-store | 1 | maint/im-7os.3-tool-store-deps-edn | 11-15 02:33 (8d) | - \| deps: remove unused ring/ring-defaults … |
 | bluegenes-tool-store | 1 | maint/im-7os.6-tool-store-fixes | 11-15 09:48 (8d) | - \| deps: bump commons-compress 1.19 -> 1.2… |
