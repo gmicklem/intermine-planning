@@ -1,6 +1,6 @@
-# STATUS 2026-11-23 11:49 UTC
+# STATUS 2026-11-23 12:00 UTC
 
-Generated 2026-11-23 11:49 UTC / 2026-11-23 11:49 GMT. Sprint dashboard for the InterMine and BlueGenes maintenance effort.
+Generated 2026-11-23 12:00 UTC / 2026-11-23 12:00 GMT. Sprint dashboard for the InterMine and BlueGenes maintenance effort.
 
 Times are UTC. Agent state: running = unfinished and written to in the last 10 min; stalled = unfinished and silent for 10 min or more; finished = last message ended its turn (no tool call pending).
 
@@ -421,7 +421,7 @@ Tokens are de-duplicated per API message (streamed records share one message id)
 | intermine | 18 (im-89g.12-511-tes…, im-9n4.56-rebuild…, (withheld)...) | maint/im-ee7.2-batch-sources | 11-15 07:16 (8d) | - \| testmine: convert build files to Gradle… |
 | intermine | 18 (im-89g.12-511-tes…, im-9n4.56-rebuild…, (withheld)...) | maint/im-ee7.2-gradle-76-flip | 11-15 10:27 (8d) | - \| build: root testReport tasks use the Gr… |
 | intermine | 18 (im-89g.12-511-tes…, im-9n4.56-rebuild…, (withheld)...) | maint/im-ee7.2-plugin-gradle7 | 11-15 05:06 (8d) | - \| build(plugin): lazy tasks, no init task… |
-| intermine | 18 (im-89g.12-511-tes…, im-9n4.56-rebuild…, (withheld)...) | maint/im-ee7.3-catalog-modules | 11-15 11:52 (7d) | - \| docs: describe the version catalog; the… |
+| intermine | 18 (im-89g.12-511-tes…, im-9n4.56-rebuild…, (withheld)...) | maint/im-ee7.3-catalog-modules | 11-15 11:52 (8d) | - \| docs: describe the version catalog; the… |
 | intermine | 18 (im-89g.12-511-tes…, im-9n4.56-rebuild…, (withheld)...) | maint/im-ee7.3-gradle-814-flip | 11-15 13:27 (7d) | - \| build(plugin): addStrutsConfig no longe… |
 | intermine | 18 (im-89g.12-511-tes…, im-9n4.56-rebuild…, (withheld)...) | maint/im-ee7.3-plugin-gradle8 | 11-15 11:34 (8d) | - \| merge: maint-2026 (ROOTS+TESTRES batch)… |
 | intermine | 18 (im-89g.12-511-tes…, im-9n4.56-rebuild…, (withheld)...) | maint/im-ee7.3-roots-testres | 11-15 11:09 (8d) | - \| build: version catalog gradle/libs.vers… |
@@ -433,7 +433,7 @@ Tokens are de-duplicated per API message (streamed records share one message id)
 | bluegenes | 4 (im-9n4.61-pubmed-…, im-7os.62-reagent…, im-7os.63-reagent…) | maint/im-28e.2-cypress-13 | 11-15 11:09 (8d) | - \| docs, cypress: how to run the suite; ta… |
 | bluegenes | 4 (im-9n4.61-pubmed-…, im-7os.62-reagent…, im-7os.63-reagent…) | maint/im-28e.3-gh-actions | 11-15 05:31 (8d) | - \| docs: CI badge and Continuous integrati… |
 | bluegenes | 4 (im-9n4.61-pubmed-…, im-7os.62-reagent…, im-7os.63-reagent…) | maint/im-7os.1-shadow-cljs | 11-15 05:17 (8d) | - \| comments: drop stale lein/figwheel refe… |
-| bluegenes | 4 (im-9n4.61-pubmed-…, im-7os.62-reagent…, im-7os.63-reagent…) | maint/im-7os.10-npm-advisories | 11-15 11:58 (7d) | - \| deps: override qs to 6.17.1 (same major… |
+| bluegenes | 4 (im-9n4.61-pubmed-…, im-7os.62-reagent…, im-7os.63-reagent…) | maint/im-7os.10-npm-advisories | 11-15 11:58 (8d) | - \| deps: override qs to 6.17.1 (same major… |
 | bluegenes | 4 (im-9n4.61-pubmed-…, im-7os.62-reagent…, im-7os.63-reagent…) | maint/im-7os.18-sibling-deps | 11-15 12:49 (7d) | - \| docs: how the sibling libraries are pin… |
 | bluegenes | 4 (im-9n4.61-pubmed-…, im-7os.62-reagent…, im-7os.63-reagent…) | maint/im-7os.4-cdn-sri | 11-15 11:48 (8d) | - \| script: cdn-sri.sh prints SRI hashes fo… |
 | bluegenes | 4 (im-9n4.61-pubmed-…, im-7os.62-reagent…, im-7os.63-reagent…) | maint/im-7os.5-removals | 11-15 02:59 (8d) | - \| npm: remove unused clipboardy [im-7os.5] |
