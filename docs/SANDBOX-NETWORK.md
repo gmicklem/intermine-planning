@@ -155,3 +155,5 @@ and, for publishing InterMine releases to Maven Central (20 Nov 2026),
   pantherdb.org refuses the sandbox at its own end (Cloudflare): a person reads it in a browser.
 - (requested 23 Nov 2026) `bovinemine.rnet.missouri.edu`: an ordinary version lookup of a mine that is not in the
   registry. `sbx policy allow network bovinemine.rnet.missouri.edu`
+- (requested 23 Nov 2026) `www.esyn.org`: only to see whether the esyN site is still alive (bead im-jqz.61).
+  `sbx policy allow network www.esyn.org,esyn.org`
