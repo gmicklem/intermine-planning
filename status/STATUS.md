@@ -1,6 +1,6 @@
-# STATUS 2026-11-23 13:00 UTC
+# STATUS 2026-11-23 14:00 UTC
 
-Generated 2026-11-23 13:00 UTC / 2026-11-23 13:00 GMT. Sprint dashboard for the InterMine and BlueGenes maintenance effort.
+Generated 2026-11-23 14:00 UTC / 2026-11-23 14:00 GMT. Sprint dashboard for the InterMine and BlueGenes maintenance effort.
 
 Times are UTC. Agent state: running = unfinished and written to in the last 10 min; stalled = unfinished and silent for 10 min or more; finished = last message ended its turn (no tool call pending).
 
@@ -125,7 +125,7 @@ No open child issues.
 
 | Agent | Model | State | Started | Last | In | Cache | Out |
 |---|---|---|---|---|---|---|---|
-| main session | fable-5-2 | idle | 11-17 23:40 | 12:28 | 2.9k | 421.36M | 848.1k |
+| main session | fable-5-2 | idle | 11-17 23:40 | 13:28 | 2.9k | 421.36M | 848.1k |
 | Read-only survey of the InterMine Java back… | opus-5-5 | finished | 11-15 00:18 | 11-15 00:20 | 42 | 1.05M | 9.0k |
 | Read-only survey of BlueGenes, the ClojureS… | opus-5-5 | finished | 11-15 00:18 | 11-15 00:20 | 22 | 347.5k | 8.3k |
 | Read-only survey of four repos under /Users… | opus-5-5 | finished | 11-15 00:18 | 11-15 00:21 | 26 | 863.6k | 7.5k |
@@ -422,7 +422,7 @@ Tokens are de-duplicated per API message (streamed records share one message id)
 | intermine | 18 (im-89g.12-511-tes…, im-9n4.56-rebuild…, (withheld)...) | maint/im-ee7.2-gradle-76-flip | 11-15 10:27 (8d) | - \| build: root testReport tasks use the Gr… |
 | intermine | 18 (im-89g.12-511-tes…, im-9n4.56-rebuild…, (withheld)...) | maint/im-ee7.2-plugin-gradle7 | 11-15 05:06 (8d) | - \| build(plugin): lazy tasks, no init task… |
 | intermine | 18 (im-89g.12-511-tes…, im-9n4.56-rebuild…, (withheld)...) | maint/im-ee7.3-catalog-modules | 11-15 11:52 (8d) | - \| docs: describe the version catalog; the… |
-| intermine | 18 (im-89g.12-511-tes…, im-9n4.56-rebuild…, (withheld)...) | maint/im-ee7.3-gradle-814-flip | 11-15 13:27 (7d) | - \| build(plugin): addStrutsConfig no longe… |
+| intermine | 18 (im-89g.12-511-tes…, im-9n4.56-rebuild…, (withheld)...) | maint/im-ee7.3-gradle-814-flip | 11-15 13:27 (8d) | - \| build(plugin): addStrutsConfig no longe… |
 | intermine | 18 (im-89g.12-511-tes…, im-9n4.56-rebuild…, (withheld)...) | maint/im-ee7.3-plugin-gradle8 | 11-15 11:34 (8d) | - \| merge: maint-2026 (ROOTS+TESTRES batch)… |
 | intermine | 18 (im-89g.12-511-tes…, im-9n4.56-rebuild…, (withheld)...) | maint/im-ee7.3-roots-testres | 11-15 11:09 (8d) | - \| build: version catalog gradle/libs.vers… |
 | intermine | 18 (im-89g.12-511-tes…, im-9n4.56-rebuild…, (withheld)...) | maint/im-jqz.1-jdbc-jackson | 11-15 03:31 (8d) | - \| deps: drop duplicate commons-math3 3.0 … |
