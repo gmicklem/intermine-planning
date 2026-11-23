@@ -153,3 +153,5 @@ and, for publishing InterMine releases to Maven Central (20 Nov 2026),
 - (allowed 20 Nov 2026; add on a new machine too) `www.psidev.info`, `pubmed.ncbi.nlm.nih.gov`: to read the citation each
   source asks for (data-set citation links). `sbx policy allow network www.psidev.info,pubmed.ncbi.nlm.nih.gov`
   pantherdb.org refuses the sandbox at its own end (Cloudflare): a person reads it in a browser.
+- (requested 23 Nov 2026) `bovinemine.rnet.missouri.edu`: an ordinary version lookup of a mine that is not in the
+  registry. `sbx policy allow network bovinemine.rnet.missouri.edu`
