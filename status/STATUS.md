@@ -1,6 +1,6 @@
-# STATUS 2026-11-22 23:00 UTC
+# STATUS 2026-11-23 00:00 UTC
 
-Generated 2026-11-22 23:00 UTC / 2026-11-22 23:00 GMT. Sprint dashboard for the InterMine and BlueGenes maintenance effort.
+Generated 2026-11-23 00:00 UTC / 2026-11-23 00:00 GMT. Sprint dashboard for the InterMine and BlueGenes maintenance effort.
 
 Times are UTC. Agent state: running = unfinished and written to in the last 10 min; stalled = unfinished and silent for 10 min or more; finished = last message ended its turn (no tool call pending).
 
@@ -125,7 +125,7 @@ No open child issues.
 
 | Agent | Model | State | Started | Last | In | Cache | Out |
 |---|---|---|---|---|---|---|---|
-| main session | fable-5-2 | idle | 11-17 23:40 | 22:37 | 2.9k | 420.91M | 847.5k |
+| main session | fable-5-2 | idle | 11-17 23:40 | 11-22 23:37 | 2.9k | 420.91M | 847.5k |
 | Read-only survey of the InterMine Java back… | opus-5-5 | finished | 11-15 00:18 | 11-15 00:20 | 42 | 1.05M | 9.0k |
 | Read-only survey of BlueGenes, the ClojureS… | opus-5-5 | finished | 11-15 00:18 | 11-15 00:20 | 22 | 347.5k | 8.3k |
 | Read-only survey of four repos under /Users… | opus-5-5 | finished | 11-15 00:18 | 11-15 00:21 | 26 | 863.6k | 7.5k |
@@ -203,7 +203,7 @@ No open child issues.
 | You are a worker in the InterMine maintenan… | sonnet-5-5 | finished | 11-15 22:56 | 11-15 23:12 | 140 | 6.50M | 39.4k |
 | You are a worker in the InterMine maintenan… | sonnet-5-5 | finished | 11-15 23:14 | 11-15 23:23 | 38 | 964.4k | 12.3k |
 | You are a worker in the InterMine/BlueGenes… | sonnet-5-5 | finished | 11-15 23:17 | 11-16 04:23 | 94 | 3.66M | 19.3k |
-| You are a worker in the InterMine maintenan… | sonnet-5-5 | stalled 6d | 11-15 23:24 | 11-15 23:47 | 30 | 1.11M | 13.5k |
+| You are a worker in the InterMine maintenan… | sonnet-5-5 | stalled 7d | 11-15 23:24 | 11-15 23:47 | 30 | 1.11M | 13.5k |
 | You are a worker in the InterMine maintenan… | sonnet-5-5 | finished | 11-15 23:48 | 11-16 00:01 | 62 | 1.95M | 13.6k |
 | You are a worker in the InterMine/BlueGenes… | opus-5-5 | finished | 11-15 23:51 | 11-16 01:23 | 248 | 19.84M | 66.2k |
 | You are a worker in the InterMine maintenan… | sonnet-5-5 | finished | 11-16 00:03 | 11-16 00:14 | 88 | 3.14M | 23.5k |
