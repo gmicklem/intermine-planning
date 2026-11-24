@@ -283,3 +283,10 @@ line; rdfc2im's SKIP_TOOLS guard. Open for Gos: `npm deprecate @intermine/bluege
 the @intermine npm organisation); FlyMine's public list "esyN demo list" (superuser); AllianceMine's BlueGenes still
 lists the tool (its maintainer knows). The 5.1.1 and 5.0.9 lines still contain the displayer code, switched off by
 default (a mine has to configure it).
+
+## Checkpoint 31, 24 Nov 2026 ~23:40 UTC (session close; the sandbox may be recreated with more memory)
+- 24 Nov: the Mac was rebooted without warning at about 21:25 UTC; the sandbox home survived. The previous session had written no restart file, so the state was rebuilt from its session log. Restarted by hand: hourly status loop, the demo BlueGenes jar (15011, behind 15001), the port forwarders, the registry demo (3300). Hourly pushes had been skipped from 15:19 to 21:11 UTC ("token is not gmicklem"); they went out at 22:10 UTC.
+- Since the 23 Nov entry: intermine maint-2026 3e139ba2c1 (three old esyN lines removed from RELEASE_NOTES; CI 45280106411 green after one re-run for the JDK download checksum fault). Gos deprecated the npm package @intermine/bluegenes-esyn-viewer on 24 Nov (both versions). Still open: FlyMine's public list "esyN demo list"; AllianceMine's BlueGenes lists the tool.
+- Nothing running at close: no workers, gates or builds. Queue unchanged: im-9n4.53, im-9n4.51, im-9n4.58.
+- For a recreated sandbox: `repos/RESTART.md` (on the host mount, in no repository) has the restore steps; the sandbox-only files (demo jars and scripts, registry jar and cache, tools, dotfiles, session logs, tool inventory) are copied to `repos/.sandbox-disk/sandbox-home-backup-2026-11-24/` and verified. The demo mines' databases are Docker volumes and are not saved: the 6.0.0 demo is rebuilt from the cache in about 25 minutes.
+- Not done at this close: `repos/.sandbox-disk/scratch/` (4.6 GB, host disk) and old merged worktrees were left for review.

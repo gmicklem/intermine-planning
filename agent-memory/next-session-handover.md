@@ -91,3 +91,10 @@ green); intermine/bluegenes-esyn-viewer archived (Gos allowed that one edit); Go
 the tool. After a reboot the containers come back by themselves, but the hourly loop and the BlueGenes jar on 15011
 must be started by hand (done 24 Nov 22:10 UTC); ports 5001 and 3300 demos are not restarted. For the embargoed
 item read the private notes as before; they are current to 23 Nov evening.
+
+**24 Nov 2026, 23:40 UTC: session closed; Gos may RECREATE the sandbox (more memory).** Start from
+`/Users/gos/claude_projects/update_intermine_planning/repos/RESTART.md` (private, on the host mount): it lists the
+home-directory backup (`repos/.sandbox-disk/sandbox-home-backup-2026-11-24/`: demo jars, registry, tools, session
+logs, dotfiles, tool inventory), the restore steps, the services to start and the state of the work. Trap: `cp` can
+write zero-filled files on the host mount; copy with rsync and verify with `rsync -c`. Trap: `pgrep -f name` inside
+a compound Bash call matches the call itself; test for a server by its port instead.
