@@ -1,6 +1,6 @@
-# STATUS 2026-11-24 16:19 UTC
+# STATUS 2026-11-24 17:26 UTC
 
-Generated 2026-11-24 16:19 UTC / 2026-11-24 16:19 GMT. Sprint dashboard for the InterMine and BlueGenes maintenance effort.
+Generated 2026-11-24 17:26 UTC / 2026-11-24 17:26 GMT. Sprint dashboard for the InterMine and BlueGenes maintenance effort.
 
 Times are UTC. Agent state: running = unfinished and written to in the last 10 min; stalled = unfinished and silent for 10 min or more; finished = last message ended its turn (no tool call pending).
 
@@ -405,7 +405,7 @@ Tokens are de-duplicated per API message (streamed records share one message id)
 
 | Repo | WT | Branch | Last commit | vs dev \| subject |
 |---|---|---|---|---|
-| intermine | 18 (im-89g.12-511-tes…, im-9n4.56-rebuild…, (withheld)...) | maint-2026 | 11-23 22:29 (17.8h) | ahead 323 vs dev \| Merge maint/im-jqz.69-esyn-release-note… |
+| intermine | 18 (im-89g.12-511-tes…, im-9n4.56-rebuild…, (withheld)...) | maint-2026 | 11-23 22:29 (19.0h) | ahead 323 vs dev \| Merge maint/im-jqz.69-esyn-release-note… |
 | intermine | 18 (im-89g.12-511-tes…, im-9n4.56-rebuild…, (withheld)...) | maint/im-89g.1-ci-actions | 11-15 04:45 (9d) | - \| docs: update README badges, PR template… |
 | intermine | 18 (im-89g.12-511-tes…, im-9n4.56-rebuild…, (withheld)...) | maint/im-89g.1-ci-fix | 11-15 06:28 (9d) | - \| ci: stop using sudo -E -u postgres; con… |
 | intermine | 18 (im-89g.12-511-tes…, im-9n4.56-rebuild…, (withheld)...) | maint/im-89g.1-ci-fix2 | 11-15 06:54 (9d) | - \| ci: fix PostgreSQL 15+ public schema pr… |
@@ -446,7 +446,7 @@ Tokens are de-duplicated per API message (streamed records share one message id)
 | bluegenes | 4 (im-9n4.61-pubmed-…, im-7os.62-reagent…, im-7os.63-reagent…) | maint/im-rkn.4-baseline | 01-26 21:58 (666d) | - \| dynamic favicon slows down dx |
 | imcljs | 1 | maint-2026 | 11-17 18:48 (6d) | ahead 15 vs dev \| Merge maint/im-8dd.11-ci: GitHub Action… |
 | imcljs | 1 | maint/im-7os.3-imcljs-deps-edn | 11-15 02:46 (9d) | - \| deps: bump clj-http 3.10.0 to 3.13.0 [i… |
-| im-tables-3 | 2 (im-9n4.61-pubmed-…) | maint-2026 | 11-23 21:58 (18.3h) | ahead 51 vs dev \| Merge maint/im-jqz.69-esyn-removal: rem… |
+| im-tables-3 | 2 (im-9n4.61-pubmed-…) | maint-2026 | 11-23 21:58 (19.5h) | ahead 51 vs dev \| Merge maint/im-jqz.69-esyn-removal: rem… |
 | im-tables-3 | 2 (im-9n4.61-pubmed-…) | maint/im-7os.3-im-tables-deps-edn | 11-15 12:05 (9d) | - \| test: lein kaocha honours IM_TABLES_SER… |
 | im-tables-3 | 2 (im-9n4.61-pubmed-…) | maint/im-9n4.61-pubmed-link | 11-20 17:53 (3d) | - \| [im-9n4.61] A Publication.pubMedId cell… |
 | bluegenes-tool-store | 1 | maint-2026 | 11-17 18:48 (6d) | ahead 22 vs master \| Merge maint/im-8dd.11-ci: GitHub Action… |
