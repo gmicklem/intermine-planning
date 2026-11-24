@@ -80,3 +80,14 @@ linked from the home page) shows year, title, PubMed id and sorts by data source
 jar on the sandbox (port 15011, `/home/agent/taskhomes/im-bg-serve/start-15011.sh`), not a container. Open:
 im-9n4.61 BlueGenes pin bump (branch `maint/im-9n4.61-pubmed-link-pin`) if not merged; queue im-9n4.53, .51, .58.
 `worktrees` is a link into `repos/.sandbox-disk/worktrees` (planning CLAUDE.md says how to re-create it).
+
+**24 Nov 2026, 22:15 UTC (after an unplanned laptop reboot; the sandbox home survived).** The previous session
+ended before it could write a restart file; state was rebuilt from the session log
+(`/home/agent/.claude/projects/-Users-gos-claude-projects-update-intermine-planning-repos/*.jsonl`: read the tail
+with a small Python script when notes are stale). Since the 20 Nov text above: esyN removed everywhere (bead
+im-jqz.69 closed; intermine maint-2026 3e139ba2c1, flymine 00cbfe26, humanmine a6fc0e9, im-tables-3 54b540b, all CI
+green); intermine/bluegenes-esyn-viewer archived (Gos allowed that one edit); Gos deprecated the npm package on
+24 Nov. Still open there: FlyMine public list "esyN demo list" (superuser), AllianceMine's BlueGenes still lists
+the tool. After a reboot the containers come back by themselves, but the hourly loop and the BlueGenes jar on 15011
+must be started by hand (done 24 Nov 22:10 UTC); ports 5001 and 3300 demos are not restarted. For the embargoed
+item read the private notes as before; they are current to 23 Nov evening.

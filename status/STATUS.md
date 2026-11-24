@@ -1,6 +1,6 @@
-# STATUS 2026-11-24 22:10 UTC
+# STATUS 2026-11-24 23:00 UTC
 
-Generated 2026-11-24 22:10 UTC / 2026-11-24 22:10 GMT. Sprint dashboard for the InterMine and BlueGenes maintenance effort.
+Generated 2026-11-24 23:00 UTC / 2026-11-24 23:00 GMT. Sprint dashboard for the InterMine and BlueGenes maintenance effort.
 
 Times are UTC. Agent state: running = unfinished and written to in the last 10 min; stalled = unfinished and silent for 10 min or more; finished = last message ended its turn (no tool call pending).
 
@@ -125,7 +125,7 @@ No open child issues.
 
 | Agent | Model | State | Started | Last | In | Cache | Out |
 |---|---|---|---|---|---|---|---|
-| main session | fable-5-2 | running | 22:09 | 22:10 | 20 | 761.0k | 4.8k |
+| main session | fable-5-2 | idle | 22:09 | 22:16 | 40 | 1.62M | 8.9k |
 | Read-only survey of the InterMine Java back… | opus-5-5 | finished | 11-15 00:18 | 11-15 00:20 | 42 | 1.05M | 9.0k |
 | Read-only survey of BlueGenes, the ClojureS… | opus-5-5 | finished | 11-15 00:18 | 11-15 00:20 | 22 | 347.5k | 8.3k |
 | Read-only survey of four repos under /Users… | opus-5-5 | finished | 11-15 00:18 | 11-15 00:21 | 26 | 863.6k | 7.5k |
@@ -386,13 +386,13 @@ No open child issues.
 | You are a worker on the InterMine/BlueGenes… | opus-5-5 | finished | 11-20 17:46 | 11-20 18:20 | 194 | 10.27M | 35.7k |
 | Embargoed item | fable-5-2 | finished | 11-23 21:42 | 11-23 21:45 | 14 | 549.7k | 19.7k |
 
-Note: 1432 non-agent .output file(s) skipped (empty or plain-text task output)
+Note: 1431 non-agent .output file(s) skipped (empty or plain-text task output)
 
 ## Totals by model
 
 | Scope | Model | Msgs | In | Cache rd | Cache wr | Out |
 |---|---|---|---|---|---|---|
-| main | fable-5-2 | 10 | 20 | 689.3k | 71.7k | 4.8k |
+| main | fable-5-2 | 18 | 40 | 1.54M | 82.2k | 8.9k |
 | subagents | fable-5-1 | 1 | 4 | 712.4k | 3.9k | 428 |
 | subagents | fable-5-2 | 11 | 26 | 2.54M | 793.9k | 21.0k |
 | subagents | haiku-5-5 | 3 | 6 | 3.5k | 19.0k | 1.6k |
@@ -405,7 +405,7 @@ Tokens are de-duplicated per API message (streamed records share one message id)
 
 | Repo | WT | Branch | Last commit | vs dev \| subject |
 |---|---|---|---|---|
-| intermine | 18 (im-89g.12-511-tes…, im-9n4.56-rebuild…, (withheld)...) | maint-2026 | 11-23 22:29 (23.7h) | ahead 323 vs dev \| Merge maint/im-jqz.69-esyn-release-note… |
+| intermine | 18 (im-89g.12-511-tes…, im-9n4.56-rebuild…, (withheld)...) | maint-2026 | 11-23 22:29 (24.5h) | ahead 323 vs dev \| Merge maint/im-jqz.69-esyn-release-note… |
 | intermine | 18 (im-89g.12-511-tes…, im-9n4.56-rebuild…, (withheld)...) | maint/im-89g.1-ci-actions | 11-15 04:45 (9d) | - \| docs: update README badges, PR template… |
 | intermine | 18 (im-89g.12-511-tes…, im-9n4.56-rebuild…, (withheld)...) | maint/im-89g.1-ci-fix | 11-15 06:28 (9d) | - \| ci: stop using sudo -E -u postgres; con… |
 | intermine | 18 (im-89g.12-511-tes…, im-9n4.56-rebuild…, (withheld)...) | maint/im-89g.1-ci-fix2 | 11-15 06:54 (9d) | - \| ci: fix PostgreSQL 15+ public schema pr… |
@@ -446,7 +446,7 @@ Tokens are de-duplicated per API message (streamed records share one message id)
 | bluegenes | 4 (im-9n4.61-pubmed-…, im-7os.62-reagent…, im-7os.63-reagent…) | maint/im-rkn.4-baseline | 01-26 21:58 (667d) | - \| dynamic favicon slows down dx |
 | imcljs | 1 | maint-2026 | 11-17 18:48 (7d) | ahead 15 vs dev \| Merge maint/im-8dd.11-ci: GitHub Action… |
 | imcljs | 1 | maint/im-7os.3-imcljs-deps-edn | 11-15 02:46 (9d) | - \| deps: bump clj-http 3.10.0 to 3.13.0 [i… |
-| im-tables-3 | 2 (im-9n4.61-pubmed-…) | maint-2026 | 11-23 21:58 (24.2h) | ahead 51 vs dev \| Merge maint/im-jqz.69-esyn-removal: rem… |
+| im-tables-3 | 2 (im-9n4.61-pubmed-…) | maint-2026 | 11-23 21:58 (25.0h) | ahead 51 vs dev \| Merge maint/im-jqz.69-esyn-removal: rem… |
 | im-tables-3 | 2 (im-9n4.61-pubmed-…) | maint/im-7os.3-im-tables-deps-edn | 11-15 12:05 (9d) | - \| test: lein kaocha honours IM_TABLES_SER… |
 | im-tables-3 | 2 (im-9n4.61-pubmed-…) | maint/im-9n4.61-pubmed-link | 11-20 17:53 (4d) | - \| [im-9n4.61] A Publication.pubMedId cell… |
 | bluegenes-tool-store | 1 | maint-2026 | 11-17 18:48 (7d) | ahead 22 vs master \| Merge maint/im-8dd.11-ci: GitHub Action… |
